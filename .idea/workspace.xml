@@ -2,12 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9dd6cf7a-12d2-4913-9195-2bee2fd7bde6" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/goLibraries.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.exe" afterPath="$PROJECT_DIR$/server.exe" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/themes/freemind" afterPath="$PROJECT_DIR$/themes/freemind" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/blog.iml" afterPath="$PROJECT_DIR$/.idea/blog.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.go" afterPath="$PROJECT_DIR$/server.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/03/09/SparkStreaming+Zookeeper+Kafka入门程序/index.html" afterPath="$PROJECT_DIR$/public/2016/03/09/SparkStreaming+Zookeeper+Kafka入门程序/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/03/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/03/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/index.html" afterPath="$PROJECT_DIR$/public/archives/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/index.html" afterPath="$PROJECT_DIR$/public/categories/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/spark/index.html" afterPath="$PROJECT_DIR$/public/categories/spark/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/sqoop/index.html" afterPath="$PROJECT_DIR$/public/categories/sqoop/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/search.xml" afterPath="$PROJECT_DIR$/public/search.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/hdfs/index.html" afterPath="$PROJECT_DIR$/public/tags/hdfs/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/index.html" afterPath="$PROJECT_DIR$/public/tags/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/mysql/index.html" afterPath="$PROJECT_DIR$/public/tags/mysql/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/spark-streaming/index.html" afterPath="$PROJECT_DIR$/public/tags/spark-streaming/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/spark/index.html" afterPath="$PROJECT_DIR$/public/tags/spark/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/sqoop/index.html" afterPath="$PROJECT_DIR$/public/tags/sqoop/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/zookeeper/index.html" afterPath="$PROJECT_DIR$/public/tags/zookeeper/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/themes/freemind/_config.yml" afterPath="$PROJECT_DIR$/themes/freemind/_config.yml" />
     </list>
     <ignored path="blog.iws" />
@@ -537,7 +548,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
+    <frame x="-8" y="-8" width="1932" height="1056" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />

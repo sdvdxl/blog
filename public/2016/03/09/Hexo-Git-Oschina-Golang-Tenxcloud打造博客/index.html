@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Spark基础知识 | 杜龙少的博客</title>
+  <title>Hexo+Git+Oschina+Golang+Tenxcloud打造博客 | 杜龙少的博客</title>
   <meta name="author" content="杜龙少">
   
   <meta name="description" content="杜龙少的博客">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Spark基础知识"/>
+  <meta property="og:title" content="Hexo+Git+Oschina+Golang+Tenxcloud打造博客"/>
   <meta property="og:site_name" content="杜龙少的博客"/>
 
   
@@ -93,7 +93,7 @@
 
 	
 		<div class="page-header page-header-inverse ">		
-			<h1 class="title title-inverse "> Spark基础知识</h1>
+			<h1 class="title title-inverse "> Hexo+Git+Oschina+Golang+Tenxcloud打造博客</h1>
 		</div>		
 	
 
@@ -113,17 +113,25 @@
 	<div class="mypage">		
 	  		
 
-	  <h1 id="Spark基本概念"><a href="#Spark基本概念" class="headerlink" title="Spark基本概念"></a>Spark基本概念</h1><ul>
-<li>RDD——Resillient Distributed Dataset A Fault-Tolerant Abstraction for In-Memory Cluster Computing弹性分布式数据集。</li>
-<li>Operation——作用于RDD的各种操作分为transformation和action。</li>
-<li>Job——作业，一个JOB包含多个RDD及作用于相应RDD上的各种operation。</li>
-<li>Stage——一个作业分为多个阶段。</li>
-<li>Partition——数据分区， 一个RDD中的数据可以分成多个不同的区。</li>
-<li>DAG——Directed Acycle graph，有向无环图，反应RDD之间的依赖关系。</li>
-<li>Narrow dependency——窄依赖，子RDD依赖于父RDD中固定的data partition。</li>
-<li>Wide Dependency——宽依赖，子RDD对父RDD中的所有data partition都有依赖。</li>
-<li>Caching Managenment——缓存管理，对RDD的中间计算结果进行缓存管理以加快整 体的处理速度。</li>
-</ul>
+	  <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><em>Hexo</em> 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。具体使用方法<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">参见这里</a></p>
+<p><em>Git</em> 介绍和使用<a href="http://gitref.org/zh/index.html" target="_blank" rel="external">参见这里</a></p>
+<p><em>OSCina</em> 开源信息平台，这里指的是<a href="http://git.oschina.net/" target="_blank" rel="external">其下的Git托管平台</a></p>
+<p><em>Golang</em> 谷歌开发的一款跨平台的语言，<a href="golang.org">官方地址</a>在国内无法打开，<a href="http://golangtc.com/" target="_blank" rel="external">golangtc</a>是一个Golang学习网站，可以自行查阅。</p>
+<p><em>TenxCloud</em> 也就是<a href="https://www.tenxcloud.com/" target="_blank" rel="external">时速云</a>，是国内最早的容器云平台之一(Container as a service)，提供丰富的容器化应用，镜像构建与发布，弹性可伸缩的容器服务，以及灵活、高性能的容器主机管理。容器化应用包括但不限于云主机，云数据库，大数据，Web应用等。</p>
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><ol>
+<li>安装hexo</li>
+<li>安装Golang，并配置Golang环境</li>
+<li>安装Git，并配置相关环境变量</li>
+</ol>
+<h1 id="创建Git仓库"><a href="#创建Git仓库" class="headerlink" title="创建Git仓库"></a>创建Git仓库</h1><p>打开<a href="http://git.oschina.net/" target="_blank" rel="external">开源中国Git托管平台</a>，(注册后)登录，点击右上角<code>+</code>号，新建项目，输入项目名，描述，如果不想公开的话，可以选择私有，其余默认即可，点击创建。然后克隆到本地。命令行切换到刚才克隆的项目根目录，输入<code>hexo init</code>，hexo博客初始化完成。输入<code>hexo generate</code>可以渲染页面，生成静态页面，默认是在public文件夹。hexo默认初始化忽略了public文件夹，我们需要修改<code>.gitignore</code>文件，删除public的记录，这样保证可以同步到git仓库中。通过git提交文件到远程仓库。</p>
+<h1 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h1><p>这里之所以选择时速云，是因为一开始接触这类最早的就是这个平台，所以使用的还算熟悉。下面我们就在上面创建一个容器。</p>
+<ol>
+<li>登录之后，<a href="https://hub.tenxcloud.com/repos/sdvdxl/golang" target="_blank" rel="external">选择这个镜像</a>，此镜像集成了Git，Golang，SSH服务，点击右侧部署镜像按钮。如下图配置：<br><img src="/images/other/2016-03-09_2351.png" alt="配置">，点击创建按钮，等待片刻即可创建成功。</li>
+<li><a href="https://console.tenxcloud.com/containers?0" target="_blank" rel="external">返回容器服务</a>，切换到北京2区，可以看到我们刚才创建的容器服务，点击如图所示的图标，进入控制台：<br><a href="/images/other/2016-03-09_2355.png">进入控制台</a>。</li>
+<li>进入控制台后，使用git命令<code>git clone 之前创建的git仓库地址</code>，克隆完后，进入项目目录，输入<code>go build server.go</code>，然后输入<code>./server &amp;</code>运行服务端。</li>
+<li>现在打开容器服务视图，找到我们创建的容器，点击右侧的查看所有服务地址，点击协议为<code>HTTP</code>的那个服务地址，在打开的页面中即可看到我们的博客内容。</li>
+<li>点击绑定域名，绑定80端口域名，我们就可以通过自己的域名访问了。<br>注意：不要选择杭州区的服务，因为采用的是阿里云服务，所以会导致没有备案的域名没法打开。</li>
+</ol>
 	  
 	</div>
 
@@ -132,14 +140,14 @@
 	<div class="pagination">
 <ul class="pagination">
 	 
-				
-    	<li class="prev"><a href="/2016/03/09/特定国家版windows8/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
-  		
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+        
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-		   <li class="next"><a href="/2016/03/09/Sqoop使用/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+		   <li class="next"><a href="/2016/03/09/安装启动Hadoop集群/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
@@ -178,7 +186,7 @@
   <h2 class="title">留言</h2>
 
   
-  	 <div class="ds-thread" data-thread-key="2016/03/09/Spark基础知识/" data-title="Spark基础知识" data-url="http://todu.top/2016/03/09/Spark基础知识/"></div>  
+  	 <div class="ds-thread" data-thread-key="2016/03/09/Hexo-Git-Oschina-Golang-Tenxcloud打造博客/" data-title="Hexo+Git+Oschina+Golang+Tenxcloud打造博客" data-url="http://todu.top/2016/03/09/Hexo-Git-Oschina-Golang-Tenxcloud打造博客/"></div>  
   
 </section>
 
@@ -198,27 +206,8 @@
 
 	<!-- categories -->
     
-	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
-    <ul id="categorys" class="tag_box list-unstyled collapse in">
-          
-  <li>
-    <li><a href="/categories/spark/">spark<span>3</span></a></li>
-  </li>
-
-    </ul>
-	</div>
-	
 
 	<!-- tags -->
-	
-	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
-    <ul id="tags" class="tag_box list-unstyled collapse in">	  
-	    
-  <li><a href="/tags/spark/">spark<span>3</span></a></li>
-    </ul>
-	</div>
 		
 
 	<!-- toc -->

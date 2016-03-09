@@ -1,5 +1,5 @@
 ---
-title: about
+title: 关于
 l: true
 a: true
 'y': true
