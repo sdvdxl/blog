@@ -28,11 +28,13 @@ export XD_CONFIG_LOCATION=file:/xd/config/
 export XD_CONFIG_NAME=region1-servers
 ```
 * 注意，`XD_CONFIG_LOCATION`最后的`/`是必须的。
+
 # Database Configuration
 MySQL，PostGresql选其中一个配置即可，当然还有Oracle也可以配置，但是在这里没有列出，可以[]参考官方文档](http://docs.spring.io/spring-xd/docs/1.3.1.RELEASE/reference/html/#_database_configuration)
 `xd-singlenode`模式是使用了一个嵌入式`HSQLDB `数据库，运行分布式模式的时候，可以使用独立的`HSQLDB`，但是仅仅推荐在学习和开发的时候使用它，正式环境最好使用其他比如`MySQL`，`Postgres`等等数据库。
 * 注意：如果在stream模块中使用除了`Postgres`和`HSQLDB`数据库，那么需要把对应的驱动放到` $XD_HOME/lib`目录。
 `servers.yml`文件中已经注释了一部分jdbc配置信息，可以按需更改。
+
 ## `MySQL`配置
 ```
 spring:
