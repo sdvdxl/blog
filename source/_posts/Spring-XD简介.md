@@ -28,6 +28,7 @@ xd:> stream destroy --name stream-name
 
 # Souces
 数据源，Stream的来源，有以下几种方式：
+
 方式|描述
 ----|------
 File|文件方式
@@ -56,6 +57,7 @@ Twitter Stream(twitterstream)|Twitter Stream流
 
 # Sinks
 数据源，Stream的输出，有以下几种方式：
+
 方式|描述
 ----|------
 Dynamic Router(router)|动态路由

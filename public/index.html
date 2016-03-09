@@ -126,8 +126,200 @@
 <h2 id="创建方式"><a href="#创建方式" class="headerlink" title="创建方式"></a>创建方式</h2><p>一个简单的示例：该示例创建一个名字叫<code>ticktock</code>的stream，每秒钟产生一条时间信息然后通过管道传送到log中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xd:&gt; stream create --definition &quot;time | log&quot; --name ticktock</span><br></pre></td></tr></table></figure></p>
 <h2 id="销毁Stream"><a href="#销毁Stream" class="headerlink" title="销毁Stream"></a>销毁Stream</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xd:&gt; stream destroy --name stream-name</span><br></pre></td></tr></table></figure>
 <h1 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h1><p>模块，当前包含<code>source</code>, <code>sink</code>,<code>processor</code>, 和<code>job</code>。</p>
-<h1 id="Souces"><a href="#Souces" class="headerlink" title="Souces"></a>Souces</h1><p>数据源，Stream的来源，有以下几种方式：<br>方式|描述<br>—-|——<br>File|文件方式<br>FTP|FTP方式<br>GemFire Continuous Query(gemfire-cq)|GemFire查询<br>GemFire source(gemfire)|GemFire文件<br>HTTP|http方式<br>JDBC Source(jdbc)|关系型数据库jdbc<br>JMS|JMS<br>Kafka|Kafka消息队列<br>Mail|通过接收电子邮件<br>MongoDB Source(mongodb)|MongoDB数据库<br>MQTT|MQTT<br>RabbitMQ|RabbitMQ消息队列<br>Reactor IP(reactor-ip)|Reactor IP(reactor-ip)<br>SFTP|SFTP<br>Stdout Capture| 标准输入<br>Syslog|系统日志<br>Tail | Tail程序<br>TCP|TCP<br>TCP Client(tcp-client)|TCP 客户端<br>Time|时间<br>Trigger Source(trigger)|触发器<br>Twitter Search(twittersearch)|Twitter搜索<br>Twitter Stream(twitterstream)|Twitter Stream流</p>
-<h1 id="Sinks"><a href="#Sinks" class="headerlink" title="Sinks"></a>Sinks</h1><p>数据源，Stream的输出，有以下几种方式：<br>方式|描述<br>—-|——<br>Dynamic Router(router)|动态路由<br>File Sink(file)|文件方式<br>FTP Sink(ftp)|FTP方式<br>GemFire Server|GemFire服务器<br>GPFDIST|GPFDIST<br>Cassandra|Cassandra 数据库<br>Hadoop(HDFS) (hdfs)|hdfs文件系统<br>HDFS Dataset(Avro/Parquet) (hdfs-dataset)|hdfs文件系统中的avro或者parquet类型文件<br>JDBC Source(jdbc)|关系型数据库jdbc<br>Kafka Sink (kafka)|Kafka消息队列<br>Log | log 文件<br>Mail | Mail 发送<br>Mongo | Mongo数据库<br>MQTT Sink (mqtt) | MQTT<br>Null Sink(null) | null<br>RabbitMQ|RabbitMQ 消息队列<br>Redis | Redis<br>Shell Sink (shell) |shell<br>Splunk Server (splunk) | splunk<br>TCP Sink (tcp) |TCP</p>
+<h1 id="Souces"><a href="#Souces" class="headerlink" title="Souces"></a>Souces</h1><p>数据源，Stream的来源，有以下几种方式：</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>File</td>
+<td>文件方式</td>
+</tr>
+<tr>
+<td>FTP</td>
+<td>FTP方式</td>
+</tr>
+<tr>
+<td>GemFire Continuous Query(gemfire-cq)</td>
+<td>GemFire查询</td>
+</tr>
+<tr>
+<td>GemFire source(gemfire)</td>
+<td>GemFire文件</td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>http方式</td>
+</tr>
+<tr>
+<td>JDBC Source(jdbc)</td>
+<td>关系型数据库jdbc</td>
+</tr>
+<tr>
+<td>JMS</td>
+<td>JMS</td>
+</tr>
+<tr>
+<td>Kafka</td>
+<td>Kafka消息队列</td>
+</tr>
+<tr>
+<td>Mail</td>
+<td>通过接收电子邮件</td>
+</tr>
+<tr>
+<td>MongoDB Source(mongodb)</td>
+<td>MongoDB数据库</td>
+</tr>
+<tr>
+<td>MQTT</td>
+<td>MQTT</td>
+</tr>
+<tr>
+<td>RabbitMQ</td>
+<td>RabbitMQ消息队列</td>
+</tr>
+<tr>
+<td>Reactor IP(reactor-ip)</td>
+<td>Reactor IP(reactor-ip)</td>
+</tr>
+<tr>
+<td>SFTP</td>
+<td>SFTP</td>
+</tr>
+<tr>
+<td>Stdout Capture</td>
+<td>标准输入</td>
+</tr>
+<tr>
+<td>Syslog</td>
+<td>系统日志</td>
+</tr>
+<tr>
+<td>Tail</td>
+<td>Tail程序</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>TCP Client(tcp-client)</td>
+<td>TCP 客户端</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>时间</td>
+</tr>
+<tr>
+<td>Trigger Source(trigger)</td>
+<td>触发器</td>
+</tr>
+<tr>
+<td>Twitter Search(twittersearch)</td>
+<td>Twitter搜索</td>
+</tr>
+<tr>
+<td>Twitter Stream(twitterstream)</td>
+<td>Twitter Stream流</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Sinks"><a href="#Sinks" class="headerlink" title="Sinks"></a>Sinks</h1><p>数据源，Stream的输出，有以下几种方式：</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dynamic Router(router)</td>
+<td>动态路由</td>
+</tr>
+<tr>
+<td>File Sink(file)</td>
+<td>文件方式</td>
+</tr>
+<tr>
+<td>FTP Sink(ftp)</td>
+<td>FTP方式</td>
+</tr>
+<tr>
+<td>GemFire Server</td>
+<td>GemFire服务器</td>
+</tr>
+<tr>
+<td>GPFDIST</td>
+<td>GPFDIST</td>
+</tr>
+<tr>
+<td>Cassandra</td>
+<td>Cassandra 数据库</td>
+</tr>
+<tr>
+<td>Hadoop(HDFS) (hdfs)</td>
+<td>hdfs文件系统</td>
+</tr>
+<tr>
+<td>HDFS Dataset(Avro/Parquet) (hdfs-dataset)</td>
+<td>hdfs文件系统中的avro或者parquet类型文件</td>
+</tr>
+<tr>
+<td>JDBC Source(jdbc)</td>
+<td>关系型数据库jdbc</td>
+</tr>
+<tr>
+<td>Kafka Sink (kafka)</td>
+<td>Kafka消息队列</td>
+</tr>
+<tr>
+<td>Log</td>
+<td>log 文件</td>
+</tr>
+<tr>
+<td>Mail</td>
+<td>Mail 发送</td>
+</tr>
+<tr>
+<td>Mongo</td>
+<td>Mongo数据库</td>
+</tr>
+<tr>
+<td>MQTT Sink (mqtt)</td>
+<td>MQTT</td>
+</tr>
+<tr>
+<td>Null Sink(null)</td>
+<td>null</td>
+</tr>
+<tr>
+<td>RabbitMQ</td>
+<td>RabbitMQ 消息队列</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>Redis</td>
+</tr>
+<tr>
+<td>Shell Sink (shell)</td>
+<td>shell</td>
+</tr>
+<tr>
+<td>Splunk Server (splunk)</td>
+<td>splunk</td>
+</tr>
+<tr>
+<td>TCP Sink (tcp)</td>
+<td>TCP</td>
+</tr>
+</tbody>
+</table>
 <h1 id="Processors"><a href="#Processors" class="headerlink" title="Processors"></a>Processors</h1><p>可用的处理器包括<code>Aggregator``Filter``Header Enricher``HTTP Client``JSON to Tuple``Object to JSON``Script``Shell Command``Splitter``Transform</code></p>
 <ul>
 <li>Aggregator – 作用和 splitter相反，用于聚合，</li>
@@ -611,39 +803,39 @@ b                            |  1
 		<h4>标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/spark/">spark<span>3</span></a></li>
-		
-			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
-		
 			<li><a href="/tags/java/">java<span>1</span></a></li>
 		
-			<li><a href="/tags/xd/">xd<span>1</span></a></li>
+			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+		
+			<li><a href="/tags/spark/">spark<span>3</span></a></li>
 		
 			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
 		
+			<li><a href="/tags/spring/">spring<span>2</span></a></li>
+		
 			<li><a href="/tags/sql/">sql<span>1</span></a></li>
 		
+			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
+		
+			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
+		
 			<li><a href="/tags/windows8/">windows8<span>1</span></a></li>
+		
+			<li><a href="/tags/hdfs/">hdfs<span>1</span></a></li>
+		
+			<li><a href="/tags/xd/">xd<span>1</span></a></li>
+		
+			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
+		
+			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
+		
+			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
 		
 			<li><a href="/tags/spring-xd/">spring-xd<span>1</span></a></li>
 		
 			<li><a href="/tags/linux/">linux<span>1</span></a></li>
 		
 			<li><a href="/tags/arch/">arch<span>2</span></a></li>
-		
-			<li><a href="/tags/spring/">spring<span>2</span></a></li>
-		
-			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
-		
-			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
-		
-			<li><a href="/tags/hdfs/">hdfs<span>1</span></a></li>
-		
-			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
-		
-			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
-		
-			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
 		
 		 
 		</ul>
