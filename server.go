@@ -8,7 +8,7 @@ import (
 func main() {
 	fs := http.FileServer(http.Dir("public"))
 	http.Handle("/", fs)
-	err := http.ListenAndServe(":8888", nil)
+	err := http.ListenAndServe(":80", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
