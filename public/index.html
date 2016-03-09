@@ -112,6 +112,58 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-03-09 </div>
+			<div class="article-title"><a href="/2016/03/09/Spring-XD简介/" >Spring-XD简介</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Spring XD is a unified, distributed, and extensible service for data ingestion, real time analytics, batch processing, and data export.<br><img src="/images/xd/xd-overview.png" alt="distributed-overview."></p>
+<h1 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h1><p>翻译过来就是流，通过定义stream可以控制数据的流向，比如从MongoDB读取数据然后存储到HDFS中。<br><img src="/images/xd/stream.png" alt="stream"></p>
+<h2 id="创建方式"><a href="#创建方式" class="headerlink" title="创建方式"></a>创建方式</h2><p>一个简单的示例：该示例创建一个名字叫<code>ticktock</code>的stream，每秒钟产生一条时间信息然后通过管道传送到log中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xd:&gt; stream create --definition &quot;time | log&quot; --name ticktock</span><br></pre></td></tr></table></figure></p>
+<h2 id="销毁Stream"><a href="#销毁Stream" class="headerlink" title="销毁Stream"></a>销毁Stream</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xd:&gt; stream destroy --name stream-name</span><br></pre></td></tr></table></figure>
+<h1 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h1><p>模块，当前包含<code>source</code>, <code>sink</code>,<code>processor</code>, 和<code>job</code>。</p>
+<h1 id="Souces"><a href="#Souces" class="headerlink" title="Souces"></a>Souces</h1><p>数据源，Stream的来源，有以下几种方式：<br>方式|描述<br>—-|——<br>File|文件方式<br>FTP|FTP方式<br>GemFire Continuous Query(gemfire-cq)|GemFire查询<br>GemFire source(gemfire)|GemFire文件<br>HTTP|http方式<br>JDBC Source(jdbc)|关系型数据库jdbc<br>JMS|JMS<br>Kafka|Kafka消息队列<br>Mail|通过接收电子邮件<br>MongoDB Source(mongodb)|MongoDB数据库<br>MQTT|MQTT<br>RabbitMQ|RabbitMQ消息队列<br>Reactor IP(reactor-ip)|Reactor IP(reactor-ip)<br>SFTP|SFTP<br>Stdout Capture| 标准输入<br>Syslog|系统日志<br>Tail | Tail程序<br>TCP|TCP<br>TCP Client(tcp-client)|TCP 客户端<br>Time|时间<br>Trigger Source(trigger)|触发器<br>Twitter Search(twittersearch)|Twitter搜索<br>Twitter Stream(twitterstream)|Twitter Stream流</p>
+<h1 id="Sinks"><a href="#Sinks" class="headerlink" title="Sinks"></a>Sinks</h1><p>数据源，Stream的输出，有以下几种方式：<br>方式|描述<br>—-|——<br>Dynamic Router(router)|动态路由<br>File Sink(file)|文件方式<br>FTP Sink(ftp)|FTP方式<br>GemFire Server|GemFire服务器<br>GPFDIST|GPFDIST<br>Cassandra|Cassandra 数据库<br>Hadoop(HDFS) (hdfs)|hdfs文件系统<br>HDFS Dataset(Avro/Parquet) (hdfs-dataset)|hdfs文件系统中的avro或者parquet类型文件<br>JDBC Source(jdbc)|关系型数据库jdbc<br>Kafka Sink (kafka)|Kafka消息队列<br>Log | log 文件<br>Mail | Mail 发送<br>Mongo | Mongo数据库<br>MQTT Sink (mqtt) | MQTT<br>Null Sink(null) | null<br>RabbitMQ|RabbitMQ 消息队列<br>Redis | Redis<br>Shell Sink (shell) |shell<br>Splunk Server (splunk) | splunk<br>TCP Sink (tcp) |TCP</p>
+<h1 id="Processors"><a href="#Processors" class="headerlink" title="Processors"></a>Processors</h1><p>可用的处理器包括<code>Aggregator``Filter``Header Enricher``HTTP Client``JSON to Tuple``Object to JSON``Script``Shell Command``Splitter``Transform</code></p>
+<ul>
+<li>Aggregator – 作用和 splitter相反，用于聚合，</li>
+<li>Splitter – 用于拆解</li>
+<li>Filter – 过滤器，用于中间处理数据</li>
+<li>Header Enricher (header-enricher) – 用于添加头部信息</li>
+<li>HTTP Client – 通过httpClient方式发送URL请求</li>
+<li>JSON to Tuple (json-to-tuple) – 转换json数据到Tuple类型</li>
+<li>Object to JSON (object-to-json) – 将对象转换为json格式</li>
+<li>Script 用于加载Groovy脚本</li>
+<li>Shell – 用于加载Shell脚本</li>
+<li>Transform – 用于负载类型转换</li>
+</ul>
+<h1 id="Taps"><a href="#Taps" class="headerlink" title="Taps"></a>Taps</h1><p>监听器，窃听器。<br>不用重复定义相同的stream，然后监听此stream就可以做其他操作。并且可以用Label来分别对每个部分内容做个别名，定义Tab时候可以使用别名。如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stream create foo --definition &quot;httpLabel: http | fLabel: filter --expression=payload.startsWith(&apos;A&apos;) | flibble: transform --expression=payload.toLowerCase() | log&quot; --deploy</span><br><span class="line">stream create fooTap --definition &quot;tap:stream:foo.flibble &gt; log&quot; --deploy</span><br></pre></td></tr></table></figure></p>
+<p>上面对trasfrom部分做了一个别名，叫做<code>flibble</code>，然后下面定义一个Tap，并且最后指定是flibble这个标签，那么就是对<code>foo</code>这个stream的<code>flibble</code>做监听。</p>
+<h1 id="Jobs"><a href="#Jobs" class="headerlink" title="Jobs"></a>Jobs</h1><p>Job相比Stream不同点在于，Job算是静态的，Stream是动态的。Stream会持续接收数据，处理数据；Job是一次性接收数据，处理数据，如果数据改变，那么是不会进行处理的，除非有定时任务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">job create --name jobtest --definition &apos;timestampfile --directory=D:/jobs&apos; --deploy</span><br><span class="line">stream create --name time-cron --definition &quot;trigger --cron=&apos;* * * * * *&apos; &gt; queue:job:jobtest&quot; --deploy</span><br></pre></td></tr></table></figure></p>
+<h1 id="使用counter"><a href="#使用counter" class="headerlink" title="使用counter"></a>使用counter</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stream create foo --definition &apos;http --outputType=application/json | log&apos;</span><br><span class="line">stream create countName --definition &apos;tap:stream:foo &gt; field-value-counter --fieldName=name&apos; --deploy</span><br><span class="line">stream deploy --name foo</span><br><span class="line">http post --data &#123;&quot;name&quot;:&quot;a&quot;&#125;</span><br><span class="line">http post --data &#123;&quot;name&quot;:&quot;a&quot;&#125;</span><br><span class="line">http post --data &#123;&quot;name&quot;:&quot;b&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p><code>field-value-counter list</code> 列出field-value-counter的名字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FieldValueCounter name</span><br><span class="line">----------------------</span><br><span class="line">countName</span><br></pre></td></tr></table></figure></p>
+<p><code>field-value-counter display --name countName</code> 列出名字为<code>countName</code>的描述</p>
+<pre><code>FieldValueCounter=countName
+---------------------------  -  -----
+VALUE                        -  COUNT
+a                            |  2
+b                            |  1
+</code></pre>
+	
+	</div>
+  <a type="button" href="/2016/03/09/Spring-XD简介/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-09 </div>
 			<div class="article-title"><a href="/2016/03/09/以分布式方式运行Spring-XD/" >以分布式方式运行Spring-XD</a></div>						
 		</h3>
 	
@@ -130,14 +182,17 @@
 <li>ZooKeeper 提供所有XD运行时的信息。追踪Container信息，如：modules，jobs发布情况，steam定义，发布状态等。</li>
 <li>Spring Batch Job Repository Database –这个要求要配置一个关系型数据库。XD包含了HSQLDB，但是不推荐用在生产环境中。XD支持任何JDBC型数据库。</li>
 <li>A Message Broker –用于数据传输。XD的数据传输模块设计成了插拔式。当前XD版本支持<code>Rabbit MQ</code>和<code>Redis</code>，这两个都支持stream和job过程产生的数据的传输，<code>Kafka</code>仅支持steam产生的数据传输。请注意：job使用Kafka作为数据传输是不稳定的。这个项目必须要配置一个作为数据传输的插件（推荐Redis）。</li>
-<li>Analytics Repository – XD目前用Redis作为counters和gauges分析的存储方式。<br>XD的分布式运行环境概览如下：<br><img src="/images/distributed-runtime-overview.png" alt="distributed-runtime-overview"></li>
+<li>Analytics Repository – XD目前用Redis作为counters和gauges分析的存储方式。<br>XD的分布式运行环境概览如下：<br><img src="/images/xd/distributed-runtime-overview.png" alt="distributed-runtime-overview"></li>
 </ul>
 <h1 id="Server-Configuration"><a href="#Server-Configuration" class="headerlink" title="Server Configuration"></a>Server Configuration</h1><p>默认查找<code>$XD_HOME/config/servers.yml</code>文件，作为配置文件。<br>但是可以使用<code>XD_CONFIG_LOCATION</code>环境变量改变配置文件夹，使用<code>XD_CONFIG_NAME</code>改变配置文件位置，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export XD_CONFIG_LOCATION=file:/xd/config/</span><br><span class="line">export XD_CONFIG_NAME=region1-servers</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>注意，<code>XD_CONFIG_LOCATION</code>最后的<code>/</code>是必须的。<h1 id="Database-Configuration"><a href="#Database-Configuration" class="headerlink" title="Database Configuration"></a>Database Configuration</h1>MySQL，PostGresql选其中一个配置即可，当然还有Oracle也可以配置，但是在这里没有列出，可以<a href="http://docs.spring.io/spring-xd/docs/1.3.1.RELEASE/reference/html/#_database_configuration" target="_blank" rel="external">]参考官方文档</a><br><code>xd-singlenode</code>模式是使用了一个嵌入式<code>HSQLDB</code>数据库，运行分布式模式的时候，可以使用独立的<code>HSQLDB</code>，但是仅仅推荐在学习和开发的时候使用它，正式环境最好使用其他比如<code>MySQL</code>，<code>Postgres</code>等等数据库。</li>
-<li>注意：如果在stream模块中使用除了<code>Postgres</code>和<code>HSQLDB</code>数据库，那么需要把对应的驱动放到<code>$XD_HOME/lib</code>目录。<br><code>servers.yml</code>文件中已经注释了一部分jdbc配置信息，可以按需更改。<h2 id="MySQL配置"><a href="#MySQL配置" class="headerlink" title="MySQL配置"></a><code>MySQL</code>配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">    datasource:</span><br><span class="line">    url: jdbc:mysql://yourDBhost:3306/yourDB</span><br><span class="line">    username: yourUsername</span><br><span class="line">    password: yourPassword</span><br><span class="line">    driverClassName: com.mysql.jdbc.Driver</span><br></pre></td></tr></table></figure>
-</li>
+<li>注意，<code>XD_CONFIG_LOCATION</code>最后的<code>/</code>是必须的。</li>
 </ul>
+<h1 id="Database-Configuration"><a href="#Database-Configuration" class="headerlink" title="Database Configuration"></a>Database Configuration</h1><p>MySQL，PostGresql选其中一个配置即可，当然还有Oracle也可以配置，但是在这里没有列出，可以<a href="http://docs.spring.io/spring-xd/docs/1.3.1.RELEASE/reference/html/#_database_configuration" target="_blank" rel="external">]参考官方文档</a><br><code>xd-singlenode</code>模式是使用了一个嵌入式<code>HSQLDB</code>数据库，运行分布式模式的时候，可以使用独立的<code>HSQLDB</code>，但是仅仅推荐在学习和开发的时候使用它，正式环境最好使用其他比如<code>MySQL</code>，<code>Postgres</code>等等数据库。</p>
+<ul>
+<li>注意：如果在stream模块中使用除了<code>Postgres</code>和<code>HSQLDB</code>数据库，那么需要把对应的驱动放到<code>$XD_HOME/lib</code>目录。<br><code>servers.yml</code>文件中已经注释了一部分jdbc配置信息，可以按需更改。</li>
+</ul>
+<h2 id="MySQL配置"><a href="#MySQL配置" class="headerlink" title="MySQL配置"></a><code>MySQL</code>配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">    datasource:</span><br><span class="line">    url: jdbc:mysql://yourDBhost:3306/yourDB</span><br><span class="line">    username: yourUsername</span><br><span class="line">    password: yourPassword</span><br><span class="line">    driverClassName: com.mysql.jdbc.Driver</span><br></pre></td></tr></table></figure>
 <h2 id="Postgresql配置"><a href="#Postgresql配置" class="headerlink" title="Postgresql配置"></a>Postgresql配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:postgresql://yourDBhost:5432/yourDB</span><br><span class="line">    username: yourUsername</span><br><span class="line">    password: yourPassword</span><br><span class="line">    driverClassName: org.postgresql.Driver</span><br></pre></td></tr></table></figure>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>stream和job的数据传输需要用到（Rabbit MQ也可以）（当用作数据分析时候也需要），这里推荐统一使用redis作为配置，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  redis:</span><br><span class="line">   port: 6379</span><br><span class="line">   host: localhost</span><br><span class="line">   pool:</span><br><span class="line">     maxIdle: 8 # max idle connections in the pool</span><br><span class="line">     minIdle: 0 # min idle connections in the pool</span><br><span class="line">     maxActive: -1 # no limit to the number of active connections</span><br><span class="line">     maxWait: 30000 # time limit to get a connection - only applies if maxActive is finite</span><br></pre></td></tr></table></figure></p>
 <h3 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h3><p>从<a href="redis.io">官网</a>下载最新的redis，然后解压，进入redis根目录，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd deps</span><br><span class="line">make hiredis jemalloc linenoise lua</span><br><span class="line">cd ..</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
@@ -463,87 +518,6 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-03-09 </div>
-			<div class="article-title"><a href="/2016/03/09/SparkStreaming程序（及过程中问题解决）/" >运行第一个SparkStreaming程序（及过程中问题解决）</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="官方示例说明"><a href="#官方示例说明" class="headerlink" title="官方示例说明"></a>官方示例说明</h1><p>按照官方文档的 <a href="http://spark.apache.org/docs/1.0.0/streaming-programming-guide.html#a-quick-example" target="_blank" rel="external">这个示例说明</a>，可以轻松的在本地的spark-shell环境中测试这个示例。示例，即为了更好的入门，那么就再说明一下。<br>运行这个统计单词的方式有三种，前面两种是官方文档上的指引，第三种则是用scala程序运行。</p>
-<hr>
-<ul>
-<li><h2 id="第一种方式-run-demo"><a href="#第一种方式-run-demo" class="headerlink" title="第一种方式, run-demo"></a>第一种方式, run-demo</h2></li>
-</ul>
-<ol>
-<li>打开一个终端，打开一个终端，输入 命令 <code>nc -lk 9999</code>，暂时叫做 “nc终端” 吧</li>
-<li><p>再打开终端，切换到Spark HOME目录， 执行命令 <code>bin/run-example org.apache.spark.examples.streaming.NetworkWordCount localhost 9999</code>， 然后每秒会有类似一下日志循环输出<br>&gt;<br>-——————————————<br>Time: 1415701382000 ms<br>-——————————————<br>-——————————————<br>Time: 1415701383000 ms<br>-——————————————</p>
-</li>
-<li><p>在nc终端随便输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在上面的Spark终端中看到有新内容输出<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</p>
-</li>
-</ol>
-<p>OK，成功！</p>
-<hr>
-<ul>
-<li><h2 id="第二种-spark-shell-模式"><a href="#第二种-spark-shell-模式" class="headerlink" title="第二种 spark-shell 模式"></a>第二种 spark-shell 模式</h2>下面介绍在spark-shell中输入scala代码运行的方式。</li>
-</ul>
-<ol>
-<li>同上面第一步，打开一个终端，打开一个终端，输入 命令 <code>nc -lk 9999</code>，暂时叫做 “nc终端” 吧</li>
-<li><p>再打开一个终端， 切换到Spark HOME目录下，输入 <code>bin/spark-shell</code> （如果你已经安装好了Spark的话，直接输入 <code>spark-shell</code> 即可），等待Spark启动成功，会打印信息<br>&gt;<br>Spark context available as sc.<br>scala&gt;</p>
-<p>然后输入以下语句：</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.streaming._</span><br><span class="line">import org.apache.spark.streaming.StreamingContext._</span><br><span class="line">import org.apache.spark.api.java.function._</span><br><span class="line">import org.apache.spark.streaming._</span><br><span class="line">import org.apache.spark.streaming.api._</span><br><span class="line"></span><br><span class="line">// Create a StreamingContext with a local master</span><br><span class="line">val ssc = new StreamingContext(sc, Seconds(1))</span><br><span class="line"></span><br><span class="line">// Create a DStream that will connect to serverIP:serverPort, like localhost:9999</span><br><span class="line">val lines = ssc.socketTextStream(&quot;localhost&quot;, 9999)</span><br><span class="line"></span><br><span class="line">// Split each line into words</span><br><span class="line">val words = lines.flatMap(_.split(&quot; &quot;))</span><br><span class="line">import org.apache.spark.streaming.StreamingContext._</span><br><span class="line"></span><br><span class="line">// Count each word in each batch</span><br><span class="line">val pairs = words.map(word =&gt; (word, 1))</span><br><span class="line">val wordCounts = pairs.reduceByKey(_ + _)</span><br><span class="line"></span><br><span class="line">// Print a few of the counts to the console</span><br><span class="line">wordCounts.print()</span><br><span class="line">ssc.start()             // Start the computation</span><br><span class="line">ssc.awaitTermination()  // Wait for the computation to terminate</span><br></pre></td></tr></table></figure>
-<p> 会打印以下信息：<br>&gt;<br>14/11/11 18:07:23 INFO MemoryStore: ensureFreeSpace(2216) called with curMem=100936, maxMem=278019440<br>.…..<br>14/11/11 18:07:23 INFO DAGScheduler: Stage 91 (take at DStream.scala:608) finished in 0.004 s<br>14/11/11 18:07:23 INFO SparkContext: Job finished: take at DStream.scala:608, took 0.007531701 s<br> -——————————————<br>Time: 1415700443000 ms<br>-——————————————</p>
-<ol>
-<li><p>同第一种方式的第3步，随便输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在上面的Spark终端中看到有新内容输出<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</p>
-<p>OK，成功！</p>
-</li>
-</ol>
-<hr>
-<ul>
-<li><h2 id="第三种-scala-ide编程方式"><a href="#第三种-scala-ide编程方式" class="headerlink" title="第三种 scala-ide编程方式"></a>第三种 scala-ide编程方式</h2>在用这种方式运行这个demo代码的时候，遇到了不少问题，记录下来，供大家参考。这个例子，请大家先根据这里记录的方式进行操作，得到一个可以运行的程序，后面我会记录遇到的问题。</li>
-</ul>
-<ol>
-<li>下载scala-ide, <a href="http://scala-ide.org/download/sdk.html" target="_blank" rel="external">下载链接</a>，下载 For Scala 2.10.4 下的对应平台的ide，解压，运行。</li>
-<li>安装sbt，<a href="http://www.scala-sbt.org/download.html" target="_blank" rel="external">下载链接</a>,</li>
-<li>安装sbteclipse, <a href="https://github.com/typesafehub/sbteclipse" target="_blank" rel="external">github地址</a>, 编辑 <code>~/.sbt/0.13/plugins/plugins.sbt</code> 文件， 添加以下内容 <code>addSbtPlugin(&quot;com.typesafe.sbteclipse&quot; % &quot;sbteclipse-plugin&quot; % &quot;2.5.0&quot;)</code>，如果没有plugins目录和plugins.sbt，自行创建。</li>
-<li><p>用向导创建一个scala项目，并在项目根目录下创建一个build.sbt文件，添加以下内容(注意，每行正式语句之后要换行)</p>
-<p>&gt;<br>name := “spark-test”</p>
-<p>&gt;<br>version := “1.0”</p>
-<p>&gt;<br>scalaVersion := “2.10.4”</p>
-<p>&gt;<br>// set the main class for the main ‘run’ task<br>// change Compile to Test to set it for ‘test:run’<br>mainClass in (Compile, run) := Some(“test.SparkTest”)</p>
-<p>&gt;<br>libraryDependencies += “org.apache.spark” % “spark-streaming_2.10” % “1.1.0”</p>
-</li>
-<li><p>创建test.SparkTest.scala文件，添加以下代码<br>&gt;<br>package test<br>import org.apache.spark.streaming.<em><br>import org.apache.spark.streaming.StreamingContext.</em><br>import org.apache.spark.SparkContext<br>import org.apache.spark.api.java.function.<em><br>import org.apache.spark.streaming.</em><br>import org.apache.spark.streaming.api._</p>
-<p>&gt;<br>object SparkTest {<br>def main(args: Array[String]): Unit = {<br> // Create a StreamingContext with a local master<br> // Spark Streaming needs at least two working thread<br> val ssc = new StreamingContext(“local[2]”, “NetworkWordCount”, Seconds(10))<br> // Create a DStream that will connect to serverIP:serverPort, like localhost:9999<br> val lines = ssc.socketTextStream(“localhost”, 9999)<br> // Split each line into words<br> val words = lines.flatMap(<em>.split(“ “))<br> // Count each word in each batch<br> val pairs = words.map(word =&gt; (word, 1))<br> val wordCounts = pairs.reduceByKey(</em> + _)<br> wordCounts.print<br> ssc.start<br> ssc.awaitTermination<br>}<br>}</p>
-</li>
-<li><p>终端中切换目录到这个项目根目录，输入命令 <code>sbt</code> ， 命令运行成功后，敲入 <code>eclipse</code> 生成eclipse项目和项目所需依赖</p>
-</li>
-<li>同第一种方式的第1,3步，<br>再打开一个终端，输入 命令 <code>nc -lk 9999</code>。<br>然后运行刚才写的main程序，在nc终端中输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在ide控制台中观察到<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</li>
-</ol>
-<p>OK，成功！</p>
-<hr>
-<h1 id="下面是遇到的问题及解决方法："><a href="#下面是遇到的问题及解决方法：" class="headerlink" title="下面是遇到的问题及解决方法："></a>下面是遇到的问题及解决方法：</h1><h3 id="1-运行程序说找不到主类"><a href="#1-运行程序说找不到主类" class="headerlink" title="1. 运行程序说找不到主类"></a>1. 运行程序说找不到主类</h3><p>解：没有在sbt文件配置主类是哪个，在<code>build.sbt</code>  文件中添加以下代码</p>
-<blockquote>
-<p>mainClass in (Compile, run) := Some(“test.SparkTest”)</p>
-</blockquote>
-<p> Some中就是主类的路径</p>
-<h3 id="2-java-lang-NoClassDefFoundError-scala-collection-GenTraversableOnce-class"><a href="#2-java-lang-NoClassDefFoundError-scala-collection-GenTraversableOnce-class" class="headerlink" title="2. java.lang.NoClassDefFoundError: scala/collection/GenTraversableOnce$class"></a>2. java.lang.NoClassDefFoundError: scala/collection/GenTraversableOnce$class</h3><p>这个问题困扰了我很长时间，一直没找到怎么解决。后来看到说是scala每次版本升级不兼容以前的版本编译的库，于是换了对应的版本的ide才正常运行。<br>解：scala-ide版本和现在用的spark包依赖编译的scala版本不一致， 请下载上面说过的 <code>scala-ide For Scala 2.10.4</code> 版本。</p>
-
-	
-	</div>
-  <a type="button" href="/2016/03/09/SparkStreaming程序（及过程中问题解决）/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-09 </div>
 			<div class="article-title"><a href="/2016/03/09/Apache-Sqoop-安装/" >Apache-Sqoop 安装</a></div>						
 		</h3>
 	
@@ -620,6 +594,8 @@
 		
 			<li><a href="/categories/spark/">spark<span>3</span></a></li>
 		
+			<li><a href="/categories/spring/">spring<span>1</span></a></li>
+		
 			<li><a href="/categories/sql/">sql<span>1</span></a></li>
 		
 			<li><a href="/categories/sqoop/">sqoop<span>2</span></a></li>
@@ -635,37 +611,39 @@
 		<h4>标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/xd/">xd<span>1</span></a></li>
-		
-			<li><a href="/tags/windows8/">windows8<span>1</span></a></li>
-		
-			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
-		
-			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
-		
-			<li><a href="/tags/hdfs/">hdfs<span>1</span></a></li>
-		
-			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
-		
-			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
-		
-			<li><a href="/tags/linux/">linux<span>1</span></a></li>
-		
-			<li><a href="/tags/arch/">arch<span>2</span></a></li>
-		
-			<li><a href="/tags/sql/">sql<span>1</span></a></li>
-		
-			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
-		
-			<li><a href="/tags/spring/">spring<span>1</span></a></li>
-		
-			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+			<li><a href="/tags/spark/">spark<span>3</span></a></li>
 		
 			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
 		
 			<li><a href="/tags/java/">java<span>1</span></a></li>
 		
-			<li><a href="/tags/spark/">spark<span>3</span></a></li>
+			<li><a href="/tags/xd/">xd<span>1</span></a></li>
+		
+			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
+		
+			<li><a href="/tags/sql/">sql<span>1</span></a></li>
+		
+			<li><a href="/tags/windows8/">windows8<span>1</span></a></li>
+		
+			<li><a href="/tags/spring-xd/">spring-xd<span>1</span></a></li>
+		
+			<li><a href="/tags/linux/">linux<span>1</span></a></li>
+		
+			<li><a href="/tags/arch/">arch<span>2</span></a></li>
+		
+			<li><a href="/tags/spring/">spring<span>2</span></a></li>
+		
+			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+		
+			<li><a href="/tags/hdfs/">hdfs<span>1</span></a></li>
+		
+			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
+		
+			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
+		
+			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
 		
 		 
 		</ul>
@@ -677,6 +655,10 @@
 <div class="widget">
   <h4>最新文章</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2016/03/09/Spring-XD简介/" ><i class="fa fa-file-o"></i>Spring-XD简介</a>
+      </li>
     
       <li>
         <a href="/2016/03/09/以分布式方式运行Spring-XD/" ><i class="fa fa-file-o"></i>以分布式方式运行Spring-XD</a>
@@ -692,10 +674,6 @@
     
       <li>
         <a href="/2016/03/09/archlinux安装/" ><i class="fa fa-file-o"></i>archlinux安装</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/09/sql查找排除某些表后不存在某个字段的表/" ><i class="fa fa-file-o"></i>sql查找排除某些表后不存在某个字段的表</a>
       </li>
     
   </ul>
