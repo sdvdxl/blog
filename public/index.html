@@ -112,6 +112,305 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-03-09 </div>
+			<div class="article-title"><a href="/2016/03/09/Jrebel插件配置参数/" >Jrebel插件配置参数</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="JVM-参数"><a href="#JVM-参数" class="headerlink" title="JVM 参数"></a>JVM 参数</h1><p><code>-javaagent:/path/jrebel.jar</code></p>
+<h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><h2 id="Spring-Bean-Core-MVC-Security-Webflow-WS"><a href="#Spring-Bean-Core-MVC-Security-Webflow-WS" class="headerlink" title="Spring Bean/Core/MVC/Security/Webflow/WS"></a>Spring Bean/Core/MVC/Security/Webflow/WS</h2><p><code>-Drebel.spring_plugin=true</code></p>
+<h2 id="Spring-Data"><a href="#Spring-Data" class="headerlink" title="Spring Data"></a>Spring Data</h2><p><code>-Drebel.spring_data_plugin=true</code></p>
+<h2 id="Struts"><a href="#Struts" class="headerlink" title="Struts"></a>Struts</h2><p><code>-Drebel.struts2_plugin=true</code></p>
+<h1 id="Hibernate"><a href="#Hibernate" class="headerlink" title="Hibernate"></a>Hibernate</h1><p><code>-Drebel.hibernate_plugin=true</code></p>
+<h1 id="Hibernate-Validator"><a href="#Hibernate-Validator" class="headerlink" title="Hibernate Validator"></a>Hibernate Validator</h1><p><code>-Drebel.hibernate_validator_plugin=true</code></p>
+<h1 id="MyBatis"><a href="#MyBatis" class="headerlink" title="MyBatis"></a>MyBatis</h1><p><code>-Drebel.mybatis_plugin=true</code></p>
+<h1 id="Logback"><a href="#Logback" class="headerlink" title="Logback"></a>Logback</h1><p><code>-Drebel.logback_plugin=true</code></p>
+<h1 id="Log4J-2"><a href="#Log4J-2" class="headerlink" title="Log4J 2"></a>Log4J 2</h1><p><code>-Drebel.log4j2_plugin=true</code></p>
+<p>#Groovy<br><code>-Drebel.groovy_plugin=true</code></p>
+<h1 id="Jruby"><a href="#Jruby" class="headerlink" title="Jruby"></a>Jruby</h1><p><code>-Drebel.jruby_plugin=true</code></p>
+<h1 id="GWT"><a href="#GWT" class="headerlink" title="GWT"></a>GWT</h1><p><code>-Drebel.gwt_plugin=true</code></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://manuals.zeroturnaround.com/jrebel/misc/frameworks.html" target="_blank" rel="external">plugins</a></p>
+
+	
+	</div>
+  <a type="button" href="/2016/03/09/Jrebel插件配置参数/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-09 </div>
+			<div class="article-title"><a href="/2016/03/09/archlinux安装ntfs驱动/" >archlinux安装ntfs驱动</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>默认情况下，archlinux本身支持挂在ntfs文件系统，只不过是只读，不能写入。如果要支持ntfs系统文件，那么需要安装ntfs的驱动程序。<br>用命令 <code>yaourt -Ss ntfs</code> 可以查找关于ntfs的软件包<br>&gt;<br>extra/ntfs-3g 2014.2.15-1 [installed]<br>    NTFS filesystem driver and utilities<br>aur/disk-manager 1.0.1-3 (56)<br>    A tool to manage filesystems, partitions, and NTFS write mode<br>aur/fgetty 0.7-5 (14)<br>    A mingetty stripped of the printfs<br>aur/fgetty-pam 0.7-4 (4)<br>    A mingetty stripped of the printfs, patched for PAM-support.<br>aur/grub4dos 0.4.5c_20140822-1 (35)<br>    A GRUB boot loader support menu on windows(fat,ntfs)/linux(ext2,3,4)<br>aur/libntfs-wii 2013.1.13-1 (1)<br>    NTFS-3G filesystem access library (for Nintendo Gamecube/Wii homebrew<br>    development)<br>aur/ntfs-3g-ar 2014.2.15AR.3-1 (37)<br>    NTFS filesystem driver and utilities with experimental features<br>aur/ntfs-3g-fuse 2014.2.15-1 (46)<br>    Stable read and write NTFS driver and ntfsprogs. This package will allow<br>    normal users to mount NTFS Volumes.<br>aur/ntfs-3g_ntfsprogs-git 4695.db35a16-1 (7)<br>    Read and write NTFS driver and utilities - GIT version<br>aur/ntfs-config 1.0.1-13 (119)<br>    Enable/disable NTFS write support with a simple click<br>aur/ntfsfixboot 1.0-3 (18)<br>    Fix NTFS boot sector<br>aur/scrounge-ntfs 0.9-2 (28)<br>    Data recovery program for NTFS file systems<br>aur/ufsd-module 8.9.0-3 (9)<br>    Paragon NTFS &amp; HFS for Linux driver. - ACLs removed<br>aur/ufsd-module-dkms 8.9.0-3 (4)<br>    Paragon NTFS &amp; HFS for Linux driver. - ACLs removed. DKMS version<br>aur/wipefreespace 2.0-1 (3)<br>    Securely wipe the free space on an ext2/3/4,NTFS, XFS,ReiserFSv3,<br>    ReiserFSv4, FAT12/16/32,Minix,JFS and HFS+ partition or drive</p>
+<p>可以看到有这么多相关软件包，其实只需要安装第一个也就是 <code>extra/ntfs-3g</code> 就可以了，输入命令 <code>yaourt -S extra/ntfs-3g</code>，安装完毕后重新插入ntfs分区U盘或者移动硬盘就可以进行写入操作了。</p>
+
+	
+	</div>
+  <a type="button" href="/2016/03/09/archlinux安装ntfs驱动/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-09 </div>
+			<div class="article-title"><a href="/2016/03/09/archlinux安装/" >archlinux安装</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本人也是第一次安装archlinux，严格来说是第一次安装成功，记录一下，既为自己也为新手。此方式是非UEFI模式，并且分区表使DOS的MBR方式，GPT分区表没有测试。以后也许会在虚拟机中测试过进行补充。</p>
+<h1 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h1><p>建议现在虚拟机中安装几次，直到安装成功，并且可以正常开机，上网，打开桌面环境，有十足把握之后再在物理机上安装，以免中间出现问题又没办法解决。并在虚拟机安装的过程中记录遇到的问题，以便日后参考。同时安装的时候记得备份重要文件，以免安装错误导致文件丢失。</p>
+<h1 id="准备安装介质"><a href="#准备安装介质" class="headerlink" title="准备安装介质"></a>准备安装介质</h1><ol>
+<li>首先准备archlinux镜像，如果没有可以<a href="https://www.archlinux.org/download/" target="_blank" rel="external">点击这里下载</a>，最好选择中国的镜像服务，比如<a href="http://mirrors.163.com/archlinux/iso/2015.01.01/" target="_blank" rel="external">网易的</a>。下载完成后校验一下MD5值（官方文件的MD5值在md5sums.txt 这个文件中），如果相同那么可以进行下一步了；如果不相同需要重新下载并校验，不推荐在MD5值不同的情况下继续进行，因为不知道会发生什么问题。</li>
+<li>刻录至U盘。如果用的是linux系统或者Mac系统（话说这么优雅的系统为啥要换呢，也可能是双系统吧），可以使用 <code>dd</code> 命令。把U盘插入计算机， 输入命令 <code>ls -al /dev/sd*</code>, 一般sdb是你的U盘，也请先做好文件备份。 现在假定U盘是 /dev/sdb, archlinux的文件路径是 /home/user/archlinux.iso,那么输入命令(需root权限) <code>dd -if=/home/user/archlinux.iso -of=/dev/sdb</code>，然后等待命令执行完毕，如果没有任何提示，则代表成功了。</li>
+</ol>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>   <strong> 再次提醒，做好文件备份 </strong></p>
+<ol>
+<li>如果没有分区的话，先进行分区，并进行格式化，如果已经操作过了或者想重用上次系统(Linux)的分区，可以直接进入第2步。<ul>
+<li>分区进行时：<br>敲入命令 <code>fdisk /dev/sda</code> (假定操作的磁盘时sda，请自行确认好，此操作要格外小心)。输入 <code>m</code> 可以查看帮助， <code>n</code> 是新建一个分区， <code>d</code> 是删除一个已有分区。如果想新建一个DOS分区表，则输入 <code>o</code>，已经有分区表，想重新分区的话，按 <code>d</code> ，直到删除所有分区。分区方案可以按照以下来： <code>/boot</code>  大概需要  <code>200M</code>， <code>/</code> 可以分配 <code>15G</code> ～ <code>40G</code>， <code>/var</code> <code>8G</code>～ <code>20G</code> (可选)  ， <code>/tmp</code> <code>4G</code> ～ <code>8G</code> (可选)，其余分给 <code>/home</code>分区（强烈建议单独分区，以后重装系统可以不用拷贝主目录下的资料了）， <code>swap</code> <code>4G</code> ～ <code>8G</code>（可选）。新建分区输入 <code>n</code>，默认（p主分区）即可，然后默认（分区号1），接下来也是默认扇区既可以，然后选择大小，可以输入G,M,K单位的大小，我们输入 <code>+200M</code>，确定；然后创建根分区，按<code>n</code>,一路下来，大小选择输入 <code>+15G</code>,确定，根分区创建完成。如果分区少于4个，可以按照上面步骤，直到分区创建完成；但是如果分区多于4个，就要创建扩展分区，然后再创建逻辑分区了。扩展分区的创建和上面一样，只不过在选择分区格式的时候不是输入 <code>p</code> 了，而是 <code>e</code>，其余一样的。创建逻辑分区的时候输入 <code>l</code> （英文L的小写字母），剩下的步骤也是和创建主分区一样的啦。所有分区创建完成后，输入 <code>w</code> ，上面的一系列操作才会真正写入磁盘，再次之前都是在内存中，所以，在按 <code>w</code> 之前，还是有后悔药吃的，但是按下之后，那就定格了。切记！</li>
+<li>格式化分区：<br>格式化分区的命令是 <code>mkfs.xxx</code>，输入 <code>mkfs.</code>，按 <code>Tab</code> 键可以看到有如下格式：  <code>mkfs.bfs</code>       <code>mkfs.ext2</code>      <code>mkfs.ext4</code>      <code>mkfs.jfs</code>       <code>mkfs.reiserfs</code> <code>mkfs.cramfs</code>    <code>mkfs.ext3</code>      <code>mkfs.ext4dev</code>  <code>mkfs.minix</code>     <code>mkfs.xfs</code>。咦，好像没有swap分区格式，swap分区格式化的命令是 <code>mkswap</code> 啦。输入命令 <code>mkfs.ext4 /dev/sda1</code> 将 <code>/boot</code> 分区格式化成ext4格式的分区，根分区和其他非swap分区用此方法依次格式化，用 <code>mkswap /dev/sdax</code> 格式化上面分的swap分区，x是分swap分区所得的号码。</li>
+</ul>
+</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
+<li>mount 相关分区。 <code>mkdir /mnt/home /mnt/tmp /mnt/var /mnt/boot</code>  创建home，tmp，var，boot挂载点目录，然后 <code>mount /dev/sdax /mnt/xx</code> x代表分区号，xx代表目录，把的分区挂载到相应挂载点上。</li>
+<li><p>修改 <code>/etc/pacman.d/mirrorlist</code> 的镜像列表，可以删除所有的，然后输入<br>&gt;<br>Server = <a href="http://mirrors.163.com/archlinux/$repo/os/x86_64" target="_blank" rel="external">http://mirrors.163.com/archlinux/$repo/os/x86_64</a></p>
+<p>   保存退出。</p>
+<ol>
+<li>执行 <code>pacstrap /mnt base</code> 命令进行基础安装。</li>
+<li>生成fstab。 <code>genfstab -p /mnt &gt;&gt; /mnt/etc/fstab</code>, 查看一下/mnt/etc/fstab 内容格式是否正确，有无重复内容，如有请先订正。格式大体如下：<br>&gt;<br>#<br># /etc/fstab: static file system information<br>#<br># <file system="">    <dir>    <type>    <options>    <dump>    <pass><br># UUID=ee8bae58-9428-4917-b63e-0258d19a4567<br>/dev/sda5               /             ext4          rw,relatime,data=ordered0 1<br># UUID=cbac48fe-3345-4cba-96ec-acdbdc56d0ad<br>/dev/sda9               /home         ext4          rw,relatime,data=ordered0 2<br># UUID=59e210c2-fced-4cdd-b631-d9a50ba82312<br>/dev/sda7               /tmp          ext4          rw,relatime,data=ordered0 2</pass></dump></options></type></dir></file></li>
+<li>切换到新系统的root目录下，命令  <code>arch-choot /mnt</code></li>
+<li>设置主机名 <code>echo your_hostname &gt; /etc/hostname</code> ， your_hostname换成你想要的，最好是纯英文。</li>
+<li>设置时区。 <code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code>。</li>
+<li>修改 <code>/etc/locale.gen</code> ， 添加以下内容<br>&gt;<br>en_US.UTF-8 UTF-8<br>zh_CN.UTF-8 UTF-8</li>
+</ol>
+<p>执行 <code>locale-gen</code>，</p>
+<ol>
+<li>执行 <code>echo LANG=zh_CN.UTF-8 &gt; /etc/locale.conf</code></li>
+<li>设置键盘映射和字体，文件在 <code>/etc/vconsole.conf</code>，在这就保持默认配置了。</li>
+<li>设置root密码 <code>passwd</code> 然后输入密码，再输入一次确认。</li>
+<li>安装引导程序，这里用grub。 <code>pacman -Sy grub</code>，安装完成后，执行  <code>pacman-db-upgrade</code>， 然后再执行 <code>grub-install --target=i386-pc --recheck --debug /dev/sda</code> 安装grub引导到sda上。最后执行 <code>grub-mkconfig -o /boot/grub/grub.cfg</code> ，生成引导配置。</li>
+<li>重启， 执行 <code>reboot</code>。如果成功安装的话，会出现grub引导选择系统菜单，选择默认的进入，输入root用户名，输入密码，登录成功。至此，安装已经完成，接下来是配置。</li>
+</ol>
+</li>
+</ol>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol>
+<li><p>网络配置</p>
+<ul>
+<li>查看网络设备名称 <code>ls /sys/class/net</code>, 记住所看到的网卡接口名称，假定叫做eth0</li>
+<li>启用网络接口 ip link set eth0 up</li>
+<li>检查结果状态 <code>ip link show dev eth0</code> 如果打印<br>&gt;<br>enp3s0: <broadcast,multicast,up,lower_up> mtu 1500 qdisc fq_codel state UP mode DEFAULT    group default qlen 1000<br>link/ether 00:e0:66:cb:e2:1e brd ff:ff:ff:ff:ff:ff</broadcast,multicast,up,lower_up></li>
+</ul>
+<p>类似内容，说明启用成功。</p>
+</li>
+<li>创建或编辑 <code>/etc/systemd/network/dhcp.network</code> ,添加以下内容：<br>&gt;<br>[Match]<br>Name=en*<br>[Network]<br>DHCP=v4</li>
+</ol>
+<ol>
+<li>启用网络服务 <code>systemctl enable systemd-resolved</code></li>
+<li><p>编辑 <code>/etc/resolv.conf</code> 配置dns ， 添加以下内容：<br>&gt;<br>nameserver 8.8.8.8<br>nameserver 4.4.4.4</p>
+<p>如果你的IP段在192.168.xxx.yyy,则再添加 nameserver 192.168.xxx.1</p>
+</li>
+<li><p>执行 <code>dhcpd</code> 启用dhcp，要开机自动启动dhcp服务，则执行 <code>systemctl enable dhcpd</code><br>基本环境配置已经完成。</p>
+</li>
+</ol>
+<h1 id="桌面环境配置"><a href="#桌面环境配置" class="headerlink" title="桌面环境配置"></a>桌面环境配置</h1><p>安装 fxce4</p>
+<p>pacman -S xorg xorg-server<br>pacman -S slim #登录管理器<br>pacman -S xfce4<br>pacman -S xfce4-goodies<br>pacman -S fortune-mode<br>pacman -S gamin</p>
+<ol>
+<li>创建用户 <code>useradd -Um du</code></li>
+<li>设置密码 <code>passwd du</code></li>
+<li>切换用户  <code>su -l du</code></li>
+<li>输入 <code>startxfce4</code> 可以进入xfce桌面了</li>
+</ol>
+<h1 id="美化显示："><a href="#美化显示：" class="headerlink" title="美化显示："></a>美化显示：</h1><ul>
+<li><p>字体</p>
+<ol>
+<li>首先可以从windowns上或者其他地方准备字体文件，然后 <code>cp *.ttf ~/.fonts/</code></li>
+<li>建立字体缓存<br><code>mkfontscale</code><br><code>mkfontdir</code><br><code>fc-cache -fv</code></li>
+</ol>
+</li>
+<li><p>输入法 <a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#.E8.BE.93.E5.85.A5.E6.B3.95.E6.A8.A1.E5.9D.97" target="_blank" rel="external">传送门</a><br>输入法就安装fcitx小企鹅输入法了</p>
+<ol>
+<li><p>安装输入法</p>
+<p> <code>pacman -S fcitx</code>  </p>
+</li>
+<li>配置输入法<br> 安装输入法其他模块<br> <code>fcitx-ui-light</code> Fcitx 的轻量 UI.<br><code>fcitx-fbterm</code> Fbterm 对 Fcitx 的支持。<br><code>fcitx-table-extra</code> Fcitx 的一些额外码表支持，包括仓颉 3, 仓颉 5, 粤拼, 速成, 五笔, 郑码等等<br><code>fcitx-table-other</code> Fcitx 的一些更奇怪的码表支持，包括 Latex, Emoji, 以及一大堆不明字符等等。<br><code>kcm-fcitx</code> KDE 的 Fcitx 输入法模块</li>
+<li>启动桌面环境时候启用输入法<br> 在 .bashrc 文件中加入如下代码<br> &gt;<br>export GTK_IM_MODULE=fcitx<br>export QT_IM_MODULE=fcitx<br>export XMODIFIERS=”@im=fcitx”</li>
+</ol>
+<p>退出用户，重新登陆，可以欢快的使用输入法了。</p>
+</li>
+</ul>
+<p>ps:<br>浙大源：<code>Server = http://mirrors.zju.edu.cn/archlinux/$repo/os/$arch</code><br>网易源：<code>Server = http://mirrors.163.com/archlinux/$repo/os/x86_64</code><br>北京交大：<code>Server = http://mirror.bjtu.edu.cn/ArchLinux/$repo/os/x86_64</code></p>
+
+	
+	</div>
+  <a type="button" href="/2016/03/09/archlinux安装/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-09 </div>
+			<div class="article-title"><a href="/2016/03/09/sql查找排除某些表后不存在某个字段的表/" >sql查找排除某些表后不存在某个字段的表</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> table_name <span class="keyword">FROM</span> information_schema.<span class="keyword">tables</span></span><br><span class="line"><span class="keyword">WHERE</span> table_schema=<span class="string">'database_name'</span></span><br><span class="line">	<span class="keyword">AND</span> table_name <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">'table_name'</span></span><br><span class="line">	<span class="keyword">AND</span> table_name <span class="keyword">NOT</span> <span class="keyword">IN</span>(<span class="keyword">SELECT</span> <span class="keyword">col</span>.table_name  <span class="keyword">FROM</span> information_schema.<span class="string">`COLUMNS`</span> <span class="keyword">col</span></span><br><span class="line">	       <span class="keyword">WHERE</span> <span class="keyword">col</span>.table_name <span class="keyword">IN</span> (<span class="keyword">SELECT</span> table_name <span class="keyword">FROM</span> information_schema.<span class="keyword">tables</span></span><br><span class="line">					<span class="keyword">WHERE</span> table_schema=<span class="string">'database_name'</span></span><br><span class="line">					<span class="keyword">AND</span> table_name <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">'table_name'</span></span><br><span class="line">					<span class="keyword">AND</span> <span class="keyword">col</span>.column_name=<span class="string">'gmt_modified'</span>);</span><br></pre></td></tr></table></figure>
+
+	
+	</div>
+  <a type="button" href="/2016/03/09/sql查找排除某些表后不存在某个字段的表/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-09 </div>
+			<div class="article-title"><a href="/2016/03/09/MySql避免重复插入记录/" >MySql避免重复插入记录</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="方案一：使用ignore关键字"><a href="#方案一：使用ignore关键字" class="headerlink" title="方案一：使用ignore关键字"></a>方案一：使用ignore关键字</h1><p>如果是用主键primary或者唯一索引unique区分了记录的唯一性,避免重复插入记录可以使用：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">ignore</span> <span class="keyword">into</span> table_name(email,phone,user_id) <span class="keyword">values</span>(<span class="string">'test9@163.com'</span>,<span class="string">'99999'</span>,<span class="string">'9999'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>这样当有重复记录就会忽略,执行后返回数字0,还有个应用就是复制表,避免重复记录：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">ignore</span> <span class="keyword">into</span> <span class="keyword">table</span>(<span class="keyword">name</span>)  <span class="keyword">select</span>  <span class="keyword">name</span> <span class="keyword">from</span> table2</span><br></pre></td></tr></table></figure></p>
+<h1 id="方案二：使用Replace"><a href="#方案二：使用Replace" class="headerlink" title="方案二：使用Replace"></a>方案二：使用Replace</h1><p>replace的语法格式为：</p>
+<ol>
+<li><code>replace into table_name(col_name, ...) values(...)</code></li>
+<li><code>replace into table_name(col_name, ...) select ...</code></li>
+<li><code>replace into table_name set col_name=value, ...</code></li>
+</ol>
+<h2 id="算法说明："><a href="#算法说明：" class="headerlink" title="算法说明："></a>算法说明：</h2><p>REPLACE的运行与INSERT很相像,但是如果旧记录与新记录有相同的值，则在新记录被插入之前，旧记录被删除，即：</p>
+<ol>
+<li>尝试把新行插入到表中</li>
+<li>当因为对于主键或唯一关键字出现重复关键字错误而造成插入失败时：<ul>
+<li>从表中删除含有重复关键字值的冲突行</li>
+<li>再次尝试把新行插入到表中<br>旧记录与新记录有相同的值的判断标准就是：表有一个PRIMARY KEY或UNIQUE索引，否则，使用一个REPLACE语句没有意义。该语句会与INSERT相同，因为没有索引被用于确定是否新行复制了其它的行。<h2 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h2>REPLACE语句会返回一个数，来指示受影响的行的数目。该数是被删除和被插入的行数的和。受影响的行数可以容易地确定是否REPLACE只添加了一行，或者是否REPLACE也替换了其它行：检查该数是否为1（添加）或更大（替换）。<h2 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h2>eg:(phone字段为唯一索引)<br><code>replace  into table_name(email,phone,user_id) values(&#39;test569&#39;,&#39;99999&#39;,&#39;123&#39;)</code><br>另外：在 SQL Server 中可以这样处理：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if not exists (<span class="keyword">select</span> phone <span class="keyword">from</span> t <span class="keyword">where</span> phone= <span class="string">'1'</span>)  </span><br><span class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> t(phone, update_time) <span class="keyword">values</span>(<span class="string">'1'</span>, <span class="keyword">getdate</span>())</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">update</span> t <span class="keyword">set</span> update_time = <span class="keyword">getdate</span>() <span class="keyword">where</span> phone= <span class="string">'1'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<p>更多信息<a href="http://dev.mysql.com/doc/refman/5.1/zh/sql-syntax.html#replace" target="_blank" rel="external">请看</a></p>
+<h1 id="方案三：ON-DUPLICATE-KEY-UPDATE"><a href="#方案三：ON-DUPLICATE-KEY-UPDATE" class="headerlink" title="方案三：ON DUPLICATE KEY UPDATE"></a>方案三：ON DUPLICATE KEY UPDATE</h1><p>如‍上所写，你也可以在<code>INSERT INTO.....</code>后面加上 <code>ON DUPLICATE KEY UPDATE</code>方法来实现。如果您指定了<code>ON DUPLICATE KEY UPDATE</code>，并且插入行后会导致在一个UNIQUE索引或PRIMARY KEY中出现重复值，则执行旧行UPDATE。例如，如果列a被定义为UNIQUE，并且包含值1，则以下两个语句具有相同的效果：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> (a,b,c) <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> c=c+<span class="number">1</span>; `</span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">table</span> <span class="keyword">SET</span> c=c+<span class="number">1</span> <span class="keyword">WHERE</span> a=<span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
+<p>如果行作为新记录被插入，则受影响行的值为1；如果原有的记录被更新，则受影响行的值为2。注释：如果列b也是唯一列，则INSERT与此UPDATE语句相当：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">table</span> <span class="keyword">SET</span> c=c+<span class="number">1</span></span><br><span class="line"><span class="keyword">WHERE</span> a=<span class="number">1</span> <span class="keyword">OR</span> b=<span class="number">2</span> <span class="keyword">LIMIT</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
+<p>如果a=1 OR b=2与多个行向匹配，则只有一个行被更新。通常，您应该尽量避免对带有多个唯一关键字的表使用ON DUPLICATE KEY子句。<br>您可以在UPDATE子句中使用VALUES(col_name)函数从INSERT…UPDATE语句的INSERT部分引用列值。换句话说，如果没有发生重复关键字冲突，则UPDATE子句中的VALUES(col_name)可以引用被插入的col_name的值。本函数特别适用于多行插入。VALUES()函数只在INSERT…UPDATE语句中有意义，其它时候会返回NULL。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> (a,b,c) <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),(<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)    </span><br><span class="line"><span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> c=<span class="keyword">VALUES</span>(a)+<span class="keyword">VALUES</span>(b);</span><br></pre></td></tr></table></figure></p>
+<p>本语句与以下两个语句作用相同：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> (a,b,c) <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)  <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> c=<span class="number">3</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> (a,b,c) <span class="keyword">VALUES</span> (<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)  <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> c=<span class="number">9</span>;</span><br></pre></td></tr></table></figure></p>
+<p>当您使用<code>ON DUPLICATE KEY UPDATE</code>时，<code>DELAYED</code>选项被忽略。<br>注：<a href="http://www.cnblogs.com/zeroone/archive/2012/04/18/2454728.html" target="_blank" rel="external">来源</a></p>
+
+	
+	</div>
+  <a type="button" href="/2016/03/09/MySql避免重复插入记录/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-09 </div>
+			<div class="article-title"><a href="/2016/03/09/特定国家版windows8/" >特定国家版windows8</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>有强迫症的同学真是伤不起，他们就认定只有OEM厂商预装的系统才是正版的，其他通过密钥激活、kms激活的系统就是盗版的，为了满足这些同学的强迫症，笔者搜罗了半天网络资源，终于将OEM厂商使用的预装系统镜像收集完毕，他们分别是特定国家版（CoreCountrySpecific）和单语言版（CoreSingleLanguage），在大多华硕笔记本、联想笔记本中预装的系统通常显示为win8/8.1中文版，其实这些版本的实质就是特定国家版，今天给大家讲解一下他们与其他系统版本的区别以及分享一下他们的下载地址和有效安装密钥。</p>
+<p>如何查看你预装的系统版本具体是什么？</p>
+<p>win8/8.1中文版，可以通过注册表查看系统的具体版本，打开注册表定位到HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion，然后在右边找到EditionID和ProductName项，如果EditionID处显示为CoreCountrySpecific，ProductName处显示为Windows 8/8.1 China，那么就说明你预装的系统为特定国家版，如果EditionID处显示为CoreSingleLanguage，那么说明你预装的系统为单语言版，目前国内OEM厂商使用的基本就是这两种系统了。</p>
+<p>特定国家版、单语言版与其他版本的区别是什么？</p>
+<p>一般预装系统显示为win8/8.1中文版的大多都是特定国家版（CoreCountrySpecific），细心的同学可能会发现不管特定国家版还是单语言版，他们的英文名字都带一个“Core”，Core是什么呢？大家都知道win8/8.1分为核心板、专业版、企业版，那么Core就是核心板，这说明特定国家版和单语言版的实质就是核心板，他们与核心版的不同之处：特定国家使用，并且无法更换系统语言，比如是中文版，无法通过语言包或语言设置更换成其他版本，另外他们的密钥也不通用。（本文由 亦是美网络 yishimei.cn 原创）</p>
+<p>为什么有些同学哭死哭活的要安装win8/8.1预装系统版本？</p>
+<p>OEM厂商在电脑出厂时就将密钥集成在主板里了，如果使用预装系统的版本，在安装成功后，输入OEM集成在主板里的密钥就可以直接联网激活了，那些同学心目中的“正版概念”就是这么来的。</p>
+<p>win8.1 CoreCountrySpecific（特定国家版）下载地址：</p>
+<p>32位系统：<a href="http://pan.baidu.com/s/1dDCNHdR" target="_blank" rel="external">http://pan.baidu.com/s/1dDCNHdR</a></p>
+<p>64位系统：<a href="http://pan.baidu.com/s/1c05ym0w" target="_blank" rel="external">http://pan.baidu.com/s/1c05ym0w</a></p>
+<p>安装密钥：TNH8J-KG84C-TRMG4-FFD7J-VH4WX</p>
+<p>激活方法：</p>
+<p>1、使用安装密钥安装完成后，参考<a href="http://www.yishimei.cn/network/374.html" target="_blank" rel="external">（oem预装系统主板密钥提取神器 - RW - Read &amp; Write utility ）</a>获取系统集成的密钥，然后在线联网激活。</p>
+<p>2、下载kms神龙版激活<a href="http://www.yishimei.cn/network/319.html" target="_blank" rel="external">（KMS在线激活windows8/8.1、windows7和office2013/2010之MicroKMS 神龙版）</a>。</p>
+<p>win8.1 CoreSingleLanguage（单语言版）下载地址：</p>
+<p>32位系统：<a href="http://pan.baidu.com/s/1bn3ytzx" target="_blank" rel="external">http://pan.baidu.com/s/1bn3ytzx</a></p>
+<p>64位系统：<a href="http://pan.baidu.com/s/1hqGLrRA" target="_blank" rel="external">http://pan.baidu.com/s/1hqGLrRA</a></p>
+<p>安装密钥：Y9NXP-XT8MV-PT9TG-97CT3-9D6TC</p>
+<p>激活方法：同win8.1 CoreCountrySpecific（特定国家版）。</p>
+
+	
+	</div>
+  <a type="button" href="/2016/03/09/特定国家版windows8/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-09 </div>
+			<div class="article-title"><a href="/2016/03/09/Spark基础知识/" >Spark基础知识</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Spark基本概念"><a href="#Spark基本概念" class="headerlink" title="Spark基本概念"></a>Spark基本概念</h1><ul>
+<li>RDD——Resillient Distributed Dataset A Fault-Tolerant Abstraction for In-Memory Cluster Computing弹性分布式数据集。</li>
+<li>Operation——作用于RDD的各种操作分为transformation和action。</li>
+<li>Job——作业，一个JOB包含多个RDD及作用于相应RDD上的各种operation。</li>
+<li>Stage——一个作业分为多个阶段。</li>
+<li>Partition——数据分区， 一个RDD中的数据可以分成多个不同的区。</li>
+<li>DAG——Directed Acycle graph，有向无环图，反应RDD之间的依赖关系。</li>
+<li>Narrow dependency——窄依赖，子RDD依赖于父RDD中固定的data partition。</li>
+<li>Wide Dependency——宽依赖，子RDD对父RDD中的所有data partition都有依赖。</li>
+<li>Caching Managenment——缓存管理，对RDD的中间计算结果进行缓存管理以加快整 体的处理速度。</li>
+</ul>
+
+	
+	</div>
+  <a type="button" href="/2016/03/09/Spark基础知识/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-09 </div>
 			<div class="article-title"><a href="/2016/03/09/Apache-Sqoop-安装/" >Apache-Sqoop 安装</a></div>						
 		</h3>
 	
@@ -137,7 +436,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-03-09 </div>
-			<div class="article-title"><a href="/2016/03/09/Sqoop使用/" >Sqoop使用</a></div>						
+			<div class="article-title"><a href="/2016/03/09/SparkStreaming程序（及过程中问题解决）/" >运行第一个SparkStreaming程序（及过程中问题解决）</a></div>						
 		</h3>
 	
 
@@ -146,222 +445,70 @@
   <div class="row">
 	
 	
-		<p><code>sqoop help</code> 查看帮助信息<br><code>sqoop help COMMAND</code> 查看 COMMAND具体的帮助，如要查看 list-databases 命令的用法，则使用 <code>sqoop help list-databases</code> 查看。</p>
-<p>主要可用的命令如下：</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>help</td>
-<td>List available commands</td>
-</tr>
-<tr>
-<td>import</td>
-<td>Import a table from a database to HDFS</td>
-</tr>
-<tr>
-<td>list-databases</td>
-<td>List available databases on a server</td>
-</tr>
-<tr>
-<td>list-tables</td>
-<td>List available tables in a database</td>
-</tr>
-</tbody>
-</table>
-<p>主要参数说明</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>–connect</td>
-<td>用来指定jdbc链接url，如mysql的: jdbc:mysql://ip:port/database</td>
-</tr>
-<tr>
-<td>–password</td>
-<td>指定密码， 安全起见，建议使用 -P 参数，交互式填写密码或者使用 –password-file参数</td>
-</tr>
-<tr>
-<td>–password-file</td>
-<td>指定密码的文件，从该文件中读取密码</td>
-</tr>
-<tr>
-<td>–username</td>
-<td>指定用户名</td>
-</tr>
-</tbody>
-</table>
-<p>用help查看帮助，使用示例：<br>list-databases 是列出所有的数据库，sqoop help list-databases· 查看使用方法</p>
-<p>使用示例，查看 本机上的mysql中的数据库<br>./sqoop  list-databases –connect jdbc:mysql://127.0.0.1:3306/test –username username -P<br>这样直接操作会提示找不到驱动，我们需要把对应的mysql驱动jar包放到$SQOOP/lib目录下，然后再次执行就可以了，或者用参数 -libjars 指定驱动jar包路径。</p>
-<h1 id="配置项说明"><a href="#配置项说明" class="headerlink" title="配置项说明"></a>配置项说明</h1><p>按照此处的配置项进行可避免文末的错误，如果遇到错误请参考文末错误说明和解决方法。</p>
+		<h1 id="官方示例说明"><a href="#官方示例说明" class="headerlink" title="官方示例说明"></a>官方示例说明</h1><p>按照官方文档的 <a href="http://spark.apache.org/docs/1.0.0/streaming-programming-guide.html#a-quick-example" target="_blank" rel="external">这个示例说明</a>，可以轻松的在本地的spark-shell环境中测试这个示例。示例，即为了更好的入门，那么就再说明一下。<br>运行这个统计单词的方式有三种，前面两种是官方文档上的指引，第三种则是用scala程序运行。</p>
+<hr>
+<ul>
+<li><h2 id="第一种方式-run-demo"><a href="#第一种方式-run-demo" class="headerlink" title="第一种方式, run-demo"></a>第一种方式, run-demo</h2></li>
+</ul>
 <ol>
-<li>sqoop 要使用对应的hadoop版本，如使用的hadoo版本是2.0.4，那么对应的sqoop版本就要使用文件名包含hadoop2.0.4的信息的版本。</li>
-<li>SQOOP_HOME   环境变量关系到sqoop运行时选择的版本问题，所以该变量请配置成正确的版本路径。如果配置成了别的，虽然执行命令是在正确的路径下执行，而真实运行的版本却是其他的版本，该问题可以通过运行sqoop version 查看，此问题比较隐晦，要注意。</li>
-<li>执行sqoop所对应的SQOOP_HOME 文件要和hdfs文件系统上的一致，否则会产生找不到对应库文件的错误。</li>
-<li>在/etc/hosts 文件中增加 archeagle 到 hdfs节点ip的映射，否则sqoop会用默认的ip映射，会连接不上。</li>
-<li><p>用户权限问题，可以在 文件 hadoop/etc/hadoop/hdfs-site.xml中增加或者修改 配置</p>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.acls.enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.permissions<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<li>打开一个终端，打开一个终端，输入 命令 <code>nc -lk 9999</code>，暂时叫做 “nc终端” 吧</li>
+<li><p>再打开终端，切换到Spark HOME目录， 执行命令 <code>bin/run-example org.apache.spark.examples.streaming.NetworkWordCount localhost 9999</code>， 然后每秒会有类似一下日志循环输出<br>&gt;<br>-——————————————<br>Time: 1415701382000 ms<br>-——————————————<br>-——————————————<br>Time: 1415701383000 ms<br>-——————————————</p>
 </li>
-<li><p>hdfs 集群要启动yarn服务。</p>
+<li><p>在nc终端随便输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在上面的Spark终端中看到有新内容输出<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</p>
 </li>
 </ol>
-<h1 id="import-的使用"><a href="#import-的使用" class="headerlink" title="import 的使用"></a>import 的使用</h1><p>常用参数说明</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-fs</td>
-<td>指定hdfs节点</td>
-</tr>
-<tr>
-<td>–target-dir</td>
-<td>要到处到hdfs文件系统上的文件路径</td>
-</tr>
-<tr>
-<td>–table</td>
-<td>要导出的表名</td>
-</tr>
-<tr>
-<td>–connect</td>
-<td>jdbc url</td>
-</tr>
-<tr>
-<td>–username</td>
-<td>数据库用户名</td>
-</tr>
-<tr>
-<td>-P</td>
-<td>从控制台输入密码</td>
-</tr>
-</tbody>
-</table>
-<p>使用示例 ：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop  import -fs hdfs://192.168.6.63:9000 --target-dir /user/admin/<span class="built_in">export</span>_<span class="built_in">test</span>_admin_user11  --table admin_user --connect jdbc:mysql://192.168.6.201:3306/<span class="built_in">test</span> --username username -P</span><br></pre></td></tr></table></figure></p>
-<h2 id="增量导入-原始链接"><a href="#增量导入-原始链接" class="headerlink" title="增量导入 原始链接"></a>增量导入 <a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_incremental_imports" target="_blank" rel="external">原始链接</a></h2><p>主要参数如下：</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>–incrementa</td>
-<td>增量方式， 有两种方式，lastmodified和append</td>
-</tr>
-<tr>
-<td>–last-value</td>
-<td>以lastmodified方式的增量追加，要指定时间；append则要指定偏移id</td>
-</tr>
-<tr>
-<td>–check-column</td>
-<td>要检查的字段， 即以哪个字段为标准计算增量范围</td>
-</tr>
-<tr>
-<td>–append</td>
-<td>指定以增量方式追加</td>
-</tr>
-</tbody>
-</table>
-<p>使用增量导入（以时间为标识作参考）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop  import -fs hdfs://192.168.6.63:9000 --target-dir /user/admin/<span class="built_in">export</span>_<span class="built_in">test</span>_admin_user11  --table admin_user --connect jdbc:mysql://192.168.6.201:3306/forseti_core --username forseti -P--incremental lastmodified --check-column gmt_create --last-value <span class="string">'2012-02-01 11:0:00'</span> --verbose --append</span><br></pre></td></tr></table></figure></p>
-<p>使用增量导入（以id为标识作为参考）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop  import -fs hdfs://192.168.6.63:9000 --target-dir /user/admin/<span class="built_in">export</span>_<span class="built_in">test</span>_admin_user11  --table admin_user --connect jdbc:mysql://192.168.6.201:3306/forseti_core --username forseti -P--incremental append --check-column id --verbose --append</span><br></pre></td></tr></table></figure></p>
-<h2 id="使用select语句-e或者–query参数"><a href="#使用select语句-e或者–query参数" class="headerlink" title="使用select语句(-e或者–query参数)"></a>使用select语句(-e或者–query参数)</h2><p>如果使用这个参数，那么可以执行自定义语句，比如可以执行join操作等其他复杂sql语句，但是语句中where是必须的，而且where后面要加 $CONDITIONS 参数。sql语句本身可以用单引号包裹，但是如果sql语句中已经包含了单引号，那么可以用双引号包裹。另外，使用了这个参数，那么参数 –split-by 在import命令中是必须的，而且该参数后面指定的字段必须出现在sql查询结果中。因为通过观察sqoop执行过程中输出的执行sql可以发现，它是在原有的sql上包裹一层，如下示例中，结果就变成了 SELECT MIN(gmt_modified), MAX(gmt_modified) FROM (select id from admin_user where  (1 = 1) ) AS t1。<br>使用示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop  import  --connect jdbc:mysql://192.168.6.201:3306/<span class="built_in">test</span> --username username -P <span class="_">-e</span> <span class="string">"select id from test where <span class="variable">$CONDITIONS</span>"</span> --split-by id</span><br></pre></td></tr></table></figure></p>
-<h1 id="job-使用"><a href="#job-使用" class="headerlink" title="job 使用"></a>job 使用</h1><h2 id="主要参数"><a href="#主要参数" class="headerlink" title="主要参数"></a>主要参数</h2><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>–create <job-id></job-id></td>
-<td>Create a new saved job</td>
-</tr>
-<tr>
-<td>–delete <job-id></job-id></td>
-<td>Delete a saved job</td>
-</tr>
-<tr>
-<td>–exec <job-id></job-id></td>
-<td>Run a saved job</td>
-</tr>
-<tr>
-<td>–help</td>
-<td>Print usage instructions</td>
-</tr>
-<tr>
-<td>–list</td>
-<td>List saved jobs</td>
-</tr>
-<tr>
-<td>–show <job-id></job-id></td>
-<td>Show the parameters for a saved job</td>
-</tr>
-<tr>
-<td>-fs &lt;local</td>
-<td>namenode:port&gt;</td>
-<td>specify a namenode</td>
-</tr>
-<tr>
-<td>-libjars <comma separated="" list="" of="" jars=""></comma></td>
-<td>specify comma separated jar files to include in the classpath.</td>
-</tr>
-<tr>
-<td>-conf <configuration file=""></configuration></td>
-<td>specify an application configuration file</td>
-</tr>
-</tbody>
-</table>
-<h2 id="创建Job示例："><a href="#创建Job示例：" class="headerlink" title="创建Job示例："></a>创建Job示例：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop job --create <span class="built_in">export</span>_mysql_table -- import --table admin_user --connect jdbc:mysql://192.168.6.201:3306/forseti_core</span><br></pre></td></tr></table></figure>
-<h2 id="执行Job示例："><a href="#执行Job示例：" class="headerlink" title="执行Job示例："></a>执行Job示例：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop job -fs hdfs://192.168.6.63:9000 --exec  <span class="built_in">export</span>_mysql_table --  --username forseti -P --target-dir /user/admin/<span class="built_in">export</span>_<span class="built_in">test</span>_admin_user11112</span><br></pre></td></tr></table></figure>
-<h2 id="执行带密码的任务"><a href="#执行带密码的任务" class="headerlink" title="执行带密码的任务"></a>执行带密码的任务</h2><p>有密码要求的任务，如果不存储密码的话，每次执行任务都要求手动输入密码，如果是定时任务，那么这个肯定是不合理的。默认metastore是不保存密码的，如果需要保存，则在conf/sqoop-site.xml增加或者取消注释如下内容</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>sqoop.metastore.client.record.password<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">description</span>&gt;</span>If true, allow saved passwords in the metastore.</span><br><span class="line">   <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h1 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h1><ul>
-<li><p>ERROR tool.ImportTool: Encountered IOException running import job: java.io.FileNotFoundException: File does not exist: hdfs://192.168.6.63:9000/home/du/software/dev/sqoop-1.4.5.bin__hadoop-0.20/lib/ant-contrib-1.0b3.jar</p>
-<pre><code>在不同机器或者用户下执行sqoop，会查找hadoop集群指定的节点上的hdfs目录中的这个文件，比如我是用在/home/du/software/dev/sqoop-1.4.5.bin__hadoop-0.20 下执行的sqoop，并且SQOOP_HOME配置的也是这个路径，那么到hdfs://192.168.6.63:9000上就会查找/home/du/software/dev/sqoop-1.4.5.bin__hadoop-0.20/lib这个路径下的ant-contrib-1.0b3.jar这个文件，解决方法就是在hdfs上创建对应目录，并把sqoop拷贝到对应目录，目录结构和执行sqoop的目录结构一样即可。
-</code></pre></li>
-<li><p>Exception in thread “main” java.lang.IncompatibleClassChangeError: Found interface org.apache.hadoop.mapreduce.JobContext, but class was expected</p>
-<pre><code>使用的hadoop版本问题，从2.6.0切换到2.4.0 解决
-</code></pre></li>
-<li><p>ERROR tool.ImportTool: Encountered IOException running import job: org.apache.hadoop.security.AccessControlException: Permission denied: user=du, access=WRITE, inode=”/user”:admin:supergroup:drwxr-xr-x</p>
-</li>
-<li><p>ERROR manager.SqlManager: Error executing statement: java.sql.SQLException: Access denied for user ‘forseti’@’192.168.6.165’ (using password: YES)</p>
-<pre><code>很明显是mysql的用户登陆失败，填写正确的用户名和密码即可解决该问题。
-</code></pre></li>
-<li><p>15/03/05 17:40:10 INFO mapreduce.Job: Running job: job_1425543105230_0006<br>15/03/05 17:40:44 INFO ipc.Client: Retrying connect to server: archeagle/220.250.64.20:43175. Already tried 0 time(s); maxRetries=3<br>15/03/05 17:41:04 INFO ipc.Client: Retrying connect to server: archeagle/220.250.64.20:43175. Already tried 1 time(s); maxRetries=3<br>15/03/05 17:41:24 INFO ipc.Client: Retrying connect to server: archeagle/220.250.64.20:43175. Already tried 2 time(s); maxRetries=3<br>15/03/05 17:41:44 INFO mapred.ClientServiceDelegate: Application state is completed. FinalApplicationStatus=FAILED. Redirecting to job history server<br>15/03/05 17:41:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Job status not available<br>  at org.apache.hadoop.mapreduce.Job.updateStatus(Job.java:322)<br>  at org.apache.hadoop.mapreduce.Job.isComplete(Job.java:599)<br>  at org.apache.hadoop.mapreduce.Job.monitorAndPrintJob(Job.java:1344)<br>  at org.apache.hadoop.mapreduce.Job.waitForCompletion(Job.java:1306)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.doSubmitJob(ImportJobBase.java:186)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.runJob(ImportJobBase.java:159)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.runImport(ImportJobBase.java:247)<br>  at org.apache.sqoop.manager.DirectMySQLManager.importTable(DirectMySQLManager.java:92)<br>  at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:497)<br>  at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:601)<br>  at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>  at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>  at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>  at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>  at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>  at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
-<pre><code>在运行sqoop的主机hosts文件增减加hadoop节点ip映射 192.168.6.63 archeagle
-</code></pre></li>
-<li><p>使用–direct参数<br>Error: java.io.IOException: Cannot run program “mysqldump”: error=2, No such file or directory<br>  at java.lang.ProcessBuilder.start(ProcessBuilder.java:1047)<br>  at java.lang.Runtime.exec(Runtime.java:617)<br>  at java.lang.Runtime.exec(Runtime.java:485)<br>  at org.apache.sqoop.mapreduce.MySQLDumpMapper.map(MySQLDumpMapper.java:405)<br>  at org.apache.sqoop.mapreduce.MySQLDumpMapper.map(MySQLDumpMapper.java:49)<br>  at org.apache.hadoop.mapreduce.Mapper.run(Mapper.java:145)<br>  at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:764)<br>  at org.apache.hadoop.mapred.MapTask.run(MapTask.java:340)<br>  at org.apache.hadoop.mapred.YarnChild$2.run(YarnChild.java:167)<br>  at java.security.AccessController.doPrivileged(Native Method)<br>  at javax.security.auth.Subject.doAs(Subject.java:415)<br>  at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1548)<br>  at org.apache.hadoop.mapred.YarnChild.main(YarnChild.java:162)<br>Caused by: java.io.IOException: error=2, No such file or directory<br>  at java.lang.UNIXProcess.forkAndExec(Native Method)<br>  at java.lang.UNIXProcess.<init>(UNIXProcess.java:186)<br>  at java.lang.ProcessImpl.start(ProcessImpl.java:130)<br>  at java.lang.ProcessBuilder.start(ProcessBuilder.java:1028)<br>  … 12 more</init></p>
+<p>OK，成功！</p>
+<hr>
 <ul>
-<li><p>ERROR tool.ImportTool: Encountered IOException running import job: org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.ipc.RetriableException): org.apache.hadoop.hdfs.server.namenode.SafeModeException: Cannot delete /user/du/.staging/job_1425543105230_0010. Name node is in safe mode.<br>The reported blocks 0 needs additional 963 blocks to reach the threshold 0.9990 of total blocks 963.<br>The number of live datanodes 0 has reached the minimum number 0. Safe mode will be turned off automatically once the thresholds have been reached.<br>at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.checkNameNodeSafeMode(FSNamesystem.java:1199)<br>at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.deleteInternal(FSNamesystem.java:3336)<br>at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.deleteInt(FSNamesystem.java:3296)<br>at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.delete(FSNamesystem.java:3280)<br>at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.delete(NameNodeRpcServer.java:727)</p>
-<pre><code>hdfs上(用户)目录不存在。
-</code></pre></li>
+<li><h2 id="第二种-spark-shell-模式"><a href="#第二种-spark-shell-模式" class="headerlink" title="第二种 spark-shell 模式"></a>第二种 spark-shell 模式</h2>下面介绍在spark-shell中输入scala代码运行的方式。</li>
 </ul>
+<ol>
+<li>同上面第一步，打开一个终端，打开一个终端，输入 命令 <code>nc -lk 9999</code>，暂时叫做 “nc终端” 吧</li>
+<li><p>再打开一个终端， 切换到Spark HOME目录下，输入 <code>bin/spark-shell</code> （如果你已经安装好了Spark的话，直接输入 <code>spark-shell</code> 即可），等待Spark启动成功，会打印信息<br>&gt;<br>Spark context available as sc.<br>scala&gt;</p>
+<p>然后输入以下语句：</p>
 </li>
-<li><p>INFO ipc.Client: Retrying connect to server: arch57/220.250.64.20:56564. Already tried 2 time(s); maxRetries=3<br>15/03/10 15:47:55 INFO mapred.ClientServiceDelegate: Application state is completed. FinalApplicationStatus=SUCCEEDED. Redirecting to job history server<br>15/03/10 15:47:55 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Job status not available<br>  at org.apache.hadoop.mapreduce.Job.updateStatus(Job.java:322)<br>  at org.apache.hadoop.mapreduce.Job.isComplete(Job.java:599)<br>  at org.apache.hadoop.mapreduce.Job.monitorAndPrintJob(Job.java:1344)<br>  at org.apache.hadoop.mapreduce.Job.waitForCompletion(Job.java:1306)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.doSubmitJob(ImportJobBase.java:186)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.runJob(ImportJobBase.java:159)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.runImport(ImportJobBase.java:247)<br>  at org.apache.sqoop.manager.SqlManager.importTable(SqlManager.java:665)<br>  at org.apache.sqoop.manager.MySQLManager.importTable(MySQLManager.java:118)<br>  at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:497)<br>  at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:601)<br>  at org.apache.sqoop.tool.JobTool.execJob(JobTool.java:228)<br>  at org.apache.sqoop.tool.JobTool.run(JobTool.java:283)<br>  at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>  at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>  at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>  at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>  at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>  at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
-<pre><code>在执行sqoop的机器的hosts增加 arch57 这个主机ip映射（PS:arch57 是一台hadoop机器的名字）
-</code></pre></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.streaming._</span><br><span class="line">import org.apache.spark.streaming.StreamingContext._</span><br><span class="line">import org.apache.spark.api.java.function._</span><br><span class="line">import org.apache.spark.streaming._</span><br><span class="line">import org.apache.spark.streaming.api._</span><br><span class="line"></span><br><span class="line">// Create a StreamingContext with a local master</span><br><span class="line">val ssc = new StreamingContext(sc, Seconds(1))</span><br><span class="line"></span><br><span class="line">// Create a DStream that will connect to serverIP:serverPort, like localhost:9999</span><br><span class="line">val lines = ssc.socketTextStream(&quot;localhost&quot;, 9999)</span><br><span class="line"></span><br><span class="line">// Split each line into words</span><br><span class="line">val words = lines.flatMap(_.split(&quot; &quot;))</span><br><span class="line">import org.apache.spark.streaming.StreamingContext._</span><br><span class="line"></span><br><span class="line">// Count each word in each batch</span><br><span class="line">val pairs = words.map(word =&gt; (word, 1))</span><br><span class="line">val wordCounts = pairs.reduceByKey(_ + _)</span><br><span class="line"></span><br><span class="line">// Print a few of the counts to the console</span><br><span class="line">wordCounts.print()</span><br><span class="line">ssc.start()             // Start the computation</span><br><span class="line">ssc.awaitTermination()  // Wait for the computation to terminate</span><br></pre></td></tr></table></figure>
+<p> 会打印以下信息：<br>&gt;<br>14/11/11 18:07:23 INFO MemoryStore: ensureFreeSpace(2216) called with curMem=100936, maxMem=278019440<br>.…..<br>14/11/11 18:07:23 INFO DAGScheduler: Stage 91 (take at DStream.scala:608) finished in 0.004 s<br>14/11/11 18:07:23 INFO SparkContext: Job finished: take at DStream.scala:608, took 0.007531701 s<br> -——————————————<br>Time: 1415700443000 ms<br>-——————————————</p>
+<ol>
+<li><p>同第一种方式的第3步，随便输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在上面的Spark终端中看到有新内容输出<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</p>
+<p>OK，成功！</p>
+</li>
+</ol>
+<hr>
+<ul>
+<li><h2 id="第三种-scala-ide编程方式"><a href="#第三种-scala-ide编程方式" class="headerlink" title="第三种 scala-ide编程方式"></a>第三种 scala-ide编程方式</h2>在用这种方式运行这个demo代码的时候，遇到了不少问题，记录下来，供大家参考。这个例子，请大家先根据这里记录的方式进行操作，得到一个可以运行的程序，后面我会记录遇到的问题。</li>
 </ul>
+<ol>
+<li>下载scala-ide, <a href="http://scala-ide.org/download/sdk.html" target="_blank" rel="external">下载链接</a>，下载 For Scala 2.10.4 下的对应平台的ide，解压，运行。</li>
+<li>安装sbt，<a href="http://www.scala-sbt.org/download.html" target="_blank" rel="external">下载链接</a>,</li>
+<li>安装sbteclipse, <a href="https://github.com/typesafehub/sbteclipse" target="_blank" rel="external">github地址</a>, 编辑 <code>~/.sbt/0.13/plugins/plugins.sbt</code> 文件， 添加以下内容 <code>addSbtPlugin(&quot;com.typesafe.sbteclipse&quot; % &quot;sbteclipse-plugin&quot; % &quot;2.5.0&quot;)</code>，如果没有plugins目录和plugins.sbt，自行创建。</li>
+<li><p>用向导创建一个scala项目，并在项目根目录下创建一个build.sbt文件，添加以下内容(注意，每行正式语句之后要换行)</p>
+<p>&gt;<br>name := “spark-test”</p>
+<p>&gt;<br>version := “1.0”</p>
+<p>&gt;<br>scalaVersion := “2.10.4”</p>
+<p>&gt;<br>// set the main class for the main ‘run’ task<br>// change Compile to Test to set it for ‘test:run’<br>mainClass in (Compile, run) := Some(“test.SparkTest”)</p>
+<p>&gt;<br>libraryDependencies += “org.apache.spark” % “spark-streaming_2.10” % “1.1.0”</p>
+</li>
+<li><p>创建test.SparkTest.scala文件，添加以下代码<br>&gt;<br>package test<br>import org.apache.spark.streaming.<em><br>import org.apache.spark.streaming.StreamingContext.</em><br>import org.apache.spark.SparkContext<br>import org.apache.spark.api.java.function.<em><br>import org.apache.spark.streaming.</em><br>import org.apache.spark.streaming.api._</p>
+<p>&gt;<br>object SparkTest {<br>def main(args: Array[String]): Unit = {<br> // Create a StreamingContext with a local master<br> // Spark Streaming needs at least two working thread<br> val ssc = new StreamingContext(“local[2]”, “NetworkWordCount”, Seconds(10))<br> // Create a DStream that will connect to serverIP:serverPort, like localhost:9999<br> val lines = ssc.socketTextStream(“localhost”, 9999)<br> // Split each line into words<br> val words = lines.flatMap(<em>.split(“ “))<br> // Count each word in each batch<br> val pairs = words.map(word =&gt; (word, 1))<br> val wordCounts = pairs.reduceByKey(</em> + _)<br> wordCounts.print<br> ssc.start<br> ssc.awaitTermination<br>}<br>}</p>
+</li>
+<li><p>终端中切换目录到这个项目根目录，输入命令 <code>sbt</code> ， 命令运行成功后，敲入 <code>eclipse</code> 生成eclipse项目和项目所需依赖</p>
+</li>
+<li>同第一种方式的第1,3步，<br>再打开一个终端，输入 命令 <code>nc -lk 9999</code>。<br>然后运行刚才写的main程序，在nc终端中输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在ide控制台中观察到<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</li>
+</ol>
+<p>OK，成功！</p>
+<hr>
+<h1 id="下面是遇到的问题及解决方法："><a href="#下面是遇到的问题及解决方法：" class="headerlink" title="下面是遇到的问题及解决方法："></a>下面是遇到的问题及解决方法：</h1><h3 id="1-运行程序说找不到主类"><a href="#1-运行程序说找不到主类" class="headerlink" title="1. 运行程序说找不到主类"></a>1. 运行程序说找不到主类</h3><p>解：没有在sbt文件配置主类是哪个，在<code>build.sbt</code>  文件中添加以下代码</p>
+<blockquote>
+<p>mainClass in (Compile, run) := Some(“test.SparkTest”)</p>
+</blockquote>
+<p> Some中就是主类的路径</p>
+<h3 id="2-java-lang-NoClassDefFoundError-scala-collection-GenTraversableOnce-class"><a href="#2-java-lang-NoClassDefFoundError-scala-collection-GenTraversableOnce-class" class="headerlink" title="2. java.lang.NoClassDefFoundError: scala/collection/GenTraversableOnce$class"></a>2. java.lang.NoClassDefFoundError: scala/collection/GenTraversableOnce$class</h3><p>这个问题困扰了我很长时间，一直没找到怎么解决。后来看到说是scala每次版本升级不兼容以前的版本编译的库，于是换了对应的版本的ide才正常运行。<br>解：scala-ide版本和现在用的spark包依赖编译的scala版本不一致， 请下载上面说过的 <code>scala-ide For Scala 2.10.4</code> 版本。</p>
 
 	
 	</div>
-  <a type="button" href="/2016/03/09/Sqoop使用/#more" class="btn btn-default more">阅读此文</a>
+  <a type="button" href="/2016/03/09/SparkStreaming程序（及过程中问题解决）/#more" class="btn btn-default more">阅读此文</a>
 </div>
 
 		
@@ -415,6 +562,16 @@
 		<div class="pagination">
 <ul class="pagination">
 	 
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+        
+
+        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+
+		
+		   <li class="next"> <a href="/page/2/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
+        
+	
 </ul>
 </div>
 
@@ -444,9 +601,19 @@
 		<h4>分类</h4>
 		<ul class="tag_box inline list-unstyled">
 		
-			<li><a href="/categories/spark/">spark<span>1</span></a></li>
+			<li><a href="/categories/java/">java<span>1</span></a></li>
+		
+			<li><a href="/categories/linux/">linux<span>2</span></a></li>
+		
+			<li><a href="/categories/mysql/">mysql<span>1</span></a></li>
+		
+			<li><a href="/categories/spark/">spark<span>3</span></a></li>
+		
+			<li><a href="/categories/sql/">sql<span>1</span></a></li>
 		
 			<li><a href="/categories/sqoop/">sqoop<span>2</span></a></li>
+		
+			<li><a href="/categories/windows/">windows<span>1</span></a></li>
 		
 		</ul>
 	</div>
@@ -457,17 +624,33 @@
 		<h4>标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/zookeeper/">zookeeper<span>1</span></a></li>
+			<li><a href="/tags/linux/">linux<span>1</span></a></li>
 		
-			<li><a href="/tags/mysql/">mysql<span>1</span></a></li>
+			<li><a href="/tags/java/">java<span>1</span></a></li>
 		
 			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
 		
+			<li><a href="/tags/windows8/">windows8<span>1</span></a></li>
+		
+			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
+		
+			<li><a href="/tags/arch/">arch<span>2</span></a></li>
+		
+			<li><a href="/tags/spark/">spark<span>3</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+		
 			<li><a href="/tags/hdfs/">hdfs<span>1</span></a></li>
 		
-			<li><a href="/tags/spark-streaming/">spark-streaming<span>1</span></a></li>
+			<li><a href="/tags/sql/">sql<span>1</span></a></li>
 		
-			<li><a href="/tags/spark/">spark<span>1</span></a></li>
+			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
+		
+			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
+		
+			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
+		
+			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -481,15 +664,23 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2016/03/09/Apache-Sqoop-安装/" ><i class="fa fa-file-o"></i>Apache-Sqoop 安装</a>
+        <a href="/2016/03/09/Jrebel插件配置参数/" ><i class="fa fa-file-o"></i>Jrebel插件配置参数</a>
       </li>
     
       <li>
-        <a href="/2016/03/09/Sqoop使用/" ><i class="fa fa-file-o"></i>Sqoop使用</a>
+        <a href="/2016/03/09/archlinux安装ntfs驱动/" ><i class="fa fa-file-o"></i>archlinux安装ntfs驱动</a>
       </li>
     
       <li>
-        <a href="/2016/03/09/SparkStreaming+Zookeeper+Kafka入门程序/" ><i class="fa fa-file-o"></i>SparkStreaming+Zookeeper+Ka...</a>
+        <a href="/2016/03/09/archlinux安装/" ><i class="fa fa-file-o"></i>archlinux安装</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/09/sql查找排除某些表后不存在某个字段的表/" ><i class="fa fa-file-o"></i>sql查找排除某些表后不存在某个字段的表</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/09/MySql避免重复插入记录/" ><i class="fa fa-file-o"></i>MySql避免重复插入记录</a>
       </li>
     
   </ul>
