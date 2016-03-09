@@ -20,7 +20,39 @@ tags:
 3. 安装Git，并配置相关环境变量
 
 # 创建Git仓库
-打开[开源中国Git托管平台](http://git.oschina.net/)，(注册后)登录，点击右上角`+`号，新建项目，输入项目名，描述，如果不想公开的话，可以选择私有，其余默认即可，点击创建。然后克隆到本地。命令行切换到刚才克隆的项目根目录，输入`hexo init`，hexo博客初始化完成。输入`hexo generate`可以渲染页面，生成静态页面，默认是在public文件夹。hexo默认初始化忽略了public文件夹，我们需要修改`.gitignore`文件，删除public的记录，这样保证可以同步到git仓库中。通过git提交文件到远程仓库。
+打开[开源中国Git托管平台](http://git.oschina.net/)，(注册后)登录，点击右上角`+`号，新建项目，输入项目名，描述，如果不想公开的话，可以选择私有，其余默认即可，点击创建。然后克隆到本地。命令行切换到刚才克隆的项目根目录，输入`hexo init`，hexo博客初始化完成。输入`hexo generate`可以渲染页面，生成静态页面，默认是在public文件夹。hexo默认初始化忽略了public文件夹，我们需要修改`.gitignore`文件，删除public的记录，这样保证可以同步到git仓库中。
+
+# 编写Golang Server服务
+在项目根目录创建一个叫`server.go`的文件，把下面的代码考入即可。
+```go
+package main
+
+import (
+	"net/http"
+	"log"
+	"os/exec"
+)
+
+func main() {
+	fs := http.FileServer(http.Dir("public"))
+	http.Handle("/", fs)
+
+	//用于git的webhook，触发pull
+	http.HandleFunc("/_blog/_pull", func(writer http.ResponseWriter, request *http.Request) {
+		cmd := exec.Command("git","pull")
+		if err:=cmd.Start(); err!=nil {
+			log.Println("git pull error", err)
+		}
+	})
+
+	err := http.ListenAndServe(":80", nil)
+	if err != nil {
+		log.Fatal("ListenAndServe: ", err)
+	}
+}
+```
+通过git提交文件到远程。
+
 
 # 创建容器
 这里之所以选择时速云，是因为一开始接触这类最早的就是这个平台，所以使用的还算熟悉。下面我们就在上面创建一个容器。
@@ -31,4 +63,8 @@ tags:
 3. 进入控制台后，使用git命令`git clone 之前创建的git仓库地址`，克隆完后，进入项目目录，输入`go build server.go`，然后输入`./server &`运行服务端。
 4. 现在打开容器服务视图，找到我们创建的容器，点击右侧的查看所有服务地址，点击协议为`HTTP`的那个服务地址，在打开的页面中即可看到我们的博客内容。
 5. 点击绑定域名，绑定80端口域名，我们就可以通过自己的域名访问了。
-注意：不要选择杭州区的服务，因为采用的是阿里云服务，所以会导致没有备案的域名没法打开。
+
+# 说明
+1. 不要选择杭州区的服务，因为采用的是阿里云服务，所以会导致没有备案的域名没法打开。
+2. 本博客公开托管在[开源中国的Git服务上](http://git.oschina.net/sdvdxl/blog)，大家可以fork之后改动后用作自己的博客平台。
+3. 方便起见，Golang脚本已经编译成了`Windows` `Mac` `Linux` 各平台的32和64位版本，无需编译server.go文件了，可以直接选择相应平台文件进行运行，启动web服务。
