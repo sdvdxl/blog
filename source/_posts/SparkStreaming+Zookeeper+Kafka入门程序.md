@@ -1,5 +1,5 @@
 ---
-title: Sqoop使用
+title: SparkStreaming+Zookeeper+Kafka入门程序
 date: 2016-03-09 12:51:43
 tags:
   - zookeeper

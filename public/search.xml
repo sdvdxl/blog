@@ -232,7 +232,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Sqoop使用]]></title>
+      <title><![CDATA[SparkStreaming+Zookeeper+Kafka入门程序]]></title>
       <url>http://todu.top/2016/03/09/SparkStreaming+Zookeeper+Kafka%E5%85%A5%E9%97%A8%E7%A8%8B%E5%BA%8F/</url>
       <content type="html"><![CDATA[<h2 id="准备工作："><a href="#准备工作：" class="headerlink" title="准备工作："></a>准备工作：</h2><ul>
 <li>安装 <a href="http://spark.apache.org/" target="_blank" rel="external">spark</a></li>
