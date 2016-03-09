@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: 杜龙少的博客
 subtitle:
-description:
+description: 杜龙少的博客
 author: 杜龙少
-language: zh
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://todu.top
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -69,3 +69,12 @@ theme: freemind
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
+
+markdown:
+  gfm: true
+  pedantic: false
+  sanitize: false
+  tables: true
+  breaks: false
+  smartLists: true
+  smartypants: true
