@@ -82,7 +82,7 @@ Splunk Server (splunk) | splunk
 TCP Sink (tcp) |TCP
 
 # Processors
-可用的处理器包括`Aggregator``Filter``Header Enricher``HTTP Client``JSON to Tuple``Object to JSON``Script``Shell Command``Splitter``Transform`
+可用的处理器包括`Aggregator` `Filter` `Header Enricher` `HTTP Client` `JSON to Tuple` `Object to JSON` `Script` `Shell Command` `Splitter` `Transform`
 - Aggregator -- 作用和 splitter相反，用于聚合，
 - Splitter -- 用于拆解
 - Filter -- 过滤器，用于中间处理数据
