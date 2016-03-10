@@ -44,7 +44,8 @@ PATH=$PATH:$JAVA_HOME/bin
 3. 输入`cd hadoop-2.7.1/etc/hadoop`进入配置文件目录。
 4. 修改`hadoop-env.sh`中的`export JAVA_HOME=`，将等号后的内容改成上面配置的jdk绝对路径，在这里就是`/usr/local/jdk8`，修改完后应该是`export JAVA_HOME=/usr/local/jdk8`，保存退出。
 5. 修改`core-site.xml`，配置config内容：
-```
+
+```xml
 <configuration>
     <property>
         <name>hadoop.tmp.dir</name>
@@ -68,7 +69,8 @@ PATH=$PATH:$JAVA_HOME/bin
 </configuration>
 ```
 6. 修改`hdfs-site.xml`，修改config内容为：
-```
+
+```xml
 <configuration>
     <property>
         <name>dfs.nameservices</name>
@@ -98,7 +100,8 @@ PATH=$PATH:$JAVA_HOME/bin
 </configuration>
 ```
 7. 修改`yarn-site.xml`
-```
+
+```xml
 <configuration>
 
   <!-- 注意ip改为自己的 -->
@@ -129,7 +132,8 @@ PATH=$PATH:$JAVA_HOME/bin
 </configuration>
 ```
 8. 修改`mapred-site.xml`
-```
+
+```xml
 <configuration>
     <property>
         <name>mapreduce.framework.name</name>
@@ -150,10 +154,12 @@ PATH=$PATH:$JAVA_HOME/bin
 </configuration>
 ```
 9. 修改`slaves`文件，添加其他两台ip
-```
+
+``` java
 10.10.1.11
 10.10.1.12
 ```
+
 将hadoop目录覆盖到其余机器对应目录。
 下面开始操作hadoop命令，如果遇到hadoop native错误，请查看文末`Hadoop Native 配置`部分。
 10. 格式化文件系统
@@ -168,7 +174,8 @@ PATH=$PATH:$JAVA_HOME/bin
 
 # Hadoop Native 配置
 输入  `hadoop checknative` 检查Hadoop本地库版本和相关依赖信息：
-```
+
+``` 
 16/03/10 12:17:56 DEBUG util.NativeCodeLoader: Trying to load the custom-built native-hadoop library...
 16/03/10 12:17:56 DEBUG util.NativeCodeLoader: Failed to load native-hadoop with error: java.lang.UnsatisfiedLinkError: /home/hadoop/hadoop-2.6.3/lib/native/libhadoop.so.1.0.0: /lib64/libc.so.6: version `GLIBC_2.14' not found (required by /home/hadoop/hadoop-2.6.3/lib/native/libhadoop.so.1.0.0)
 16/03/10 12:17:56 DEBUG util.NativeCodeLoader: java.library.path=/home/hadoop/hadoop-2.6.3/lib/native
@@ -183,6 +190,7 @@ bzip2:   false
 openssl: false
 16/03/10 12:17:56 INFO util.ExitUtil: Exiting with status 1
 ```
+
 发现`/lib64/libc.so.6: version `GLIBC_2.14' not found`信息，说明该版本的Hadoop需要glibc_2.14版本。下面就安装所需的版本。
 1. `mkdir glib_build && cd glib_build`
 2. `wget http://ftp.gnu.org/gnu/glibc/glibc-2.14.tar.gz && wget http://ftp.gnu.org/gnu/glibc/glibc-linuxthreads-2.5.tar.bz2`
