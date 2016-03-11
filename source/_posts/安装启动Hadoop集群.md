@@ -58,6 +58,11 @@ PATH=$PATH:$JAVA_HOME/bin
         <value>hdfs://10.10.1.10:9000</value>
     </property>
     <property>
+        <name>fs.default.namenode</name>
+        <!-- 注意，这里改成自己本机的ip -->
+        <value>hdfs://10.10.1.10:8082</value>
+    </property>
+    <property>
         <name>io.file.buffer.size</name>
         <value>4096</value>
     </property>

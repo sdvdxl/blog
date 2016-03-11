@@ -4,6 +4,8 @@ date: 2016-03-09 14:18:33
 tags:
   - spring
   - xd
+  - spring-xd
+  - spring xd
 categroy: spring
 ---
 *主要以官方文档说明进行配置*

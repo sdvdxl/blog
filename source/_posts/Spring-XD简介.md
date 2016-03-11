@@ -4,6 +4,8 @@ date: 2016-03-09 15:30:24
 tags:
   - spring-xd
   - spring
+  - xd
+  - spring xd
 category: spring
 ---
 
