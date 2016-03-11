@@ -152,17 +152,14 @@
 <li>安装sbt，<a href="http://www.scala-sbt.org/download.html" target="_blank" rel="external">下载链接</a>,</li>
 <li>安装sbteclipse, <a href="https://github.com/typesafehub/sbteclipse" target="_blank" rel="external">github地址</a>, 编辑 <code>~/.sbt/0.13/plugins/plugins.sbt</code> 文件， 添加以下内容 <code>addSbtPlugin(&quot;com.typesafe.sbteclipse&quot; % &quot;sbteclipse-plugin&quot; % &quot;2.5.0&quot;)</code>，如果没有plugins目录和plugins.sbt，自行创建。</li>
 <li><p>用向导创建一个scala项目，并在项目根目录下创建一个build.sbt文件，添加以下内容(注意，每行正式语句之后要换行)</p>
-<p>&gt;<br>name := “spark-test”</p>
-<p>&gt;<br>version := “1.0”</p>
-<p>&gt;<br>scalaVersion := “2.10.4”</p>
-<p>&gt;<br>// set the main class for the main ‘run’ task<br>// change Compile to Test to set it for ‘test:run’<br>mainClass in (Compile, run) := Some(“test.SparkTest”)</p>
-<p>&gt;<br>libraryDependencies += “org.apache.spark” % “spark-streaming_2.10” % “1.1.0”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">name := &quot;spark-test&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">version := &quot;1.0&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">scalaVersion := &quot;2.10.4&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// set the main class for the main &apos;run&apos; task</span><br><span class="line">// change Compile to Test to set it for &apos;test:run&apos;</span><br><span class="line">mainClass in (Compile, run) := Some(&quot;test.SparkTest&quot;)</span><br><span class="line"></span><br><span class="line">libraryDependencies += &quot;org.apache.spark&quot; % &quot;spark-streaming_2.10&quot; % &quot;1.1.0&quot;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>创建test.SparkTest.scala文件，添加以下代码<br>&gt;<br>package test<br>import org.apache.spark.streaming.<em><br>import org.apache.spark.streaming.StreamingContext.</em><br>import org.apache.spark.SparkContext<br>import org.apache.spark.api.java.function.<em><br>import org.apache.spark.streaming.</em><br>import org.apache.spark.streaming.api._</p>
-<p>&gt;<br>object SparkTest {<br>def main(args: Array[String]): Unit = {<br> // Create a StreamingContext with a local master<br> // Spark Streaming needs at least two working thread<br> val ssc = new StreamingContext(“local[2]”, “NetworkWordCount”, Seconds(10))<br> // Create a DStream that will connect to serverIP:serverPort, like localhost:9999<br> val lines = ssc.socketTextStream(“localhost”, 9999)<br> // Split each line into words<br> val words = lines.flatMap(<em>.split(“ “))<br> // Count each word in each batch<br> val pairs = words.map(word =&gt; (word, 1))<br> val wordCounts = pairs.reduceByKey(</em> + _)<br> wordCounts.print<br> ssc.start<br> ssc.awaitTermination<br>}<br>}</p>
+<li><p>创建test.SparkTest.scala文件，添加以下代码</p>
 </li>
-<li><p>终端中切换目录到这个项目根目录，输入命令 <code>sbt</code> ， 命令运行成功后，敲入 <code>eclipse</code> 生成eclipse项目和项目所需依赖</p>
-</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming.StreamingContext._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.SparkContext</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.function._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming.api._</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">object SparkTest &#123;</span><br><span class="line">  <span class="function">def <span class="title">main</span><span class="params">(args: Array[String])</span>: Unit </span>= &#123;</span><br><span class="line">    <span class="comment">// Create a StreamingContext with a local master</span></span><br><span class="line">    <span class="comment">// Spark Streaming needs at least two working thread</span></span><br><span class="line">    val ssc = <span class="keyword">new</span> StreamingContext(<span class="string">"local[2]"</span>, <span class="string">"NetworkWordCount"</span>, Seconds(<span class="number">10</span>))</span><br><span class="line">    <span class="comment">// Create a DStream that will connect to serverIP:serverPort, like localhost:9999</span></span><br><span class="line">    val lines = ssc.socketTextStream(<span class="string">"localhost"</span>, <span class="number">9999</span>)</span><br><span class="line">    <span class="comment">// Split each line into words</span></span><br><span class="line">    val words = lines.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line">    <span class="comment">// Count each word in each batch</span></span><br><span class="line">    val pairs = words.map(word =&gt; (word, <span class="number">1</span>))</span><br><span class="line">    val wordCounts = pairs.reduceByKey(_ + _)</span><br><span class="line">    wordCounts.print</span><br><span class="line">    ssc.start</span><br><span class="line">    ssc.awaitTermination</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>终端中切换目录到这个项目根目录，输入命令 <code>sbt</code> ， 命令运行成功后，敲入 <code>eclipse</code> 生成eclipse项目和项目所需依赖</li>
 <li>同第一种方式的第1,3步，<br>再打开一个终端，输入 命令 <code>nc -lk 9999</code>。<br>然后运行刚才写的main程序，在nc终端中输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在ide控制台中观察到<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</li>
 </ol>
 <p>OK，成功！</p>
@@ -182,13 +179,13 @@
 <ul class="pagination">
 	 
 				
-    	<li class="prev"><a href="/2016/03/09/Sqoop使用/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+    	<li class="prev"><a href="/2016/03/09/SparkStreaming+Zookeeper+Kafka入门程序/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
   		
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-		   <li class="next"><a href="/2016/03/09/Apache-Sqoop-安装/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+          <li class="next disabled"><a>下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>
         
 	
 </ul>

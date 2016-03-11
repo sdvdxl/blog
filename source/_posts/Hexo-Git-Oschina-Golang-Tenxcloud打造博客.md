@@ -2,7 +2,10 @@
 title: Hexo+Git+Oschina+Golang+Tenxcloud打造博客
 date: 2016-03-09 23:17:00
 tags:
+    - 博客
+category: other
 ---
+
 # 简介
 *Hexo* 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。具体使用方法[参见这里](https://hexo.io/zh-cn/docs/)
 
@@ -24,6 +27,7 @@ tags:
 
 # 编写Golang Server服务
 在项目根目录创建一个叫`server.go`的文件，把下面的代码考入即可。
+
 ```go
 package main
 

@@ -3,8 +3,8 @@ title: 运行第一个SparkStreaming程序（及过程中问题解决）
 date: 2016-03-09 12:51:43
 tags:
   - zookeeper
-	- spark-streaming
-	- spark
+  - spark-streaming
+  - spark
 category: spark
 ---
 
@@ -47,6 +47,7 @@ Spark context available as sc.
 scala>
 
  然后输入以下语句：
+ 
 
 ```
 import org.apache.spark.streaming._
@@ -104,25 +105,26 @@ Time: 1415701670000 ms
 3. 安装sbteclipse, [github地址](https://github.com/typesafehub/sbteclipse), 编辑 ` ~/.sbt/0.13/plugins/plugins.sbt  ` 文件， 添加以下内容 ` addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "2.5.0") `，如果没有plugins目录和plugins.sbt，自行创建。
 4. 用向导创建一个scala项目，并在项目根目录下创建一个build.sbt文件，添加以下内容(注意，每行正式语句之后要换行)
 
- >
+ ```
  name := "spark-test"
 
-  >
+
  version := "1.0"
 
-  >
+
  scalaVersion := "2.10.4"
 
-  >
+
  // set the main class for the main 'run' task
  // change Compile to Test to set it for 'test:run'
  mainClass in (Compile, run) := Some("test.SparkTest")
 
-  >
  libraryDependencies += "org.apache.spark" % "spark-streaming_2.10" % "1.1.0"
+```
 
 5. 创建test.SparkTest.scala文件，添加以下代码
- >
+
+```java
 package test
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.StreamingContext._
@@ -131,7 +133,7 @@ import org.apache.spark.api.java.function._
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.api._
 
- >
+
 object SparkTest {
   def main(args: Array[String]): Unit = {
     // Create a StreamingContext with a local master
@@ -149,6 +151,7 @@ object SparkTest {
     ssc.awaitTermination
   }
 }
+```
 
 6. 终端中切换目录到这个项目根目录，输入命令 ` sbt ` ， 命令运行成功后，敲入 ` eclipse ` 生成eclipse项目和项目所需依赖
 7. 同第一种方式的第1,3步，

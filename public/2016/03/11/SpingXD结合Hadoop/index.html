@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Apache-Sqoop 安装 | 杜龙少的博客</title>
+  <title>SpingXD结合Hadoop | 杜龙少的博客</title>
   <meta name="author" content="杜龙少">
   
   <meta name="description" content="杜龙少的博客">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Apache-Sqoop 安装"/>
+  <meta property="og:title" content="SpingXD结合Hadoop"/>
   <meta property="og:site_name" content="杜龙少的博客"/>
 
   
@@ -93,7 +93,7 @@
 
 	
 		<div class="page-header page-header-inverse ">		
-			<h1 class="title title-inverse "> Apache-Sqoop 安装</h1>
+			<h1 class="title title-inverse "> SpingXD结合Hadoop</h1>
 		</div>		
 	
 
@@ -113,10 +113,19 @@
 	<div class="mypage">		
 	  		
 
-	  <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>首先当然是<a href="http://archive.apache.org/dist/sqoop/1.4.4/sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz" target="_blank" rel="external">下载sqoop</a><br>sqoop 依赖以下软件,点击链接可以直接下载<br>&gt;<br><a href="http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/hadoop/common/hadoop-2.6.0/hadoop-2.6.0.tar.gz" target="_blank" rel="external">hadoop</a><br><a href="http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/accumulo/1.6.2/accumulo-1.6.2-bin.tar.gz" target="_blank" rel="external">accumulo</a><br><a href="http://ftp.tsukuba.wide.ad.jp/software/apache/hive/hive-1.0.0/apache-hive-1.0.0-bin.tar.gz" target="_blank" rel="external">apache-hive</a><br><a href="http://ftp.kddilabs.jp/infosystems/apache/hbase/hbase-1.0.0/hbase-1.0.0-bin.tar.gz" target="_blank" rel="external">hbase</a><br><a href="http://mirror.bit.edu.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz" target="_blank" rel="external">zookeeper</a></p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="配置JAVA环境变量"><a href="#配置JAVA环境变量" class="headerlink" title="配置JAVA环境变量"></a>配置JAVA环境变量</h2><p>JAVA_HOME=/home/du/software/dev/jdk1.7.0_45<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/install/java  <span class="comment">#此处换成自己的jdk目录</span></span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/jre/lib</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</span><br></pre></td></tr></table></figure></p>
-<h2 id="配置sqoop运行依赖"><a href="#配置sqoop运行依赖" class="headerlink" title="配置sqoop运行依赖"></a>配置sqoop运行依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> HADOOP_COMMON_HOME=/home/du/software/dev/hadoop-2.6.0</span><br><span class="line"><span class="built_in">export</span> HADOOP_MAPRED_HOME=<span class="variable">$HADOOP_COMMON_HOME</span>/share/hadoop/mapreduce</span><br><span class="line"><span class="built_in">export</span> ZOOKEEPER_HOME=/home/du/software/dev/zookeeper-3.4.6</span><br><span class="line"><span class="built_in">export</span> ACCUMULO_HOME=/usr/install/accumulo-1.6.2</span><br><span class="line"><span class="built_in">export</span> HIVE_HOME=/usr/install/apache-hive-1.0.0-bin</span><br><span class="line"><span class="built_in">export</span> HCAT_HOME=/usr/install/apache-hive-1.0.0-bin/hcatalog</span><br><span class="line"><span class="built_in">export</span> HBASE_HOME=/usr/install/hbase-1.0.0</span><br><span class="line"><span class="built_in">export</span> SQOOP_HOME=/usr/install/sqoop-1.4.4.bin__hadoop-2.0.4-alpha</span><br></pre></td></tr></table></figure>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>切换到sqoop目录，运行 <code>bin/sqoop help</code>， 如果打印帮助文档则说明成功。</p>
+	  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前的文章介绍了<a href="/Spring-XD简介">Spring XD</a>，<a href="/以分布式方式运行Spring-XD">以分布式方式运行Spring-XD</a>和<a href="/安装启动Hadoop集群">安装启动Hadoop集群</a>的文章。本文将简单介绍（刚学，很LOW(⊙﹏⊙)b）SpringXD和Hadoop，HDFS结合配置和使用方法。</p>
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>已经按照上述提到的两篇文章或者其他资料搭建并运行了SpringXD和Hadoop。</p>
+<h1 id="配置SpringXD"><a href="#配置SpringXD" class="headerlink" title="配置SpringXD"></a>配置SpringXD</h1><ol>
+<li>运行命令<code>jps</code>找到<code>AdminServerApplication</code>和<code>ContainerServerApplication</code>两项，结束进程<code>kill 进程pid</code>。</li>
+<li>编辑SpingXD的配置文件<code>server.yaml</code>，在<code>spring</code>节点下增加以下hadoop的配置信息：</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hadoop:</span></span><br><span class="line">	&lt;!-- 注意换成自己的hdfs地址 --<span class="string">&gt;</span><br><span class="line"></span><span class="attr">    fsUri:</span> hdfs://<span class="number">10.10</span><span class="number">.1</span><span class="number">.110</span>:<span class="number">8020</span></span><br><span class="line"><span class="attr">    resourceManagerHost:</span> <span class="number">10.10</span><span class="number">.1</span><span class="number">.110</span></span><br><span class="line"><span class="attr">    resourceManagerPort:</span> <span class="number">8032</span></span><br><span class="line"><span class="attr">    yarnApplicationClasspath:</span></span><br></pre></td></tr></table></figure>
+<p>然后启动xd-admin<code>bin/xd-admin</code>和xd-container<code>bin/xd-container</code>。</p>
+<ol>
+<li>切换到hadoop用户下，使用命令<code>hadoop fs -mkdir /xd</code>创建目录，然后更改权限<code>hadoop fs -chmod -R 777 /xd</code>（如果没有配置hadoop的环境变量，则请进入hadoop的目录使用<code>bin/hadoop</code>命令代替<code>hadoop</code>）</li>
+<li>打开新的控制台，进入xd-shell交互环境，假如根据上面的Spring-XD配置文章配置了安全措施，那么还需要执行下面的命令<code>admin config server --uri http://xd-adminIP:9393 --username 用户名 --password 密码</code>进行授权后登录。</li>
+<li>创建stream，向hdfs中写入数据<code>stream create --name myhdfsstream1 --definition &quot;time | hdfs&quot; --deploy</code>，用命令<code>hadoop fs ls /xd/myhdfsstream1</code>即可看到有临时文件生成。</li>
+</ol>
 	  
 	</div>
 
@@ -125,14 +134,14 @@
 	<div class="pagination">
 <ul class="pagination">
 	 
-				
-    	<li class="prev"><a href="/2016/03/09/Sqoop使用/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
-  		
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+        
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-		   <li class="next"><a href="/2016/03/09/SparkStreaming+Zookeeper+Kafka入门程序/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+		   <li class="next"><a href="/2016/03/09/Hexo-Git-Oschina-Golang-Tenxcloud打造博客/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
@@ -171,7 +180,7 @@
   <h2 class="title">留言</h2>
 
   
-  	 <div class="ds-thread" data-thread-key="2016/03/09/Apache-Sqoop-安装/" data-title="Apache-Sqoop 安装" data-url="http://todu.top/2016/03/09/Apache-Sqoop-安装/"></div>  
+  	 <div class="ds-thread" data-thread-key="2016/03/11/SpingXD结合Hadoop/" data-title="SpingXD结合Hadoop" data-url="http://todu.top/2016/03/11/SpingXD结合Hadoop/"></div>  
   
 </section>
 
@@ -185,7 +194,7 @@
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2016-03-09 
+	2016-03-11 
 	</div>
 	
 
@@ -196,7 +205,7 @@
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/categories/sqoop/">sqoop<span>2</span></a></li>
+    <li><a href="/categories/spring/">spring<span>3</span></a></li> <li><a href="/categories/spring/hadoop/">hadoop<span>1</span></a></li>
   </li>
 
     </ul>
@@ -209,7 +218,7 @@
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
+  <li><a href="/tags/spring/">spring<span>3</span></a></li> <li><a href="/tags/spring-xd/">spring xd<span>3</span></a></li> <li><a href="/tags/spring-xd/">spring-xd<span>3</span></a></li> <li><a href="/tags/hadoop/">hadoop<span>2</span></a></li> <li><a href="/tags/hdfs/">hdfs<span>3</span></a></li> <li><a href="/tags/xd/">xd<span>3</span></a></li>
     </ul>
 	</div>
 		

@@ -124,7 +124,8 @@
 <li>安装Git，并配置相关环境变量</li>
 </ol>
 <h1 id="创建Git仓库"><a href="#创建Git仓库" class="headerlink" title="创建Git仓库"></a>创建Git仓库</h1><p>打开<a href="http://git.oschina.net/" target="_blank" rel="external">开源中国Git托管平台</a>，(注册后)登录，点击右上角<code>+</code>号，新建项目，输入项目名，描述，如果不想公开的话，可以选择私有，其余默认即可，点击创建。然后克隆到本地。命令行切换到刚才克隆的项目根目录，输入<code>hexo init</code>，hexo博客初始化完成。输入<code>hexo generate</code>可以渲染页面，生成静态页面，默认是在public文件夹。hexo默认初始化忽略了public文件夹，我们需要修改<code>.gitignore</code>文件，删除public的记录，这样保证可以同步到git仓库中。</p>
-<h1 id="编写Golang-Server服务"><a href="#编写Golang-Server服务" class="headerlink" title="编写Golang Server服务"></a>编写Golang Server服务</h1><p>在项目根目录创建一个叫<code>server.go</code>的文件，把下面的代码考入即可。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"net/http"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">	<span class="string">"os/exec"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> main() &#123;</span><br><span class="line">	fs := http.FileServer(http.Dir(<span class="string">"public"</span>))</span><br><span class="line">	http.Handle(<span class="string">"/"</span>, fs)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//用于git的webhook，触发pull</span></span><br><span class="line">	http.HandleFunc(<span class="string">"/_blog/_pull"</span>, <span class="keyword">func</span>(writer http.ResponseWriter, request *http.Request) &#123;</span><br><span class="line">		cmd := exec.Command(<span class="string">"git"</span>,<span class="string">"pull"</span>)</span><br><span class="line">		<span class="keyword">if</span> err:=cmd.Start(); err!=<span class="literal">nil</span> &#123;</span><br><span class="line">			log.Println(<span class="string">"git pull error"</span>, err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	err := http.ListenAndServe(<span class="string">":80"</span>, <span class="literal">nil</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"ListenAndServe: "</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="编写Golang-Server服务"><a href="#编写Golang-Server服务" class="headerlink" title="编写Golang Server服务"></a>编写Golang Server服务</h1><p>在项目根目录创建一个叫<code>server.go</code>的文件，把下面的代码考入即可。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"net/http"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">	<span class="string">"os/exec"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> main() &#123;</span><br><span class="line">	fs := http.FileServer(http.Dir(<span class="string">"public"</span>))</span><br><span class="line">	http.Handle(<span class="string">"/"</span>, fs)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//用于git的webhook，触发pull</span></span><br><span class="line">	http.HandleFunc(<span class="string">"/_blog/_pull"</span>, <span class="keyword">func</span>(writer http.ResponseWriter, request *http.Request) &#123;</span><br><span class="line">		cmd := exec.Command(<span class="string">"git"</span>,<span class="string">"pull"</span>)</span><br><span class="line">		<span class="keyword">if</span> err:=cmd.Start(); err!=<span class="literal">nil</span> &#123;</span><br><span class="line">			log.Println(<span class="string">"git pull error"</span>, err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	err := http.ListenAndServe(<span class="string">":80"</span>, <span class="literal">nil</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"ListenAndServe: "</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>通过git提交文件到远程。</p>
 <h1 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h1><p>这里之所以选择时速云，是因为一开始接触这类最早的就是这个平台，所以使用的还算熟悉。下面我们就在上面创建一个容器。</p>
 <ol>
@@ -148,9 +149,9 @@
 	<div class="pagination">
 <ul class="pagination">
 	 
-		
-          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
-        
+				
+    	<li class="prev"><a href="/2016/03/11/SpingXD结合Hadoop/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
@@ -214,8 +215,27 @@
 
 	<!-- categories -->
     
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/other/">other<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
 
 	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/博客/">博客<span>1</span></a></li>
+    </ul>
+	</div>
 		
 
 	<!-- toc -->
