@@ -173,14 +173,14 @@ PATH=$PATH:$JAVA_HOME/bin
 启动`bin/start-dfs.sh`，可以一次性启动master和slaves节点服务。`sbin/start-yarn.sh`启动yarn资源管理服务。要停止服务，用对应的`sbin/stop-dfs.sh`和`sbin/stop-dfs.sh`即可停止服务。
 12. 单独启动一个datanode
 增加节点或者重启节点，需要单独启动，则可使用以下命令:
-`sbin/hadoop-daemons.sh start datanode`，启动nodeManager`sbin/yarn-daemons.sh start nodemanager`，当然也可以操作namenode`sbin/hadoop-daemon.sh start namenode ` `sbin/yarn-daemon.sh start resourcemanager`。
+`sbin/hadoop-daemon.sh start datanode`，启动nodeManager`sbin/yarn-daemon.sh start nodemanager`，当然也可以操作namenode`sbin/hadoop-daemon.sh start namenode ` `sbin/yarn-daemon.sh start resourcemanager`。
 
 
 
 # Hadoop Native 配置
 输入  `hadoop checknative` 检查Hadoop本地库版本和相关依赖信息：
 
-``` 
+```
 16/03/10 12:17:56 DEBUG util.NativeCodeLoader: Trying to load the custom-built native-hadoop library...
 16/03/10 12:17:56 DEBUG util.NativeCodeLoader: Failed to load native-hadoop with error: java.lang.UnsatisfiedLinkError: /home/hadoop/hadoop-2.6.3/lib/native/libhadoop.so.1.0.0: /lib64/libc.so.6: version `GLIBC_2.14' not found (required by /home/hadoop/hadoop-2.6.3/lib/native/libhadoop.so.1.0.0)
 16/03/10 12:17:56 DEBUG util.NativeCodeLoader: java.library.path=/home/hadoop/hadoop-2.6.3/lib/native
