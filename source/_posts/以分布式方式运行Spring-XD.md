@@ -6,7 +6,7 @@ tags:
   - xd
   - spring-xd
   - spring xd
-categroy: spring
+category: spring
 ---
 *主要以官方文档说明进行配置*
 # 简介
