@@ -49,7 +49,7 @@ scala>
  然后输入以下语句：
  
 
-```
+```scala
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.api.java.function._
@@ -124,7 +124,7 @@ Time: 1415701670000 ms
 
 5. 创建test.SparkTest.scala文件，添加以下代码
 
-```java
+```scala
 package test
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.StreamingContext._
