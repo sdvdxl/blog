@@ -174,6 +174,7 @@ PATH=$PATH:$JAVA_HOME/bin
 12. 单独启动一个datanode
 增加节点或者重启节点，需要单独启动，则可使用以下命令:
 `sbin/hadoop-daemon.sh start datanode`，启动nodeManager`sbin/yarn-daemon.sh start nodemanager`，当然也可以操作namenode`sbin/hadoop-daemon.sh start namenode ` `sbin/yarn-daemon.sh start resourcemanager`。
+**注意**：原文中是`sbin/yarn-daemons.sh`和`sbin/hadoop-daemons.sh`，运行后发现并没有启动成功，去掉s后启动成功。
 
 
 
