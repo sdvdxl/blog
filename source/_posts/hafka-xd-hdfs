@@ -1,0 +1,13 @@
+add jar /home/hive/kafka-demo-1.0-SNAPSHOT.jar;
+
+create temporary function array_uniq_element_number as 'com.demo.UDFArrayUniqElementNumber';
+
+array_uniq_element_number(array(1,2,3))
+
+
+
+stream create --name kafkaHdfs --definition 'kafka --topic=kafka_test --zkconnect=10.10.1.20:2181 --queueSize=64  |hdfs --inputType=application/json' --deploy
+
+module upload --type processor --name wordcount --file /home/hadoop/wordcount.jar
+stream create httpHdfs --definition 'http | hdfs' --deploy
+stream create sparkStreamingTap --definition 'tap:stream:httpHdfs > wordcount| log' --deploy
