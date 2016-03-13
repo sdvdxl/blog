@@ -3,8 +3,8 @@ title: Sqoop使用
 date: 2016-03-09 12:51:43
 tags:
   - sqoop
-	- hdfs
-	- mysql
+  - hdfs
+  - mysql
 category: sqoop
 ---
 

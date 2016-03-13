@@ -2,6 +2,9 @@
 title: golang入门
 date: 2016-03-13 11:12:45
 tags:
+  - go
+  - golang
+category: golang
 ---
 本文同步发表于[我的简书](http://www.jianshu.com/users/dc3cafc2a2f1),[点此穿越](http://www.jianshu.com/p/e00f0cf4f01c)
 # Go 基本介绍
