@@ -112,6 +112,44 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-03-13 </div>
+			<div class="article-title"><a href="/2016/03/13/golang命令-1/" >golang命令</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Go 提供了很多好用的命令，比如可以用go get 直接从网络上导入包，下面介绍一些常用的Go命令</p>
+<h1 id="go-get"><a href="#go-get" class="headerlink" title="go get"></a>go get</h1><h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>go get 命令用来直接下载并安装网络上的包到GOPATH中。事实上它依赖于版本控制工具，比如常用的Git和Mercurial。比如我们要使用<code>github.com/golang/text</code>这个包，那么可以执行命令 <code>go get github.com/golang/text</code>，稍后片刻（依照网络情况时间长短不一），那么这个包源码就会放到 <code>GOPATH/src</code>对应的目录下，编译好的文件会放到<code>GOPATH/pkg</code>对应的目录下，如果有可执行性代码，那么会将编译好的可执行性文件放到<code>GOPATH/bin</code>目录下。</p>
+<h2 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h2><p>像刚才例子中提到的<code>github.com/golang/text</code>这个包下又有子包，也想get下来，该如何做呢？也许你想没办法，一个一个get吧，的确这是一个不错的方法，但是有一个更为高效和优雅的方式，那就是 <code>...</code>，这个符号代表旗下子目录，那我们可以这样操作<code>go get github.com/golang/text ...</code>，就可以将text和其子包同时get下来了。</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><ul>
+<li><code>-v</code> 可以显示正在get的包</li>
+<li><code>-x</code> 可以显示正在执行的命令<h1 id="go-build"><a href="#go-build" class="headerlink" title="go build"></a>go build</h1>编译go文件。<br>可以切换到要build的包中执行<code>go build</code>，也可以直接 “go build” + “包名”，如要build包 <code>github.com/golang/text</code>，可以切换到text包目录下执行 <code>go build</code>，也可以直接执行 <code>go build github.com/golang/text</code>，这样就可以build text包了，如果要build子包，那么输入<code>go build ./...</code>。<code>build</code>命令会将main函数编译成可执行性文件，如果没有main，那么没有额外的文件产生。</li>
+</ul>
+<h1 id="go-clean"><a href="#go-clean" class="headerlink" title="go clean"></a>go clean</h1><p><code>clean</code>和<code>build</code>作用相反，是将build出来的可执行性文件清除掉。</p>
+<h1 id="go-install"><a href="#go-install" class="headerlink" title="go install"></a>go install</h1><p><code>install</code> 命令是将包编译成二进制文件并放到<code>GOPATH/pkg/目标平台/</code>对应的目录下。比如我们自己从github上克隆了<code>github.com/golang/text</code>，要使用它的话，需要进入到text包中，然后执行 <code>go install</code>；加入有子包也要安装的话，输入<code>go install ./...</code>，就会在<code>GOPATH/pkg/目标平台/</code>产生后缀为<code>.a</code>的文件。当然也可以和build一样输入完整的包路径。</p>
+<h1 id="go-list"><a href="#go-list" class="headerlink" title="go list"></a>go list</h1><p>这个命令用来查看所引用的包。</p>
+<h2 id="基本用法-1"><a href="#基本用法-1" class="headerlink" title="基本用法"></a>基本用法</h2><ol>
+<li>直接跟包名，如：<code>github.com/golang/text</code>，会打印这个包本身；也可以切换到该包目录下执行<code>go list</code>，效果相同。</li>
+<li>可以直接跟”包名”+”/…”，比如要查看<code>github.com/golang/text</code>这个包的导入情况，执行<code>go list github.com/golang/text/...</code>会打印本包的go文件。<h2 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h2><code>-f</code>可以指定打印格式，默认是<code>go list -f &#39;{ {.ImportPath} }&#39;</code>， <code>-f</code>后面的参数可以用下面结构体的属性：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">type</span> Package <span class="keyword">struct</span> &#123;</span><br><span class="line">    Dir           <span class="keyword">string</span> <span class="comment">// directory containing package sources</span></span><br><span class="line">    ImportPath    <span class="keyword">string</span> <span class="comment">// import path of package in dir</span></span><br><span class="line">    ImportComment <span class="keyword">string</span> <span class="comment">// path in import comment on package statement</span></span><br><span class="line">    Name          <span class="keyword">string</span> <span class="comment">// package name</span></span><br><span class="line">    Doc           <span class="keyword">string</span> <span class="comment">// package documentation string</span></span><br><span class="line">    Target        <span class="keyword">string</span> <span class="comment">// install path</span></span><br><span class="line">    Goroot        <span class="keyword">bool</span>   <span class="comment">// is this package in the Go root?</span></span><br><span class="line">    Standard      <span class="keyword">bool</span>   <span class="comment">// is this package part of the standard Go library?</span></span><br><span class="line">    Stale         <span class="keyword">bool</span>   <span class="comment">// would 'go install' do anything for this package?</span></span><br><span class="line">    Root          <span class="keyword">string</span> <span class="comment">// Go root or Go path dir containing this package</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Source files</span></span><br><span class="line">    GoFiles        []<span class="keyword">string</span> <span class="comment">// .go source files (excluding CgoFiles, TestGoFiles, XTestGoFiles)</span></span><br><span class="line">    CgoFiles       []<span class="keyword">string</span> <span class="comment">// .go sources files that import "C"</span></span><br><span class="line">    IgnoredGoFiles []<span class="keyword">string</span> <span class="comment">// .go sources ignored due to build constraints</span></span><br><span class="line">    CFiles         []<span class="keyword">string</span> <span class="comment">// .c source files</span></span><br><span class="line">    CXXFiles       []<span class="keyword">string</span> <span class="comment">// .cc, .cxx and .cpp source files</span></span><br><span class="line">    MFiles         []<span class="keyword">string</span> <span class="comment">// .m source files</span></span><br><span class="line">    HFiles         []<span class="keyword">string</span> <span class="comment">// .h, .hh, .hpp and .hxx source files</span></span><br><span class="line">    SFiles         []<span class="keyword">string</span> <span class="comment">// .s source files</span></span><br><span class="line">    SwigFiles      []<span class="keyword">string</span> <span class="comment">// .swig files</span></span><br><span class="line">    SwigCXXFiles   []<span class="keyword">string</span> <span class="comment">// .swigcxx files</span></span><br><span class="line">    SysoFiles      []<span class="keyword">string</span> <span class="comment">// .syso object files to add to archive</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Cgo directives</span></span><br><span class="line">    CgoCFLAGS    []<span class="keyword">string</span> <span class="comment">// cgo: flags for C compiler</span></span><br><span class="line">    CgoCPPFLAGS  []<span class="keyword">string</span> <span class="comment">// cgo: flags for C preprocessor</span></span><br><span class="line">    CgoCXXFLAGS  []<span class="keyword">string</span> <span class="comment">// cgo: flags for C++ compiler</span></span><br><span class="line">    CgoLDFLAGS   []<span class="keyword">string</span> <span class="comment">// cgo: flags for linker</span></span><br><span class="line">    CgoPkgConfig []<span class="keyword">string</span> <span class="comment">// cgo: pkg-config names</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Dependency information</span></span><br><span class="line">    Imports []<span class="keyword">string</span> <span class="comment">// import paths used by this package</span></span><br><span class="line">    Deps    []<span class="keyword">string</span> <span class="comment">// all (recursively) imported dependencies</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Error information</span></span><br><span class="line">    Incomplete <span class="keyword">bool</span>            <span class="comment">// this package or a dependency has an error</span></span><br><span class="line">    Error      *PackageError   <span class="comment">// error loading package</span></span><br><span class="line">    DepsErrors []*PackageError <span class="comment">// errors loading dependencies</span></span><br><span class="line"></span><br><span class="line">    TestGoFiles  []<span class="keyword">string</span> <span class="comment">// _test.go files in package</span></span><br><span class="line">    TestImports  []<span class="keyword">string</span> <span class="comment">// imports from TestGoFiles</span></span><br><span class="line">    XTestGoFiles []<span class="keyword">string</span> <span class="comment">// _test.go files outside package</span></span><br><span class="line">    XTestImports []<span class="keyword">string</span> <span class="comment">// imports from XTestGoFiles</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果想打印比较全的信息，也有一个参数可以使用：<code>-json</code>，这会将上面部分信息以json格式打印出来，读者可以自行实验。</p>
+<h1 id="go-run"><a href="#go-run" class="headerlink" title="go run"></a>go run</h1><p>这个命令可以直接运行go文件（带main函数），不需要编译成二进制可执行性文件。</p>
+
+	
+	</div>
+  <a type="button" href="/2016/03/13/golang命令-1/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-13 </div>
 			<div class="article-title"><a href="/2016/03/13/Android通话自动录音/" >Android通话自动录音</a></div>						
 		</h3>
 	
@@ -288,6 +326,37 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-03-13 </div>
+			<div class="article-title"><a href="/2016/03/13/go中main/" >go中main</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>想必很多朋友在入门的时候都是拿main开始，而不是test，我也喜欢这样，我想可能是main比较为人熟知的用法吧，test在go中也是非常友好的，不需要依赖其他库就可方便使用。既然都偏向于main方法的开始和入门，那么这个博文就说一下go语言main相关的事情。<br>原本只打算写一下main包的拆分和运行方式，突然想到还有其他一些注意地方，那么就一并记录一下，其他的如果使用过程中遇到了，再进行记录。<br><strong>以下示例都是在GOPATH下进行</strong></p>
+<h1 id="main函数定义"><a href="#main函数定义" class="headerlink" title="main函数定义"></a>main函数定义</h1><p>想要作为程序的运行入口，那么这个函数必须明明为main，同时要放到main包。main函数声明极其简单，如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> main()&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样就声明并定义好了程序的运行的入口函数，不需要其他额外的参数和返回值。加上包的声明，完整的main文件就如下格式：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">func</span> main() &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>另外main文件名字可以随意命名，只需要后缀是<code>.go</code>就可以了，如：<code>a.go</code>, <code>main.go</code>, <code>server.go</code>等都是可以的。</p>
+<h1 id="main-的运行"><a href="#main-的运行" class="headerlink" title="main 的运行"></a>main 的运行</h1><p>要运行main文件，go提供了2中方式：</p>
+<ol>
+<li><code>go run main.go</code> 其中main.go 就是要运行的main函数所在的文件</li>
+<li><code>go build</code>命令，文件名可以省略，也可以加上， 还可以用用参数 <code>-o</code> 指定编译后的文件，如 <code>go build -o main.exe main.go</code> 就是把main.go文件编译成main.exe可执行文件，然后直接执行main.exe就可以运行了。</li>
+</ol>
+<h1 id="main-包文件（内容）的拆分"><a href="#main-包文件（内容）的拆分" class="headerlink" title="main 包文件（内容）的拆分"></a>main 包文件（内容）的拆分</h1><p>假如觉得一个main文件中放太多东西有点杂乱，那么可以把main函数和其他内容拆开，放到不同的文件中（这里指的都是main这个包中），文件名字随意。比如我们有个sum函数，那么可以把它放到math.go这个main包的文件中，然后main函数独立在main.go文件中，main方法可以直接调用main包（相同名字的包）的函数、方法或者变量。那么如何执行呢，当然就可以用上述的方法运行。但是如果用<code>go run main.go</code>这种方式，那么可能遇到一个问题：找不到sum这个函数。因为run的只是main.go 这一个文件，没有加载其他文件的内容，自然就找不到sum这个函数了，那么加载sum这个函数内容，自然就可以了，对应执行方式就变成了<code>go run main.go math.go</code>，也就是说，要把相关以来的内容相关的文件也要加到run 后面。用<code>go build</code> 如果不指定文件名字，那么go会自行加载依赖项目，可以顺利执行。</p>
+
+	
+	</div>
+  <a type="button" href="/2016/03/13/go中main/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-13 </div>
 			<div class="article-title"><a href="/2016/03/13/golang入门/" >golang入门</a></div>						
 		</h3>
 	
@@ -446,108 +515,6 @@ export GOROOT GOPATH PATH
 </div>
 
 		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-13 </div>
-			<div class="article-title"><a href="/2016/03/13/删除git已经跟踪的文件或者目录/" >删除git已经跟踪的文件或者目录</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>如果第一次提交的时候，没有在gitignore文件中添加忽略文件，那么这些文件（目录也是文件）就会被git跟踪，push的时候也会被推送到远程。所以最好就是一开始在commit之前先添加到gitignore中。</p>
-<p>如果文件已经被跟踪且被推送到远程，可以按照下面方法解决：<br>1.<code>rm -rf 文件</code></p>
-<ol>
-<li><code>git rm -r --cached 要忽略的文件</code><br>3.<code>git add -A (添加所有)</code><br>4.<code>git push origin 分支</code></li>
-</ol>
-<p>如果同名的文件过多，如：.class 文件被提交了，那么如果这样一个一个显然效率太低，可以按照下面方法操作</p>
-<ol>
-<li><code>find . -iname 文件名 -exec rm -rf {}\;</code></li>
-<li>重复上面的步骤，文件名替换为下一个要删除的文件名</li>
-<li>修改gitignore，添加忽略文件</li>
-<li><code>git rm -r --cached 要忽略的文件</code></li>
-<li><code>git add -A</code></li>
-<li><code>git push origin 分支</code></li>
-</ol>
-
-	
-	</div>
-  <a type="button" href="/2016/03/13/删除git已经跟踪的文件或者目录/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-11 </div>
-			<div class="article-title"><a href="/2016/03/11/hadoop集成hive/" >hadoop集成hive</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h1><p>hadoop和yarn已经配置好并且成功运行。</p>
-<h1 id="选择版本和下载"><a href="#选择版本和下载" class="headerlink" title="选择版本和下载"></a>选择版本和下载</h1><p><a href="http://www.apache.org/dyn/closer.cgi/hive/" target="_blank" rel="external">下载hive</a>，有两个版本可以选择，hive1和hive2，hive2版本MR功能已经废弃，将来版本可能会直接去掉，如果要用hive的MR功能，那么请选择hive1相应版本，否则的话选哪个都可以进行测试。</p>
-<h1 id="配置hive"><a href="#配置hive" class="headerlink" title="配置hive"></a>配置hive</h1><ol>
-<li>下载完hive后，解压，然后<code>sudo vi /etc/profile</code>编辑文件，添加环境变量</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HIVE_HOME=hive目录的绝路路径</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$HIVE_HOME</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> HIVE_HOME PATH</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>控制台输入<code>source /etc/profile</code>使环境变量生效。</p>
-</li>
-<li><p>进入$HIVE_HOME/conf目录，拷贝<code>hive-default.xml.template</code>并重命名为<code>hive-site.xml</code>，编辑：（如果没有该参数，请自行添加，存在则改之）</p>
-</li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.exec.scratchdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/user/hive/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span> <span class="comment">&lt;!--hdfs目录 hive目录需要手动创建,并改为777权限--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Scratch space for Hive jobs<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.warehouse.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/user/hive/warehouse<span class="tag">&lt;/<span class="name">value</span>&gt;</span> <span class="comment">&lt;!--hdfs目录，需要手动创建--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>location of default database for the warehouse<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true<span class="tag">&lt;/<span class="name">value</span>&gt;</span> <span class="comment">&lt;!--修改为自己的mysql数据库--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>JDBC connect string for a JDBC metastore<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionDriverName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>Driver class name for a JDBC metastore<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionUserName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>root<span class="tag">&lt;/<span class="name">value</span>&gt;</span> <span class="comment">&lt;!--mysql用户名--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>username to use against metastore database<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionPassword<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>root<span class="tag">&lt;/<span class="name">value</span>&gt;</span> <span class="comment">&lt;!--mysql密码--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>password to use against metastore database<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>然后查找value是<code>${system</code>开头的，替换成具体的本地绝对路径，可以创建一个hive用户，放到hive用户目录下。</p>
-</li>
-<li><p>拷贝<code>hive-env.sh.template</code>并重命名<code>hive-env.sh</code>，添加如下内容，注意环境变量值更换为自己的路径。</p>
-</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HADOOP_HOME=/home/hadoop/hadoop-2.7.1 </span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/share/jdk1.8.0_73</span><br></pre></td></tr></table></figure>
-<ol>
-<li>将hive-site.xml拷贝一份到hadoop的配置目录。</li>
-<li>下载mysql驱动放到hive目录下的lib目录中。</li>
-<li>启动hive，控制台输入<code>hive</code>，如果正确则输出一段信息后进入hive交互模式。</li>
-</ol>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ol>
-<li><blockquote>
-<p>Caused by: org.datanucleus.store.rdbms.connectionpool.DatastoreDriverNotFoundException: The specified datastore driver (“com.mysql.jdbc.Driver”) was not found in the CLASSPATH. Please check your CLASSPATH specification, and the name of the driver.</p>
-</blockquote>
-<p> <strong>解决方法</strong>：下载mysql驱动放到hive的lib目录</p>
-</li>
-<li><blockquote>
-<p>org.apache.hadoop.security.AccessControlException: Permission denied: user=hive, access=WRITE, inode=”/tmp/hadoop-yarn/staging/hive/.staging”:hadoop:supergroup:drwxr-xr-x</p>
-</blockquote>
-<p> <strong>解决方法</strong>：在hdfs中创建tmp目录，并改为777权限。</p>
-</li>
-<li><blockquote>
-<p>Starting Job = job_1457683200911_0001, Tracking URL = <a href="http://10.10.1.110:8088/proxy/application_1457683200911_0001/" target="_blank" rel="external">http://10.10.1.110:8088/proxy/application_1457683200911_0001/</a><br>Kill Command = /home/hadoop/hadoop-2.7.1/bin/hadoop job  -kill job_1457683200911_0001<br>Hadoop job information for Stage-1: number of mappers: 0; number of reducers: 0，打开管理页面发现信息：waiting for AM container to be allocated, launched and register with RM.</p>
-</blockquote>
-<p> <strong>解决方法</strong>：yarn没有配置正确，没有启动<code>nodemanager</code>，启动命令<code>yarn-daemon.sh start nodemanager</code>，启动之后即可运行job。</p>
-</li>
-</ol>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
-<li><a href="http://blog.csdn.net/jyf211314/article/details/34110721" target="_blank" rel="external">hadoop2.2完全分布式集群+hive+mysql存储元数据配置</a>排版有点乱，请将就看</li>
-<li><a href="http://blog.csdn.net/z363115269/article/details/39048589" target="_blank" rel="external">hive导入HDFS数据</a> 和上面毛病类似</li>
-</ol>
-
-	
-	</div>
-  <a type="button" href="/2016/03/11/hadoop集成hive/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
 
 		</div>
 
@@ -600,7 +567,7 @@ export GOROOT GOPATH PATH
 		
 			<li><a href="/categories/git/">git<span>1</span></a></li>
 		
-			<li><a href="/categories/golang/">golang<span>6</span></a></li>
+			<li><a href="/categories/golang/">golang<span>7</span></a></li>
 		
 			<li><a href="/categories/hadoop/">hadoop<span>2</span></a></li>
 		
@@ -631,45 +598,45 @@ export GOROOT GOPATH PATH
 		<h4>标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/hadoop/">hadoop<span>3</span></a></li>
-		
-			<li><a href="/tags/spring/">spring<span>3</span></a></li>
-		
-			<li><a href="/tags/博客/">博客<span>1</span></a></li>
-		
-			<li><a href="/tags/arch/">arch<span>2</span></a></li>
-		
-			<li><a href="/tags/软件/">软件<span>1</span></a></li>
-		
-			<li><a href="/tags/golang/">golang<span>6</span></a></li>
-		
-			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
-		
 			<li><a href="/tags/录音/">录音<span>1</span></a></li>
-		
-			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
-		
-			<li><a href="/tags/spring-xd/">spring-xd<span>3</span></a></li>
-		
-			<li><a href="/tags/go/">go<span>6</span></a></li>
-		
-			<li><a href="/tags/hive/">hive<span>1</span></a></li>
-		
-			<li><a href="/tags/linux/">linux<span>2</span></a></li>
-		
-			<li><a href="/tags/http/">http<span>1</span></a></li>
-		
-			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
-		
-			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
-		
-			<li><a href="/tags/android/">android<span>1</span></a></li>
 		
 			<li><a href="/tags/git/">git<span>1</span></a></li>
 		
-			<li><a href="/tags/java/">java<span>1</span></a></li>
+			<li><a href="/tags/sql/">sql<span>1</span></a></li>
+		
+			<li><a href="/tags/博客/">博客<span>1</span></a></li>
+		
+			<li><a href="/tags/xd/">xd<span>3</span></a></li>
 		
 			<li><a href="/tags/spring-xd/">spring xd<span>3</span></a></li>
+		
+			<li><a href="/tags/spring/">spring<span>3</span></a></li>
+		
+			<li><a href="/tags/spark/">spark<span>3</span></a></li>
+		
+			<li><a href="/tags/hdfs/">hdfs<span>4</span></a></li>
+		
+			<li><a href="/tags/arch/">arch<span>2</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+		
+			<li><a href="/tags/hive/">hive<span>1</span></a></li>
+		
+			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
+		
+			<li><a href="/tags/安卓/">安卓<span>1</span></a></li>
+		
+			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
+		
+			<li><a href="/tags/android/">android<span>1</span></a></li>
+		
+			<li><a href="/tags/windows8/">windows8<span>1</span></a></li>
+		
+			<li><a href="/tags/软件/">软件<span>1</span></a></li>
+		
+			<li><a href="/tags/spring-xd/">spring-xd<span>3</span></a></li>
+		
+			<li><a href="/tags/golang/">golang<span>8</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>29</span></a></li>
@@ -685,6 +652,10 @@ export GOROOT GOPATH PATH
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2016/03/13/golang命令-1/" ><i class="fa fa-file-o"></i>golang命令</a>
+      </li>
+    
+      <li>
         <a href="/2016/03/13/Android通话自动录音/" ><i class="fa fa-file-o"></i>Android通话自动录音</a>
       </li>
     
@@ -698,10 +669,6 @@ export GOROOT GOPATH PATH
     
       <li>
         <a href="/2016/03/13/go读取文件/" ><i class="fa fa-file-o"></i>go读取文件</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/13/go交叉编译/" ><i class="fa fa-file-o"></i>go交叉编译</a>
       </li>
     
   </ul>
