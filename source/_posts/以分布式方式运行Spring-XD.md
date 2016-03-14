@@ -162,3 +162,10 @@ zk:
 xd:
     transport: redis
 ```
+
+##注意：
+配置权限后，进入xd-shell会显示`server-unknown:>`， 需要配置一下admin server才能进入交互
+
+```
+admin config server --uri http://服务器地址:端口(默认9393) --username 用户名 --password 密码
+```
