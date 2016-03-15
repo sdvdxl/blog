@@ -148,7 +148,7 @@
 <p>将hadoop目录覆盖到其余机器对应目录。<br>下面开始操作hadoop命令，如果遇到hadoop native错误，请查看文末<code>Hadoop Native 配置</code>部分。</p>
 <ol>
 <li>格式化文件系统<br>注意：这里的格式化文件系统并不是硬盘格式化，只是针对主服务器hdfs-site.xml的dfs.namenode.name.dir和dfs.datanode.data.dir目录做相应的清理工作。切换到Hadoop的home目录，执行<code>bin/hdfs namenode -format</code>。</li>
-<li>启动停止服务<br>启动<code>bin/start-dfs.sh</code>，可以一次性启动master和slaves节点服务。<code>sbin/start-yarn.sh</code>启动yarn资源管理服务。要停止服务，用对应的<code>sbin/stop-dfs.sh</code>和<code>sbin/stop-dfs.sh</code>即可停止服务。</li>
+<li>启动停止服务<br>启动<code>sbin/start-dfs.sh</code>，可以一次性启动master和slaves节点服务。<code>sbin/start-yarn.sh</code>启动yarn资源管理服务。要停止服务，用对应的<code>sbin/stop-dfs.sh</code>和<code>sbin/stop-dfs.sh</code>即可停止服务。</li>
 <li>单独启动一个datanode<br>增加节点或者重启节点，需要单独启动，则可使用以下命令:<br><code>sbin/hadoop-daemon.sh start datanode</code>，启动nodeManager<code>sbin/yarn-daemon.sh start nodemanager</code>，当然也可以操作namenode<code>sbin/hadoop-daemon.sh start namenode</code> <code>sbin/yarn-daemon.sh start resourcemanager</code>。<br><strong>注意</strong>：原文中是<code>sbin/yarn-daemons.sh</code>和<code>sbin/hadoop-daemons.sh</code>，运行后发现并没有启动成功，去掉s后启动成功。</li>
 </ol>
 <h1 id="Hadoop-Native-配置"><a href="#Hadoop-Native-配置" class="headerlink" title="Hadoop Native 配置"></a>Hadoop Native 配置</h1><p>输入  <code>hadoop checknative</code> 检查Hadoop本地库版本和相关依赖信息：</p>

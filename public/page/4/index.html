@@ -1,0 +1,646 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 4 页 | 杜龙少的博客</title>
+  <meta name="author" content="杜龙少">
+  
+  <meta name="description" content="杜龙少的博客">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="杜龙少的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="杜龙少的博客" type="application/atom+xml">
+  
+  
+    <link href="/favorite.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">杜龙少的博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header page-header-inverse ">
+  <h1 class="title title-inverse ">杜龙少的博客</h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+      <i class="fa fa-heart"></i>
+      杜龙少的博客
+</div>    
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-09 </div>
+			<div class="article-title"><a href="/2016/03/09/Sqoop使用/" >Sqoop使用</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p><code>sqoop help</code> 查看帮助信息<br><code>sqoop help COMMAND</code> 查看 COMMAND具体的帮助，如要查看 list-databases 命令的用法，则使用 <code>sqoop help list-databases</code> 查看。</p>
+<p>主要可用的命令如下：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>help</td>
+<td>List available commands</td>
+</tr>
+<tr>
+<td>import</td>
+<td>Import a table from a database to HDFS</td>
+</tr>
+<tr>
+<td>list-databases</td>
+<td>List available databases on a server</td>
+</tr>
+<tr>
+<td>list-tables</td>
+<td>List available tables in a database</td>
+</tr>
+</tbody>
+</table>
+<p>主要参数说明</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>–connect</td>
+<td>用来指定jdbc链接url，如mysql的: jdbc:mysql://ip:port/database</td>
+</tr>
+<tr>
+<td>–password</td>
+<td>指定密码， 安全起见，建议使用 -P 参数，交互式填写密码或者使用 –password-file参数</td>
+</tr>
+<tr>
+<td>–password-file</td>
+<td>指定密码的文件，从该文件中读取密码</td>
+</tr>
+<tr>
+<td>–username</td>
+<td>指定用户名</td>
+</tr>
+</tbody>
+</table>
+<p>用help查看帮助，使用示例：<br>list-databases 是列出所有的数据库，sqoop help list-databases· 查看使用方法</p>
+<p>使用示例，查看 本机上的mysql中的数据库<br>./sqoop  list-databases –connect jdbc:mysql://127.0.0.1:3306/test –username username -P<br>这样直接操作会提示找不到驱动，我们需要把对应的mysql驱动jar包放到$SQOOP/lib目录下，然后再次执行就可以了，或者用参数 -libjars 指定驱动jar包路径。</p>
+<h1 id="配置项说明"><a href="#配置项说明" class="headerlink" title="配置项说明"></a>配置项说明</h1><p>按照此处的配置项进行可避免文末的错误，如果遇到错误请参考文末错误说明和解决方法。</p>
+<ol>
+<li>sqoop 要使用对应的hadoop版本，如使用的hadoo版本是2.0.4，那么对应的sqoop版本就要使用文件名包含hadoop2.0.4的信息的版本。</li>
+<li>SQOOP_HOME   环境变量关系到sqoop运行时选择的版本问题，所以该变量请配置成正确的版本路径。如果配置成了别的，虽然执行命令是在正确的路径下执行，而真实运行的版本却是其他的版本，该问题可以通过运行sqoop version 查看，此问题比较隐晦，要注意。</li>
+<li>执行sqoop所对应的SQOOP_HOME 文件要和hdfs文件系统上的一致，否则会产生找不到对应库文件的错误。</li>
+<li>在/etc/hosts 文件中增加 archeagle 到 hdfs节点ip的映射，否则sqoop会用默认的ip映射，会连接不上。</li>
+<li><p>用户权限问题，可以在 文件 hadoop/etc/hadoop/hdfs-site.xml中增加或者修改 配置</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.acls.enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.permissions<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>hdfs 集群要启动yarn服务。</p>
+</li>
+</ol>
+<h1 id="import-的使用"><a href="#import-的使用" class="headerlink" title="import 的使用"></a>import 的使用</h1><p>常用参数说明</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-fs</td>
+<td>指定hdfs节点</td>
+</tr>
+<tr>
+<td>–target-dir</td>
+<td>要到处到hdfs文件系统上的文件路径</td>
+</tr>
+<tr>
+<td>–table</td>
+<td>要导出的表名</td>
+</tr>
+<tr>
+<td>–connect</td>
+<td>jdbc url</td>
+</tr>
+<tr>
+<td>–username</td>
+<td>数据库用户名</td>
+</tr>
+<tr>
+<td>-P</td>
+<td>从控制台输入密码</td>
+</tr>
+</tbody>
+</table>
+<p>使用示例 ：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop  import -fs hdfs://192.168.6.63:9000 --target-dir /user/admin/<span class="built_in">export</span>_<span class="built_in">test</span>_admin_user11  --table admin_user --connect jdbc:mysql://192.168.6.201:3306/<span class="built_in">test</span> --username username -P</span><br></pre></td></tr></table></figure></p>
+<h2 id="增量导入-原始链接"><a href="#增量导入-原始链接" class="headerlink" title="增量导入 原始链接"></a>增量导入 <a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_incremental_imports" target="_blank" rel="external">原始链接</a></h2><p>主要参数如下：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>–incrementa</td>
+<td>增量方式， 有两种方式，lastmodified和append</td>
+</tr>
+<tr>
+<td>–last-value</td>
+<td>以lastmodified方式的增量追加，要指定时间；append则要指定偏移id</td>
+</tr>
+<tr>
+<td>–check-column</td>
+<td>要检查的字段， 即以哪个字段为标准计算增量范围</td>
+</tr>
+<tr>
+<td>–append</td>
+<td>指定以增量方式追加</td>
+</tr>
+</tbody>
+</table>
+<p>使用增量导入（以时间为标识作参考）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop  import -fs hdfs://192.168.6.63:9000 --target-dir /user/admin/<span class="built_in">export</span>_<span class="built_in">test</span>_admin_user11  --table admin_user --connect jdbc:mysql://192.168.6.201:3306/forseti_core --username forseti -P--incremental lastmodified --check-column gmt_create --last-value <span class="string">'2012-02-01 11:0:00'</span> --verbose --append</span><br></pre></td></tr></table></figure></p>
+<p>使用增量导入（以id为标识作为参考）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop  import -fs hdfs://192.168.6.63:9000 --target-dir /user/admin/<span class="built_in">export</span>_<span class="built_in">test</span>_admin_user11  --table admin_user --connect jdbc:mysql://192.168.6.201:3306/forseti_core --username forseti -P--incremental append --check-column id --verbose --append</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用select语句-e或者–query参数"><a href="#使用select语句-e或者–query参数" class="headerlink" title="使用select语句(-e或者–query参数)"></a>使用select语句(-e或者–query参数)</h2><p>如果使用这个参数，那么可以执行自定义语句，比如可以执行join操作等其他复杂sql语句，但是语句中where是必须的，而且where后面要加 $CONDITIONS 参数。sql语句本身可以用单引号包裹，但是如果sql语句中已经包含了单引号，那么可以用双引号包裹。另外，使用了这个参数，那么参数 –split-by 在import命令中是必须的，而且该参数后面指定的字段必须出现在sql查询结果中。因为通过观察sqoop执行过程中输出的执行sql可以发现，它是在原有的sql上包裹一层，如下示例中，结果就变成了 SELECT MIN(gmt_modified), MAX(gmt_modified) FROM (select id from admin_user where  (1 = 1) ) AS t1。<br>使用示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop  import  --connect jdbc:mysql://192.168.6.201:3306/<span class="built_in">test</span> --username username -P <span class="_">-e</span> <span class="string">"select id from test where <span class="variable">$CONDITIONS</span>"</span> --split-by id</span><br></pre></td></tr></table></figure></p>
+<h1 id="job-使用"><a href="#job-使用" class="headerlink" title="job 使用"></a>job 使用</h1><h2 id="主要参数"><a href="#主要参数" class="headerlink" title="主要参数"></a>主要参数</h2><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>–create <job-id></job-id></td>
+<td>Create a new saved job</td>
+</tr>
+<tr>
+<td>–delete <job-id></job-id></td>
+<td>Delete a saved job</td>
+</tr>
+<tr>
+<td>–exec <job-id></job-id></td>
+<td>Run a saved job</td>
+</tr>
+<tr>
+<td>–help</td>
+<td>Print usage instructions</td>
+</tr>
+<tr>
+<td>–list</td>
+<td>List saved jobs</td>
+</tr>
+<tr>
+<td>–show <job-id></job-id></td>
+<td>Show the parameters for a saved job</td>
+</tr>
+<tr>
+<td>-fs &lt;local</td>
+<td>namenode:port&gt;</td>
+<td>specify a namenode</td>
+</tr>
+<tr>
+<td>-libjars <comma separated="" list="" of="" jars=""></comma></td>
+<td>specify comma separated jar files to include in the classpath.</td>
+</tr>
+<tr>
+<td>-conf <configuration file=""></configuration></td>
+<td>specify an application configuration file</td>
+</tr>
+</tbody>
+</table>
+<h2 id="创建Job示例："><a href="#创建Job示例：" class="headerlink" title="创建Job示例："></a>创建Job示例：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop job --create <span class="built_in">export</span>_mysql_table -- import --table admin_user --connect jdbc:mysql://192.168.6.201:3306/forseti_core</span><br></pre></td></tr></table></figure>
+<h2 id="执行Job示例："><a href="#执行Job示例：" class="headerlink" title="执行Job示例："></a>执行Job示例：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop job -fs hdfs://192.168.6.63:9000 --exec  <span class="built_in">export</span>_mysql_table --  --username forseti -P --target-dir /user/admin/<span class="built_in">export</span>_<span class="built_in">test</span>_admin_user11112</span><br></pre></td></tr></table></figure>
+<h2 id="执行带密码的任务"><a href="#执行带密码的任务" class="headerlink" title="执行带密码的任务"></a>执行带密码的任务</h2><p>有密码要求的任务，如果不存储密码的话，每次执行任务都要求手动输入密码，如果是定时任务，那么这个肯定是不合理的。默认metastore是不保存密码的，如果需要保存，则在conf/sqoop-site.xml增加或者取消注释如下内容</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>sqoop.metastore.client.record.password<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">description</span>&gt;</span>If true, allow saved passwords in the metastore.</span><br><span class="line">   <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h1><ul>
+<li><p>ERROR tool.ImportTool: Encountered IOException running import job: java.io.FileNotFoundException: File does not exist: hdfs://192.168.6.63:9000/home/du/software/dev/sqoop-1.4.5.bin__hadoop-0.20/lib/ant-contrib-1.0b3.jar</p>
+<pre><code>在不同机器或者用户下执行sqoop，会查找hadoop集群指定的节点上的hdfs目录中的这个文件，比如我是用在/home/du/software/dev/sqoop-1.4.5.bin__hadoop-0.20 下执行的sqoop，并且SQOOP_HOME配置的也是这个路径，那么到hdfs://192.168.6.63:9000上就会查找/home/du/software/dev/sqoop-1.4.5.bin__hadoop-0.20/lib这个路径下的ant-contrib-1.0b3.jar这个文件，解决方法就是在hdfs上创建对应目录，并把sqoop拷贝到对应目录，目录结构和执行sqoop的目录结构一样即可。
+</code></pre></li>
+<li><p>Exception in thread “main” java.lang.IncompatibleClassChangeError: Found interface org.apache.hadoop.mapreduce.JobContext, but class was expected</p>
+<pre><code>使用的hadoop版本问题，从2.6.0切换到2.4.0 解决
+</code></pre></li>
+<li><p>ERROR tool.ImportTool: Encountered IOException running import job: org.apache.hadoop.security.AccessControlException: Permission denied: user=du, access=WRITE, inode=”/user”:admin:supergroup:drwxr-xr-x</p>
+</li>
+<li><p>ERROR manager.SqlManager: Error executing statement: java.sql.SQLException: Access denied for user ‘forseti’@’192.168.6.165’ (using password: YES)</p>
+<pre><code>很明显是mysql的用户登陆失败，填写正确的用户名和密码即可解决该问题。
+</code></pre></li>
+<li><p>15/03/05 17:40:10 INFO mapreduce.Job: Running job: job_1425543105230_0006<br>15/03/05 17:40:44 INFO ipc.Client: Retrying connect to server: archeagle/220.250.64.20:43175. Already tried 0 time(s); maxRetries=3<br>15/03/05 17:41:04 INFO ipc.Client: Retrying connect to server: archeagle/220.250.64.20:43175. Already tried 1 time(s); maxRetries=3<br>15/03/05 17:41:24 INFO ipc.Client: Retrying connect to server: archeagle/220.250.64.20:43175. Already tried 2 time(s); maxRetries=3<br>15/03/05 17:41:44 INFO mapred.ClientServiceDelegate: Application state is completed. FinalApplicationStatus=FAILED. Redirecting to job history server<br>15/03/05 17:41:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Job status not available<br>  at org.apache.hadoop.mapreduce.Job.updateStatus(Job.java:322)<br>  at org.apache.hadoop.mapreduce.Job.isComplete(Job.java:599)<br>  at org.apache.hadoop.mapreduce.Job.monitorAndPrintJob(Job.java:1344)<br>  at org.apache.hadoop.mapreduce.Job.waitForCompletion(Job.java:1306)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.doSubmitJob(ImportJobBase.java:186)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.runJob(ImportJobBase.java:159)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.runImport(ImportJobBase.java:247)<br>  at org.apache.sqoop.manager.DirectMySQLManager.importTable(DirectMySQLManager.java:92)<br>  at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:497)<br>  at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:601)<br>  at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>  at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>  at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>  at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>  at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>  at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
+<pre><code>在运行sqoop的主机hosts文件增减加hadoop节点ip映射 192.168.6.63 archeagle
+</code></pre></li>
+<li><p>使用–direct参数<br>Error: java.io.IOException: Cannot run program “mysqldump”: error=2, No such file or directory<br>  at java.lang.ProcessBuilder.start(ProcessBuilder.java:1047)<br>  at java.lang.Runtime.exec(Runtime.java:617)<br>  at java.lang.Runtime.exec(Runtime.java:485)<br>  at org.apache.sqoop.mapreduce.MySQLDumpMapper.map(MySQLDumpMapper.java:405)<br>  at org.apache.sqoop.mapreduce.MySQLDumpMapper.map(MySQLDumpMapper.java:49)<br>  at org.apache.hadoop.mapreduce.Mapper.run(Mapper.java:145)<br>  at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:764)<br>  at org.apache.hadoop.mapred.MapTask.run(MapTask.java:340)<br>  at org.apache.hadoop.mapred.YarnChild$2.run(YarnChild.java:167)<br>  at java.security.AccessController.doPrivileged(Native Method)<br>  at javax.security.auth.Subject.doAs(Subject.java:415)<br>  at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1548)<br>  at org.apache.hadoop.mapred.YarnChild.main(YarnChild.java:162)<br>Caused by: java.io.IOException: error=2, No such file or directory<br>  at java.lang.UNIXProcess.forkAndExec(Native Method)<br>  at java.lang.UNIXProcess.<init>(UNIXProcess.java:186)<br>  at java.lang.ProcessImpl.start(ProcessImpl.java:130)<br>  at java.lang.ProcessBuilder.start(ProcessBuilder.java:1028)<br>  … 12 more</init></p>
+<ul>
+<li><p>ERROR tool.ImportTool: Encountered IOException running import job: org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.ipc.RetriableException): org.apache.hadoop.hdfs.server.namenode.SafeModeException: Cannot delete /user/du/.staging/job_1425543105230_0010. Name node is in safe mode.<br>The reported blocks 0 needs additional 963 blocks to reach the threshold 0.9990 of total blocks 963.<br>The number of live datanodes 0 has reached the minimum number 0. Safe mode will be turned off automatically once the thresholds have been reached.<br>at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.checkNameNodeSafeMode(FSNamesystem.java:1199)<br>at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.deleteInternal(FSNamesystem.java:3336)<br>at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.deleteInt(FSNamesystem.java:3296)<br>at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.delete(FSNamesystem.java:3280)<br>at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.delete(NameNodeRpcServer.java:727)</p>
+<pre><code>hdfs上(用户)目录不存在。
+</code></pre></li>
+</ul>
+</li>
+<li><p>INFO ipc.Client: Retrying connect to server: arch57/220.250.64.20:56564. Already tried 2 time(s); maxRetries=3<br>15/03/10 15:47:55 INFO mapred.ClientServiceDelegate: Application state is completed. FinalApplicationStatus=SUCCEEDED. Redirecting to job history server<br>15/03/10 15:47:55 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Job status not available<br>  at org.apache.hadoop.mapreduce.Job.updateStatus(Job.java:322)<br>  at org.apache.hadoop.mapreduce.Job.isComplete(Job.java:599)<br>  at org.apache.hadoop.mapreduce.Job.monitorAndPrintJob(Job.java:1344)<br>  at org.apache.hadoop.mapreduce.Job.waitForCompletion(Job.java:1306)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.doSubmitJob(ImportJobBase.java:186)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.runJob(ImportJobBase.java:159)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.runImport(ImportJobBase.java:247)<br>  at org.apache.sqoop.manager.SqlManager.importTable(SqlManager.java:665)<br>  at org.apache.sqoop.manager.MySQLManager.importTable(MySQLManager.java:118)<br>  at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:497)<br>  at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:601)<br>  at org.apache.sqoop.tool.JobTool.execJob(JobTool.java:228)<br>  at org.apache.sqoop.tool.JobTool.run(JobTool.java:283)<br>  at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>  at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>  at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>  at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>  at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>  at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
+<pre><code>在执行sqoop的机器的hosts增加 arch57 这个主机ip映射（PS:arch57 是一台hadoop机器的名字）
+</code></pre></li>
+</ul>
+
+	
+	</div>
+  <a type="button" href="/2016/03/09/Sqoop使用/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-09 </div>
+			<div class="article-title"><a href="/2016/03/09/SparkStreaming程序（及过程中问题解决）/" >运行第一个SparkStreaming程序（及过程中问题解决）</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="官方示例说明"><a href="#官方示例说明" class="headerlink" title="官方示例说明"></a>官方示例说明</h1><p>按照官方文档的 <a href="http://spark.apache.org/docs/1.0.0/streaming-programming-guide.html#a-quick-example" target="_blank" rel="external">这个示例说明</a>，可以轻松的在本地的spark-shell环境中测试这个示例。示例，即为了更好的入门，那么就再说明一下。<br>运行这个统计单词的方式有三种，前面两种是官方文档上的指引，第三种则是用scala程序运行。</p>
+<hr>
+<ul>
+<li><h2 id="第一种方式-run-demo"><a href="#第一种方式-run-demo" class="headerlink" title="第一种方式, run-demo"></a>第一种方式, run-demo</h2></li>
+</ul>
+<ol>
+<li>打开一个终端，打开一个终端，输入 命令 <code>nc -lk 9999</code>，暂时叫做 “nc终端” 吧</li>
+<li><p>再打开终端，切换到Spark HOME目录， 执行命令 <code>bin/run-example org.apache.spark.examples.streaming.NetworkWordCount localhost 9999</code>， 然后每秒会有类似一下日志循环输出<br>&gt;<br>-——————————————<br>Time: 1415701382000 ms<br>-——————————————<br>-——————————————<br>Time: 1415701383000 ms<br>-——————————————</p>
+</li>
+<li><p>在nc终端随便输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在上面的Spark终端中看到有新内容输出<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</p>
+</li>
+</ol>
+<p>OK，成功！</p>
+<hr>
+<ul>
+<li><h2 id="第二种-spark-shell-模式"><a href="#第二种-spark-shell-模式" class="headerlink" title="第二种 spark-shell 模式"></a>第二种 spark-shell 模式</h2>下面介绍在spark-shell中输入scala代码运行的方式。</li>
+</ul>
+<ol>
+<li>同上面第一步，打开一个终端，打开一个终端，输入 命令 <code>nc -lk 9999</code>，暂时叫做 “nc终端” 吧</li>
+<li><p>再打开一个终端， 切换到Spark HOME目录下，输入 <code>bin/spark-shell</code> （如果你已经安装好了Spark的话，直接输入 <code>spark-shell</code> 即可），等待Spark启动成功，会打印信息<br>&gt;<br>Spark context available as sc.<br>scala&gt;</p>
+<p>然后输入以下语句：</p>
+</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.streaming._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.function._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming.api._</span><br><span class="line"></span><br><span class="line"><span class="comment">// Create a StreamingContext with a local master</span></span><br><span class="line"><span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(sc, <span class="type">Seconds</span>(<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// Create a DStream that will connect to serverIP:serverPort, like localhost:9999</span></span><br><span class="line"><span class="keyword">val</span> lines = ssc.socketTextStream(<span class="string">"localhost"</span>, <span class="number">9999</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Split each line into words</span></span><br><span class="line"><span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</span><br><span class="line"></span><br><span class="line"><span class="comment">// Count each word in each batch</span></span><br><span class="line"><span class="keyword">val</span> pairs = words.map(word =&gt; (word, <span class="number">1</span>))</span><br><span class="line"><span class="keyword">val</span> wordCounts = pairs.reduceByKey(_ + _)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Print a few of the counts to the console</span></span><br><span class="line">wordCounts.print()</span><br><span class="line">ssc.start()             <span class="comment">// Start the computation</span></span><br><span class="line">ssc.awaitTermination()  <span class="comment">// Wait for the computation to terminate</span></span><br></pre></td></tr></table></figure>
+<p> 会打印以下信息：<br>&gt;<br>14/11/11 18:07:23 INFO MemoryStore: ensureFreeSpace(2216) called with curMem=100936, maxMem=278019440<br>.…..<br>14/11/11 18:07:23 INFO DAGScheduler: Stage 91 (take at DStream.scala:608) finished in 0.004 s<br>14/11/11 18:07:23 INFO SparkContext: Job finished: take at DStream.scala:608, took 0.007531701 s<br> -——————————————<br>Time: 1415700443000 ms<br>-——————————————</p>
+<ol>
+<li><p>同第一种方式的第3步，随便输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在上面的Spark终端中看到有新内容输出<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</p>
+<p>OK，成功！</p>
+</li>
+</ol>
+<hr>
+<ul>
+<li><h2 id="第三种-scala-ide编程方式"><a href="#第三种-scala-ide编程方式" class="headerlink" title="第三种 scala-ide编程方式"></a>第三种 scala-ide编程方式</h2>在用这种方式运行这个demo代码的时候，遇到了不少问题，记录下来，供大家参考。这个例子，请大家先根据这里记录的方式进行操作，得到一个可以运行的程序，后面我会记录遇到的问题。</li>
+</ul>
+<ol>
+<li>下载scala-ide, <a href="http://scala-ide.org/download/sdk.html" target="_blank" rel="external">下载链接</a>，下载 For Scala 2.10.4 下的对应平台的ide，解压，运行。</li>
+<li>安装sbt，<a href="http://www.scala-sbt.org/download.html" target="_blank" rel="external">下载链接</a>,</li>
+<li>安装sbteclipse, <a href="https://github.com/typesafehub/sbteclipse" target="_blank" rel="external">github地址</a>, 编辑 <code>~/.sbt/0.13/plugins/plugins.sbt</code> 文件， 添加以下内容 <code>addSbtPlugin(&quot;com.typesafe.sbteclipse&quot; % &quot;sbteclipse-plugin&quot; % &quot;2.5.0&quot;)</code>，如果没有plugins目录和plugins.sbt，自行创建。</li>
+<li><p>用向导创建一个scala项目，并在项目根目录下创建一个build.sbt文件，添加以下内容(注意，每行正式语句之后要换行)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">name := &quot;spark-test&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">version := &quot;1.0&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">scalaVersion := &quot;2.10.4&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// set the main class for the main &apos;run&apos; task</span><br><span class="line">// change Compile to Test to set it for &apos;test:run&apos;</span><br><span class="line">mainClass in (Compile, run) := Some(&quot;test.SparkTest&quot;)</span><br><span class="line"></span><br><span class="line">libraryDependencies += &quot;org.apache.spark&quot; % &quot;spark-streaming_2.10&quot; % &quot;1.1.0&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建test.SparkTest.scala文件，添加以下代码</p>
+</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.function._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming.api._</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">SparkTest</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</span><br><span class="line">    <span class="comment">// Create a StreamingContext with a local master</span></span><br><span class="line">    <span class="comment">// Spark Streaming needs at least two working thread</span></span><br><span class="line">    <span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(<span class="string">"local[2]"</span>, <span class="string">"NetworkWordCount"</span>, <span class="type">Seconds</span>(<span class="number">10</span>))</span><br><span class="line">    <span class="comment">// Create a DStream that will connect to serverIP:serverPort, like localhost:9999</span></span><br><span class="line">    <span class="keyword">val</span> lines = ssc.socketTextStream(<span class="string">"localhost"</span>, <span class="number">9999</span>)</span><br><span class="line">    <span class="comment">// Split each line into words</span></span><br><span class="line">    <span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line">    <span class="comment">// Count each word in each batch</span></span><br><span class="line">    <span class="keyword">val</span> pairs = words.map(word =&gt; (word, <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">val</span> wordCounts = pairs.reduceByKey(_ + _)</span><br><span class="line">    wordCounts.print</span><br><span class="line">    ssc.start</span><br><span class="line">    ssc.awaitTermination</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>终端中切换目录到这个项目根目录，输入命令 <code>sbt</code> ， 命令运行成功后，敲入 <code>eclipse</code> 生成eclipse项目和项目所需依赖</li>
+<li>同第一种方式的第1,3步，<br>再打开一个终端，输入 命令 <code>nc -lk 9999</code>。<br>然后运行刚才写的main程序，在nc终端中输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在ide控制台中观察到<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</li>
+</ol>
+<p>OK，成功！</p>
+<hr>
+<h1 id="下面是遇到的问题及解决方法："><a href="#下面是遇到的问题及解决方法：" class="headerlink" title="下面是遇到的问题及解决方法："></a>下面是遇到的问题及解决方法：</h1><h3 id="1-运行程序说找不到主类"><a href="#1-运行程序说找不到主类" class="headerlink" title="1. 运行程序说找不到主类"></a>1. 运行程序说找不到主类</h3><p>解：没有在sbt文件配置主类是哪个，在<code>build.sbt</code>  文件中添加以下代码</p>
+<blockquote>
+<p>mainClass in (Compile, run) := Some(“test.SparkTest”)</p>
+</blockquote>
+<p> Some中就是主类的路径</p>
+<h3 id="2-java-lang-NoClassDefFoundError-scala-collection-GenTraversableOnce-class"><a href="#2-java-lang-NoClassDefFoundError-scala-collection-GenTraversableOnce-class" class="headerlink" title="2. java.lang.NoClassDefFoundError: scala/collection/GenTraversableOnce$class"></a>2. java.lang.NoClassDefFoundError: scala/collection/GenTraversableOnce$class</h3><p>这个问题困扰了我很长时间，一直没找到怎么解决。后来看到说是scala每次版本升级不兼容以前的版本编译的库，于是换了对应的版本的ide才正常运行。<br>解：scala-ide版本和现在用的spark包依赖编译的scala版本不一致， 请下载上面说过的 <code>scala-ide For Scala 2.10.4</code> 版本。</p>
+
+	
+	</div>
+  <a type="button" href="/2016/03/09/SparkStreaming程序（及过程中问题解决）/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+<ul class="pagination">
+	 
+		
+    	<li class="prev"><a href="/page/3/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> 上一页</a></li>
+  		
+
+        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+
+		
+          <li class="next disabled"><a>下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>
+        
+	
+</ul>
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>分类</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/android/">android<span>1</span></a></li>
+		
+			<li><a href="/categories/git/">git<span>1</span></a></li>
+		
+			<li><a href="/categories/golang/">golang<span>9</span></a></li>
+		
+			<li><a href="/categories/hadoop/">hadoop<span>2</span></a></li>
+		
+			<li><a href="/categories/java/">java<span>1</span></a></li>
+		
+			<li><a href="/categories/linux/">linux<span>4</span></a></li>
+		
+			<li><a href="/categories/mysql/">mysql<span>1</span></a></li>
+		
+			<li><a href="/categories/other/">other<span>1</span></a></li>
+		
+			<li><a href="/categories/spark/">spark<span>3</span></a></li>
+		
+			<li><a href="/categories/spring/">spring<span>4</span></a></li>
+		
+			<li><a href="/categories/sql/">sql<span>1</span></a></li>
+		
+			<li><a href="/categories/sqoop/">sqoop<span>2</span></a></li>
+		
+			<li><a href="/categories/windows/">windows<span>1</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>标签云</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/linux/">linux<span>3</span></a></li>
+		
+			<li><a href="/tags/arch/">arch<span>2</span></a></li>
+		
+			<li><a href="/tags/sql/">sql<span>1</span></a></li>
+		
+			<li><a href="/tags/spark/">spark<span>3</span></a></li>
+		
+			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
+		
+			<li><a href="/tags/windows8/">windows8<span>1</span></a></li>
+		
+			<li><a href="/tags/go/">go<span>8</span></a></li>
+		
+			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
+		
+			<li><a href="/tags/hive/">hive<span>1</span></a></li>
+		
+			<li><a href="/tags/软件/">软件<span>1</span></a></li>
+		
+			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
+		
+			<li><a href="/tags/spring/">spring<span>4</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+		
+			<li><a href="/tags/git/">git<span>1</span></a></li>
+		
+			<li><a href="/tags/端口/">端口<span>1</span></a></li>
+		
+			<li><a href="/tags/golang/">golang<span>10</span></a></li>
+		
+			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
+		
+			<li><a href="/tags/spring-xd/">spring-xd<span>3</span></a></li>
+		
+			<li><a href="/tags/hadoop/">hadoop<span>4</span></a></li>
+		
+			<li><a href="/tags/hdfs/">hdfs<span>5</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>31</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>最新文章</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2016/03/15/linux下根据端口号查询对应进程/" ><i class="fa fa-file-o"></i>linux下根据端口号查询对应进程</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/15/golang打印错误栈信息/" ><i class="fa fa-file-o"></i>golang打印错误栈信息</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/15/golang容易忽略导致入坑的方面/" ><i class="fa fa-file-o"></i>golang容易忽略导致入坑的方面</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/14/sink-hdfs/" ><i class="fa fa-file-o"></i>sink-hdfs</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/13/golang命令-1/" ><i class="fa fa-file-o"></i>golang命令</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>链接</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="fa fa-github"></i><a href="http://www.github.com/wzpan" title="My Github account." target="_blank"]);">My Github</a></li>
+	
+		<li><i class="fa fa-linkedin"></i><a href="http://www.linkedin.com/in/sdvdxl" title="My Linkin account." target="_blank"]);">My LinkedIn</a></li>
+	
+	</ul>
+</div>
+
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2016 杜龙少
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

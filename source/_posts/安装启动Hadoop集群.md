@@ -170,7 +170,7 @@ PATH=$PATH:$JAVA_HOME/bin
 10. 格式化文件系统
 注意：这里的格式化文件系统并不是硬盘格式化，只是针对主服务器hdfs-site.xml的dfs.namenode.name.dir和dfs.datanode.data.dir目录做相应的清理工作。切换到Hadoop的home目录，执行`bin/hdfs namenode -format`。
 11. 启动停止服务
-启动`bin/start-dfs.sh`，可以一次性启动master和slaves节点服务。`sbin/start-yarn.sh`启动yarn资源管理服务。要停止服务，用对应的`sbin/stop-dfs.sh`和`sbin/stop-dfs.sh`即可停止服务。
+启动`sbin/start-dfs.sh`，可以一次性启动master和slaves节点服务。`sbin/start-yarn.sh`启动yarn资源管理服务。要停止服务，用对应的`sbin/stop-dfs.sh`和`sbin/stop-dfs.sh`即可停止服务。
 12. 单独启动一个datanode
 增加节点或者重启节点，需要单独启动，则可使用以下命令:
 `sbin/hadoop-daemon.sh start datanode`，启动nodeManager`sbin/yarn-daemon.sh start nodemanager`，当然也可以操作namenode`sbin/hadoop-daemon.sh start namenode ` `sbin/yarn-daemon.sh start resourcemanager`。
