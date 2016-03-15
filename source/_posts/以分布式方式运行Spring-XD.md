@@ -144,13 +144,21 @@ spring:
        #   master: mymaster
        #   nodes: 127.0.0.1:26379,127.0.0.1:26380,127.0.0.1:26381
     batch:
+        isolationLevel: ISOLATION_SERIALIZABLE
+        # clobType:
+        dbType: MYSQL
+        maxVarcharLength: 2500
+        tablePrefix: BATCH_
+        validateTransactionState: true
         initializer:
-            enabled: false
+          enabled: true
     datasource:
         url: jdbc:mysql://localhost:3306/xd
         username: root
         password: hekr
         driverClassName: com.mysql.jdbc.Driver
+        testOnBorrow: true
+        validationQuery: select 1
 zk:
   namespace: xd
   client:
@@ -164,8 +172,12 @@ xd:
 ```
 
 ##注意：
-配置权限后，进入xd-shell会显示`server-unknown:>`， 需要配置一下admin server才能进入交互
+1. 配置权限后，进入xd-shell会显示`server-unknown:>`， 需要配置一下admin server才能进入交互
 
 ```
 admin config server --uri http://服务器地址:端口(默认9393) --username 用户名 --password 密码
+```
+2. `testOnBorrow`默认是`true`，如果配置为true或者没有配置，则需要配置正确的`validationQuery`，如果配置不正确则会有类似如下异常出现
+```java
+Command failed org.springframework.xd.rest.client.impl.SpringXDException: Could not get JDBC Connection; nested exception is java.sql.SQLException: Failed to validate a newly established connection.
 ```

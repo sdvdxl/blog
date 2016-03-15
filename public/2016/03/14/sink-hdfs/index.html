@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>SpingXD结合Hadoop | 杜龙少的博客</title>
+  <title>sink-hdfs | 杜龙少的博客</title>
   <meta name="author" content="杜龙少">
   
   <meta name="description" content="杜龙少的博客">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="SpingXD结合Hadoop"/>
+  <meta property="og:title" content="sink-hdfs"/>
   <meta property="og:site_name" content="杜龙少的博客"/>
 
   
@@ -93,7 +93,7 @@
 
 	
 		<div class="page-header page-header-inverse ">		
-			<h1 class="title title-inverse "> SpingXD结合Hadoop</h1>
+			<h1 class="title title-inverse "> sink-hdfs</h1>
 		</div>		
 	
 
@@ -113,19 +113,7 @@
 	<div class="mypage">		
 	  		
 
-	  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前的文章介绍了<a href="/Spring-XD简介">Spring XD</a>，<a href="/以分布式方式运行Spring-XD">以分布式方式运行Spring-XD</a>和<a href="/安装启动Hadoop集群">安装启动Hadoop集群</a>的文章。本文将简单介绍（刚学，很LOW(⊙﹏⊙)b）SpringXD和Hadoop，HDFS结合配置和使用方法。</p>
-<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>已经按照上述提到的两篇文章或者其他资料搭建并运行了SpringXD和Hadoop。</p>
-<h1 id="配置SpringXD"><a href="#配置SpringXD" class="headerlink" title="配置SpringXD"></a>配置SpringXD</h1><ol>
-<li>运行命令<code>jps</code>找到<code>AdminServerApplication</code>和<code>ContainerServerApplication</code>两项，结束进程<code>kill 进程pid</code>。</li>
-<li>编辑SpingXD的配置文件<code>server.yaml</code>，在<code>spring</code>节点下增加以下hadoop的配置信息：</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hadoop:</span></span><br><span class="line">	&lt;!-- 注意换成自己的hdfs地址 --<span class="string">&gt;</span><br><span class="line"></span><span class="attr">    fsUri:</span> hdfs://<span class="number">10.10</span><span class="number">.1</span><span class="number">.110</span>:<span class="number">8020</span></span><br><span class="line"><span class="attr">    resourceManagerHost:</span> <span class="number">10.10</span><span class="number">.1</span><span class="number">.110</span></span><br><span class="line"><span class="attr">    resourceManagerPort:</span> <span class="number">8032</span></span><br><span class="line"><span class="attr">    yarnApplicationClasspath:</span></span><br></pre></td></tr></table></figure>
-<p>然后启动xd-admin<code>bin/xd-admin</code>和xd-container<code>bin/xd-container</code>。</p>
-<ol>
-<li>切换到hadoop用户下，使用命令<code>hadoop fs -mkdir /xd</code>创建目录，然后更改权限<code>hadoop fs -chmod -R 777 /xd</code>（如果没有配置hadoop的环境变量，则请进入hadoop的目录使用<code>bin/hadoop</code>命令代替<code>hadoop</code>）</li>
-<li>打开新的控制台，进入xd-shell交互环境，假如根据上面的Spring-XD配置文章配置了安全措施，那么还需要执行下面的命令<code>admin config server --uri http://xd-adminIP:9393 --username 用户名 --password 密码</code>进行授权后登录。</li>
-<li>创建stream，向hdfs中写入数据<code>stream create --name myhdfsstream1 --definition &quot;time | hdfs&quot; --deploy</code>，用命令<code>hadoop fs ls /xd/myhdfsstream1</code>即可看到有临时文件生成。</li>
-</ol>
+	  <p>hdfs根据时间自动划分文件夹<br><code>stream create --name dataset1 --definition &quot;kafka --topic=kafka_test --zkconnect=10.10.1.20:2181 --queueSize=64  |hdfs --inputType=application/json --idleTimeout=10000 --partitionPath=dateFormat(&#39;yyyy/MM/dd/HH/mm&#39;)&quot; --deploy</code><br>其中，–partitionPath=dateFormat(‘yyyy/MM/dd/HH/mm’)用来指定划分 策略，这个是说用年(四位)/月(两位)/天(2位)/时(2位)/分(2位)这种格式来划分</p>
 	  
 	</div>
 
@@ -134,14 +122,14 @@
 	<div class="pagination">
 <ul class="pagination">
 	 
-				
-    	<li class="prev"><a href="/2016/03/11/hadoop集成hive/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
-  		
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+        
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-		   <li class="next"><a href="/2016/03/10/Hexo-Git-Oschina-Golang-Tenxcloud打造博客/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+		   <li class="next"><a href="/2016/03/13/golang命令-1/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
@@ -180,7 +168,7 @@
   <h2 class="title">留言</h2>
 
   
-  	 <div class="ds-thread" data-thread-key="2016/03/11/SpingXD结合Hadoop/" data-title="SpingXD结合Hadoop" data-url="http://todu.top/2016/03/11/SpingXD结合Hadoop/"></div>  
+  	 <div class="ds-thread" data-thread-key="2016/03/14/sink-hdfs/" data-title="sink-hdfs" data-url="http://todu.top/2016/03/14/sink-hdfs/"></div>  
   
 </section>
 
@@ -194,7 +182,7 @@
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2016-03-11 
+	2016-03-14 
 	</div>
 	
 
@@ -218,7 +206,7 @@
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/spring/">spring<span>4</span></a></li> <li><a href="/tags/spring-xd/">spring xd<span>4</span></a></li> <li><a href="/tags/spring-xd/">spring-xd<span>3</span></a></li> <li><a href="/tags/hadoop/">hadoop<span>4</span></a></li> <li><a href="/tags/hdfs/">hdfs<span>5</span></a></li> <li><a href="/tags/xd/">xd<span>3</span></a></li>
+  <li><a href="/tags/spring/">spring<span>4</span></a></li> <li><a href="/tags/spring-xd/">spring xd<span>4</span></a></li> <li><a href="/tags/hadoop/">hadoop<span>4</span></a></li> <li><a href="/tags/hdfs/">hdfs<span>5</span></a></li>
     </ul>
 	</div>
 		
