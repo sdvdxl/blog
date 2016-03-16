@@ -30,7 +30,7 @@ go get 命令用来直接下载并安装网络上的包到GOPATH中。事实上�
 1. 直接跟包名，如：`github.com/golang/text`，会打印这个包本身；也可以切换到该包目录下执行`go list`，效果相同。
 2. 可以直接跟"包名"+"/..."，比如要查看`github.com/golang/text`这个包的导入情况，执行`go list github.com/golang/text/...`会打印本包的go文件。
 ## 参数
-`-f`可以指定打印格式，默认是`go list -f '{ {.ImportPath}}'`， `-f`后面的参数可以用下面结构体的属性：
+`-f`可以指定打印格式，默认是`go list -f '{% raw %} {{.ImportPath}} {% endraw %}'`， `-f`后面的参数可以用下面结构体的属性：
 ``` go
  type Package struct {
     Dir           string // directory containing package sources
