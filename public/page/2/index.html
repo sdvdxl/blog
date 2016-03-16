@@ -112,6 +112,29 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-03-13 </div>
+			<div class="article-title"><a href="/2016/03/13/go交叉编译/" >go交叉编译</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>1.5之前需要进入go安装目录下的src目录，然后执行<br><code>GOOS=windows GOARCH=i386  CGO_ENABLED=0 ./make.bash --no-clean</code></p>
+<p>1.5及其之后可以直接执行<code>CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -o 输出文件名 go文件</code><br>其中<code>GOOS</code>有：<code>windows</code>,<code>linux</code>,<code>darwin</code>也就是mac系统<br><code>GOARCH</code>有：<code>adm64</code>和<code>386</code>分别对应64位平台和32位平台</p>
+
+	
+	</div>
+  <a type="button" href="/2016/03/13/go交叉编译/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-13 </div>
 			<div class="article-title"><a href="/2016/03/13/go中main/" >go中main</a></div>						
 		</h3>
 	
@@ -569,250 +592,6 @@ export GOROOT GOPATH PATH
 </div>
 
 		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-09 </div>
-			<div class="article-title"><a href="/2016/03/09/Spring-XD简介/" >Spring-XD简介</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Spring XD is a unified, distributed, and extensible service for data ingestion, real time analytics, batch processing, and data export.<br><img src="/images/xd/xd-overview.png" alt="distributed-overview."></p>
-<h1 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h1><p>翻译过来就是流，通过定义stream可以控制数据的流向，比如从MongoDB读取数据然后存储到HDFS中。<br><img src="/images/xd/stream.png" alt="stream"></p>
-<h2 id="创建方式"><a href="#创建方式" class="headerlink" title="创建方式"></a>创建方式</h2><p>一个简单的示例：该示例创建一个名字叫<code>ticktock</code>的stream，每秒钟产生一条时间信息然后通过管道传送到log中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xd:&gt; stream create --definition &quot;time | log&quot; --name ticktock</span><br></pre></td></tr></table></figure></p>
-<h2 id="销毁Stream"><a href="#销毁Stream" class="headerlink" title="销毁Stream"></a>销毁Stream</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xd:&gt; stream destroy --name stream-name</span><br></pre></td></tr></table></figure>
-<h1 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h1><p>模块，当前包含<code>source</code>, <code>sink</code>,<code>processor</code>, 和<code>job</code>。</p>
-<h1 id="Souces"><a href="#Souces" class="headerlink" title="Souces"></a>Souces</h1><p>数据源，Stream的来源，有以下几种方式：</p>
-<table>
-<thead>
-<tr>
-<th>方式</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>File</td>
-<td>文件方式</td>
-</tr>
-<tr>
-<td>FTP</td>
-<td>FTP方式</td>
-</tr>
-<tr>
-<td>GemFire Continuous Query(gemfire-cq)</td>
-<td>GemFire查询</td>
-</tr>
-<tr>
-<td>GemFire source(gemfire)</td>
-<td>GemFire文件</td>
-</tr>
-<tr>
-<td>HTTP</td>
-<td>http方式</td>
-</tr>
-<tr>
-<td>JDBC Source(jdbc)</td>
-<td>关系型数据库jdbc</td>
-</tr>
-<tr>
-<td>JMS</td>
-<td>JMS</td>
-</tr>
-<tr>
-<td>Kafka</td>
-<td>Kafka消息队列</td>
-</tr>
-<tr>
-<td>Mail</td>
-<td>通过接收电子邮件</td>
-</tr>
-<tr>
-<td>MongoDB Source(mongodb)</td>
-<td>MongoDB数据库</td>
-</tr>
-<tr>
-<td>MQTT</td>
-<td>MQTT</td>
-</tr>
-<tr>
-<td>RabbitMQ</td>
-<td>RabbitMQ消息队列</td>
-</tr>
-<tr>
-<td>Reactor IP(reactor-ip)</td>
-<td>Reactor IP(reactor-ip)</td>
-</tr>
-<tr>
-<td>SFTP</td>
-<td>SFTP</td>
-</tr>
-<tr>
-<td>Stdout Capture</td>
-<td>标准输入</td>
-</tr>
-<tr>
-<td>Syslog</td>
-<td>系统日志</td>
-</tr>
-<tr>
-<td>Tail</td>
-<td>Tail程序</td>
-</tr>
-<tr>
-<td>TCP</td>
-<td>TCP</td>
-</tr>
-<tr>
-<td>TCP Client(tcp-client)</td>
-<td>TCP 客户端</td>
-</tr>
-<tr>
-<td>Time</td>
-<td>时间</td>
-</tr>
-<tr>
-<td>Trigger Source(trigger)</td>
-<td>触发器</td>
-</tr>
-<tr>
-<td>Twitter Search(twittersearch)</td>
-<td>Twitter搜索</td>
-</tr>
-<tr>
-<td>Twitter Stream(twitterstream)</td>
-<td>Twitter Stream流</td>
-</tr>
-</tbody>
-</table>
-<h1 id="Sinks"><a href="#Sinks" class="headerlink" title="Sinks"></a>Sinks</h1><p>数据源，Stream的输出，有以下几种方式：</p>
-<table>
-<thead>
-<tr>
-<th>方式</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Dynamic Router(router)</td>
-<td>动态路由</td>
-</tr>
-<tr>
-<td>File Sink(file)</td>
-<td>文件方式</td>
-</tr>
-<tr>
-<td>FTP Sink(ftp)</td>
-<td>FTP方式</td>
-</tr>
-<tr>
-<td>GemFire Server</td>
-<td>GemFire服务器</td>
-</tr>
-<tr>
-<td>GPFDIST</td>
-<td>GPFDIST</td>
-</tr>
-<tr>
-<td>Cassandra</td>
-<td>Cassandra 数据库</td>
-</tr>
-<tr>
-<td>Hadoop(HDFS) (hdfs)</td>
-<td>hdfs文件系统</td>
-</tr>
-<tr>
-<td>HDFS Dataset(Avro/Parquet) (hdfs-dataset)</td>
-<td>hdfs文件系统中的avro或者parquet类型文件</td>
-</tr>
-<tr>
-<td>JDBC Source(jdbc)</td>
-<td>关系型数据库jdbc</td>
-</tr>
-<tr>
-<td>Kafka Sink (kafka)</td>
-<td>Kafka消息队列</td>
-</tr>
-<tr>
-<td>Log</td>
-<td>log 文件</td>
-</tr>
-<tr>
-<td>Mail</td>
-<td>Mail 发送</td>
-</tr>
-<tr>
-<td>Mongo</td>
-<td>Mongo数据库</td>
-</tr>
-<tr>
-<td>MQTT Sink (mqtt)</td>
-<td>MQTT</td>
-</tr>
-<tr>
-<td>Null Sink(null)</td>
-<td>null</td>
-</tr>
-<tr>
-<td>RabbitMQ</td>
-<td>RabbitMQ 消息队列</td>
-</tr>
-<tr>
-<td>Redis</td>
-<td>Redis</td>
-</tr>
-<tr>
-<td>Shell Sink (shell)</td>
-<td>shell</td>
-</tr>
-<tr>
-<td>Splunk Server (splunk)</td>
-<td>splunk</td>
-</tr>
-<tr>
-<td>TCP Sink (tcp)</td>
-<td>TCP</td>
-</tr>
-</tbody>
-</table>
-<h1 id="Processors"><a href="#Processors" class="headerlink" title="Processors"></a>Processors</h1><p>可用的处理器包括<code>Aggregator</code> <code>Filter</code> <code>Header Enricher</code> <code>HTTP Client</code> <code>JSON to Tuple</code> <code>Object to JSON</code> <code>Script</code> <code>Shell Command</code> <code>Splitter</code> <code>Transform</code></p>
-<ul>
-<li>Aggregator – 作用和 splitter相反，用于聚合，</li>
-<li>Splitter – 用于拆解</li>
-<li>Filter – 过滤器，用于中间处理数据</li>
-<li>Header Enricher (header-enricher) – 用于添加头部信息</li>
-<li>HTTP Client – 通过httpClient方式发送URL请求</li>
-<li>JSON to Tuple (json-to-tuple) – 转换json数据到Tuple类型</li>
-<li>Object to JSON (object-to-json) – 将对象转换为json格式</li>
-<li>Script 用于加载Groovy脚本</li>
-<li>Shell – 用于加载Shell脚本</li>
-<li>Transform – 用于负载类型转换</li>
-</ul>
-<h1 id="Taps"><a href="#Taps" class="headerlink" title="Taps"></a>Taps</h1><p>监听器，窃听器。<br>不用重复定义相同的stream，然后监听此stream就可以做其他操作。并且可以用Label来分别对每个部分内容做个别名，定义Tab时候可以使用别名。如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stream create foo --definition &quot;httpLabel: http | fLabel: filter --expression=payload.startsWith(&apos;A&apos;) | flibble: transform --expression=payload.toLowerCase() | log&quot; --deploy</span><br><span class="line">stream create fooTap --definition &quot;tap:stream:foo.flibble &gt; log&quot; --deploy</span><br></pre></td></tr></table></figure></p>
-<p>上面对trasfrom部分做了一个别名，叫做<code>flibble</code>，然后下面定义一个Tap，并且最后指定是flibble这个标签，那么就是对<code>foo</code>这个stream的<code>flibble</code>做监听。</p>
-<h1 id="Jobs"><a href="#Jobs" class="headerlink" title="Jobs"></a>Jobs</h1><p>Job相比Stream不同点在于，Job算是静态的，Stream是动态的。Stream会持续接收数据，处理数据；Job是一次性接收数据，处理数据，如果数据改变，那么是不会进行处理的，除非有定时任务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">job create --name jobtest --definition &apos;timestampfile --directory=D:/jobs&apos; --deploy</span><br><span class="line">stream create --name time-cron --definition &quot;trigger --cron=&apos;* * * * * *&apos; &gt; queue:job:jobtest&quot; --deploy</span><br></pre></td></tr></table></figure></p>
-<h1 id="使用counter"><a href="#使用counter" class="headerlink" title="使用counter"></a>使用counter</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stream create foo --definition &apos;http --outputType=application/json | log&apos;</span><br><span class="line">stream create countName --definition &apos;tap:stream:foo &gt; field-value-counter --fieldName=name&apos; --deploy</span><br><span class="line">stream deploy --name foo</span><br><span class="line">http post --data &#123;&quot;name&quot;:&quot;a&quot;&#125;</span><br><span class="line">http post --data &#123;&quot;name&quot;:&quot;a&quot;&#125;</span><br><span class="line">http post --data &#123;&quot;name&quot;:&quot;b&quot;&#125;</span><br></pre></td></tr></table></figure>
-<p><code>field-value-counter list</code> 列出field-value-counter的名字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FieldValueCounter name</span><br><span class="line">----------------------</span><br><span class="line">countName</span><br></pre></td></tr></table></figure></p>
-<p><code>field-value-counter display --name countName</code> 列出名字为<code>countName</code>的描述</p>
-<pre><code>FieldValueCounter=countName
----------------------------  -  -----
-VALUE                        -  COUNT
-a                            |  2
-b                            |  1
-</code></pre>
-	
-	</div>
-  <a type="button" href="/2016/03/09/Spring-XD简介/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
 
 		</div>
 
@@ -879,7 +658,7 @@ b                            |  1
 		
 			<li><a href="/categories/spark/">spark<span>3</span></a></li>
 		
-			<li><a href="/categories/spring/">spring<span>4</span></a></li>
+			<li><a href="/categories/spring/">spring<span>5</span></a></li>
 		
 			<li><a href="/categories/sql/">sql<span>1</span></a></li>
 		
@@ -896,45 +675,45 @@ b                            |  1
 		<h4>标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
-		
-			<li><a href="/tags/博客/">博客<span>1</span></a></li>
-		
-			<li><a href="/tags/git/">git<span>1</span></a></li>
-		
-			<li><a href="/tags/sql/">sql<span>1</span></a></li>
-		
-			<li><a href="/tags/xd/">xd<span>3</span></a></li>
-		
-			<li><a href="/tags/hdfs/">hdfs<span>5</span></a></li>
-		
-			<li><a href="/tags/http/">http<span>1</span></a></li>
+			<li><a href="/tags/golang/">golang<span>10</span></a></li>
 		
 			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
 		
-			<li><a href="/tags/arch/">arch<span>2</span></a></li>
-		
 			<li><a href="/tags/android/">android<span>1</span></a></li>
-		
-			<li><a href="/tags/linux/">linux<span>3</span></a></li>
 		
 			<li><a href="/tags/hive/">hive<span>1</span></a></li>
 		
-			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
-		
-			<li><a href="/tags/go/">go<span>8</span></a></li>
-		
-			<li><a href="/tags/hadoop/">hadoop<span>4</span></a></li>
-		
-			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
-		
 			<li><a href="/tags/进程/">进程<span>1</span></a></li>
+		
+			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
 		
 			<li><a href="/tags/录音/">录音<span>1</span></a></li>
 		
-			<li><a href="/tags/spring-xd/">spring-xd<span>3</span></a></li>
+			<li><a href="/tags/sql/">sql<span>1</span></a></li>
+		
+			<li><a href="/tags/http/">http<span>1</span></a></li>
+		
+			<li><a href="/tags/windows8/">windows8<span>1</span></a></li>
+		
+			<li><a href="/tags/hadoop/">hadoop<span>4</span></a></li>
+		
+			<li><a href="/tags/linux/">linux<span>3</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
 		
 			<li><a href="/tags/java/">java<span>1</span></a></li>
+		
+			<li><a href="/tags/go/">go<span>8</span></a></li>
+		
+			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
+		
+			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
+		
+			<li><a href="/tags/安卓/">安卓<span>1</span></a></li>
+		
+			<li><a href="/tags/端口/">端口<span>1</span></a></li>
+		
+			<li><a href="/tags/博客/">博客<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>31</span></a></li>
@@ -950,6 +729,10 @@ b                            |  1
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2016/03/16/sparkApp提交到SpringXD出现错误可能情况及解决方法/" ><i class="fa fa-file-o"></i>sparkApp提交到SpringXD出现错误可能情况...</a>
+      </li>
+    
+      <li>
         <a href="/2016/03/15/linux下根据端口号查询对应进程/" ><i class="fa fa-file-o"></i>linux下根据端口号查询对应进程</a>
       </li>
     
@@ -963,10 +746,6 @@ b                            |  1
     
       <li>
         <a href="/2016/03/14/sink-hdfs/" ><i class="fa fa-file-o"></i>sink-hdfs</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/13/golang命令-1/" ><i class="fa fa-file-o"></i>golang命令</a>
       </li>
     
   </ul>

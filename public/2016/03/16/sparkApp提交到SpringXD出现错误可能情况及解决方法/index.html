@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>杜龙少的博客</title>
+  <title>sparkApp提交到SpringXD出现错误可能情况及解决方法 | 杜龙少的博客</title>
   <meta name="author" content="杜龙少">
   
   <meta name="description" content="杜龙少的博客">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="sparkApp提交到SpringXD出现错误可能情况及解决方法"/>
   <meta property="og:site_name" content="杜龙少的博客"/>
 
   
@@ -88,40 +88,32 @@
 
   <div class="container">
   	<div class="content">
-    	 <div class="page-header page-header-inverse ">
-  <h1 class="title title-inverse ">杜龙少的博客</h1>
-</div>
+    	 
 
-<div class="row page">
 
 	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> sparkApp提交到SpringXD出现错误可能情况及解决方法</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
 	<div class="col-md-9">
 	
 
-		<div class="slogan">
-      <i class="fa fa-heart"></i>
-      杜龙少的博客
-</div>    
-		<div id="top_search"></div>
-		<div class="mypage">
-		
-		<!-- title and entry -->
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-16 </div>
-			<div class="article-title"><a href="/2016/03/16/sparkApp提交到SpringXD出现错误可能情况及解决方法/" >sparkApp提交到SpringXD出现错误可能情况及解决方法</a></div>						
-		</h3>
-	
+	<!-- content -->
+	<div class="mypage">		
+	  		
 
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>编写spark代码：</p>
+	  <p>编写spark代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.SparkConf;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.JavaPairRDD;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.JavaRDD;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.function.FlatMapFunction;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.function.Function2;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.function.PairFunction;</span><br><span class="line"><span class="keyword">import</span> scala.Tuple2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by sdvdxl on 2016/3/14.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SparkCalcDemo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String HADOOP_URL = <span class="string">"hdfs://10.10.1.110:8020/"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SparkConf conf = <span class="keyword">new</span> SparkConf().setAppName(<span class="string">"test"</span>).setMaster(<span class="string">"local[1]"</span>);</span><br><span class="line">        JavaSparkContext sc = <span class="keyword">new</span> JavaSparkContext(conf);</span><br><span class="line">        JavaRDD&lt;String&gt; textFile = sc.textFile(HADOOP_URL + <span class="string">"/xd/dataset1/2016/03/14/15/01"</span>, <span class="number">1</span>);</span><br><span class="line">        JavaRDD&lt;String&gt; words = textFile.flatMap(<span class="keyword">new</span> FlatMapFunction&lt;String, String&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> Iterable&lt;String&gt; <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">                List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">                JSONObject jobj = JSON.parseObject(<span class="keyword">new</span> String(org.apache.commons.codec.binary.Base64.decodeBase64(s.substring(<span class="number">1</span>, s.length() - <span class="number">1</span>))));</span><br><span class="line">                list.add(jobj.getString(<span class="string">"name"</span>));</span><br><span class="line">                list.add(jobj.getString(<span class="string">"random"</span>));</span><br><span class="line">                <span class="keyword">return</span> list;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        JavaPairRDD&lt;String, Integer&gt; pairs = words.mapToPair(<span class="keyword">new</span> PairFunction&lt;String, String, Integer&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> Tuple2&lt;String, Integer&gt; <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;String, Integer&gt;(s, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        JavaPairRDD&lt;String, Integer&gt; counts = pairs.reduceByKey(<span class="keyword">new</span> Function2&lt;Integer, Integer, Integer&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(Integer a, Integer b)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> a + b;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        counts.foreach(tuple2 -&gt;</span><br><span class="line">                System.out.println(tuple2._1 + <span class="string">" : "</span> + tuple2._2));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>pom依赖：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>kafka-demo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>kafka-demo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.spark<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spark-core_2.11<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.6.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!--&lt;exclusions&gt;</span><br><span class="line">				&lt;exclusion&gt;</span><br><span class="line">					&lt;groupId&gt;com.fasterxml.jackson.module&lt;/groupId&gt;</span><br><span class="line">					&lt;artifactId&gt;jackson-module-scala_2.10&lt;/artifactId&gt;</span><br><span class="line">				&lt;/exclusion&gt;</span><br><span class="line"></span><br><span class="line">			&lt;/exclusions&gt;--&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--dependency&gt;</span><br><span class="line">			&lt;groupId&gt;com.fasterxml.jackson.module&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;jackson-module-scala_2.10&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;2.7.2&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-codec<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-codec<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.camel<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>camel-base64<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.16.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-dependency-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;/lib<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">excludeTransitive</span>&gt;</span>false<span class="tag">&lt;/<span class="name">excludeTransitive</span>&gt;</span> <span class="comment">&lt;!-- 表示是否不包含间接依赖的包 --&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">stripVersion</span>&gt;</span>false<span class="tag">&lt;/<span class="name">stripVersion</span>&gt;</span> <span class="comment">&lt;!-- 去除版本信息 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-dependencies<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-dependencies<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- 拷贝项目依赖包到lib/目录下 --&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;/lib<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">excludeTransitive</span>&gt;</span>false<span class="tag">&lt;/<span class="name">excludeTransitive</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">stripVersion</span>&gt;</span>false<span class="tag">&lt;/<span class="name">stripVersion</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!-- 项目资源插件 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-resources-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- 拷贝项目src/main/resources/下，除.bat以外的所有文件到conf/目录下 --&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;/conf<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources/<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>*.bat<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-command<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- 只拷贝项目src/main/resources/目录下的.bat文件到输出目录下 --&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources/<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">include</span>&gt;</span>*.bat<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!-- 打包插件 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-jar-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">archive</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!-- 生成MANIFEST.MF的设置 --&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- 为依赖包添加路径, 这些路径会写在MANIFEST文件的Class-Path下 --&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">addClasspath</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addClasspath</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">classpathPrefix</span>&gt;</span>lib/<span class="tag">&lt;/<span class="name">classpathPrefix</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- jar启动入口类--&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>com.some.package.some.class.Main<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- 在Class-Path下添加配置文件的路径 --&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">Class-Path</span>&gt;</span>conf/<span class="tag">&lt;/<span class="name">Class-Path</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">archive</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!-- 打jar包时，只打包class文件 --&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.class<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>oschina<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>mavenspring<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.springframework.org/release<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>jcenter<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://jcenter.bintray.com<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>spring-milestones<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>Spring Milestones<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://repo.spring.io/milestone<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>spring-release<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>Spring Releases<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://repo.spring.io/libs-release<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>spring-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>Spring Snapshots<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://repo.spring.io/snapshot<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">releases</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">releases</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -134,504 +126,130 @@
 <p>仔细看的话，在上面有一句<code>Exception in thread &quot;main&quot; java.lang.SecurityException: Invalid signature file digest for Manifest main attributes</code>错误，这个错误是由于导出的jar包结构信息不正确导致的。用eclipse的导出runnable jar 功能导出的jar包就没问题了。</p>
 <p>另外如果有依赖的jar包没哟被加载进去，则会在最上方出现<code>java.lang.NoClassDefFoundError:</code>类似信息。</p>
 <p>相关资料：<a href="http://www.todu.top/2016/03/09/以分布式方式运行Spring-XD" target="_blank" rel="external">以分布式方式运行Spring-XD</a></p>
-
-	
+	  
 	</div>
-  <a type="button" href="/2016/03/16/sparkApp提交到SpringXD出现错误可能情况及解决方法/#more" class="btn btn-default more">阅读此文</a>
-</div>
 
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-15 </div>
-			<div class="article-title"><a href="/2016/03/15/linux下根据端口号查询对应进程/" >linux下根据端口号查询对应进程</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>适用于ip4</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -Pnl +M -i4 | grep port</span><br></pre></td></tr></table></figure>
-<p>适用于ip6</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -Pnl +M -i6 | grep port</span><br></pre></td></tr></table></figure>
-
-	
-	</div>
-  <a type="button" href="/2016/03/15/linux下根据端口号查询对应进程/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-15 </div>
-			<div class="article-title"><a href="/2016/03/15/golang打印错误栈信息/" >golang打印错误栈信息</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> mainimport (</span><br><span class="line">    <span class="string">"runtime"</span></span><br><span class="line">    <span class="string">"fmt"</span>)<span class="keyword">func</span> main() &#123;</span><br><span class="line">    outer()&#125;<span class="keyword">func</span> outer() &#123;</span><br><span class="line">    inner()&#125;<span class="keyword">func</span> inner() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">defer</span> <span class="keyword">func</span>() &#123;</span><br><span class="line">        <span class="keyword">if</span> err := <span class="built_in">recover</span>(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">            trace := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">1024</span>)</span><br><span class="line">            count := runtime.Stack(trace, <span class="literal">true</span>)</span><br><span class="line">            fmt.Printf(<span class="string">"Recover from panic: %s\n"</span>, err)</span><br><span class="line">            fmt.Printf(<span class="string">"Stack of %d bytes: %s\n"</span>, count, trace)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="built_in">panic</span>(<span class="string">"Fake error!"</span>)&#125;</span><br></pre></td></tr></table></figure>
-
-	
-	</div>
-  <a type="button" href="/2016/03/15/golang打印错误栈信息/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-15 </div>
-			<div class="article-title"><a href="/2016/03/15/golang容易忽略导致入坑的方面/" >golang容易忽略导致入坑的方面</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="main-函数"><a href="#main-函数" class="headerlink" title="main 函数"></a>main 函数</h1><p>main函数必须定义在main包里，不可导出。当main函数调用完毕，程序就会立即退出，不会等待运行中的goroutine运行完毕。</p>
-<h1 id="初始化函数"><a href="#初始化函数" class="headerlink" title="初始化函数"></a>初始化函数</h1><p><code>func init() { … }</code></p>
-<p>此函数无参，不需显示调用。</p>
-<p>此函数根据依赖顺序执行初始化顺序，并且是顺序执行，如：</p>
-<p>A 依赖 B， B 依赖 C，并且A，B，C 都有init函数，那么初始化顺序是C ，B ， A</p>
-<h1 id="iota"><a href="#iota" class="headerlink" title="iota"></a>iota</h1><ul>
-<li><p>iota 只能用在const定义的常量上</p>
-</li>
-<li><p>iota在一个const范围，不管中间的变量有没有用到iota，iota都是持续递增加1的，如</p>
-</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line"></span><br><span class="line">       aa = <span class="literal">iota</span></span><br><span class="line"></span><br><span class="line">       bb</span><br><span class="line"></span><br><span class="line">       cc = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">       dd = <span class="literal">iota</span></span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>dd 是3</p>
-<ul>
-<li>如果重新定义const，那么值会是重新从0开始，如</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line"></span><br><span class="line">       ee = <span class="literal">iota</span></span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h1 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h1><p>x.(T) x为变量， T为要判断的类型，其中有两种用法</p>
-<ul>
-<li><p><code>a := x.(T)</code> ，如果x是类型T的实现类型变量，那么可以得到转换后的值a，否则panic: interface conversion: (x的类型) is not package.T: missing method （T的方法）</p>
-</li>
-<li><p><code>a, ok := x.(T)</code>，如果x是类型T的实现的类型变量，那么ok为true， 转换成功，否则，ok为false，说明转换失败。</p>
-</li>
-</ul>
-<h1 id="从Panic中恢复"><a href="#从Panic中恢复" class="headerlink" title="从Panic中恢复"></a>从Panic中恢复</h1><p>需要用到build-in recover()方法，函数原型：</p>
-<p><code>func recover() interface{}</code></p>
-<p>要捕获panic，必须在有可能发生panic的地方的上面进行处理，</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">defer</span> <span class="keyword">func</span>()&#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">if</span> err := <span class="built_in">recover</span>(); err !=<span class="literal">nil</span> &#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//处理错误</span></span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
-<p>一般来说，会将上面的代码放在函数（或者方法）的开始的地方。</p>
-<p><strong> 注意 ， recover函数只能用在defer中，否则不会进行错误捕获。</strong></p>
-
-	
-	</div>
-  <a type="button" href="/2016/03/15/golang容易忽略导致入坑的方面/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-14 </div>
-			<div class="article-title"><a href="/2016/03/14/sink-hdfs/" >sink-hdfs</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>hdfs根据时间自动划分文件夹<br><code>stream create --name dataset1 --definition &quot;kafka --topic=kafka_test --zkconnect=10.10.1.20:2181 --queueSize=64  |hdfs --inputType=application/json --idleTimeout=10000 --partitionPath=dateFormat(&#39;yyyy/MM/dd/HH/mm&#39;)&quot; --deploy</code><br>其中，–partitionPath=dateFormat(‘yyyy/MM/dd/HH/mm’)用来指定划分 策略，这个是说用年(四位)/月(两位)/天(2位)/时(2位)/分(2位)这种格式来划分</p>
-
-	
-	</div>
-  <a type="button" href="/2016/03/14/sink-hdfs/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-13 </div>
-			<div class="article-title"><a href="/2016/03/13/golang命令-1/" >golang命令</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>Go 提供了很多好用的命令，比如可以用go get 直接从网络上导入包，下面介绍一些常用的Go命令</p>
-<h1 id="go-get"><a href="#go-get" class="headerlink" title="go get"></a>go get</h1><h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>go get 命令用来直接下载并安装网络上的包到GOPATH中。事实上它依赖于版本控制工具，比如常用的Git和Mercurial。比如我们要使用<code>github.com/golang/text</code>这个包，那么可以执行命令 <code>go get github.com/golang/text</code>，稍后片刻（依照网络情况时间长短不一），那么这个包源码就会放到 <code>GOPATH/src</code>对应的目录下，编译好的文件会放到<code>GOPATH/pkg</code>对应的目录下，如果有可执行性代码，那么会将编译好的可执行性文件放到<code>GOPATH/bin</code>目录下。</p>
-<h2 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h2><p>像刚才例子中提到的<code>github.com/golang/text</code>这个包下又有子包，也想get下来，该如何做呢？也许你想没办法，一个一个get吧，的确这是一个不错的方法，但是有一个更为高效和优雅的方式，那就是 <code>...</code>，这个符号代表旗下子目录，那我们可以这样操作<code>go get github.com/golang/text ...</code>，就可以将text和其子包同时get下来了。</p>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><ul>
-<li><code>-v</code> 可以显示正在get的包</li>
-<li><code>-x</code> 可以显示正在执行的命令<h1 id="go-build"><a href="#go-build" class="headerlink" title="go build"></a>go build</h1>编译go文件。<br>可以切换到要build的包中执行<code>go build</code>，也可以直接 “go build” + “包名”，如要build包 <code>github.com/golang/text</code>，可以切换到text包目录下执行 <code>go build</code>，也可以直接执行 <code>go build github.com/golang/text</code>，这样就可以build text包了，如果要build子包，那么输入<code>go build ./...</code>。<code>build</code>命令会将main函数编译成可执行性文件，如果没有main，那么没有额外的文件产生。</li>
-</ul>
-<h1 id="go-clean"><a href="#go-clean" class="headerlink" title="go clean"></a>go clean</h1><p><code>clean</code>和<code>build</code>作用相反，是将build出来的可执行性文件清除掉。</p>
-<h1 id="go-install"><a href="#go-install" class="headerlink" title="go install"></a>go install</h1><p><code>install</code> 命令是将包编译成二进制文件并放到<code>GOPATH/pkg/目标平台/</code>对应的目录下。比如我们自己从github上克隆了<code>github.com/golang/text</code>，要使用它的话，需要进入到text包中，然后执行 <code>go install</code>；加入有子包也要安装的话，输入<code>go install ./...</code>，就会在<code>GOPATH/pkg/目标平台/</code>产生后缀为<code>.a</code>的文件。当然也可以和build一样输入完整的包路径。</p>
-<h1 id="go-list"><a href="#go-list" class="headerlink" title="go list"></a>go list</h1><p>这个命令用来查看所引用的包。</p>
-<h2 id="基本用法-1"><a href="#基本用法-1" class="headerlink" title="基本用法"></a>基本用法</h2><ol>
-<li>直接跟包名，如：<code>github.com/golang/text</code>，会打印这个包本身；也可以切换到该包目录下执行<code>go list</code>，效果相同。</li>
-<li>可以直接跟”包名”+”/…”，比如要查看<code>github.com/golang/text</code>这个包的导入情况，执行<code>go list github.com/golang/text/...</code>会打印本包的go文件。<h2 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h2><code>-f</code>可以指定打印格式，默认是<code>go list -f &#39;{ {.ImportPath}}&#39;</code>， <code>-f</code>后面的参数可以用下面结构体的属性：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">type</span> Package <span class="keyword">struct</span> &#123;</span><br><span class="line">    Dir           <span class="keyword">string</span> <span class="comment">// directory containing package sources</span></span><br><span class="line">    ImportPath    <span class="keyword">string</span> <span class="comment">// import path of package in dir</span></span><br><span class="line">    ImportComment <span class="keyword">string</span> <span class="comment">// path in import comment on package statement</span></span><br><span class="line">    Name          <span class="keyword">string</span> <span class="comment">// package name</span></span><br><span class="line">    Doc           <span class="keyword">string</span> <span class="comment">// package documentation string</span></span><br><span class="line">    Target        <span class="keyword">string</span> <span class="comment">// install path</span></span><br><span class="line">    Goroot        <span class="keyword">bool</span>   <span class="comment">// is this package in the Go root?</span></span><br><span class="line">    Standard      <span class="keyword">bool</span>   <span class="comment">// is this package part of the standard Go library?</span></span><br><span class="line">    Stale         <span class="keyword">bool</span>   <span class="comment">// would 'go install' do anything for this package?</span></span><br><span class="line">    Root          <span class="keyword">string</span> <span class="comment">// Go root or Go path dir containing this package</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Source files</span></span><br><span class="line">    GoFiles        []<span class="keyword">string</span> <span class="comment">// .go source files (excluding CgoFiles, TestGoFiles, XTestGoFiles)</span></span><br><span class="line">    CgoFiles       []<span class="keyword">string</span> <span class="comment">// .go sources files that import "C"</span></span><br><span class="line">    IgnoredGoFiles []<span class="keyword">string</span> <span class="comment">// .go sources ignored due to build constraints</span></span><br><span class="line">    CFiles         []<span class="keyword">string</span> <span class="comment">// .c source files</span></span><br><span class="line">    CXXFiles       []<span class="keyword">string</span> <span class="comment">// .cc, .cxx and .cpp source files</span></span><br><span class="line">    MFiles         []<span class="keyword">string</span> <span class="comment">// .m source files</span></span><br><span class="line">    HFiles         []<span class="keyword">string</span> <span class="comment">// .h, .hh, .hpp and .hxx source files</span></span><br><span class="line">    SFiles         []<span class="keyword">string</span> <span class="comment">// .s source files</span></span><br><span class="line">    SwigFiles      []<span class="keyword">string</span> <span class="comment">// .swig files</span></span><br><span class="line">    SwigCXXFiles   []<span class="keyword">string</span> <span class="comment">// .swigcxx files</span></span><br><span class="line">    SysoFiles      []<span class="keyword">string</span> <span class="comment">// .syso object files to add to archive</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Cgo directives</span></span><br><span class="line">    CgoCFLAGS    []<span class="keyword">string</span> <span class="comment">// cgo: flags for C compiler</span></span><br><span class="line">    CgoCPPFLAGS  []<span class="keyword">string</span> <span class="comment">// cgo: flags for C preprocessor</span></span><br><span class="line">    CgoCXXFLAGS  []<span class="keyword">string</span> <span class="comment">// cgo: flags for C++ compiler</span></span><br><span class="line">    CgoLDFLAGS   []<span class="keyword">string</span> <span class="comment">// cgo: flags for linker</span></span><br><span class="line">    CgoPkgConfig []<span class="keyword">string</span> <span class="comment">// cgo: pkg-config names</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Dependency information</span></span><br><span class="line">    Imports []<span class="keyword">string</span> <span class="comment">// import paths used by this package</span></span><br><span class="line">    Deps    []<span class="keyword">string</span> <span class="comment">// all (recursively) imported dependencies</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Error information</span></span><br><span class="line">    Incomplete <span class="keyword">bool</span>            <span class="comment">// this package or a dependency has an error</span></span><br><span class="line">    Error      *PackageError   <span class="comment">// error loading package</span></span><br><span class="line">    DepsErrors []*PackageError <span class="comment">// errors loading dependencies</span></span><br><span class="line"></span><br><span class="line">    TestGoFiles  []<span class="keyword">string</span> <span class="comment">// _test.go files in package</span></span><br><span class="line">    TestImports  []<span class="keyword">string</span> <span class="comment">// imports from TestGoFiles</span></span><br><span class="line">    XTestGoFiles []<span class="keyword">string</span> <span class="comment">// _test.go files outside package</span></span><br><span class="line">    XTestImports []<span class="keyword">string</span> <span class="comment">// imports from XTestGoFiles</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>如果想打印比较全的信息，也有一个参数可以使用：<code>-json</code>，这会将上面部分信息以json格式打印出来，读者可以自行实验。</p>
-<h1 id="go-run"><a href="#go-run" class="headerlink" title="go run"></a>go run</h1><p>这个命令可以直接运行go文件（带main函数），不需要编译成二进制可执行性文件。</p>
-
-	
-	</div>
-  <a type="button" href="/2016/03/13/golang命令-1/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-13 </div>
-			<div class="article-title"><a href="/2016/03/13/Android通话自动录音/" >Android通话自动录音</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="应用介绍："><a href="#应用介绍：" class="headerlink" title="应用介绍："></a>应用介绍：</h1><p>通话自动录音，包括去电/来电接通录音。 启动服务之后，当电话接通之后开始录音, 录音文件保存在存储卡上My Record文件夹内。 同时可以用本软件进行查看录音文件，播放，删除等操作。 单击录音文件可以长按录音文件可以单个删除</p>
-<h1 id="版本：1-5"><a href="#版本：1-5" class="headerlink" title="版本：1.5"></a>版本：1.5</h1><h1 id="百度应用地址"><a href="#百度应用地址" class="headerlink" title="百度应用地址"></a><a href="http://shouji.baidu.com/soft/item?docid=2357503&amp;from=web_alad_multi&amp;f=search_app_%E9%80%9A%E8%AF%9D%E8%87%AA%E5%8A%A8%E5%BD%95%E9%9F%B3%40list_1_title%401%40search_sug_app" target="_blank" rel="external">百度应用地址</a></h1><p><a href="http://shouji.baidu.com/s?wd=%E9%80%9A%E8%AF%9D%E8%87%AA%E5%8A%A8%E5%BD%95%E9%9F%B3&amp;data_type=app&amp;f=search_sug%40app&amp;from=web_alad_multi" target="_blank" rel="external">百度应用同类搜索占位为第一位</a></p>
-<h1 id="应用截图"><a href="#应用截图" class="headerlink" title="应用截图"></a>应用截图</h1><p><img src="http://7xiyb7.com1.z0.glb.clouddn.com/worksandroid%E9%80%9A%E8%AF%9D%E8%87%AA%E5%8A%A8%E5%BD%95%E9%9F%B31.jpg" alt="android通话自动录音1"></p>
-<p><img src="http://7xiyb7.com1.z0.glb.clouddn.com/worksandroid%E9%80%9A%E8%AF%9D%E8%87%AA%E5%8A%A8%E5%BD%95%E9%9F%B32.jpg" alt="android通话自动录音2"></p>
-<p><img src="http://7xiyb7.com1.z0.glb.clouddn.com/worksandroid%E9%80%9A%E8%AF%9D%E8%87%AA%E5%8A%A8%E5%BD%95%E9%9F%B33.jpg" alt="android通话自动录音3"></p>
-<p><img src="http://7xiyb7.com1.z0.glb.clouddn.com/worksandroid%E9%80%9A%E8%AF%9D%E8%87%AA%E5%8A%A8%E5%BD%95%E9%9F%B34.jpg" alt="android通话自动录音4"></p>
-
-	
-	</div>
-  <a type="button" href="/2016/03/13/Android通话自动录音/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-13 </div>
-			<div class="article-title"><a href="/2016/03/13/linux工具集锦/" >linux工具集锦</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="bcompare"><a href="#bcompare" class="headerlink" title="bcompare"></a>bcompare</h1><p>Beyond Compare是一套超级的文件及文件夹(目录)的比较工具，不仅可以快速比较出两个目录的不同，还可以比较每个文件的内容，而且可以任意显示比较结果。程序内建了文件浏览器，方便您对文件、文件夹、压缩包、FTP网站之间的差异比对以及资料同步。使用它可以管理源代码，保持文件夹的同步，比较程序输出，及验证光盘的复制。它还支持脚本、插件，尤其对中文支持很好。</p>
-<h1 id="Geany"><a href="#Geany" class="headerlink" title="Geany"></a>Geany</h1><h1 id="Evince"><a href="#Evince" class="headerlink" title="Evince"></a>Evince</h1><p>pdf阅读器</p>
-<p>#Markdown 编辑器<br>Farbox</p>
-<h1 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h1><p>一款可以在原有的终端上进行分屏工作的工具。</p>
-<h1 id="mutate"><a href="#mutate" class="headerlink" title="mutate"></a>mutate</h1><p>类似 mac上的alfred的软件，<a href="https://github.com/qdore/Mutatehttps://github.com/qdore/Mutate" target="_blank" rel="external">地址</a><br>ppa安装方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:mutate/ppa</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install mutate</span><br></pre></td></tr></table></figure></p>
-<h1 id="plank"><a href="#plank" class="headerlink" title="plank"></a>plank</h1><p>一款友好实用的dock工具。</p>
-<h1 id="virtualbox"><a href="#virtualbox" class="headerlink" title="virtualbox"></a>virtualbox</h1><p>一款跨平台的可以安装任何操作系统的虚拟机软件。<a href="https://www.virtualbox.org/" target="_blank" rel="external">官方地址</a>，同时最好安装扩展，可以有增强功能（拷贝，拖拽，更好的显示）。</p>
-<h1 id="xfce-zhuti"><a href="#xfce-zhuti" class="headerlink" title="xfce zhuti"></a>xfce zhuti</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:rebuntu16/other-stuff</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install xfce-theme-manager</span><br></pre></td></tr></table></figure>
-
-	
-	</div>
-  <a type="button" href="/2016/03/13/linux工具集锦/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-13 </div>
-			<div class="article-title"><a href="/2016/03/13/配置Idea的Go开发环境/" >配置Idea的Go开发环境</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="获取IDEA"><a href="#获取IDEA" class="headerlink" title="获取IDEA"></a>获取IDEA</h1><ol>
-<li><a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="external">最新版戳这里下载</a>，下载对应平台的版本，一般来说，社区版(Community Edition)就已经足够了。</li>
-<li>安装IDEA。Windows和Mac是安装版，一步一步安装完成即可；Linux是免安装版，解压，给IDEA的执行文件添加可执行权限即可。假设安装目录是<code>H:\software\dev\JetBrains\IntelliJ IDEA Community Edition 14.1.1</code>，其他平台自行设置目录。</li>
-</ol>
-<h1 id="获取Go"><a href="#获取Go" class="headerlink" title="获取Go"></a>获取Go</h1><ol>
-<li>Go的官方网站是<a href="http://golang.org/" target="_blank" rel="external">http://golang.org/</a>，<a href="https://golang.org/dl/" target="_blank" rel="external">下载地址</a>，但是鉴于中国网络问题，不科学上网则没法下载，各位同学可以从<a href="http://golangtc.com/download" target="_blank" rel="external">这里下载</a>，最好下载最新的，当然这个网站(<a href="http://golangtc.com/)本身就是国内较活跃的一个Go社区。" target="_blank" rel="external">http://golangtc.com/)本身就是国内较活跃的一个Go社区。</a></li>
-<li>下载后解压到本地目录，假设安装目录是<code>H:\software\dev\go</code>。其他平台自行设置目录。</li>
-</ol>
-<h1 id="获取Git和hg"><a href="#获取Git和hg" class="headerlink" title="获取Git和hg"></a>获取Git和hg</h1><p>因为Go get命令要使用到git或者hg，所以需要安装git和hg。<br>git可以<a href="http://git-scm.com/" target="_blank" rel="external">从这里下载</a>, hg(执行命令是hg，实际下载的软件叫mercurial)可以<a href="http://mercurial.selenic.com/" target="_blank" rel="external">从这里下载</a>，加入git安装到<code>H:\software\dev\Git</code>，hg安装到<code>H:\software\dev\Mercurial</code></p>
-<h1 id="配置Go和Git-hg"><a href="#配置Go和Git-hg" class="headerlink" title="配置Go和Git(hg)"></a>配置Go和Git(hg)</h1><p>配置环境变量，这里以Windows为例，其他平台请自行换成对应的路径即可。如果打开命令行分别执行以下命令都成功，那么不需要额外配置环境变量，否则配置对应的环境变量<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">go version</span><br><span class="line">git version</span><br><span class="line">hg version</span><br></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>变量名称</th>
-<th>变量值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GOROOT</td>
-<td>H:\software\dev\go</td>
-<td>go根路径</td>
-</tr>
-<tr>
-<td>GOPATH</td>
-<td>H:\software\dev\gopath</td>
-<td>gopath可以是任何一个目录</td>
-</tr>
-<tr>
-<td>PATH</td>
-<td>%PATH%;%GOROOT%\bin;H:\software\dev\Git\bin;H:\software\dev\Mercuria;</td>
-<td>注意不要忘了加入原来的path变量</td>
-</tr>
-</tbody>
-</table>
-<h1 id="配置IDEA的Go环境"><a href="#配置IDEA的Go环境" class="headerlink" title="配置IDEA的Go环境"></a>配置IDEA的Go环境</h1><ol>
-<li><p>打开IDEA，File -&gt; Settings -&gt; Plugins -&gt; Browse repositiores… -&gt; Manage repositories… ，添加自定义repository url <code>https://plugins.jetbrains.com/plugins/nightly/list</code>(nightly build)或者 <code>https://plugins.jetbrains.com/plugins/alpha/list</code>(alpha version)，添加完成之后，等待刷新完成后，输入go，选择go插件，点击安装，等待安装完成后，重启生效。网络环境不好的话，可能插件不能下载，可以直接<a href="https://plugins.jetbrains.com/plugin/download?updateId=19402" target="_blank" rel="external">去idea官网下载插件</a>，如何获取最新插件呢，这里是根据updateId来的，这个最新的id就是从上面的repository的url中获取的，用浏览器打开这个url，就会观察到以下内容</p>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">idea-plugin</span> <span class="attr">downloads</span>=<span class="string">"97922"</span> <span class="attr">size</span>=<span class="string">"1071401"</span> <span class="attr">date</span>=<span class="string">"1428797441000"</span> <span class="attr">url</span>=<span class="string">""</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>Go<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">id</span>&gt;</span>ro.redeul.google.go<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">&lt;![CDATA[</span><br><span class="line">Support for Go programming language. &lt;p&gt;Alpha pre-release of the 1.0.0 version.&lt;/p&gt; &lt;p&gt;Doesn't contain all the functionality of the 0.9.x branch but has a completely reworked internals. It's faster than 0.9.x, refactoring works to some degree and has native support for gopath packages.&lt;/p&gt; Compatibility &lt;p&gt;Plugin can be installed on IntelliJ platform 141.2 or greater. It corresponds to IntelliJ IDEA 14.1, WebStorm 10, PhpStorm 9&lt;/p&gt;</span><br><span class="line">]]&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.271<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">vendor</span> <span class="attr">email</span>=<span class="string">""</span> <span class="attr">url</span>=<span class="string">"https://github.com/go-lang-plugin-org"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">download-url</span>&gt;</span>../../plugin/download?updateId=19402<span class="tag">&lt;/<span class="name">download-url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">idea-version</span> <span class="attr">min</span>=<span class="string">"n/a"</span> <span class="attr">max</span>=<span class="string">"n/a"</span> <span class="attr">until-build</span>=<span class="string">"3999"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">change-notes</span>&gt;</span></span><br><span class="line">&lt;![CDATA[</span><br><span class="line">&lt;ul&gt; &lt;li&gt;Initial GAE support: running dev server. &lt;strong&gt;Requires resetting project SDK.&lt;/strong&gt;&lt;/li&gt; &lt;/ul&gt;</span><br><span class="line">]]&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">change-notes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">rating</span>&gt;</span>4.3<span class="tag">&lt;/<span class="name">rating</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">idea-plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>其中 download-url 中的 updateId 就是最新的下载id。<br>如果还是没法下载，那么<a href="http://pan.baidu.com/s/1c0o50ys" target="_blank" rel="external">请点击这里</a>，从百度云上下载。<br>然后 File -&gt; Settings -&gt; Install plugin from disk…选择刚才下载的压缩包（不要解压），确定后重启成效。</p>
-<ol>
-<li>File -&gt; Other settings -&gt; Default Project Structure… -&gt; Platform Settings -&gt; SDKs -&gt; + -&gt; Go SDK -&gt; 选择GOROOT路径，确定。</li>
-<li><p>File -&gt; New Project -&gt; Go -&gt; Next -&gt; 输入Project name和Project location -&gt; Finish -&gt; 在项目根目录中新建main.go，添加以下内容</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">package</span> main</span><br><span class="line">    <span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">func</span> main() &#123;</span><br><span class="line">	fmt.Println(<span class="string">"hello world"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>Run -&gt; Edit Configrations -&gt; + -&gt; Go Application -&gt; File 中在原来的路径基础上添加main文件即 添加 <code>\main.go</code>，点击确定，然后运行可以看到控制台打印 hello world。</p>
-<h1 id="配置GDB-debug"><a href="#配置GDB-debug" class="headerlink" title="配置GDB debug"></a>配置GDB debug</h1><p>Run -&gt; Edit Configrations -&gt; Defaults -&gt; Go GDB -&gt;<br>Name：可以随便填写<br>GDB executeable：dbg.exe的完整路径<br>Application executable：填写生成的可执行文件的完整路径，路径要是windows写法，如G:\gopath\src\example\main.exe则需要两个反斜杠，就变成了G:\gopath\src\example\main.exe，或者是Unix写法 G:/gopath/src/example/main.exe,否则会提示找不到文件。这里的可执行文件必须使用<code>go build -gcflags &quot;-N -l&quot;</code>编译出来的，这样的文件带有debug信息并且没有被go内联优化。</p>
-<h1 id="配置保存时自动格式化代码和自动导入"><a href="#配置保存时自动格式化代码和自动导入" class="headerlink" title="配置保存时自动格式化代码和自动导入"></a>配置保存时自动格式化代码和自动导入</h1><p>这个配置需要用到IDEA的宏（所谓的宏，就是一系列操作），下面就说怎么录制这个宏。</p>
-
-	
-	</div>
-  <a type="button" href="/2016/03/13/配置Idea的Go开发环境/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-13 </div>
-			<div class="article-title"><a href="/2016/03/13/go读取文件/" >go读取文件</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="使用File"><a href="#使用File" class="headerlink" title="使用File"></a>使用File</h1><pre><code>不多说，直接上代码
-</code></pre><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> readUseFile() &#123;</span><br><span class="line">	file, err := os.Open(<span class="string">"f:/file.txt"</span>)</span><br><span class="line">	handleError(err)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">defer</span> file.Close()</span><br><span class="line"></span><br><span class="line">	buf := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">512</span>)</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		n, err := file.Read(buf)</span><br><span class="line"></span><br><span class="line">		<span class="comment">//1</span></span><br><span class="line">		<span class="comment">//		if err != nil &amp;&amp; err == io.EOF &#123;</span></span><br><span class="line">		<span class="comment">//			break</span></span><br><span class="line">		<span class="comment">//		&#125;</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//2</span></span><br><span class="line">		<span class="comment">//		if n == 0 &#123;</span></span><br><span class="line">		<span class="comment">//			break</span></span><br><span class="line">		<span class="comment">//		&#125;</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//3</span></span><br><span class="line">		<span class="keyword">if</span> n == <span class="number">0</span> &amp;&amp; err != <span class="literal">nil</span> &amp;&amp; err == io.EOF &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		fmt.Print(n)</span><br><span class="line">		fmt.Print(<span class="keyword">string</span>(buf))</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	handleError(err)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<pre><code>可以看到，file本身具有读取文件内容的函数，入参事一个切片，是数据的缓冲区，出参第一个是实际读取的大小，第二个是读取过程中发生的错误。如果有数据且读取成功，则n&gt;0,如果恰好读到文件末尾，则n=0。如果读取过程中有错误发生，则err不为nil，如果读取正常且读到了文件末尾，则err为io.EOF。
-读取过程中有三种方法可以跳出死循环。第一种方法是判断err状态，如果不为nil且是io.EOF，则已经读取完毕；第二种方法是判断实际读取的数量，如果读取的量为0，则认为已经读取结束。第三种方式是上面两种的结合，这种判断要比上面两种中仁和一种都要保险，缺点就是罗嗦点。
-</code></pre>
-	
-	</div>
-  <a type="button" href="/2016/03/13/go读取文件/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
-
-		</div>
-
-		<!-- pagination -->
-		<div>
-  		<center>
-		<div class="pagination">
+	<div>
+  	<center>
+	<div class="pagination">
 <ul class="pagination">
 	 
 		
           <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
         
 
-        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-		   <li class="next"> <a href="/page/2/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
+		   <li class="next"><a href="/2016/03/15/linux下根据端口号查询对应进程/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
 </div>
 
-  		</center>
-		</div>
-
-		
-		
-	</div> <!-- col-md-9 -->
-
-	
-		<div class="col-md-3">
-	<div id="sidebar">
-	
-			
-  <div id="site_search">
-   <div class="form-group">
-    <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索" class="st-search-input st-default-search-input form-control"/>
-   </div>  
-  <div id="local-search-result"></div>
-  </div>
-
-
-		
-			
-	<div class="widget">
-		<h4>分类</h4>
-		<ul class="tag_box inline list-unstyled">
-		
-			<li><a href="/categories/android/">android<span>1</span></a></li>
-		
-			<li><a href="/categories/git/">git<span>1</span></a></li>
-		
-			<li><a href="/categories/golang/">golang<span>9</span></a></li>
-		
-			<li><a href="/categories/hadoop/">hadoop<span>2</span></a></li>
-		
-			<li><a href="/categories/java/">java<span>1</span></a></li>
-		
-			<li><a href="/categories/linux/">linux<span>4</span></a></li>
-		
-			<li><a href="/categories/mysql/">mysql<span>1</span></a></li>
-		
-			<li><a href="/categories/other/">other<span>1</span></a></li>
-		
-			<li><a href="/categories/spark/">spark<span>3</span></a></li>
-		
-			<li><a href="/categories/spring/">spring<span>5</span></a></li>
-		
-			<li><a href="/categories/sql/">sql<span>1</span></a></li>
-		
-			<li><a href="/categories/sqoop/">sqoop<span>2</span></a></li>
-		
-			<li><a href="/categories/windows/">windows<span>1</span></a></li>
-		
-		</ul>
+    </center>
 	</div>
 
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div class="ds-thread" data-thread-key="2016/03/16/sparkApp提交到SpringXD出现错误可能情况及解决方法/" data-title="sparkApp提交到SpringXD出现错误可能情况及解决方法" data-url="http://todu.top/2016/03/16/sparkApp提交到SpringXD出现错误可能情况及解决方法/"></div>  
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
 		
-			
-	<div class="widget">
-		<h4>标签云</h4>
-		<ul class="tag_box inline list-unstyled">		
-		
-			<li><a href="/tags/spring/">spring<span>4</span></a></li>
-		
-			<li><a href="/tags/录音/">录音<span>1</span></a></li>
-		
-			<li><a href="/tags/软件/">软件<span>1</span></a></li>
-		
-			<li><a href="/tags/go/">go<span>8</span></a></li>
-		
-			<li><a href="/tags/博客/">博客<span>1</span></a></li>
-		
-			<li><a href="/tags/hive/">hive<span>1</span></a></li>
-		
-			<li><a href="/tags/spark/">spark<span>4</span></a></li>
-		
-			<li><a href="/tags/xd/">xd<span>3</span></a></li>
-		
-			<li><a href="/tags/hadoop/">hadoop<span>4</span></a></li>
-		
-			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
-		
-			<li><a href="/tags/golang/">golang<span>10</span></a></li>
-		
-			<li><a href="/tags/http/">http<span>1</span></a></li>
-		
-			<li><a href="/tags/hdfs/">hdfs<span>5</span></a></li>
-		
-			<li><a href="/tags/java/">java<span>1</span></a></li>
-		
-			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
-		
-			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
-		
-			<li><a href="/tags/git/">git<span>1</span></a></li>
-		
-			<li><a href="/tags/安卓/">安卓<span>1</span></a></li>
-		
-			<li><a href="/tags/spring-xd/">spring xd<span>5</span></a></li>
-		
-			<li><a href="/tags/端口/">端口<span>1</span></a></li>
-		
-		
-		   <li><a href="/tags">...<span>31</span></a></li>
-		 
-		</ul>
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-03-16 
 	</div>
+	
 
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/spring/">spring<span>5</span></a></li>
+  </li>
 
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/spark/">spark<span>4</span></a></li> <li><a href="/tags/spring-xd/">spring xd<span>5</span></a></li>
+    </ul>
+	</div>
 		
-			
-<div class="widget">
-  <h4>最新文章</h4>
-  <ul class="entry list-unstyled">
-    
-      <li>
-        <a href="/2016/03/16/sparkApp提交到SpringXD出现错误可能情况及解决方法/" ><i class="fa fa-file-o"></i>sparkApp提交到SpringXD出现错误可能情况...</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/15/linux下根据端口号查询对应进程/" ><i class="fa fa-file-o"></i>linux下根据端口号查询对应进程</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/15/golang打印错误栈信息/" ><i class="fa fa-file-o"></i>golang打印错误栈信息</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/15/golang容易忽略导致入坑的方面/" ><i class="fa fa-file-o"></i>golang容易忽略导致入坑的方面</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/14/sink-hdfs/" ><i class="fa fa-file-o"></i>sink-hdfs</a>
-      </li>
-    
-  </ul>
-</div>
 
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
 		
-			
-<div class="widget">
-	<h4>链接</h4>
-	<ul class="blogroll list-unstyled">
-	
-		<li><i class="fa fa-github"></i><a href="http://www.github.com/wzpan" title="My Github account." target="_blank"]);">My Github</a></li>
-	
-		<li><i class="fa fa-linkedin"></i><a href="http://www.linkedin.com/in/sdvdxl" title="My Linkin account." target="_blank"]);">My LinkedIn</a></li>
-	
-	</ul>
-</div>
+
+</div><!-- row -->
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'sdvdxl' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
 
 
-		
-	</div> <!-- sidebar -->
-</div> <!-- col-md-3 -->
-
-	
-	
-</div> <!-- row-fluid -->
 
 	</div>
   </div>
