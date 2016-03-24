@@ -112,6 +112,28 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-03-16 </div>
+			<div class="article-title"><a href="/2016/03/16/通过SpringXD将信息分片-文件夹存储到HDFS/" >通过SpringXD将信息分片|文件夹存储到HDFS</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<pre><code>kafka --topic=kafka_test --zkconnect=10.10.1.20:2181 --queueSize=64 |hdfs --inputType=application/json --idleTimeout=10000 --partitionPath=dateFormat(&apos;yyyy/MM/dd/HH/mm&apos;)
+</code></pre>
+	
+	</div>
+  <a type="button" href="/2016/03/16/通过SpringXD将信息分片-文件夹存储到HDFS/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-16 </div>
 			<div class="article-title"><a href="/2016/03/16/sparkApp提交到SpringXD出现错误可能情况及解决方法/" >sparkApp提交到SpringXD出现错误可能情况及解决方法</a></div>						
 		</h3>
 	
@@ -427,31 +449,6 @@
 </div>
 
 		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-13 </div>
-			<div class="article-title"><a href="/2016/03/13/go读取文件/" >go读取文件</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="使用File"><a href="#使用File" class="headerlink" title="使用File"></a>使用File</h1><pre><code>不多说，直接上代码
-</code></pre><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> readUseFile() &#123;</span><br><span class="line">	file, err := os.Open(<span class="string">"f:/file.txt"</span>)</span><br><span class="line">	handleError(err)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">defer</span> file.Close()</span><br><span class="line"></span><br><span class="line">	buf := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">512</span>)</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		n, err := file.Read(buf)</span><br><span class="line"></span><br><span class="line">		<span class="comment">//1</span></span><br><span class="line">		<span class="comment">//		if err != nil &amp;&amp; err == io.EOF &#123;</span></span><br><span class="line">		<span class="comment">//			break</span></span><br><span class="line">		<span class="comment">//		&#125;</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//2</span></span><br><span class="line">		<span class="comment">//		if n == 0 &#123;</span></span><br><span class="line">		<span class="comment">//			break</span></span><br><span class="line">		<span class="comment">//		&#125;</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//3</span></span><br><span class="line">		<span class="keyword">if</span> n == <span class="number">0</span> &amp;&amp; err != <span class="literal">nil</span> &amp;&amp; err == io.EOF &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		fmt.Print(n)</span><br><span class="line">		fmt.Print(<span class="keyword">string</span>(buf))</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	handleError(err)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<pre><code>可以看到，file本身具有读取文件内容的函数，入参事一个切片，是数据的缓冲区，出参第一个是实际读取的大小，第二个是读取过程中发生的错误。如果有数据且读取成功，则n&gt;0,如果恰好读到文件末尾，则n=0。如果读取过程中有错误发生，则err不为nil，如果读取正常且读到了文件末尾，则err为io.EOF。
-读取过程中有三种方法可以跳出死循环。第一种方法是判断err状态，如果不为nil且是io.EOF，则已经读取完毕；第二种方法是判断实际读取的数量，如果读取的量为0，则认为已经读取结束。第三种方式是上面两种的结合，这种判断要比上面两种中仁和一种都要保险，缺点就是罗嗦点。
-</code></pre>
-	
-	</div>
-  <a type="button" href="/2016/03/13/go读取文件/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
 
 		</div>
 
@@ -518,7 +515,7 @@
 		
 			<li><a href="/categories/spark/">spark<span>3</span></a></li>
 		
-			<li><a href="/categories/spring/">spring<span>5</span></a></li>
+			<li><a href="/categories/spring/">spring<span>6</span></a></li>
 		
 			<li><a href="/categories/sql/">sql<span>1</span></a></li>
 		
@@ -535,48 +532,48 @@
 		<h4>标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
-		
 			<li><a href="/tags/进程/">进程<span>1</span></a></li>
-		
-			<li><a href="/tags/sql/">sql<span>1</span></a></li>
-		
-			<li><a href="/tags/http/">http<span>1</span></a></li>
-		
-			<li><a href="/tags/spark/">spark<span>4</span></a></li>
-		
-			<li><a href="/tags/录音/">录音<span>1</span></a></li>
-		
-			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
-		
-			<li><a href="/tags/端口/">端口<span>1</span></a></li>
-		
-			<li><a href="/tags/安卓/">安卓<span>1</span></a></li>
-		
-			<li><a href="/tags/hdfs/">hdfs<span>5</span></a></li>
-		
-			<li><a href="/tags/linux/">linux<span>3</span></a></li>
-		
-			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
-		
-			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
-		
-			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
-		
-			<li><a href="/tags/android/">android<span>1</span></a></li>
-		
-			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
-		
-			<li><a href="/tags/spring/">spring<span>4</span></a></li>
 		
 			<li><a href="/tags/windows8/">windows8<span>1</span></a></li>
 		
+			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
+		
 			<li><a href="/tags/xd/">xd<span>3</span></a></li>
+		
+			<li><a href="/tags/http/">http<span>1</span></a></li>
+		
+			<li><a href="/tags/spring-xd/">spring xd<span>6</span></a></li>
+		
+			<li><a href="/tags/git/">git<span>1</span></a></li>
 		
 			<li><a href="/tags/软件/">软件<span>1</span></a></li>
 		
+			<li><a href="/tags/hive/">hive<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>31</span></a></li>
+			<li><a href="/tags/hadoop/">hadoop<span>4</span></a></li>
+		
+			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
+		
+			<li><a href="/tags/kafka/">kafka<span>1</span></a></li>
+		
+			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
+		
+			<li><a href="/tags/录音/">录音<span>1</span></a></li>
+		
+			<li><a href="/tags/hdfs/">hdfs<span>6</span></a></li>
+		
+			<li><a href="/tags/android/">android<span>1</span></a></li>
+		
+			<li><a href="/tags/java/">java<span>1</span></a></li>
+		
+			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
+		
+			<li><a href="/tags/sql/">sql<span>1</span></a></li>
+		
+			<li><a href="/tags/arch/">arch<span>2</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>32</span></a></li>
 		 
 		</ul>
 	</div>
@@ -587,6 +584,10 @@
 <div class="widget">
   <h4>最新文章</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2016/03/16/通过SpringXD将信息分片-文件夹存储到HDFS/" ><i class="fa fa-file-o"></i>通过SpringXD将信息分片|文件夹存储到HDFS</a>
+      </li>
     
       <li>
         <a href="/2016/03/16/sparkApp提交到SpringXD出现错误可能情况及解决方法/" ><i class="fa fa-file-o"></i>sparkApp提交到SpringXD出现错误可能情况...</a>
@@ -602,10 +603,6 @@
     
       <li>
         <a href="/2016/03/15/golang容易忽略导致入坑的方面/" ><i class="fa fa-file-o"></i>golang容易忽略导致入坑的方面</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/14/sink-hdfs/" ><i class="fa fa-file-o"></i>sink-hdfs</a>
       </li>
     
   </ul>

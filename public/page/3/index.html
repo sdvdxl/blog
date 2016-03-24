@@ -112,6 +112,89 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-03-09 </div>
+			<div class="article-title"><a href="/2016/03/09/安装启动Hadoop集群/" >安装启动Hadoop集群</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>UCloud云主机，2.6.32-431.11.15.el6.ucloud.x86_64<br>假设三台主机内网IP分别为10.10.1.10, 10.10.1.11和10.10.1.12，hostname分别为：10-10-1-10,10-10-1-11和10-10-1-12</p>
+<h1 id="配置JDK"><a href="#配置JDK" class="headerlink" title="配置JDK"></a>配置JDK</h1><p>本次搭建测试用的是jdk8，可以从<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">Oracle官网下载</a>对应的版本。</p>
+<h2 id="配置jdk"><a href="#配置jdk" class="headerlink" title="配置jdk"></a>配置jdk</h2><p>假设jdk解压后目录存放在<code>/usr/local/jdk8</code>，命令行输入<code>sudo vi /etc/profile</code>，添加一下内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/<span class="built_in">local</span>/jdk8</span><br><span class="line">CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/jre/lib</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</span><br></pre></td></tr></table></figure></p>
+<p>然后输入<code>source /etc/profile</code>使环境变量生效，输入<code>java -version</code>有java版本信息输出说明配置成功，三台主机均这么配置。</p>
+<h1 id="配置hadoop用户"><a href="#配置hadoop用户" class="headerlink" title="配置hadoop用户"></a>配置hadoop用户</h1><p>控制台输入<code>sudo useradd -m -U hadoop</code> 添加hadoop用户，然后输入<code>sudo passwd hadoop</code> 修改hadoop用户的密码，输入<code>su -l hadoop</code>，输入刚才设置的密码，切换到hadoop用户。</p>
+<h1 id="配置ssh"><a href="#配置ssh" class="headerlink" title="配置ssh"></a>配置ssh</h1><p>前提是已经切换到hadoop用户。<br>在每个主机控制台输入<code>ssh-keygen</code>回车，一直回车直到结束。最后在master主机上使用<code>ssh-copy-id</code>命令拷贝认证信息到本主机和其他两台主机，这样可以免密码登录。<code>ssh-copy-id hadoop@主机地址</code>，注意本机地址不要使用localhost和127.0.0.1，请使用局域网ip，在这里是10.10.1.10。</p>
+<h1 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h1><p>以修改10.10.1.10主机为例，在控制台输入<code>sudo vi /etc/hosts</code>，在内容中添加一下信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 10-10-128-53</span><br><span class="line">10.10.248.115 10-10-248-115</span><br><span class="line">10.10.227.51 10-10-227-51</span><br></pre></td></tr></table></figure></p>
+<p>注意，千万不要配置<code>10.10.1.10 10-10-1-10</code>本主机ip映射本主机名的条目，否则会造成主机间无法监听。其余两台参照这个也进行配置。</p>
+<h1 id="配置Hadoop"><a href="#配置Hadoop" class="headerlink" title="配置Hadoop"></a>配置Hadoop</h1><ol>
+<li><a href="http://hadoop.apache.org/releases.html" target="_blank" rel="external">下载Hadoop</a>，这里下载的是<code>2.7.1</code>版本。控制输入<code>wget http://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz</code>，等待下载完成。</li>
+<li>控制台输入<code>tar -xvf hadoop-2.7.1.tar.gz</code>解压，会生成<code>hadoop-2.7.1</code>目录。</li>
+<li>输入<code>cd hadoop-2.7.1/etc/hadoop</code>进入配置文件目录。</li>
+<li>修改<code>hadoop-env.sh</code>中的<code>export JAVA_HOME=</code>，将等号后的内容改成上面配置的jdk绝对路径，在这里就是<code>/usr/local/jdk8</code>，修改完后应该是<code>export JAVA_HOME=/usr/local/jdk8</code>，保存退出。</li>
+<li>修改<code>core-site.xml</code>，配置config内容：</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">description</span>&gt;</span>Abase for other temporary directories.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 注意，这里改成自己本机的ip --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://10.10.1.10:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.default.namenode<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 注意，这里改成自己本机的ip --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://10.10.1.10:8082<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>io.file.buffer.size<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>4096<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.native.lib<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">description</span>&gt;</span>Should native hadoop libraries, if present, be used.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>修改<code>hdfs-site.xml</code>，修改config内容为：</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.nameservices<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoop-cluster1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.secondary.http-address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 注意修改为自己的ip --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:50090<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/dfs/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.webhdfs.enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>修改<code>yarn-site.xml</code></li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 注意ip改为自己的 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:8032<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.scheduler.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:8030<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.resource-tracker.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:8031<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.admin.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:8033<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.webapp.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:8088<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>修改<code>mapred-site.xml</code></li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobtracker.http.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.128.53:50030<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.128.53:10020<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.webapp.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.128.53:19888<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>修改<code>slaves</code>文件，添加其他两台ip</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10.10</span>.1.11</span><br><span class="line"><span class="number">10.10</span>.1.12</span><br></pre></td></tr></table></figure>
+<p>将hadoop目录覆盖到其余机器对应目录。<br>下面开始操作hadoop命令，如果遇到hadoop native错误，请查看文末<code>Hadoop Native 配置</code>部分。</p>
+<ol>
+<li>格式化文件系统<br>注意：这里的格式化文件系统并不是硬盘格式化，只是针对主服务器hdfs-site.xml的dfs.namenode.name.dir和dfs.datanode.data.dir目录做相应的清理工作。切换到Hadoop的home目录，执行<code>bin/hdfs namenode -format</code>。</li>
+<li>启动停止服务<br>启动<code>sbin/start-dfs.sh</code>，可以一次性启动master和slaves节点服务。<code>sbin/start-yarn.sh</code>启动yarn资源管理服务。要停止服务，用对应的<code>sbin/stop-dfs.sh</code>和<code>sbin/stop-dfs.sh</code>即可停止服务。</li>
+<li>单独启动一个datanode<br>增加节点或者重启节点，需要单独启动，则可使用以下命令:<br><code>sbin/hadoop-daemon.sh start datanode</code>，启动nodeManager<code>sbin/yarn-daemon.sh start nodemanager</code>，当然也可以操作namenode<code>sbin/hadoop-daemon.sh start namenode</code> <code>sbin/yarn-daemon.sh start resourcemanager</code>。<br><strong>注意</strong>：原文中是<code>sbin/yarn-daemons.sh</code>和<code>sbin/hadoop-daemons.sh</code>，运行后发现并没有启动成功，去掉s后启动成功。</li>
+</ol>
+<h1 id="Hadoop-Native-配置"><a href="#Hadoop-Native-配置" class="headerlink" title="Hadoop Native 配置"></a>Hadoop Native 配置</h1><p>输入  <code>hadoop checknative</code> 检查Hadoop本地库版本和相关依赖信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">16/03/10 12:17:56 DEBUG util.NativeCodeLoader: Trying to load the custom-built native-hadoop library...</span><br><span class="line">16/03/10 12:17:56 DEBUG util.NativeCodeLoader: Failed to load native-hadoop with error: java.lang.UnsatisfiedLinkError: /home/hadoop/hadoop-2.6.3/lib/native/libhadoop.so.1.0.0: /lib64/libc.so.6: version `GLIBC_2.14&apos; not found (required by /home/hadoop/hadoop-2.6.3/lib/native/libhadoop.so.1.0.0)</span><br><span class="line">16/03/10 12:17:56 DEBUG util.NativeCodeLoader: java.library.path=/home/hadoop/hadoop-2.6.3/lib/native</span><br><span class="line">16/03/10 12:17:56 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">16/03/10 12:17:56 DEBUG util.Shell: setsid exited with exit code 0</span><br><span class="line">Native library checking:</span><br><span class="line">hadoop:  false</span><br><span class="line">zlib:    false</span><br><span class="line">snappy:  false</span><br><span class="line">lz4:     false</span><br><span class="line">bzip2:   false</span><br><span class="line">openssl: false</span><br><span class="line">16/03/10 12:17:56 INFO util.ExitUtil: Exiting with status 1</span><br></pre></td></tr></table></figure>
+<p>发现<code>/lib64/libc.so.6: version</code>GLIBC_2.14’ not found`信息，说明该版本的Hadoop需要glibc_2.14版本。下面就安装所需的版本。</p>
+<ol>
+<li><code>mkdir glib_build &amp;&amp; cd glib_build</code></li>
+<li><code>wget http://ftp.gnu.org/gnu/glibc/glibc-2.14.tar.gz &amp;&amp; wget http://ftp.gnu.org/gnu/glibc/glibc-linuxthreads-2.5.tar.bz2</code></li>
+<li><code>tar zxf glibc-2.14.tar.gz &amp;&amp; cd glibc-2.14 &amp;&amp; tar jxf ../glibc-linuxthreads-2.5.tar.bz2</code></li>
+<li><code>cd ../ &amp;&amp; export CFLAGS=&quot;-g -O2&quot; &amp;&amp; ./glibc-2.14/configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin</code></li>
+<li><code>make</code></li>
+<li><code>make install</code><br>install最后会遇到错误信息：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">CC=&quot;gcc -B/usr/bin/&quot; /usr/bin/perl scripts/test-installation.pl /root/</span><br><span class="line">/usr/bin/ld: cannot find -lnss_test1</span><br><span class="line">collect2: ld returned 1 exit status</span><br><span class="line">Execution of gcc -B/usr/bin/ failed!</span><br><span class="line">The script has found some problems with your installation!</span><br><span class="line">Please read the FAQ and the README file and check the following:</span><br><span class="line">- Did you change the gcc specs file (necessary after upgrading from</span><br><span class="line">  Linux libc5)?</span><br><span class="line">- Are there any symbolic links of the form libXXX.so to old libraries?</span><br><span class="line">  Links like libm.so -&gt; libm.so.5 (where libm.so.5 is an old library) are wrong,</span><br><span class="line">  libm.so should point to the newly installed glibc file - and there should be</span><br><span class="line">  only one such link (check e.g. /lib and /usr/lib)</span><br><span class="line">You should restart this script from your build directory after you&apos;ve</span><br><span class="line">fixed all problems!</span><br><span class="line">Btw. the script doesn&apos;t work if you&apos;re installing GNU libc not as your</span><br><span class="line">primary library!</span><br><span class="line">make[1]: *** [install] Error 1</span><br><span class="line">make[1]: Leaving directory `/root/glibc-2.14&apos;</span><br><span class="line">make: *** [install] Error 2</span><br></pre></td></tr></table></figure>
+<p>无需关注，检验是否成功<br><code>ls -l /lib64/libc.so.6</code><br>lrwxrwxrwx 1 root root 12 Mar 10 12:12 /lib64/libc.so.6 -&gt; libc-2.14.so<br>出现了<code>/lib64/libc.so.6 -&gt; libc-2.14.so</code>字样说明成功了。</p>
+<p>安装openssl<br><code>yum install openssl-static.x86_64</code></p>
+<h1 id="如何修改主机名称"><a href="#如何修改主机名称" class="headerlink" title="如何修改主机名称"></a>如何修改主机名称</h1><p>修改文件<code>/etc/sysconfig/network</code><br>然后执行<code>/etc/rc.d/init.d/network restart</code>重启网络模块</p>
+<h1 id="secondaryNameNode-配置"><a href="#secondaryNameNode-配置" class="headerlink" title="secondaryNameNode 配置"></a>secondaryNameNode 配置</h1><ol>
+<li>修改masters文件（如果没有则自己创建），添加一个主机名称，用以作为secondaryNameNode。</li>
+<li>修改hdfs-site.xml的内容，删除<code>dfs.namenode.secondary.http-address</code>部分配置，添加新的配置（注意修改为自己的ip）：</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.http.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:50070<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">		The address and the base port where the dfs namenode web ui will listen on.</span><br><span class="line">		If the port is 0 then the server will start on a free port.</span><br><span class="line">	<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.secondary.http-address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.11<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h6><ol>
+<li><a href="http://blog.csdn.net/tang9140/article/details/42869531" target="_blank" rel="external">Hadoop-2.5.2集群安装配置详解</a></li>
+<li><a href="http://blog.csdn.net/zzu09huixu/article/details/36873669" target="_blank" rel="external">基于hadoop2.2的namenode与SecondaryNameNode分开配置在不同的计算机</a></li>
+</ol>
+
+	
+	</div>
+  <a type="button" href="/2016/03/09/安装启动Hadoop集群/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-09 </div>
 			<div class="article-title"><a href="/2016/03/09/Spring-XD简介/" >Spring-XD简介</a></div>						
 		</h3>
 	
@@ -714,239 +797,6 @@ b                            |  1
 </div>
 
 		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-09 </div>
-			<div class="article-title"><a href="/2016/03/09/Sqoop使用/" >Sqoop使用</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p><code>sqoop help</code> 查看帮助信息<br><code>sqoop help COMMAND</code> 查看 COMMAND具体的帮助，如要查看 list-databases 命令的用法，则使用 <code>sqoop help list-databases</code> 查看。</p>
-<p>主要可用的命令如下：</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>help</td>
-<td>List available commands</td>
-</tr>
-<tr>
-<td>import</td>
-<td>Import a table from a database to HDFS</td>
-</tr>
-<tr>
-<td>list-databases</td>
-<td>List available databases on a server</td>
-</tr>
-<tr>
-<td>list-tables</td>
-<td>List available tables in a database</td>
-</tr>
-</tbody>
-</table>
-<p>主要参数说明</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>–connect</td>
-<td>用来指定jdbc链接url，如mysql的: jdbc:mysql://ip:port/database</td>
-</tr>
-<tr>
-<td>–password</td>
-<td>指定密码， 安全起见，建议使用 -P 参数，交互式填写密码或者使用 –password-file参数</td>
-</tr>
-<tr>
-<td>–password-file</td>
-<td>指定密码的文件，从该文件中读取密码</td>
-</tr>
-<tr>
-<td>–username</td>
-<td>指定用户名</td>
-</tr>
-</tbody>
-</table>
-<p>用help查看帮助，使用示例：<br>list-databases 是列出所有的数据库，sqoop help list-databases· 查看使用方法</p>
-<p>使用示例，查看 本机上的mysql中的数据库<br>./sqoop  list-databases –connect jdbc:mysql://127.0.0.1:3306/test –username username -P<br>这样直接操作会提示找不到驱动，我们需要把对应的mysql驱动jar包放到$SQOOP/lib目录下，然后再次执行就可以了，或者用参数 -libjars 指定驱动jar包路径。</p>
-<h1 id="配置项说明"><a href="#配置项说明" class="headerlink" title="配置项说明"></a>配置项说明</h1><p>按照此处的配置项进行可避免文末的错误，如果遇到错误请参考文末错误说明和解决方法。</p>
-<ol>
-<li>sqoop 要使用对应的hadoop版本，如使用的hadoo版本是2.0.4，那么对应的sqoop版本就要使用文件名包含hadoop2.0.4的信息的版本。</li>
-<li>SQOOP_HOME   环境变量关系到sqoop运行时选择的版本问题，所以该变量请配置成正确的版本路径。如果配置成了别的，虽然执行命令是在正确的路径下执行，而真实运行的版本却是其他的版本，该问题可以通过运行sqoop version 查看，此问题比较隐晦，要注意。</li>
-<li>执行sqoop所对应的SQOOP_HOME 文件要和hdfs文件系统上的一致，否则会产生找不到对应库文件的错误。</li>
-<li>在/etc/hosts 文件中增加 archeagle 到 hdfs节点ip的映射，否则sqoop会用默认的ip映射，会连接不上。</li>
-<li><p>用户权限问题，可以在 文件 hadoop/etc/hadoop/hdfs-site.xml中增加或者修改 配置</p>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.acls.enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.permissions<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>hdfs 集群要启动yarn服务。</p>
-</li>
-</ol>
-<h1 id="import-的使用"><a href="#import-的使用" class="headerlink" title="import 的使用"></a>import 的使用</h1><p>常用参数说明</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-fs</td>
-<td>指定hdfs节点</td>
-</tr>
-<tr>
-<td>–target-dir</td>
-<td>要到处到hdfs文件系统上的文件路径</td>
-</tr>
-<tr>
-<td>–table</td>
-<td>要导出的表名</td>
-</tr>
-<tr>
-<td>–connect</td>
-<td>jdbc url</td>
-</tr>
-<tr>
-<td>–username</td>
-<td>数据库用户名</td>
-</tr>
-<tr>
-<td>-P</td>
-<td>从控制台输入密码</td>
-</tr>
-</tbody>
-</table>
-<p>使用示例 ：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop  import -fs hdfs://192.168.6.63:9000 --target-dir /user/admin/<span class="built_in">export</span>_<span class="built_in">test</span>_admin_user11  --table admin_user --connect jdbc:mysql://192.168.6.201:3306/<span class="built_in">test</span> --username username -P</span><br></pre></td></tr></table></figure></p>
-<h2 id="增量导入-原始链接"><a href="#增量导入-原始链接" class="headerlink" title="增量导入 原始链接"></a>增量导入 <a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_incremental_imports" target="_blank" rel="external">原始链接</a></h2><p>主要参数如下：</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>–incrementa</td>
-<td>增量方式， 有两种方式，lastmodified和append</td>
-</tr>
-<tr>
-<td>–last-value</td>
-<td>以lastmodified方式的增量追加，要指定时间；append则要指定偏移id</td>
-</tr>
-<tr>
-<td>–check-column</td>
-<td>要检查的字段， 即以哪个字段为标准计算增量范围</td>
-</tr>
-<tr>
-<td>–append</td>
-<td>指定以增量方式追加</td>
-</tr>
-</tbody>
-</table>
-<p>使用增量导入（以时间为标识作参考）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop  import -fs hdfs://192.168.6.63:9000 --target-dir /user/admin/<span class="built_in">export</span>_<span class="built_in">test</span>_admin_user11  --table admin_user --connect jdbc:mysql://192.168.6.201:3306/forseti_core --username forseti -P--incremental lastmodified --check-column gmt_create --last-value <span class="string">'2012-02-01 11:0:00'</span> --verbose --append</span><br></pre></td></tr></table></figure></p>
-<p>使用增量导入（以id为标识作为参考）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop  import -fs hdfs://192.168.6.63:9000 --target-dir /user/admin/<span class="built_in">export</span>_<span class="built_in">test</span>_admin_user11  --table admin_user --connect jdbc:mysql://192.168.6.201:3306/forseti_core --username forseti -P--incremental append --check-column id --verbose --append</span><br></pre></td></tr></table></figure></p>
-<h2 id="使用select语句-e或者–query参数"><a href="#使用select语句-e或者–query参数" class="headerlink" title="使用select语句(-e或者–query参数)"></a>使用select语句(-e或者–query参数)</h2><p>如果使用这个参数，那么可以执行自定义语句，比如可以执行join操作等其他复杂sql语句，但是语句中where是必须的，而且where后面要加 $CONDITIONS 参数。sql语句本身可以用单引号包裹，但是如果sql语句中已经包含了单引号，那么可以用双引号包裹。另外，使用了这个参数，那么参数 –split-by 在import命令中是必须的，而且该参数后面指定的字段必须出现在sql查询结果中。因为通过观察sqoop执行过程中输出的执行sql可以发现，它是在原有的sql上包裹一层，如下示例中，结果就变成了 SELECT MIN(gmt_modified), MAX(gmt_modified) FROM (select id from admin_user where  (1 = 1) ) AS t1。<br>使用示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop  import  --connect jdbc:mysql://192.168.6.201:3306/<span class="built_in">test</span> --username username -P <span class="_">-e</span> <span class="string">"select id from test where <span class="variable">$CONDITIONS</span>"</span> --split-by id</span><br></pre></td></tr></table></figure></p>
-<h1 id="job-使用"><a href="#job-使用" class="headerlink" title="job 使用"></a>job 使用</h1><h2 id="主要参数"><a href="#主要参数" class="headerlink" title="主要参数"></a>主要参数</h2><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>–create <job-id></job-id></td>
-<td>Create a new saved job</td>
-</tr>
-<tr>
-<td>–delete <job-id></job-id></td>
-<td>Delete a saved job</td>
-</tr>
-<tr>
-<td>–exec <job-id></job-id></td>
-<td>Run a saved job</td>
-</tr>
-<tr>
-<td>–help</td>
-<td>Print usage instructions</td>
-</tr>
-<tr>
-<td>–list</td>
-<td>List saved jobs</td>
-</tr>
-<tr>
-<td>–show <job-id></job-id></td>
-<td>Show the parameters for a saved job</td>
-</tr>
-<tr>
-<td>-fs &lt;local</td>
-<td>namenode:port&gt;</td>
-<td>specify a namenode</td>
-</tr>
-<tr>
-<td>-libjars <comma separated="" list="" of="" jars=""></comma></td>
-<td>specify comma separated jar files to include in the classpath.</td>
-</tr>
-<tr>
-<td>-conf <configuration file=""></configuration></td>
-<td>specify an application configuration file</td>
-</tr>
-</tbody>
-</table>
-<h2 id="创建Job示例："><a href="#创建Job示例：" class="headerlink" title="创建Job示例："></a>创建Job示例：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop job --create <span class="built_in">export</span>_mysql_table -- import --table admin_user --connect jdbc:mysql://192.168.6.201:3306/forseti_core</span><br></pre></td></tr></table></figure>
-<h2 id="执行Job示例："><a href="#执行Job示例：" class="headerlink" title="执行Job示例："></a>执行Job示例：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/sqoop job -fs hdfs://192.168.6.63:9000 --exec  <span class="built_in">export</span>_mysql_table --  --username forseti -P --target-dir /user/admin/<span class="built_in">export</span>_<span class="built_in">test</span>_admin_user11112</span><br></pre></td></tr></table></figure>
-<h2 id="执行带密码的任务"><a href="#执行带密码的任务" class="headerlink" title="执行带密码的任务"></a>执行带密码的任务</h2><p>有密码要求的任务，如果不存储密码的话，每次执行任务都要求手动输入密码，如果是定时任务，那么这个肯定是不合理的。默认metastore是不保存密码的，如果需要保存，则在conf/sqoop-site.xml增加或者取消注释如下内容</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>sqoop.metastore.client.record.password<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">description</span>&gt;</span>If true, allow saved passwords in the metastore.</span><br><span class="line">   <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h1 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h1><ul>
-<li><p>ERROR tool.ImportTool: Encountered IOException running import job: java.io.FileNotFoundException: File does not exist: hdfs://192.168.6.63:9000/home/du/software/dev/sqoop-1.4.5.bin__hadoop-0.20/lib/ant-contrib-1.0b3.jar</p>
-<pre><code>在不同机器或者用户下执行sqoop，会查找hadoop集群指定的节点上的hdfs目录中的这个文件，比如我是用在/home/du/software/dev/sqoop-1.4.5.bin__hadoop-0.20 下执行的sqoop，并且SQOOP_HOME配置的也是这个路径，那么到hdfs://192.168.6.63:9000上就会查找/home/du/software/dev/sqoop-1.4.5.bin__hadoop-0.20/lib这个路径下的ant-contrib-1.0b3.jar这个文件，解决方法就是在hdfs上创建对应目录，并把sqoop拷贝到对应目录，目录结构和执行sqoop的目录结构一样即可。
-</code></pre></li>
-<li><p>Exception in thread “main” java.lang.IncompatibleClassChangeError: Found interface org.apache.hadoop.mapreduce.JobContext, but class was expected</p>
-<pre><code>使用的hadoop版本问题，从2.6.0切换到2.4.0 解决
-</code></pre></li>
-<li><p>ERROR tool.ImportTool: Encountered IOException running import job: org.apache.hadoop.security.AccessControlException: Permission denied: user=du, access=WRITE, inode=”/user”:admin:supergroup:drwxr-xr-x</p>
-</li>
-<li><p>ERROR manager.SqlManager: Error executing statement: java.sql.SQLException: Access denied for user ‘forseti’@’192.168.6.165’ (using password: YES)</p>
-<pre><code>很明显是mysql的用户登陆失败，填写正确的用户名和密码即可解决该问题。
-</code></pre></li>
-<li><p>15/03/05 17:40:10 INFO mapreduce.Job: Running job: job_1425543105230_0006<br>15/03/05 17:40:44 INFO ipc.Client: Retrying connect to server: archeagle/220.250.64.20:43175. Already tried 0 time(s); maxRetries=3<br>15/03/05 17:41:04 INFO ipc.Client: Retrying connect to server: archeagle/220.250.64.20:43175. Already tried 1 time(s); maxRetries=3<br>15/03/05 17:41:24 INFO ipc.Client: Retrying connect to server: archeagle/220.250.64.20:43175. Already tried 2 time(s); maxRetries=3<br>15/03/05 17:41:44 INFO mapred.ClientServiceDelegate: Application state is completed. FinalApplicationStatus=FAILED. Redirecting to job history server<br>15/03/05 17:41:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Job status not available<br>  at org.apache.hadoop.mapreduce.Job.updateStatus(Job.java:322)<br>  at org.apache.hadoop.mapreduce.Job.isComplete(Job.java:599)<br>  at org.apache.hadoop.mapreduce.Job.monitorAndPrintJob(Job.java:1344)<br>  at org.apache.hadoop.mapreduce.Job.waitForCompletion(Job.java:1306)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.doSubmitJob(ImportJobBase.java:186)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.runJob(ImportJobBase.java:159)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.runImport(ImportJobBase.java:247)<br>  at org.apache.sqoop.manager.DirectMySQLManager.importTable(DirectMySQLManager.java:92)<br>  at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:497)<br>  at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:601)<br>  at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>  at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>  at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>  at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>  at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>  at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
-<pre><code>在运行sqoop的主机hosts文件增减加hadoop节点ip映射 192.168.6.63 archeagle
-</code></pre></li>
-<li><p>使用–direct参数<br>Error: java.io.IOException: Cannot run program “mysqldump”: error=2, No such file or directory<br>  at java.lang.ProcessBuilder.start(ProcessBuilder.java:1047)<br>  at java.lang.Runtime.exec(Runtime.java:617)<br>  at java.lang.Runtime.exec(Runtime.java:485)<br>  at org.apache.sqoop.mapreduce.MySQLDumpMapper.map(MySQLDumpMapper.java:405)<br>  at org.apache.sqoop.mapreduce.MySQLDumpMapper.map(MySQLDumpMapper.java:49)<br>  at org.apache.hadoop.mapreduce.Mapper.run(Mapper.java:145)<br>  at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:764)<br>  at org.apache.hadoop.mapred.MapTask.run(MapTask.java:340)<br>  at org.apache.hadoop.mapred.YarnChild$2.run(YarnChild.java:167)<br>  at java.security.AccessController.doPrivileged(Native Method)<br>  at javax.security.auth.Subject.doAs(Subject.java:415)<br>  at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1548)<br>  at org.apache.hadoop.mapred.YarnChild.main(YarnChild.java:162)<br>Caused by: java.io.IOException: error=2, No such file or directory<br>  at java.lang.UNIXProcess.forkAndExec(Native Method)<br>  at java.lang.UNIXProcess.<init>(UNIXProcess.java:186)<br>  at java.lang.ProcessImpl.start(ProcessImpl.java:130)<br>  at java.lang.ProcessBuilder.start(ProcessBuilder.java:1028)<br>  … 12 more</init></p>
-<ul>
-<li><p>ERROR tool.ImportTool: Encountered IOException running import job: org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.ipc.RetriableException): org.apache.hadoop.hdfs.server.namenode.SafeModeException: Cannot delete /user/du/.staging/job_1425543105230_0010. Name node is in safe mode.<br>The reported blocks 0 needs additional 963 blocks to reach the threshold 0.9990 of total blocks 963.<br>The number of live datanodes 0 has reached the minimum number 0. Safe mode will be turned off automatically once the thresholds have been reached.<br>at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.checkNameNodeSafeMode(FSNamesystem.java:1199)<br>at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.deleteInternal(FSNamesystem.java:3336)<br>at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.deleteInt(FSNamesystem.java:3296)<br>at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.delete(FSNamesystem.java:3280)<br>at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.delete(NameNodeRpcServer.java:727)</p>
-<pre><code>hdfs上(用户)目录不存在。
-</code></pre></li>
-</ul>
-</li>
-<li><p>INFO ipc.Client: Retrying connect to server: arch57/220.250.64.20:56564. Already tried 2 time(s); maxRetries=3<br>15/03/10 15:47:55 INFO mapred.ClientServiceDelegate: Application state is completed. FinalApplicationStatus=SUCCEEDED. Redirecting to job history server<br>15/03/10 15:47:55 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Job status not available<br>  at org.apache.hadoop.mapreduce.Job.updateStatus(Job.java:322)<br>  at org.apache.hadoop.mapreduce.Job.isComplete(Job.java:599)<br>  at org.apache.hadoop.mapreduce.Job.monitorAndPrintJob(Job.java:1344)<br>  at org.apache.hadoop.mapreduce.Job.waitForCompletion(Job.java:1306)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.doSubmitJob(ImportJobBase.java:186)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.runJob(ImportJobBase.java:159)<br>  at org.apache.sqoop.mapreduce.ImportJobBase.runImport(ImportJobBase.java:247)<br>  at org.apache.sqoop.manager.SqlManager.importTable(SqlManager.java:665)<br>  at org.apache.sqoop.manager.MySQLManager.importTable(MySQLManager.java:118)<br>  at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:497)<br>  at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:601)<br>  at org.apache.sqoop.tool.JobTool.execJob(JobTool.java:228)<br>  at org.apache.sqoop.tool.JobTool.run(JobTool.java:283)<br>  at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>  at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>  at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>  at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>  at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>  at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
-<pre><code>在执行sqoop的机器的hosts增加 arch57 这个主机ip映射（PS:arch57 是一台hadoop机器的名字）
-</code></pre></li>
-</ul>
-
-	
-	</div>
-  <a type="button" href="/2016/03/09/Sqoop使用/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
 
 		</div>
 
@@ -1013,7 +863,7 @@ b                            |  1
 		
 			<li><a href="/categories/spark/">spark<span>3</span></a></li>
 		
-			<li><a href="/categories/spring/">spring<span>5</span></a></li>
+			<li><a href="/categories/spring/">spring<span>6</span></a></li>
 		
 			<li><a href="/categories/sql/">sql<span>1</span></a></li>
 		
@@ -1030,48 +880,48 @@ b                            |  1
 		<h4>标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/hive/">hive<span>1</span></a></li>
-		
-			<li><a href="/tags/spring-xd/">spring xd<span>5</span></a></li>
-		
-			<li><a href="/tags/sql/">sql<span>1</span></a></li>
-		
-			<li><a href="/tags/go/">go<span>8</span></a></li>
-		
-			<li><a href="/tags/windows8/">windows8<span>1</span></a></li>
-		
-			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
-		
-			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
-		
-			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
-		
-			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
-		
-			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
+			<li><a href="/tags/安卓/">安卓<span>1</span></a></li>
 		
 			<li><a href="/tags/hadoop/">hadoop<span>4</span></a></li>
 		
-			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
-		
-			<li><a href="/tags/linux/">linux<span>3</span></a></li>
+			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
 		
 			<li><a href="/tags/spring/">spring<span>4</span></a></li>
 		
-			<li><a href="/tags/博客/">博客<span>1</span></a></li>
+			<li><a href="/tags/linux/">linux<span>3</span></a></li>
 		
-			<li><a href="/tags/java/">java<span>1</span></a></li>
+			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
 		
 			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
 		
-			<li><a href="/tags/golang/">golang<span>10</span></a></li>
+			<li><a href="/tags/git/">git<span>1</span></a></li>
 		
-			<li><a href="/tags/hdfs/">hdfs<span>5</span></a></li>
+			<li><a href="/tags/博客/">博客<span>1</span></a></li>
+		
+			<li><a href="/tags/hdfs/">hdfs<span>6</span></a></li>
+		
+			<li><a href="/tags/sql/">sql<span>1</span></a></li>
+		
+			<li><a href="/tags/spark/">spark<span>4</span></a></li>
+		
+			<li><a href="/tags/xd/">xd<span>3</span></a></li>
+		
+			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
 		
 			<li><a href="/tags/android/">android<span>1</span></a></li>
 		
+			<li><a href="/tags/录音/">录音<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>31</span></a></li>
+			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
+		
+			<li><a href="/tags/spring-xd/">spring xd<span>6</span></a></li>
+		
+			<li><a href="/tags/spring-xd/">spring-xd<span>3</span></a></li>
+		
+			<li><a href="/tags/arch/">arch<span>2</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>32</span></a></li>
 		 
 		</ul>
 	</div>
@@ -1082,6 +932,10 @@ b                            |  1
 <div class="widget">
   <h4>最新文章</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2016/03/16/通过SpringXD将信息分片-文件夹存储到HDFS/" ><i class="fa fa-file-o"></i>通过SpringXD将信息分片|文件夹存储到HDFS</a>
+      </li>
     
       <li>
         <a href="/2016/03/16/sparkApp提交到SpringXD出现错误可能情况及解决方法/" ><i class="fa fa-file-o"></i>sparkApp提交到SpringXD出现错误可能情况...</a>
@@ -1097,10 +951,6 @@ b                            |  1
     
       <li>
         <a href="/2016/03/15/golang容易忽略导致入坑的方面/" ><i class="fa fa-file-o"></i>golang容易忽略导致入坑的方面</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/14/sink-hdfs/" ><i class="fa fa-file-o"></i>sink-hdfs</a>
       </li>
     
   </ul>
