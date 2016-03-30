@@ -112,6 +112,38 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-03-09 </div>
+			<div class="article-title"><a href="/2016/03/09/spark/Spark基础知识/" >Spark基础知识</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Spark基本概念"><a href="#Spark基本概念" class="headerlink" title="Spark基本概念"></a>Spark基本概念</h1><ul>
+<li>RDD——Resillient Distributed Dataset A Fault-Tolerant Abstraction for In-Memory Cluster Computing弹性分布式数据集。</li>
+<li>Operation——作用于RDD的各种操作分为transformation和action。</li>
+<li>Job——作业，一个JOB包含多个RDD及作用于相应RDD上的各种operation。</li>
+<li>Stage——一个作业分为多个阶段。</li>
+<li>Partition——数据分区， 一个RDD中的数据可以分成多个不同的区。</li>
+<li>DAG——Directed Acycle graph，有向无环图，反应RDD之间的依赖关系。</li>
+<li>Narrow dependency——窄依赖，子RDD依赖于父RDD中固定的data partition。</li>
+<li>Wide Dependency——宽依赖，子RDD对父RDD中的所有data partition都有依赖。</li>
+<li>Caching Managenment——缓存管理，对RDD的中间计算结果进行缓存管理以加快整 体的处理速度。</li>
+</ul>
+
+	
+	</div>
+  <a type="button" href="/2016/03/09/spark/Spark基础知识/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-09 </div>
 			<div class="article-title"><a href="/2016/03/09/spark/SparkStreaming程序（及过程中问题解决）/" >运行第一个SparkStreaming程序（及过程中问题解决）</a></div>						
 		</h3>
 	
@@ -600,45 +632,45 @@ alert("真乖");
 		<h4>标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/kafka/">kafka<span>1</span></a></li>
+			<li><a href="/tags/博客/">博客<span>1</span></a></li>
+		
+			<li><a href="/tags/hive/">hive<span>1</span></a></li>
+		
+			<li><a href="/tags/进程/">进程<span>1</span></a></li>
+		
+			<li><a href="/tags/录音/">录音<span>1</span></a></li>
 		
 			<li><a href="/tags/hadoop/">hadoop<span>4</span></a></li>
 		
 			<li><a href="/tags/安卓/">安卓<span>1</span></a></li>
 		
-			<li><a href="/tags/端口/">端口<span>1</span></a></li>
-		
-			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
-		
-			<li><a href="/tags/spark/">spark<span>4</span></a></li>
-		
-			<li><a href="/tags/java/">java<span>1</span></a></li>
-		
-			<li><a href="/tags/hdfs/">hdfs<span>6</span></a></li>
-		
-			<li><a href="/tags/spring-xd/">spring xd<span>6</span></a></li>
-		
-			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
-		
-			<li><a href="/tags/windows8/">windows8<span>1</span></a></li>
+			<li><a href="/tags/android/">android<span>1</span></a></li>
 		
 			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
 		
-			<li><a href="/tags/sql/">sql<span>1</span></a></li>
+			<li><a href="/tags/软件/">软件<span>1</span></a></li>
 		
-			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
 		
-			<li><a href="/tags/golang/">golang<span>10</span></a></li>
+			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
 		
-			<li><a href="/tags/xd/">xd<span>3</span></a></li>
+			<li><a href="/tags/kafka/">kafka<span>1</span></a></li>
 		
-			<li><a href="/tags/git/">git<span>1</span></a></li>
+			<li><a href="/tags/http/">http<span>1</span></a></li>
 		
-			<li><a href="/tags/android/">android<span>1</span></a></li>
+			<li><a href="/tags/linux/">linux<span>3</span></a></li>
+		
+			<li><a href="/tags/spark/">spark<span>4</span></a></li>
+		
+			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
+		
+			<li><a href="/tags/java/">java<span>1</span></a></li>
+		
+			<li><a href="/tags/go/">go<span>8</span></a></li>
+		
+			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
 		
 			<li><a href="/tags/arch/">arch<span>2</span></a></li>
-		
-			<li><a href="/tags/博客/">博客<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>32</span></a></li>
@@ -654,6 +686,10 @@ alert("真乖");
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/9999/12/31/博客更新说明/" ><i class="fa fa-file-o"></i>博客更新说明</a>
+      </li>
+    
+      <li>
         <a href="/2016/03/16/spring/通过SpringXD将信息分片-文件夹存储到HDFS/" ><i class="fa fa-file-o"></i>通过SpringXD将信息分片|文件夹存储到HDFS</a>
       </li>
     
@@ -667,10 +703,6 @@ alert("真乖");
     
       <li>
         <a href="/2016/03/15/golang/golang打印错误栈信息/" ><i class="fa fa-file-o"></i>golang打印错误栈信息</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/15/golang/golang容易忽略导致入坑的方面/" ><i class="fa fa-file-o"></i>golang容易忽略导致入坑的方面</a>
       </li>
     
   </ul>

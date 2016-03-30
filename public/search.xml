@@ -4,6 +4,13 @@
   
     
     <entry>
+      <title><![CDATA[博客更新说明]]></title>
+      <url>http://todu.top/9999/12/31/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E8%AF%B4%E6%98%8E/</url>
+      <content type="html"><![CDATA[<p>本次博客连接变更为 /年/月/日/目录/标题格式，原url失效，请重新收藏或者点击。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[通过SpringXD将信息分片|文件夹存储到HDFS]]></title>
       <url>http://todu.top/2016/03/16/spring/%E9%80%9A%E8%BF%87SpringXD%E5%B0%86%E4%BF%A1%E6%81%AF%E5%88%86%E7%89%87-%E6%96%87%E4%BB%B6%E5%A4%B9%E5%AD%98%E5%82%A8%E5%88%B0HDFS/</url>
       <content type="html"><![CDATA[<pre><code>kafka --topic=kafka_test --zkconnect=10.10.1.20:2181 --queueSize=64 |hdfs --inputType=application/json --idleTimeout=10000 --partitionPath=dateFormat(&apos;yyyy/MM/dd/HH/mm&apos;)

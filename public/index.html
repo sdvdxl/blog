@@ -111,6 +111,28 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 9999-12-31 </div>
+			<div class="article-title"><a href="/9999/12/31/博客更新说明/" >博客更新说明</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>本次博客连接变更为 /年/月/日/目录/标题格式，原url失效，请重新收藏或者点击。</p>
+
+	
+	</div>
+  <a type="button" href="/9999/12/31/博客更新说明/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2016-03-16 </div>
 			<div class="article-title"><a href="/2016/03/16/spring/通过SpringXD将信息分片-文件夹存储到HDFS/" >通过SpringXD将信息分片|文件夹存储到HDFS</a></div>						
 		</h3>
@@ -377,78 +399,6 @@
 </div>
 
 		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-13 </div>
-			<div class="article-title"><a href="/2016/03/13/golang/配置Idea的Go开发环境/" >配置Idea的Go开发环境</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="获取IDEA"><a href="#获取IDEA" class="headerlink" title="获取IDEA"></a>获取IDEA</h1><ol>
-<li><a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="external">最新版戳这里下载</a>，下载对应平台的版本，一般来说，社区版(Community Edition)就已经足够了。</li>
-<li>安装IDEA。Windows和Mac是安装版，一步一步安装完成即可；Linux是免安装版，解压，给IDEA的执行文件添加可执行权限即可。假设安装目录是<code>H:\software\dev\JetBrains\IntelliJ IDEA Community Edition 14.1.1</code>，其他平台自行设置目录。</li>
-</ol>
-<h1 id="获取Go"><a href="#获取Go" class="headerlink" title="获取Go"></a>获取Go</h1><ol>
-<li>Go的官方网站是<a href="http://golang.org/" target="_blank" rel="external">http://golang.org/</a>，<a href="https://golang.org/dl/" target="_blank" rel="external">下载地址</a>，但是鉴于中国网络问题，不科学上网则没法下载，各位同学可以从<a href="http://golangtc.com/download" target="_blank" rel="external">这里下载</a>，最好下载最新的，当然这个网站(<a href="http://golangtc.com/)本身就是国内较活跃的一个Go社区。" target="_blank" rel="external">http://golangtc.com/)本身就是国内较活跃的一个Go社区。</a></li>
-<li>下载后解压到本地目录，假设安装目录是<code>H:\software\dev\go</code>。其他平台自行设置目录。</li>
-</ol>
-<h1 id="获取Git和hg"><a href="#获取Git和hg" class="headerlink" title="获取Git和hg"></a>获取Git和hg</h1><p>因为Go get命令要使用到git或者hg，所以需要安装git和hg。<br>git可以<a href="http://git-scm.com/" target="_blank" rel="external">从这里下载</a>, hg(执行命令是hg，实际下载的软件叫mercurial)可以<a href="http://mercurial.selenic.com/" target="_blank" rel="external">从这里下载</a>，加入git安装到<code>H:\software\dev\Git</code>，hg安装到<code>H:\software\dev\Mercurial</code></p>
-<h1 id="配置Go和Git-hg"><a href="#配置Go和Git-hg" class="headerlink" title="配置Go和Git(hg)"></a>配置Go和Git(hg)</h1><p>配置环境变量，这里以Windows为例，其他平台请自行换成对应的路径即可。如果打开命令行分别执行以下命令都成功，那么不需要额外配置环境变量，否则配置对应的环境变量<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">go version</span><br><span class="line">git version</span><br><span class="line">hg version</span><br></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>变量名称</th>
-<th>变量值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GOROOT</td>
-<td>H:\software\dev\go</td>
-<td>go根路径</td>
-</tr>
-<tr>
-<td>GOPATH</td>
-<td>H:\software\dev\gopath</td>
-<td>gopath可以是任何一个目录</td>
-</tr>
-<tr>
-<td>PATH</td>
-<td>%PATH%;%GOROOT%\bin;H:\software\dev\Git\bin;H:\software\dev\Mercuria;</td>
-<td>注意不要忘了加入原来的path变量</td>
-</tr>
-</tbody>
-</table>
-<h1 id="配置IDEA的Go环境"><a href="#配置IDEA的Go环境" class="headerlink" title="配置IDEA的Go环境"></a>配置IDEA的Go环境</h1><ol>
-<li><p>打开IDEA，File -&gt; Settings -&gt; Plugins -&gt; Browse repositiores… -&gt; Manage repositories… ，添加自定义repository url <code>https://plugins.jetbrains.com/plugins/nightly/list</code>(nightly build)或者 <code>https://plugins.jetbrains.com/plugins/alpha/list</code>(alpha version)，添加完成之后，等待刷新完成后，输入go，选择go插件，点击安装，等待安装完成后，重启生效。网络环境不好的话，可能插件不能下载，可以直接<a href="https://plugins.jetbrains.com/plugin/download?updateId=19402" target="_blank" rel="external">去idea官网下载插件</a>，如何获取最新插件呢，这里是根据updateId来的，这个最新的id就是从上面的repository的url中获取的，用浏览器打开这个url，就会观察到以下内容</p>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">idea-plugin</span> <span class="attr">downloads</span>=<span class="string">"97922"</span> <span class="attr">size</span>=<span class="string">"1071401"</span> <span class="attr">date</span>=<span class="string">"1428797441000"</span> <span class="attr">url</span>=<span class="string">""</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>Go<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">id</span>&gt;</span>ro.redeul.google.go<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">&lt;![CDATA[</span><br><span class="line">Support for Go programming language. &lt;p&gt;Alpha pre-release of the 1.0.0 version.&lt;/p&gt; &lt;p&gt;Doesn't contain all the functionality of the 0.9.x branch but has a completely reworked internals. It's faster than 0.9.x, refactoring works to some degree and has native support for gopath packages.&lt;/p&gt; Compatibility &lt;p&gt;Plugin can be installed on IntelliJ platform 141.2 or greater. It corresponds to IntelliJ IDEA 14.1, WebStorm 10, PhpStorm 9&lt;/p&gt;</span><br><span class="line">]]&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.271<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">vendor</span> <span class="attr">email</span>=<span class="string">""</span> <span class="attr">url</span>=<span class="string">"https://github.com/go-lang-plugin-org"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">download-url</span>&gt;</span>../../plugin/download?updateId=19402<span class="tag">&lt;/<span class="name">download-url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">idea-version</span> <span class="attr">min</span>=<span class="string">"n/a"</span> <span class="attr">max</span>=<span class="string">"n/a"</span> <span class="attr">until-build</span>=<span class="string">"3999"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">change-notes</span>&gt;</span></span><br><span class="line">&lt;![CDATA[</span><br><span class="line">&lt;ul&gt; &lt;li&gt;Initial GAE support: running dev server. &lt;strong&gt;Requires resetting project SDK.&lt;/strong&gt;&lt;/li&gt; &lt;/ul&gt;</span><br><span class="line">]]&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">change-notes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">rating</span>&gt;</span>4.3<span class="tag">&lt;/<span class="name">rating</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">idea-plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>其中 download-url 中的 updateId 就是最新的下载id。<br>如果还是没法下载，那么<a href="http://pan.baidu.com/s/1c0o50ys" target="_blank" rel="external">请点击这里</a>，从百度云上下载。<br>然后 File -&gt; Settings -&gt; Install plugin from disk…选择刚才下载的压缩包（不要解压），确定后重启成效。</p>
-<ol>
-<li>File -&gt; Other settings -&gt; Default Project Structure… -&gt; Platform Settings -&gt; SDKs -&gt; + -&gt; Go SDK -&gt; 选择GOROOT路径，确定。</li>
-<li><p>File -&gt; New Project -&gt; Go -&gt; Next -&gt; 输入Project name和Project location -&gt; Finish -&gt; 在项目根目录中新建main.go，添加以下内容</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">package</span> main</span><br><span class="line">    <span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">func</span> main() &#123;</span><br><span class="line">	fmt.Println(<span class="string">"hello world"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>Run -&gt; Edit Configrations -&gt; + -&gt; Go Application -&gt; File 中在原来的路径基础上添加main文件即 添加 <code>\main.go</code>，点击确定，然后运行可以看到控制台打印 hello world。</p>
-<h1 id="配置GDB-debug"><a href="#配置GDB-debug" class="headerlink" title="配置GDB debug"></a>配置GDB debug</h1><p>Run -&gt; Edit Configrations -&gt; Defaults -&gt; Go GDB -&gt;<br>Name：可以随便填写<br>GDB executeable：dbg.exe的完整路径<br>Application executable：填写生成的可执行文件的完整路径，路径要是windows写法，如G:\gopath\src\example\main.exe则需要两个反斜杠，就变成了G:\gopath\src\example\main.exe，或者是Unix写法 G:/gopath/src/example/main.exe,否则会提示找不到文件。这里的可执行文件必须使用<code>go build -gcflags &quot;-N -l&quot;</code>编译出来的，这样的文件带有debug信息并且没有被go内联优化。</p>
-<h1 id="配置保存时自动格式化代码和自动导入"><a href="#配置保存时自动格式化代码和自动导入" class="headerlink" title="配置保存时自动格式化代码和自动导入"></a>配置保存时自动格式化代码和自动导入</h1><p>这个配置需要用到IDEA的宏（所谓的宏，就是一系列操作），下面就说怎么录制这个宏。</p>
-
-	
-	</div>
-  <a type="button" href="/2016/03/13/golang/配置Idea的Go开发环境/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
 
 		</div>
 
@@ -532,45 +482,45 @@
 		<h4>标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/git/">git<span>1</span></a></li>
-		
-			<li><a href="/tags/go/">go<span>8</span></a></li>
-		
-			<li><a href="/tags/windows8/">windows8<span>1</span></a></li>
-		
-			<li><a href="/tags/sql/">sql<span>1</span></a></li>
-		
-			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
-		
-			<li><a href="/tags/hive/">hive<span>1</span></a></li>
-		
-			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+			<li><a href="/tags/spark/">spark<span>4</span></a></li>
 		
 			<li><a href="/tags/kafka/">kafka<span>1</span></a></li>
 		
-			<li><a href="/tags/golang/">golang<span>10</span></a></li>
+			<li><a href="/tags/go/">go<span>8</span></a></li>
 		
-			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
-		
-			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
-		
-			<li><a href="/tags/spark/">spark<span>4</span></a></li>
-		
-			<li><a href="/tags/java/">java<span>1</span></a></li>
+			<li><a href="/tags/spring-xd/">spring-xd<span>3</span></a></li>
 		
 			<li><a href="/tags/端口/">端口<span>1</span></a></li>
 		
-			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
+			<li><a href="/tags/golang/">golang<span>10</span></a></li>
+		
+			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
+		
+			<li><a href="/tags/spring-xd/">spring xd<span>6</span></a></li>
+		
+			<li><a href="/tags/git/">git<span>1</span></a></li>
 		
 			<li><a href="/tags/hdfs/">hdfs<span>6</span></a></li>
 		
+			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+		
+			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
+		
+			<li><a href="/tags/博客/">博客<span>1</span></a></li>
+		
+			<li><a href="/tags/录音/">录音<span>1</span></a></li>
+		
 			<li><a href="/tags/安卓/">安卓<span>1</span></a></li>
 		
-			<li><a href="/tags/android/">android<span>1</span></a></li>
+			<li><a href="/tags/linux/">linux<span>3</span></a></li>
 		
-			<li><a href="/tags/进程/">进程<span>1</span></a></li>
+			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
 		
-			<li><a href="/tags/软件/">软件<span>1</span></a></li>
+			<li><a href="/tags/arch/">arch<span>2</span></a></li>
+		
+			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
+		
+			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>32</span></a></li>
@@ -586,6 +536,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/9999/12/31/博客更新说明/" ><i class="fa fa-file-o"></i>博客更新说明</a>
+      </li>
+    
+      <li>
         <a href="/2016/03/16/spring/通过SpringXD将信息分片-文件夹存储到HDFS/" ><i class="fa fa-file-o"></i>通过SpringXD将信息分片|文件夹存储到HDFS</a>
       </li>
     
@@ -599,10 +553,6 @@
     
       <li>
         <a href="/2016/03/15/golang/golang打印错误栈信息/" ><i class="fa fa-file-o"></i>golang打印错误栈信息</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/15/golang/golang容易忽略导致入坑的方面/" ><i class="fa fa-file-o"></i>golang容易忽略导致入坑的方面</a>
       </li>
     
   </ul>
