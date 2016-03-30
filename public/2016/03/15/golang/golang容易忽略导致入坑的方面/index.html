@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>golang容易忽略导致入坑的方面 | 杜龙少的博客</title>
+  <meta name="author" content="杜龙少">
+  
+  <meta name="description" content="杜龙少的博客">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="golang容易忽略导致入坑的方面"/>
+  <meta property="og:site_name" content="杜龙少的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="杜龙少的博客" type="application/atom+xml">
+  
+  
+    <link href="/favorite.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">杜龙少的博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> golang容易忽略导致入坑的方面</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="main-函数"><a href="#main-函数" class="headerlink" title="main 函数"></a>main 函数</h1><p>main函数必须定义在main包里，不可导出。当main函数调用完毕，程序就会立即退出，不会等待运行中的goroutine运行完毕。</p>
+<h1 id="初始化函数"><a href="#初始化函数" class="headerlink" title="初始化函数"></a>初始化函数</h1><p><code>func init() { … }</code></p>
+<p>此函数无参，不需显示调用。</p>
+<p>此函数根据依赖顺序执行初始化顺序，并且是顺序执行，如：</p>
+<p>A 依赖 B， B 依赖 C，并且A，B，C 都有init函数，那么初始化顺序是C ，B ， A</p>
+<h1 id="iota"><a href="#iota" class="headerlink" title="iota"></a>iota</h1><ul>
+<li><p>iota 只能用在const定义的常量上</p>
+</li>
+<li><p>iota在一个const范围，不管中间的变量有没有用到iota，iota都是持续递增加1的，如</p>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line"></span><br><span class="line">       aa = <span class="literal">iota</span></span><br><span class="line"></span><br><span class="line">       bb</span><br><span class="line"></span><br><span class="line">       cc = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">       dd = <span class="literal">iota</span></span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>dd 是3</p>
+<ul>
+<li>如果重新定义const，那么值会是重新从0开始，如</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line"></span><br><span class="line">       ee = <span class="literal">iota</span></span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h1 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h1><p>x.(T) x为变量， T为要判断的类型，其中有两种用法</p>
+<ul>
+<li><p><code>a := x.(T)</code> ，如果x是类型T的实现类型变量，那么可以得到转换后的值a，否则panic: interface conversion: (x的类型) is not package.T: missing method （T的方法）</p>
+</li>
+<li><p><code>a, ok := x.(T)</code>，如果x是类型T的实现的类型变量，那么ok为true， 转换成功，否则，ok为false，说明转换失败。</p>
+</li>
+</ul>
+<h1 id="从Panic中恢复"><a href="#从Panic中恢复" class="headerlink" title="从Panic中恢复"></a>从Panic中恢复</h1><p>需要用到build-in recover()方法，函数原型：</p>
+<p><code>func recover() interface{}</code></p>
+<p>要捕获panic，必须在有可能发生panic的地方的上面进行处理，</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">defer</span> <span class="keyword">func</span>()&#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">if</span> err := <span class="built_in">recover</span>(); err !=<span class="literal">nil</span> &#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//处理错误</span></span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p>一般来说，会将上面的代码放在函数（或者方法）的开始的地方。</p>
+<p><strong> 注意 ， recover函数只能用在defer中，否则不会进行错误捕获。</strong></p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/03/15/golang/golang打印错误栈信息/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/03/14/spring/sink-hdfs/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div class="ds-thread" data-thread-key="2016/03/15/golang/golang容易忽略导致入坑的方面/" data-title="golang容易忽略导致入坑的方面" data-url="http://todu.top/2016/03/15/golang/golang容易忽略导致入坑的方面/"></div>  
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-03-15 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/golang/">golang<span>10</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/golang/">golang<span>10</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'sdvdxl' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2016 杜龙少
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

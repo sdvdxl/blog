@@ -1,0 +1,347 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>安装启动Hadoop集群 | 杜龙少的博客</title>
+  <meta name="author" content="杜龙少">
+  
+  <meta name="description" content="杜龙少的博客">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="安装启动Hadoop集群"/>
+  <meta property="og:site_name" content="杜龙少的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="杜龙少的博客" type="application/atom+xml">
+  
+  
+    <link href="/favorite.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">杜龙少的博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 安装启动Hadoop集群</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>UCloud云主机，2.6.32-431.11.15.el6.ucloud.x86_64<br>假设三台主机内网IP分别为10.10.1.10, 10.10.1.11和10.10.1.12，hostname分别为：10-10-1-10,10-10-1-11和10-10-1-12</p>
+<h1 id="配置JDK"><a href="#配置JDK" class="headerlink" title="配置JDK"></a>配置JDK</h1><p>本次搭建测试用的是jdk8，可以从<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">Oracle官网下载</a>对应的版本。</p>
+<h2 id="配置jdk"><a href="#配置jdk" class="headerlink" title="配置jdk"></a>配置jdk</h2><p>假设jdk解压后目录存放在<code>/usr/local/jdk8</code>，命令行输入<code>sudo vi /etc/profile</code>，添加一下内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/<span class="built_in">local</span>/jdk8</span><br><span class="line">CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/jre/lib</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</span><br></pre></td></tr></table></figure></p>
+<p>然后输入<code>source /etc/profile</code>使环境变量生效，输入<code>java -version</code>有java版本信息输出说明配置成功，三台主机均这么配置。</p>
+<h1 id="配置hadoop用户"><a href="#配置hadoop用户" class="headerlink" title="配置hadoop用户"></a>配置hadoop用户</h1><p>控制台输入<code>sudo useradd -m -U hadoop</code> 添加hadoop用户，然后输入<code>sudo passwd hadoop</code> 修改hadoop用户的密码，输入<code>su -l hadoop</code>，输入刚才设置的密码，切换到hadoop用户。</p>
+<h1 id="配置ssh"><a href="#配置ssh" class="headerlink" title="配置ssh"></a>配置ssh</h1><p>前提是已经切换到hadoop用户。<br>在每个主机控制台输入<code>ssh-keygen</code>回车，一直回车直到结束。最后在master主机上使用<code>ssh-copy-id</code>命令拷贝认证信息到本主机和其他两台主机，这样可以免密码登录。<code>ssh-copy-id hadoop@主机地址</code>，注意本机地址不要使用localhost和127.0.0.1，请使用局域网ip，在这里是10.10.1.10。</p>
+<h1 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h1><p>以修改10.10.1.10主机为例，在控制台输入<code>sudo vi /etc/hosts</code>，在内容中添加一下信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 10-10-128-53</span><br><span class="line">10.10.248.115 10-10-248-115</span><br><span class="line">10.10.227.51 10-10-227-51</span><br></pre></td></tr></table></figure></p>
+<p>注意，千万不要配置<code>10.10.1.10 10-10-1-10</code>本主机ip映射本主机名的条目，否则会造成主机间无法监听。其余两台参照这个也进行配置。</p>
+<h1 id="配置Hadoop"><a href="#配置Hadoop" class="headerlink" title="配置Hadoop"></a>配置Hadoop</h1><ol>
+<li><a href="http://hadoop.apache.org/releases.html" target="_blank" rel="external">下载Hadoop</a>，这里下载的是<code>2.7.1</code>版本。控制输入<code>wget http://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz</code>，等待下载完成。</li>
+<li>控制台输入<code>tar -xvf hadoop-2.7.1.tar.gz</code>解压，会生成<code>hadoop-2.7.1</code>目录。</li>
+<li>输入<code>cd hadoop-2.7.1/etc/hadoop</code>进入配置文件目录。</li>
+<li>修改<code>hadoop-env.sh</code>中的<code>export JAVA_HOME=</code>，将等号后的内容改成上面配置的jdk绝对路径，在这里就是<code>/usr/local/jdk8</code>，修改完后应该是<code>export JAVA_HOME=/usr/local/jdk8</code>，保存退出。</li>
+<li>修改<code>core-site.xml</code>，配置config内容：</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">description</span>&gt;</span>Abase for other temporary directories.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 注意，这里改成自己本机的ip --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://10.10.1.10:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.default.namenode<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 注意，这里改成自己本机的ip --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://10.10.1.10:8082<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>io.file.buffer.size<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>4096<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.native.lib<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">description</span>&gt;</span>Should native hadoop libraries, if present, be used.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>修改<code>hdfs-site.xml</code>，修改config内容为：</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.nameservices<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoop-cluster1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.secondary.http-address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 注意修改为自己的ip --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:50090<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/dfs/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.webhdfs.enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>修改<code>yarn-site.xml</code></li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 注意ip改为自己的 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:8032<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.scheduler.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:8030<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.resource-tracker.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:8031<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.admin.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:8033<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.webapp.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:8088<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>修改<code>mapred-site.xml</code></li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobtracker.http.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.128.53:50030<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.128.53:10020<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.webapp.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.128.53:19888<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>修改<code>slaves</code>文件，添加其他两台ip</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10.10</span>.1.11</span><br><span class="line"><span class="number">10.10</span>.1.12</span><br></pre></td></tr></table></figure>
+<p>将hadoop目录覆盖到其余机器对应目录。<br>下面开始操作hadoop命令，如果遇到hadoop native错误，请查看文末<code>Hadoop Native 配置</code>部分。</p>
+<ol>
+<li>格式化文件系统<br>注意：这里的格式化文件系统并不是硬盘格式化，只是针对主服务器hdfs-site.xml的dfs.namenode.name.dir和dfs.datanode.data.dir目录做相应的清理工作。切换到Hadoop的home目录，执行<code>bin/hdfs namenode -format</code>。</li>
+<li>启动停止服务<br>启动<code>sbin/start-dfs.sh</code>，可以一次性启动master和slaves节点服务。<code>sbin/start-yarn.sh</code>启动yarn资源管理服务。要停止服务，用对应的<code>sbin/stop-dfs.sh</code>和<code>sbin/stop-dfs.sh</code>即可停止服务。</li>
+<li>单独启动一个datanode<br>增加节点或者重启节点，需要单独启动，则可使用以下命令:<br><code>sbin/hadoop-daemon.sh start datanode</code>，启动nodeManager<code>sbin/yarn-daemon.sh start nodemanager</code>，当然也可以操作namenode<code>sbin/hadoop-daemon.sh start namenode</code> <code>sbin/yarn-daemon.sh start resourcemanager</code>。<br><strong>注意</strong>：原文中是<code>sbin/yarn-daemons.sh</code>和<code>sbin/hadoop-daemons.sh</code>，运行后发现并没有启动成功，去掉s后启动成功。</li>
+</ol>
+<h1 id="Hadoop-Native-配置"><a href="#Hadoop-Native-配置" class="headerlink" title="Hadoop Native 配置"></a>Hadoop Native 配置</h1><p>输入  <code>hadoop checknative</code> 检查Hadoop本地库版本和相关依赖信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">16/03/10 12:17:56 DEBUG util.NativeCodeLoader: Trying to load the custom-built native-hadoop library...</span><br><span class="line">16/03/10 12:17:56 DEBUG util.NativeCodeLoader: Failed to load native-hadoop with error: java.lang.UnsatisfiedLinkError: /home/hadoop/hadoop-2.6.3/lib/native/libhadoop.so.1.0.0: /lib64/libc.so.6: version `GLIBC_2.14&apos; not found (required by /home/hadoop/hadoop-2.6.3/lib/native/libhadoop.so.1.0.0)</span><br><span class="line">16/03/10 12:17:56 DEBUG util.NativeCodeLoader: java.library.path=/home/hadoop/hadoop-2.6.3/lib/native</span><br><span class="line">16/03/10 12:17:56 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">16/03/10 12:17:56 DEBUG util.Shell: setsid exited with exit code 0</span><br><span class="line">Native library checking:</span><br><span class="line">hadoop:  false</span><br><span class="line">zlib:    false</span><br><span class="line">snappy:  false</span><br><span class="line">lz4:     false</span><br><span class="line">bzip2:   false</span><br><span class="line">openssl: false</span><br><span class="line">16/03/10 12:17:56 INFO util.ExitUtil: Exiting with status 1</span><br></pre></td></tr></table></figure>
+<p>发现<code>/lib64/libc.so.6: version</code>GLIBC_2.14’ not found`信息，说明该版本的Hadoop需要glibc_2.14版本。下面就安装所需的版本。</p>
+<ol>
+<li><code>mkdir glib_build &amp;&amp; cd glib_build</code></li>
+<li><code>wget http://ftp.gnu.org/gnu/glibc/glibc-2.14.tar.gz &amp;&amp; wget http://ftp.gnu.org/gnu/glibc/glibc-linuxthreads-2.5.tar.bz2</code></li>
+<li><code>tar zxf glibc-2.14.tar.gz &amp;&amp; cd glibc-2.14 &amp;&amp; tar jxf ../glibc-linuxthreads-2.5.tar.bz2</code></li>
+<li><code>cd ../ &amp;&amp; export CFLAGS=&quot;-g -O2&quot; &amp;&amp; ./glibc-2.14/configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin</code></li>
+<li><code>make</code></li>
+<li><code>make install</code><br>install最后会遇到错误信息：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">CC=&quot;gcc -B/usr/bin/&quot; /usr/bin/perl scripts/test-installation.pl /root/</span><br><span class="line">/usr/bin/ld: cannot find -lnss_test1</span><br><span class="line">collect2: ld returned 1 exit status</span><br><span class="line">Execution of gcc -B/usr/bin/ failed!</span><br><span class="line">The script has found some problems with your installation!</span><br><span class="line">Please read the FAQ and the README file and check the following:</span><br><span class="line">- Did you change the gcc specs file (necessary after upgrading from</span><br><span class="line">  Linux libc5)?</span><br><span class="line">- Are there any symbolic links of the form libXXX.so to old libraries?</span><br><span class="line">  Links like libm.so -&gt; libm.so.5 (where libm.so.5 is an old library) are wrong,</span><br><span class="line">  libm.so should point to the newly installed glibc file - and there should be</span><br><span class="line">  only one such link (check e.g. /lib and /usr/lib)</span><br><span class="line">You should restart this script from your build directory after you&apos;ve</span><br><span class="line">fixed all problems!</span><br><span class="line">Btw. the script doesn&apos;t work if you&apos;re installing GNU libc not as your</span><br><span class="line">primary library!</span><br><span class="line">make[1]: *** [install] Error 1</span><br><span class="line">make[1]: Leaving directory `/root/glibc-2.14&apos;</span><br><span class="line">make: *** [install] Error 2</span><br></pre></td></tr></table></figure>
+<p>无需关注，检验是否成功<br><code>ls -l /lib64/libc.so.6</code><br>lrwxrwxrwx 1 root root 12 Mar 10 12:12 /lib64/libc.so.6 -&gt; libc-2.14.so<br>出现了<code>/lib64/libc.so.6 -&gt; libc-2.14.so</code>字样说明成功了。</p>
+<p>安装openssl<br><code>yum install openssl-static.x86_64</code></p>
+<h1 id="如何修改主机名称"><a href="#如何修改主机名称" class="headerlink" title="如何修改主机名称"></a>如何修改主机名称</h1><p>修改文件<code>/etc/sysconfig/network</code><br>然后执行<code>/etc/rc.d/init.d/network restart</code>重启网络模块</p>
+<h1 id="secondaryNameNode-配置"><a href="#secondaryNameNode-配置" class="headerlink" title="secondaryNameNode 配置"></a>secondaryNameNode 配置</h1><ol>
+<li>修改masters文件（如果没有则自己创建），添加一个主机名称，用以作为secondaryNameNode。</li>
+<li>修改hdfs-site.xml的内容，删除<code>dfs.namenode.secondary.http-address</code>部分配置，添加新的配置（注意修改为自己的ip）：</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.http.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.10:50070<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">		The address and the base port where the dfs namenode web ui will listen on.</span><br><span class="line">		If the port is 0 then the server will start on a free port.</span><br><span class="line">	<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.secondary.http-address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>10.10.1.11<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h6><ol>
+<li><a href="http://blog.csdn.net/tang9140/article/details/42869531" target="_blank" rel="external">Hadoop-2.5.2集群安装配置详解</a></li>
+<li><a href="http://blog.csdn.net/zzu09huixu/article/details/36873669" target="_blank" rel="external">基于hadoop2.2的namenode与SecondaryNameNode分开配置在不同的计算机</a></li>
+</ol>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/03/09/other/Hexo-Git-Oschina-Golang-Tenxcloud打造博客/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/03/09/spring/Spring-XD简介/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div class="ds-thread" data-thread-key="2016/03/09/hadoop/安装启动Hadoop集群/" data-title="安装启动Hadoop集群" data-url="http://todu.top/2016/03/09/hadoop/安装启动Hadoop集群/"></div>  
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-03-09 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/hadoop/">hadoop<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/hadoop/">hadoop<span>4</span></a></li> <li><a href="/tags/hdfs/">hdfs<span>6</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'sdvdxl' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2016 杜龙少
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

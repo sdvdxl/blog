@@ -1,0 +1,508 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Spring-XD简介 | 杜龙少的博客</title>
+  <meta name="author" content="杜龙少">
+  
+  <meta name="description" content="杜龙少的博客">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Spring-XD简介"/>
+  <meta property="og:site_name" content="杜龙少的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="杜龙少的博客" type="application/atom+xml">
+  
+  
+    <link href="/favorite.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">杜龙少的博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Spring-XD简介</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Spring XD is a unified, distributed, and extensible service for data ingestion, real time analytics, batch processing, and data export.<br><img src="/images/xd/xd-overview.png" alt="distributed-overview."></p>
+<h1 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h1><p>翻译过来就是流，通过定义stream可以控制数据的流向，比如从MongoDB读取数据然后存储到HDFS中。<br><img src="/images/xd/stream.png" alt="stream"></p>
+<h2 id="创建方式"><a href="#创建方式" class="headerlink" title="创建方式"></a>创建方式</h2><p>一个简单的示例：该示例创建一个名字叫<code>ticktock</code>的stream，每秒钟产生一条时间信息然后通过管道传送到log中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xd:&gt; stream create --definition &quot;time | log&quot; --name ticktock</span><br></pre></td></tr></table></figure></p>
+<h2 id="销毁Stream"><a href="#销毁Stream" class="headerlink" title="销毁Stream"></a>销毁Stream</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xd:&gt; stream destroy --name stream-name</span><br></pre></td></tr></table></figure>
+<h1 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h1><p>模块，当前包含<code>source</code>, <code>sink</code>,<code>processor</code>, 和<code>job</code>。</p>
+<h1 id="Souces"><a href="#Souces" class="headerlink" title="Souces"></a>Souces</h1><p>数据源，Stream的来源，有以下几种方式：</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>File</td>
+<td>文件方式</td>
+</tr>
+<tr>
+<td>FTP</td>
+<td>FTP方式</td>
+</tr>
+<tr>
+<td>GemFire Continuous Query(gemfire-cq)</td>
+<td>GemFire查询</td>
+</tr>
+<tr>
+<td>GemFire source(gemfire)</td>
+<td>GemFire文件</td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>http方式</td>
+</tr>
+<tr>
+<td>JDBC Source(jdbc)</td>
+<td>关系型数据库jdbc</td>
+</tr>
+<tr>
+<td>JMS</td>
+<td>JMS</td>
+</tr>
+<tr>
+<td>Kafka</td>
+<td>Kafka消息队列</td>
+</tr>
+<tr>
+<td>Mail</td>
+<td>通过接收电子邮件</td>
+</tr>
+<tr>
+<td>MongoDB Source(mongodb)</td>
+<td>MongoDB数据库</td>
+</tr>
+<tr>
+<td>MQTT</td>
+<td>MQTT</td>
+</tr>
+<tr>
+<td>RabbitMQ</td>
+<td>RabbitMQ消息队列</td>
+</tr>
+<tr>
+<td>Reactor IP(reactor-ip)</td>
+<td>Reactor IP(reactor-ip)</td>
+</tr>
+<tr>
+<td>SFTP</td>
+<td>SFTP</td>
+</tr>
+<tr>
+<td>Stdout Capture</td>
+<td>标准输入</td>
+</tr>
+<tr>
+<td>Syslog</td>
+<td>系统日志</td>
+</tr>
+<tr>
+<td>Tail</td>
+<td>Tail程序</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>TCP Client(tcp-client)</td>
+<td>TCP 客户端</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>时间</td>
+</tr>
+<tr>
+<td>Trigger Source(trigger)</td>
+<td>触发器</td>
+</tr>
+<tr>
+<td>Twitter Search(twittersearch)</td>
+<td>Twitter搜索</td>
+</tr>
+<tr>
+<td>Twitter Stream(twitterstream)</td>
+<td>Twitter Stream流</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Sinks"><a href="#Sinks" class="headerlink" title="Sinks"></a>Sinks</h1><p>数据源，Stream的输出，有以下几种方式：</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dynamic Router(router)</td>
+<td>动态路由</td>
+</tr>
+<tr>
+<td>File Sink(file)</td>
+<td>文件方式</td>
+</tr>
+<tr>
+<td>FTP Sink(ftp)</td>
+<td>FTP方式</td>
+</tr>
+<tr>
+<td>GemFire Server</td>
+<td>GemFire服务器</td>
+</tr>
+<tr>
+<td>GPFDIST</td>
+<td>GPFDIST</td>
+</tr>
+<tr>
+<td>Cassandra</td>
+<td>Cassandra 数据库</td>
+</tr>
+<tr>
+<td>Hadoop(HDFS) (hdfs)</td>
+<td>hdfs文件系统</td>
+</tr>
+<tr>
+<td>HDFS Dataset(Avro/Parquet) (hdfs-dataset)</td>
+<td>hdfs文件系统中的avro或者parquet类型文件</td>
+</tr>
+<tr>
+<td>JDBC Source(jdbc)</td>
+<td>关系型数据库jdbc</td>
+</tr>
+<tr>
+<td>Kafka Sink (kafka)</td>
+<td>Kafka消息队列</td>
+</tr>
+<tr>
+<td>Log</td>
+<td>log 文件</td>
+</tr>
+<tr>
+<td>Mail</td>
+<td>Mail 发送</td>
+</tr>
+<tr>
+<td>Mongo</td>
+<td>Mongo数据库</td>
+</tr>
+<tr>
+<td>MQTT Sink (mqtt)</td>
+<td>MQTT</td>
+</tr>
+<tr>
+<td>Null Sink(null)</td>
+<td>null</td>
+</tr>
+<tr>
+<td>RabbitMQ</td>
+<td>RabbitMQ 消息队列</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>Redis</td>
+</tr>
+<tr>
+<td>Shell Sink (shell)</td>
+<td>shell</td>
+</tr>
+<tr>
+<td>Splunk Server (splunk)</td>
+<td>splunk</td>
+</tr>
+<tr>
+<td>TCP Sink (tcp)</td>
+<td>TCP</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Processors"><a href="#Processors" class="headerlink" title="Processors"></a>Processors</h1><p>可用的处理器包括<code>Aggregator</code> <code>Filter</code> <code>Header Enricher</code> <code>HTTP Client</code> <code>JSON to Tuple</code> <code>Object to JSON</code> <code>Script</code> <code>Shell Command</code> <code>Splitter</code> <code>Transform</code></p>
+<ul>
+<li>Aggregator – 作用和 splitter相反，用于聚合，</li>
+<li>Splitter – 用于拆解</li>
+<li>Filter – 过滤器，用于中间处理数据</li>
+<li>Header Enricher (header-enricher) – 用于添加头部信息</li>
+<li>HTTP Client – 通过httpClient方式发送URL请求</li>
+<li>JSON to Tuple (json-to-tuple) – 转换json数据到Tuple类型</li>
+<li>Object to JSON (object-to-json) – 将对象转换为json格式</li>
+<li>Script 用于加载Groovy脚本</li>
+<li>Shell – 用于加载Shell脚本</li>
+<li>Transform – 用于负载类型转换</li>
+</ul>
+<h1 id="Taps"><a href="#Taps" class="headerlink" title="Taps"></a>Taps</h1><p>监听器，窃听器。<br>不用重复定义相同的stream，然后监听此stream就可以做其他操作。并且可以用Label来分别对每个部分内容做个别名，定义Tab时候可以使用别名。如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stream create foo --definition &quot;httpLabel: http | fLabel: filter --expression=payload.startsWith(&apos;A&apos;) | flibble: transform --expression=payload.toLowerCase() | log&quot; --deploy</span><br><span class="line">stream create fooTap --definition &quot;tap:stream:foo.flibble &gt; log&quot; --deploy</span><br></pre></td></tr></table></figure></p>
+<p>上面对trasfrom部分做了一个别名，叫做<code>flibble</code>，然后下面定义一个Tap，并且最后指定是flibble这个标签，那么就是对<code>foo</code>这个stream的<code>flibble</code>做监听。</p>
+<h1 id="Jobs"><a href="#Jobs" class="headerlink" title="Jobs"></a>Jobs</h1><p>Job相比Stream不同点在于，Job算是静态的，Stream是动态的。Stream会持续接收数据，处理数据；Job是一次性接收数据，处理数据，如果数据改变，那么是不会进行处理的，除非有定时任务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">job create --name jobtest --definition &apos;timestampfile --directory=D:/jobs&apos; --deploy</span><br><span class="line">stream create --name time-cron --definition &quot;trigger --cron=&apos;* * * * * *&apos; &gt; queue:job:jobtest&quot; --deploy</span><br></pre></td></tr></table></figure></p>
+<h1 id="使用counter"><a href="#使用counter" class="headerlink" title="使用counter"></a>使用counter</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stream create foo --definition &apos;http --outputType=application/json | log&apos;</span><br><span class="line">stream create countName --definition &apos;tap:stream:foo &gt; field-value-counter --fieldName=name&apos; --deploy</span><br><span class="line">stream deploy --name foo</span><br><span class="line">http post --data &#123;&quot;name&quot;:&quot;a&quot;&#125;</span><br><span class="line">http post --data &#123;&quot;name&quot;:&quot;a&quot;&#125;</span><br><span class="line">http post --data &#123;&quot;name&quot;:&quot;b&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p><code>field-value-counter list</code> 列出field-value-counter的名字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FieldValueCounter name</span><br><span class="line">----------------------</span><br><span class="line">countName</span><br></pre></td></tr></table></figure></p>
+<p><code>field-value-counter display --name countName</code> 列出名字为<code>countName</code>的描述</p>
+<pre><code>FieldValueCounter=countName
+---------------------------  -  -----
+VALUE                        -  COUNT
+a                            |  2
+b                            |  1
+</code></pre>	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/03/09/hadoop/安装启动Hadoop集群/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/03/09/spring/以分布式方式运行Spring-XD/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div class="ds-thread" data-thread-key="2016/03/09/spring/Spring-XD简介/" data-title="Spring-XD简介" data-url="http://todu.top/2016/03/09/spring/Spring-XD简介/"></div>  
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-03-09 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/spring/">spring<span>6</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/spring/">spring<span>4</span></a></li> <li><a href="/tags/spring-xd/">spring xd<span>6</span></a></li> <li><a href="/tags/spring-xd/">spring-xd<span>3</span></a></li> <li><a href="/tags/xd/">xd<span>3</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'sdvdxl' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2016 杜龙少
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

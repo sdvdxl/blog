@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>alert | 杜龙少的博客</title>
+  <title>Spark基础知识 | 杜龙少的博客</title>
   <meta name="author" content="杜龙少">
   
   <meta name="description" content="杜龙少的博客">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="alert"/>
+  <meta property="og:title" content="Spark基础知识"/>
   <meta property="og:site_name" content="杜龙少的博客"/>
 
   
@@ -93,7 +93,7 @@
 
 	
 		<div class="page-header page-header-inverse ">		
-			<h1 class="title title-inverse "> alert</h1>
+			<h1 class="title title-inverse "> Spark基础知识</h1>
 		</div>		
 	
 
@@ -113,19 +113,18 @@
 	<div class="mypage">		
 	  		
 
-	  <script>
-alert("老公来了，快来接驾");
-alert("开玩笑的");
-alert("老公不是在群里吗");
-alert("其实我是故意整你的");
-alert("输入密码解除弹窗");
-var pw = null;
-do  {
-    pw = prompt("输入密码");
-} while(pw!="豆芽老公我爱你")
-alert("真乖");
-    location.href="http://todu.top"
-</script>	  
+	  <h1 id="Spark基本概念"><a href="#Spark基本概念" class="headerlink" title="Spark基本概念"></a>Spark基本概念</h1><ul>
+<li>RDD——Resillient Distributed Dataset A Fault-Tolerant Abstraction for In-Memory Cluster Computing弹性分布式数据集。</li>
+<li>Operation——作用于RDD的各种操作分为transformation和action。</li>
+<li>Job——作业，一个JOB包含多个RDD及作用于相应RDD上的各种operation。</li>
+<li>Stage——一个作业分为多个阶段。</li>
+<li>Partition——数据分区， 一个RDD中的数据可以分成多个不同的区。</li>
+<li>DAG——Directed Acycle graph，有向无环图，反应RDD之间的依赖关系。</li>
+<li>Narrow dependency——窄依赖，子RDD依赖于父RDD中固定的data partition。</li>
+<li>Wide Dependency——宽依赖，子RDD对父RDD中的所有data partition都有依赖。</li>
+<li>Caching Managenment——缓存管理，对RDD的中间计算结果进行缓存管理以加快整 体的处理速度。</li>
+</ul>
+	  
 	</div>
 
 	<div>
@@ -134,13 +133,13 @@ alert("真乖");
 <ul class="pagination">
 	 
 				
-    	<li class="prev"><a href="/2016/03/09/Sqoop使用/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+    	<li class="prev"><a href="/2016/03/09/hack/特定国家版windows8/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
   		
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-          <li class="next disabled"><a>下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>
+		   <li class="next"><a href="/2016/03/09/spark/SparkStreaming程序（及过程中问题解决）/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
@@ -179,7 +178,7 @@ alert("真乖");
   <h2 class="title">留言</h2>
 
   
-  	 <div class="ds-thread" data-thread-key="2015/03/24/老公来了/" data-title="alert" data-url="http://todu.top/2015/03/24/老公来了/"></div>  
+  	 <div class="ds-thread" data-thread-key="2016/03/09/spark/Spark基础知识/" data-title="Spark基础知识" data-url="http://todu.top/2016/03/09/spark/Spark基础知识/"></div>  
   
 </section>
 
@@ -193,14 +192,33 @@ alert("真乖");
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2015-03-24 
+	2016-03-09 
 	</div>
 	
 
 	<!-- categories -->
     
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/spark/">spark<span>3</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
 
 	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/spark/">spark<span>4</span></a></li>
+    </ul>
+	</div>
 		
 
 	<!-- toc -->
