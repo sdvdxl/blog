@@ -150,7 +150,7 @@ addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.2")
 安装完成后重启idea。
 ### 创建 sbt 项目
 File -> New -> Project... 打开项目创建向导：
-![创建sbt项目](/images/sbt-project-1.png)
+![创建sbt项目](/images/scala/sbt-project-1.png)
 创建完成后，等待idea刷新项目，目录结构大体如下（project/project 和 target相关没有列出）：
 
 ```
@@ -244,7 +244,7 @@ libraryDependencies += "org.apache.spark" % "spark-core_2.10" % "1.6.1" % "provi
 libraryDependencies += "org.apache.spark" % "spark-core_2.10" % "1.6.1"
 ```
 6. 配置运行参数，如下图：
-![idea-spark-run-config](/images/idea-spark-run-config.png)
+![idea-spark-run-config](/images/scala/idea-spark-run-config.png)
 然后选择上面的运行配置，运行即可。这里可能会碰到一个异常：
 ```java
 Exception in thread "main" org.apache.hadoop.mapred.InvalidInputException: Input path does not exist: file:/Users/du/workspace/hekr/spark-sbt-demo/src/main/scala/WorldCount.scala
