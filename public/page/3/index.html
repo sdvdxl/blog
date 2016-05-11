@@ -111,6 +111,142 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2016-03-13 </div>
+			<div class="article-title"><a href="/2016/03/13/git/删除git已经跟踪的文件或者目录/" >删除git已经跟踪的文件或者目录</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>如果第一次提交的时候，没有在gitignore文件中添加忽略文件，那么这些文件（目录也是文件）就会被git跟踪，push的时候也会被推送到远程。所以最好就是一开始在commit之前先添加到gitignore中。</p>
+<p>如果文件已经被跟踪且被推送到远程，可以按照下面方法解决：<br>1.<code>rm -rf 文件</code></p>
+<ol>
+<li><code>git rm -r --cached 要忽略的文件</code><br>3.<code>git add -A (添加所有)</code><br>4.<code>git push origin 分支</code></li>
+</ol>
+<p>如果同名的文件过多，如：.class 文件被提交了，那么如果这样一个一个显然效率太低，可以按照下面方法操作</p>
+<ol>
+<li><code>find . -iname 文件名 -exec rm -rf {}\;</code></li>
+<li>重复上面的步骤，文件名替换为下一个要删除的文件名</li>
+<li>修改gitignore，添加忽略文件</li>
+<li><code>git rm -r --cached 要忽略的文件</code></li>
+<li><code>git add -A</code></li>
+<li><code>git push origin 分支</code></li>
+</ol>
+
+	
+	</div>
+  <a type="button" href="/2016/03/13/git/删除git已经跟踪的文件或者目录/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-11 </div>
+			<div class="article-title"><a href="/2016/03/11/hadoop/hadoop集成hive/" >hadoop集成hive</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h1><p>hadoop和yarn已经配置好并且成功运行。</p>
+<h1 id="选择版本和下载"><a href="#选择版本和下载" class="headerlink" title="选择版本和下载"></a>选择版本和下载</h1><p><a href="http://www.apache.org/dyn/closer.cgi/hive/" target="_blank" rel="external">下载hive</a>，有两个版本可以选择，hive1和hive2，hive2版本MR功能已经废弃，将来版本可能会直接去掉，如果要用hive的MR功能，那么请选择hive1相应版本，否则的话选哪个都可以进行测试。</p>
+<h1 id="配置hive"><a href="#配置hive" class="headerlink" title="配置hive"></a>配置hive</h1><ol>
+<li>下载完hive后，解压，然后<code>sudo vi /etc/profile</code>编辑文件，添加环境变量</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HIVE_HOME=hive目录的绝路路径</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$HIVE_HOME</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> HIVE_HOME PATH</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>控制台输入<code>source /etc/profile</code>使环境变量生效。</p>
+</li>
+<li><p>进入$HIVE_HOME/conf目录，拷贝<code>hive-default.xml.template</code>并重命名为<code>hive-site.xml</code>，编辑：（如果没有该参数，请自行添加，存在则改之）</p>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.exec.scratchdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/user/hive/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span> <span class="comment">&lt;!--hdfs目录 hive目录需要手动创建,并改为777权限--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Scratch space for Hive jobs<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.warehouse.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/user/hive/warehouse<span class="tag">&lt;/<span class="name">value</span>&gt;</span> <span class="comment">&lt;!--hdfs目录，需要手动创建--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>location of default database for the warehouse<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true<span class="tag">&lt;/<span class="name">value</span>&gt;</span> <span class="comment">&lt;!--修改为自己的mysql数据库--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>JDBC connect string for a JDBC metastore<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionDriverName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>Driver class name for a JDBC metastore<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionUserName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>root<span class="tag">&lt;/<span class="name">value</span>&gt;</span> <span class="comment">&lt;!--mysql用户名--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>username to use against metastore database<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionPassword<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>root<span class="tag">&lt;/<span class="name">value</span>&gt;</span> <span class="comment">&lt;!--mysql密码--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>password to use against metastore database<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>然后查找value是<code>${system</code>开头的，替换成具体的本地绝对路径，可以创建一个hive用户，放到hive用户目录下。</p>
+</li>
+<li><p>拷贝<code>hive-env.sh.template</code>并重命名<code>hive-env.sh</code>，添加如下内容，注意环境变量值更换为自己的路径。</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HADOOP_HOME=/home/hadoop/hadoop-2.7.1 </span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/share/jdk1.8.0_73</span><br></pre></td></tr></table></figure>
+<ol>
+<li>将hive-site.xml拷贝一份到hadoop的配置目录。</li>
+<li>下载mysql驱动放到hive目录下的lib目录中。</li>
+<li>启动hive，控制台输入<code>hive</code>，如果正确则输出一段信息后进入hive交互模式。</li>
+</ol>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ol>
+<li><blockquote>
+<p>Caused by: org.datanucleus.store.rdbms.connectionpool.DatastoreDriverNotFoundException: The specified datastore driver (“com.mysql.jdbc.Driver”) was not found in the CLASSPATH. Please check your CLASSPATH specification, and the name of the driver.</p>
+</blockquote>
+<p> <strong>解决方法</strong>：下载mysql驱动放到hive的lib目录</p>
+</li>
+<li><blockquote>
+<p>org.apache.hadoop.security.AccessControlException: Permission denied: user=hive, access=WRITE, inode=”/tmp/hadoop-yarn/staging/hive/.staging”:hadoop:supergroup:drwxr-xr-x</p>
+</blockquote>
+<p> <strong>解决方法</strong>：在hdfs中创建tmp目录，并改为777权限。</p>
+</li>
+<li><blockquote>
+<p>Starting Job = job_1457683200911_0001, Tracking URL = <a href="http://10.10.1.110:8088/proxy/application_1457683200911_0001/" target="_blank" rel="external">http://10.10.1.110:8088/proxy/application_1457683200911_0001/</a><br>Kill Command = /home/hadoop/hadoop-2.7.1/bin/hadoop job  -kill job_1457683200911_0001<br>Hadoop job information for Stage-1: number of mappers: 0; number of reducers: 0，打开管理页面发现信息：waiting for AM container to be allocated, launched and register with RM.</p>
+</blockquote>
+<p> <strong>解决方法</strong>：yarn没有配置正确，没有启动<code>nodemanager</code>，启动命令<code>yarn-daemon.sh start nodemanager</code>，启动之后即可运行job。</p>
+</li>
+</ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="http://blog.csdn.net/jyf211314/article/details/34110721" target="_blank" rel="external">hadoop2.2完全分布式集群+hive+mysql存储元数据配置</a>排版有点乱，请将就看</li>
+<li><a href="http://blog.csdn.net/z363115269/article/details/39048589" target="_blank" rel="external">hive导入HDFS数据</a> 和上面毛病类似</li>
+</ol>
+
+	
+	</div>
+  <a type="button" href="/2016/03/11/hadoop/hadoop集成hive/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-11 </div>
+			<div class="article-title"><a href="/2016/03/11/spring/SpingXD结合Hadoop/" >SpingXD结合Hadoop</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前的文章介绍了<a href="/Spring-XD简介">Spring XD</a>，<a href="/以分布式方式运行Spring-XD">以分布式方式运行Spring-XD</a>和<a href="/安装启动Hadoop集群">安装启动Hadoop集群</a>的文章。本文将简单介绍（刚学，很LOW(⊙﹏⊙)b）SpringXD和Hadoop，HDFS结合配置和使用方法。</p>
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>已经按照上述提到的两篇文章或者其他资料搭建并运行了SpringXD和Hadoop。</p>
+<h1 id="配置SpringXD"><a href="#配置SpringXD" class="headerlink" title="配置SpringXD"></a>配置SpringXD</h1><ol>
+<li>运行命令<code>jps</code>找到<code>AdminServerApplication</code>和<code>ContainerServerApplication</code>两项，结束进程<code>kill 进程pid</code>。</li>
+<li>编辑SpingXD的配置文件<code>server.yaml</code>，在<code>spring</code>节点下增加以下hadoop的配置信息：</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hadoop:</span></span><br><span class="line">	&lt;!-- 注意换成自己的hdfs地址 --<span class="string">&gt;</span><br><span class="line"></span><span class="attr">    fsUri:</span> hdfs://<span class="number">10.10</span><span class="number">.1</span><span class="number">.110</span>:<span class="number">8020</span></span><br><span class="line"><span class="attr">    resourceManagerHost:</span> <span class="number">10.10</span><span class="number">.1</span><span class="number">.110</span></span><br><span class="line"><span class="attr">    resourceManagerPort:</span> <span class="number">8032</span></span><br><span class="line"><span class="attr">    yarnApplicationClasspath:</span></span><br></pre></td></tr></table></figure>
+<p>然后启动xd-admin<code>bin/xd-admin</code>和xd-container<code>bin/xd-container</code>。</p>
+<ol>
+<li>切换到hadoop用户下，使用命令<code>hadoop fs -mkdir /xd</code>创建目录，然后更改权限<code>hadoop fs -chmod -R 777 /xd</code>（如果没有配置hadoop的环境变量，则请进入hadoop的目录使用<code>bin/hadoop</code>命令代替<code>hadoop</code>）</li>
+<li>打开新的控制台，进入xd-shell交互环境，假如根据上面的Spring-XD配置文章配置了安全措施，那么还需要执行下面的命令<code>admin config server --uri http://xd-adminIP:9393 --username 用户名 --password 密码</code>进行授权后登录。</li>
+<li>创建stream，向hdfs中写入数据<code>stream create --name myhdfsstream1 --definition &quot;time | hdfs&quot; --deploy</code>，用命令<code>hadoop fs ls /xd/myhdfsstream1</code>即可看到有临时文件生成。</li>
+</ol>
+
+	
+	</div>
+  <a type="button" href="/2016/03/11/spring/SpingXD结合Hadoop/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2016-03-09 </div>
 			<div class="article-title"><a href="/2016/03/09/other/Hexo-Git-Oschina-Golang-Tenxcloud打造博客/" >Hexo+Git+Oschina+Golang+Tenxcloud打造博客</a></div>						
 		</h3>
@@ -707,113 +843,6 @@ b                            |  1
 </div>
 
 		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-09 </div>
-			<div class="article-title"><a href="/2016/03/09/sql/sql查找排除某些表后不存在某个字段的表/" >sql查找排除某些表后不存在某个字段的表</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> table_name <span class="keyword">FROM</span> information_schema.<span class="keyword">tables</span></span><br><span class="line"><span class="keyword">WHERE</span> table_schema=<span class="string">'database_name'</span></span><br><span class="line">	<span class="keyword">AND</span> table_name <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">'table_name'</span></span><br><span class="line">	<span class="keyword">AND</span> table_name <span class="keyword">NOT</span> <span class="keyword">IN</span>(<span class="keyword">SELECT</span> <span class="keyword">col</span>.table_name  <span class="keyword">FROM</span> information_schema.<span class="string">`COLUMNS`</span> <span class="keyword">col</span></span><br><span class="line">	       <span class="keyword">WHERE</span> <span class="keyword">col</span>.table_name <span class="keyword">IN</span> (<span class="keyword">SELECT</span> table_name <span class="keyword">FROM</span> information_schema.<span class="keyword">tables</span></span><br><span class="line">					<span class="keyword">WHERE</span> table_schema=<span class="string">'database_name'</span></span><br><span class="line">					<span class="keyword">AND</span> table_name <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">'table_name'</span></span><br><span class="line">					<span class="keyword">AND</span> <span class="keyword">col</span>.column_name=<span class="string">'gmt_modified'</span>);</span><br></pre></td></tr></table></figure>
-
-	
-	</div>
-  <a type="button" href="/2016/03/09/sql/sql查找排除某些表后不存在某个字段的表/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-09 </div>
-			<div class="article-title"><a href="/2016/03/09/sql/MySql避免重复插入记录/" >MySql避免重复插入记录</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="方案一：使用ignore关键字"><a href="#方案一：使用ignore关键字" class="headerlink" title="方案一：使用ignore关键字"></a>方案一：使用ignore关键字</h1><p>如果是用主键primary或者唯一索引unique区分了记录的唯一性,避免重复插入记录可以使用：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">ignore</span> <span class="keyword">into</span> table_name(email,phone,user_id) <span class="keyword">values</span>(<span class="string">'test9@163.com'</span>,<span class="string">'99999'</span>,<span class="string">'9999'</span>)</span><br></pre></td></tr></table></figure></p>
-<p>这样当有重复记录就会忽略,执行后返回数字0,还有个应用就是复制表,避免重复记录：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">ignore</span> <span class="keyword">into</span> <span class="keyword">table</span>(<span class="keyword">name</span>)  <span class="keyword">select</span>  <span class="keyword">name</span> <span class="keyword">from</span> table2</span><br></pre></td></tr></table></figure></p>
-<h1 id="方案二：使用Replace"><a href="#方案二：使用Replace" class="headerlink" title="方案二：使用Replace"></a>方案二：使用Replace</h1><p>replace的语法格式为：</p>
-<ol>
-<li><code>replace into table_name(col_name, ...) values(...)</code></li>
-<li><code>replace into table_name(col_name, ...) select ...</code></li>
-<li><code>replace into table_name set col_name=value, ...</code></li>
-</ol>
-<h2 id="算法说明："><a href="#算法说明：" class="headerlink" title="算法说明："></a>算法说明：</h2><p>REPLACE的运行与INSERT很相像,但是如果旧记录与新记录有相同的值，则在新记录被插入之前，旧记录被删除，即：</p>
-<ol>
-<li>尝试把新行插入到表中</li>
-<li>当因为对于主键或唯一关键字出现重复关键字错误而造成插入失败时：<ul>
-<li>从表中删除含有重复关键字值的冲突行</li>
-<li>再次尝试把新行插入到表中<br>旧记录与新记录有相同的值的判断标准就是：表有一个PRIMARY KEY或UNIQUE索引，否则，使用一个REPLACE语句没有意义。该语句会与INSERT相同，因为没有索引被用于确定是否新行复制了其它的行。<h2 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h2>REPLACE语句会返回一个数，来指示受影响的行的数目。该数是被删除和被插入的行数的和。受影响的行数可以容易地确定是否REPLACE只添加了一行，或者是否REPLACE也替换了其它行：检查该数是否为1（添加）或更大（替换）。<h2 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h2>eg:(phone字段为唯一索引)<br><code>replace  into table_name(email,phone,user_id) values(&#39;test569&#39;,&#39;99999&#39;,&#39;123&#39;)</code><br>另外：在 SQL Server 中可以这样处理：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if not exists (<span class="keyword">select</span> phone <span class="keyword">from</span> t <span class="keyword">where</span> phone= <span class="string">'1'</span>)  </span><br><span class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> t(phone, update_time) <span class="keyword">values</span>(<span class="string">'1'</span>, <span class="keyword">getdate</span>())</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">update</span> t <span class="keyword">set</span> update_time = <span class="keyword">getdate</span>() <span class="keyword">where</span> phone= <span class="string">'1'</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ol>
-<p>更多信息<a href="http://dev.mysql.com/doc/refman/5.1/zh/sql-syntax.html#replace" target="_blank" rel="external">请看</a></p>
-<h1 id="方案三：ON-DUPLICATE-KEY-UPDATE"><a href="#方案三：ON-DUPLICATE-KEY-UPDATE" class="headerlink" title="方案三：ON DUPLICATE KEY UPDATE"></a>方案三：ON DUPLICATE KEY UPDATE</h1><p>如‍上所写，你也可以在<code>INSERT INTO.....</code>后面加上 <code>ON DUPLICATE KEY UPDATE</code>方法来实现。如果您指定了<code>ON DUPLICATE KEY UPDATE</code>，并且插入行后会导致在一个UNIQUE索引或PRIMARY KEY中出现重复值，则执行旧行UPDATE。例如，如果列a被定义为UNIQUE，并且包含值1，则以下两个语句具有相同的效果：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> (a,b,c) <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> c=c+<span class="number">1</span>; `</span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">table</span> <span class="keyword">SET</span> c=c+<span class="number">1</span> <span class="keyword">WHERE</span> a=<span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
-<p>如果行作为新记录被插入，则受影响行的值为1；如果原有的记录被更新，则受影响行的值为2。注释：如果列b也是唯一列，则INSERT与此UPDATE语句相当：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">table</span> <span class="keyword">SET</span> c=c+<span class="number">1</span></span><br><span class="line"><span class="keyword">WHERE</span> a=<span class="number">1</span> <span class="keyword">OR</span> b=<span class="number">2</span> <span class="keyword">LIMIT</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
-<p>如果a=1 OR b=2与多个行向匹配，则只有一个行被更新。通常，您应该尽量避免对带有多个唯一关键字的表使用ON DUPLICATE KEY子句。<br>您可以在UPDATE子句中使用VALUES(col_name)函数从INSERT…UPDATE语句的INSERT部分引用列值。换句话说，如果没有发生重复关键字冲突，则UPDATE子句中的VALUES(col_name)可以引用被插入的col_name的值。本函数特别适用于多行插入。VALUES()函数只在INSERT…UPDATE语句中有意义，其它时候会返回NULL。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> (a,b,c) <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),(<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)    </span><br><span class="line"><span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> c=<span class="keyword">VALUES</span>(a)+<span class="keyword">VALUES</span>(b);</span><br></pre></td></tr></table></figure></p>
-<p>本语句与以下两个语句作用相同：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> (a,b,c) <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)  <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> c=<span class="number">3</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> (a,b,c) <span class="keyword">VALUES</span> (<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)  <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> c=<span class="number">9</span>;</span><br></pre></td></tr></table></figure></p>
-<p>当您使用<code>ON DUPLICATE KEY UPDATE</code>时，<code>DELAYED</code>选项被忽略。<br>注：<a href="http://www.cnblogs.com/zeroone/archive/2012/04/18/2454728.html" target="_blank" rel="external">来源</a></p>
-
-	
-	</div>
-  <a type="button" href="/2016/03/09/sql/MySql避免重复插入记录/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-03-09 </div>
-			<div class="article-title"><a href="/2016/03/09/hack/特定国家版windows8/" >特定国家版windows8</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>有强迫症的同学真是伤不起，他们就认定只有OEM厂商预装的系统才是正版的，其他通过密钥激活、kms激活的系统就是盗版的，为了满足这些同学的强迫症，笔者搜罗了半天网络资源，终于将OEM厂商使用的预装系统镜像收集完毕，他们分别是特定国家版（CoreCountrySpecific）和单语言版（CoreSingleLanguage），在大多华硕笔记本、联想笔记本中预装的系统通常显示为win8/8.1中文版，其实这些版本的实质就是特定国家版，今天给大家讲解一下他们与其他系统版本的区别以及分享一下他们的下载地址和有效安装密钥。</p>
-<p>如何查看你预装的系统版本具体是什么？</p>
-<p>win8/8.1中文版，可以通过注册表查看系统的具体版本，打开注册表定位到HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion，然后在右边找到EditionID和ProductName项，如果EditionID处显示为CoreCountrySpecific，ProductName处显示为Windows 8/8.1 China，那么就说明你预装的系统为特定国家版，如果EditionID处显示为CoreSingleLanguage，那么说明你预装的系统为单语言版，目前国内OEM厂商使用的基本就是这两种系统了。</p>
-<p>特定国家版、单语言版与其他版本的区别是什么？</p>
-<p>一般预装系统显示为win8/8.1中文版的大多都是特定国家版（CoreCountrySpecific），细心的同学可能会发现不管特定国家版还是单语言版，他们的英文名字都带一个“Core”，Core是什么呢？大家都知道win8/8.1分为核心板、专业版、企业版，那么Core就是核心板，这说明特定国家版和单语言版的实质就是核心板，他们与核心版的不同之处：特定国家使用，并且无法更换系统语言，比如是中文版，无法通过语言包或语言设置更换成其他版本，另外他们的密钥也不通用。（本文由 亦是美网络 yishimei.cn 原创）</p>
-<p>为什么有些同学哭死哭活的要安装win8/8.1预装系统版本？</p>
-<p>OEM厂商在电脑出厂时就将密钥集成在主板里了，如果使用预装系统的版本，在安装成功后，输入OEM集成在主板里的密钥就可以直接联网激活了，那些同学心目中的“正版概念”就是这么来的。</p>
-<p>win8.1 CoreCountrySpecific（特定国家版）下载地址：</p>
-<p>32位系统：<a href="http://pan.baidu.com/s/1dDCNHdR" target="_blank" rel="external">http://pan.baidu.com/s/1dDCNHdR</a></p>
-<p>64位系统：<a href="http://pan.baidu.com/s/1c05ym0w" target="_blank" rel="external">http://pan.baidu.com/s/1c05ym0w</a></p>
-<p>安装密钥：TNH8J-KG84C-TRMG4-FFD7J-VH4WX</p>
-<p>激活方法：</p>
-<p>1、使用安装密钥安装完成后，参考<a href="http://www.yishimei.cn/network/374.html" target="_blank" rel="external">（oem预装系统主板密钥提取神器 - RW - Read &amp; Write utility ）</a>获取系统集成的密钥，然后在线联网激活。</p>
-<p>2、下载kms神龙版激活<a href="http://www.yishimei.cn/network/319.html" target="_blank" rel="external">（KMS在线激活windows8/8.1、windows7和office2013/2010之MicroKMS 神龙版）</a>。</p>
-<p>win8.1 CoreSingleLanguage（单语言版）下载地址：</p>
-<p>32位系统：<a href="http://pan.baidu.com/s/1bn3ytzx" target="_blank" rel="external">http://pan.baidu.com/s/1bn3ytzx</a></p>
-<p>64位系统：<a href="http://pan.baidu.com/s/1hqGLrRA" target="_blank" rel="external">http://pan.baidu.com/s/1hqGLrRA</a></p>
-<p>安装密钥：Y9NXP-XT8MV-PT9TG-97CT3-9D6TC</p>
-<p>激活方法：同win8.1 CoreCountrySpecific（特定国家版）。</p>
-
-	
-	</div>
-  <a type="button" href="/2016/03/09/hack/特定国家版windows8/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
 
 		</div>
 
@@ -870,7 +899,7 @@ b                            |  1
 		
 			<li><a href="/categories/hadoop/">hadoop<span>2</span></a></li>
 		
-			<li><a href="/categories/java/">java<span>1</span></a></li>
+			<li><a href="/categories/java/">java<span>2</span></a></li>
 		
 			<li><a href="/categories/linux/">linux<span>4</span></a></li>
 		
@@ -878,7 +907,7 @@ b                            |  1
 		
 			<li><a href="/categories/other/">other<span>1</span></a></li>
 		
-			<li><a href="/categories/spark/">spark<span>3</span></a></li>
+			<li><a href="/categories/spark/">spark<span>4</span></a></li>
 		
 			<li><a href="/categories/spring/">spring<span>6</span></a></li>
 		
@@ -897,48 +926,48 @@ b                            |  1
 		<h4>标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
-		
-			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
-		
-			<li><a href="/tags/go/">go<span>8</span></a></li>
-		
-			<li><a href="/tags/spark/">spark<span>4</span></a></li>
-		
-			<li><a href="/tags/软件/">软件<span>1</span></a></li>
-		
-			<li><a href="/tags/kafka/">kafka<span>1</span></a></li>
-		
-			<li><a href="/tags/进程/">进程<span>1</span></a></li>
-		
-			<li><a href="/tags/端口/">端口<span>1</span></a></li>
+			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
 		
 			<li><a href="/tags/xd/">xd<span>3</span></a></li>
 		
-			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
-		
-			<li><a href="/tags/golang/">golang<span>10</span></a></li>
-		
 			<li><a href="/tags/安卓/">安卓<span>1</span></a></li>
 		
-			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
-		
-			<li><a href="/tags/sql/">sql<span>1</span></a></li>
-		
-			<li><a href="/tags/jrebel/">jrebel<span>1</span></a></li>
-		
-			<li><a href="/tags/windows8/">windows8<span>1</span></a></li>
-		
-			<li><a href="/tags/spring-xd/">spring-xd<span>3</span></a></li>
-		
-			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
+			<li><a href="/tags/http/">http<span>1</span></a></li>
 		
 			<li><a href="/tags/录音/">录音<span>1</span></a></li>
 		
+			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
+		
+			<li><a href="/tags/jdk/">jdk<span>1</span></a></li>
+		
+			<li><a href="/tags/android/">android<span>1</span></a></li>
+		
+			<li><a href="/tags/spring/">spring<span>4</span></a></li>
+		
+			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
+		
+			<li><a href="/tags/spring-xd/">spring-xd<span>3</span></a></li>
+		
+			<li><a href="/tags/hadoop/">hadoop<span>4</span></a></li>
+		
+			<li><a href="/tags/kafka/">kafka<span>1</span></a></li>
+		
 			<li><a href="/tags/arch/">arch<span>2</span></a></li>
 		
+			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
 		
-		   <li><a href="/tags">...<span>32</span></a></li>
+			<li><a href="/tags/golang/">golang<span>10</span></a></li>
+		
+			<li><a href="/tags/go/">go<span>8</span></a></li>
+		
+			<li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li>
+		
+			<li><a href="/tags/linux/">linux<span>3</span></a></li>
+		
+			<li><a href="/tags/spark/">spark<span>5</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>34</span></a></li>
 		 
 		</ul>
 	</div>
@@ -955,19 +984,19 @@ b                            |  1
       </li>
     
       <li>
+        <a href="/2016/05/10/spark/sbt-idea-入门及配置/" ><i class="fa fa-file-o"></i>sbt-idea-入门及配置</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/20/博客更新说明/" ><i class="fa fa-file-o"></i></a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/20/java/JDK多版本管理/" ><i class="fa fa-file-o"></i>JDK多版本管理</a>
+      </li>
+    
+      <li>
         <a href="/2016/03/16/spring/通过SpringXD将信息分片-文件夹存储到HDFS/" ><i class="fa fa-file-o"></i>通过SpringXD将信息分片|文件夹存储到HDFS</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/16/spark/sparkApp提交到SpringXD出现错误可能情况及解决方法/" ><i class="fa fa-file-o"></i>sparkApp提交到SpringXD出现错误可能情况...</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/15/linux/linux下根据端口号查询对应进程/" ><i class="fa fa-file-o"></i>linux下根据端口号查询对应进程</a>
-      </li>
-    
-      <li>
-        <a href="/2016/03/15/golang/golang打印错误栈信息/" ><i class="fa fa-file-o"></i>golang打印错误栈信息</a>
       </li>
     
   </ul>
