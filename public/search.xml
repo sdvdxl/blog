@@ -11,7 +11,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Linux shell 命令]]></title>
+      <title><![CDATA[Linux-shell-命令]]></title>
       <url>http://todu.top/2016/05/25/linux/Linux%20shell%20%E5%91%BD%E4%BB%A4/</url>
       <content type="html"><![CDATA[<h2 id="lsof"><a href="#lsof" class="headerlink" title="lsof"></a>lsof</h2><p>适用于ip4</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -Pnl +M -i4 | grep port</span><br></pre></td></tr></table></figure>
