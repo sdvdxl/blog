@@ -11,6 +11,19 @@
     </entry>
     
     <entry>
+      <title><![CDATA[命令]]></title>
+      <url>http://todu.top/2016/05/25/linux/Linux%20shell%20%E5%91%BD%E4%BB%A4/</url>
+      <content type="html"><![CDATA[<h2 id="lsof"><a href="#lsof" class="headerlink" title="lsof"></a>lsof</h2><p>适用于ip4</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -Pnl +M -i4 | grep port</span><br></pre></td></tr></table></figure>
+<p>适用于ip6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -Pnl +M -i6 | grep port</span><br></pre></td></tr></table></figure>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>杀掉名字一样的java进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps |grep SparkSubmit | awk &apos;&#123;print &quot;kill -9 &quot; $1&#125;&apos; | sh</span><br></pre></td></tr></table></figure></p>
+<p>如果仅仅是打印命令，则后面的管道和sh不需要加，如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps |grep SparkSubmit | awk &apos;&#123;print &quot;kill -9 &quot; $1&#125;&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>删除找到的符合条件的文件（或者目录）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -iname target -exec rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[sbt-idea-入门及配置]]></title>
       <url>http://todu.top/2016/05/10/spark/sbt-idea-%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/</url>
       <content type="html"><![CDATA[<h1 id="Java-环境配置"><a href="#Java-环境配置" class="headerlink" title="Java 环境配置"></a>Java 环境配置</h1><p>这个就不多说了，这是前提条件，请自行安装后配置正确，如果不清楚请自行搜索 <strong>java 环境变量配置</strong> 相关问题。</p>

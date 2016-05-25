@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>linux下根据端口号查询对应进程 | 杜龙少的博客</title>
+  <title>命令 | 杜龙少的博客</title>
   <meta name="author" content="杜龙少">
   
   <meta name="description" content="杜龙少的博客">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="linux下根据端口号查询对应进程"/>
+  <meta property="og:title" content="命令"/>
   <meta property="og:site_name" content="杜龙少的博客"/>
 
   
@@ -93,7 +93,7 @@
 
 	
 		<div class="page-header page-header-inverse ">		
-			<h1 class="title title-inverse "> linux下根据端口号查询对应进程</h1>
+			<h1 class="title title-inverse "> 命令</h1>
 		</div>		
 	
 
@@ -113,10 +113,13 @@
 	<div class="mypage">		
 	  		
 
-	  <p>适用于ip4</p>
+	  <h2 id="lsof"><a href="#lsof" class="headerlink" title="lsof"></a>lsof</h2><p>适用于ip4</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -Pnl +M -i4 | grep port</span><br></pre></td></tr></table></figure>
 <p>适用于ip6</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -Pnl +M -i6 | grep port</span><br></pre></td></tr></table></figure>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>杀掉名字一样的java进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps |grep SparkSubmit | awk &apos;&#123;print &quot;kill -9 &quot; $1&#125;&apos; | sh</span><br></pre></td></tr></table></figure></p>
+<p>如果仅仅是打印命令，则后面的管道和sh不需要加，如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps |grep SparkSubmit | awk &apos;&#123;print &quot;kill -9 &quot; $1&#125;&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>删除找到的符合条件的文件（或者目录）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -iname target -exec rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure></p>
 	  
 	</div>
 
@@ -126,13 +129,13 @@
 <ul class="pagination">
 	 
 				
-    	<li class="prev"><a href="/2016/03/16/spark/sparkApp提交到SpringXD出现错误可能情况及解决方法/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+    	<li class="prev"><a href="/9999/12/31/博客更新说明/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
   		
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-		   <li class="next"><a href="/2016/03/15/golang/golang打印错误栈信息/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+		   <li class="next"><a href="/2016/05/10/spark/sbt-idea-入门及配置/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
@@ -171,7 +174,7 @@
   <h2 class="title">留言</h2>
 
   
-  	 <div class="ds-thread" data-thread-key="2016/03/15/linux/linux下根据端口号查询对应进程/" data-title="linux下根据端口号查询对应进程" data-url="http://todu.top/2016/03/15/linux/linux下根据端口号查询对应进程/"></div>  
+  	 <div class="ds-thread" data-thread-key="2016/05/25/linux/Linux shell 命令/" data-title="命令" data-url="http://todu.top/2016/05/25/linux/Linux shell 命令/"></div>  
   
 </section>
 
@@ -185,7 +188,7 @@
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2016-03-15 
+	2016-05-25 
 	</div>
 	
 
@@ -209,7 +212,7 @@
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/linux/">linux<span>4</span></a></li> <li><a href="/tags/端口/">端口<span>1</span></a></li> <li><a href="/tags/进程/">进程<span>1</span></a></li>
+  <li><a href="/tags/linux/">linux<span>4</span></a></li> <li><a href="/tags/shell/">shell<span>1</span></a></li>
     </ul>
 	</div>
 		
