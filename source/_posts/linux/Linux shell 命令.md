@@ -1,6 +1,5 @@
 layout: linux
-title: 命令
-p: linux/Linux shell 命令
+title: Linux shell 命令
 date: 2016-05-25 09:34:07
 tags:
 	- linux
