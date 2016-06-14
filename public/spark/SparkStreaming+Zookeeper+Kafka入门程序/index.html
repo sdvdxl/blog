@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SparkStreaming+Zookeeper+Kafka入门程序 | 杜龙少的博客</title>
+  <meta name="author" content="杜龙少">
+  
+  <meta name="description" content="杜龙少的博客">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="SparkStreaming+Zookeeper+Kafka入门程序"/>
+  <meta property="og:site_name" content="杜龙少的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="杜龙少的博客" type="application/atom+xml">
+  
+  
+    <link href="/favorite.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">杜龙少的博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> SparkStreaming+Zookeeper+Kafka入门程序</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="准备工作："><a href="#准备工作：" class="headerlink" title="准备工作："></a>准备工作：</h2><ul>
+<li>安装 <a href="http://spark.apache.org/" target="_blank" rel="external">spark</a></li>
+<li>安装 <a href="http://zookeeper.apache.org/" target="_blank" rel="external">zookeeper</a></li>
+<li>安装 <a href="http://kafka.apache.org/" target="_blank" rel="external">kafka</a></li>
+</ul>
+<h2 id="开始工作"><a href="#开始工作" class="headerlink" title="开始工作"></a>开始工作</h2><h4 id="1-启动zookeeper"><a href="#1-启动zookeeper" class="headerlink" title="1. 启动zookeeper"></a>1. 启动zookeeper</h4><p> 打开终端，切换到 <code>zookeeper HOME</code> 目录， 进入conf文件夹，拷贝一份 <code>zoo_sample.cfg</code> 副本并重命名为 <code>zoo.cfg</code><br> 切换到上级的bin目录中，执行 <code>./zkServer.sh start</code> 启动zookeeper，会有日志打印</p>
+<blockquote>
+<p>Starting zookeeper … STARTED</p>
+</blockquote>
+<p> 然后用 <code>./zkServer.sh status</code> 查看状态，如果有下列信息输出，则说明启动成功</p>
+<blockquote>
+<p>Mode: standalone</p>
+</blockquote>
+<p> 如果要停止zookeeper，则运行 <code>./zkServer stop</code> 即可</p>
+<h4 id="2-启动kafka"><a href="#2-启动kafka" class="headerlink" title="2. 启动kafka"></a>2. 启动kafka</h4><p>打开终端，切换到 <code>kafka HOME</code> 目录,运行 <code>bin/kafka-server-start.sh config/server.properties</code> 会有以下类似日志输出<br>  &gt;<br>[2014-11-12 17:38:13,395] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions [test,0] (kafka.server.ReplicaFetcherManager)<br>[2014-11-12 17:38:13,420] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions [test,0] (kafka.server.ReplicaFetcherManager)</p>
+<h4 id="3-启动kafka生产者"><a href="#3-启动kafka生产者" class="headerlink" title="3. 启动kafka生产者"></a>3. 启动kafka生产者</h4><p>重新打开一个终端，暂叫做 生产者终端，方便后面引用说明。切换到 <code>kafka HOME</code> 目录,运行 <code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</code> 创建一个叫 <code>test</code> 的主题。</p>
+<h4 id="4-编写scala应用程序"><a href="#4-编写scala应用程序" class="headerlink" title="4. 编写scala应用程序"></a>4. 编写scala应用程序</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    <span class="keyword">package</span> test</span><br><span class="line">    <span class="keyword">import</span> java.util.<span class="type">Properties</span></span><br><span class="line">    <span class="keyword">import</span> kafka.producer._</span><br><span class="line">    <span class="keyword">import</span> org.apache.spark.streaming._</span><br><span class="line">    <span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</span><br><span class="line">    <span class="keyword">import</span> org.apache.spark.streaming.kafka._</span><br><span class="line">    <span class="keyword">import</span> org.apache.spark.<span class="type">SparkConf</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">object</span> <span class="title">KafkaWordCount</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line">    <span class="comment">//    if (args.length &lt; 4) &#123;</span></span><br><span class="line">    <span class="comment">//      System.err.println("Usage: KafkaWordCount &lt;zkQuorum&gt;     &lt;group&gt; &lt;topics&gt; &lt;numThreads&gt;")</span></span><br><span class="line">    <span class="comment">//      System.exit(1)</span></span><br><span class="line">     <span class="comment">//    &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//    StreamingExamples.setStreamingLogLevels()</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//val Array(zkQuorum, group, topics, numThreads) = args</span></span><br><span class="line">    <span class="keyword">val</span> zkQuorum = <span class="string">"localhost:2181"</span></span><br><span class="line">    <span class="keyword">val</span> group = <span class="string">"1"</span></span><br><span class="line">    <span class="keyword">val</span> topics = <span class="string">"test"</span></span><br><span class="line">    <span class="keyword">val</span> numThreads = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> sparkConf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"KafkaWordCount"</span>).setMaster(<span class="string">"local[2]"</span>)</span><br><span class="line">    <span class="keyword">val</span> ssc =  <span class="keyword">new</span> <span class="type">StreamingContext</span>(sparkConf, <span class="type">Seconds</span>(<span class="number">2</span>))</span><br><span class="line">    ssc.checkpoint(<span class="string">"checkpoint"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> topicpMap = topics.split(<span class="string">","</span>).map((_,numThreads)).toMap</span><br><span class="line">    <span class="keyword">val</span> lines = <span class="type">KafkaUtils</span>.createStream(ssc, zkQuorum, group, topicpMap).map(_._2)</span><br><span class="line">    <span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> pairs = words.map(word =&gt; (word, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> wordCounts = pairs.reduceByKey(_ + _)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//val wordCounts = words.map(x =&gt; (x, 1L))</span></span><br><span class="line">    <span class="comment">//  .reduceByKeyAndWindow(_ + _, _ - _, Minutes(10), Seconds(2), 2)</span></span><br><span class="line">    wordCounts.print()</span><br><span class="line"></span><br><span class="line">    ssc.start()</span><br><span class="line">    ssc.awaitTermination()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>build.sbt</code> 文件中添加依赖<br> &gt;<br> libraryDependencies += “org.apache.spark” % “spark-streaming_2.10” % “1.1.0”<br>&gt;<br>libraryDependencies += “org.apache.spark” % “spark-streaming-kafka_2.10” % “1.1.0”</p>
+<p>启动scala程序，然后在 上面第2步的 生产者终端中输入一些字符串，如  <code>sdfsadf a aa a a a a a a a a</code> ，在ide的控制台上可以看到有信息输出<br> &gt;<br>4/11/12 16:38:22 INFO scheduler.DAGScheduler: Stage 195 (take at DStream.scala:608) finished in 0.004 s<br>-——————————————<br>Time: 1415781502000 ms<br>-——————————————<br>(aa,1)<br>(a,9)<br>(sdfsadf,1)</p>
+<p>说明程序成功运行。</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/spark/Spark基础知识/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/sqoop/Apache-Sqoop-安装/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div class="ds-thread" data-thread-key="spark/SparkStreaming+Zookeeper+Kafka入门程序/" data-title="SparkStreaming+Zookeeper+Kafka入门程序" data-url="http://todu.top/spark/SparkStreaming+Zookeeper+Kafka入门程序/"></div>  
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-03-09 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/spark/">spark<span>4</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li> <li><a href="/tags/spark-streaming/">spark-streaming<span>2</span></a></li> <li><a href="/tags/spark/">spark<span>5</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'sdvdxl' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2016 杜龙少
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
