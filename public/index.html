@@ -1,0 +1,699 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>杜龙少的博客</title>
+  <meta name="author" content="杜龙少">
+  
+  <meta name="description" content="杜龙少的博客">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="杜龙少的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="杜龙少的博客" type="application/atom+xml">
+  
+  
+    <link href="/favorite.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">杜龙少的博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header page-header-inverse ">
+  <h1 class="title title-inverse ">杜龙少的博客</h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+      <i class="fa fa-heart"></i>
+      杜龙少的博客
+</div>    
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-05-25 </div>
+			<div class="article-title"><a href="/linux/Linux-Shell-命令/" >Linux shell 命令</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="lsof"><a href="#lsof" class="headerlink" title="lsof"></a>lsof</h2><p>适用于ip4</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -Pnl +M -i4 | grep port</span><br></pre></td></tr></table></figure>
+<p>适用于ip6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -Pnl +M -i6 | grep port</span><br></pre></td></tr></table></figure>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>杀掉名字一样的java进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps |grep SparkSubmit | awk &apos;&#123;print &quot;kill -9 &quot; $1&#125;&apos; | sh</span><br></pre></td></tr></table></figure></p>
+<p>如果仅仅是打印命令，则后面的管道和sh不需要加，如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps |grep SparkSubmit | awk &apos;&#123;print &quot;kill -9 &quot; $1&#125;&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>删除找到的符合条件的文件（或者目录）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -iname target -exec rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure></p>
+
+	
+	</div>
+  <a type="button" href="/linux/Linux-Shell-命令/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-05-10 </div>
+			<div class="article-title"><a href="/spark/sbt-idea-入门及配置/" >sbt-idea-入门及配置</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Java-环境配置"><a href="#Java-环境配置" class="headerlink" title="Java 环境配置"></a>Java 环境配置</h1><p>这个就不多说了，这是前提条件，请自行安装后配置正确，如果不清楚请自行搜索 <strong>java 环境变量配置</strong> 相关问题。</p>
+<h1 id="Scala-配置"><a href="#Scala-配置" class="headerlink" title="Scala 配置"></a>Scala 配置</h1><p>首先要要配置 scala 环境。从<a href="http://scala-lang.org/" target="_blank" rel="external">官方</a>地址下载，这里我们使用scala2.10.6版本，所以<a href="http://scala-lang.org/download/2.10.6.html" target="_blank" rel="external">从这里下载</a>对应的平台版本。Windows请下载 <a href="http://downloads.lightbend.com/scala/2.10.6/scala-2.10.6.zip" target="_blank" rel="external">scala-2.10.6.zip</a> ，MacOS和Linux请下载 <a href="http://downloads.lightbend.com/scala/2.10.6/scala-2.10.6.tgz" target="_blank" rel="external">scala-2.10.6.tgz</a> 。</p>
+<p>下载完成后，解压到一个目录，然后配置环境变量 <code>SCALA_HOME</code> ，把scala的解压后的绝对路径配置到 <code>SCALA_HOME</code> ，然后增加 <code>PATH</code> 的配置。以下以 WIndows 和 Linux 举例来说，假如这里解压后得到的文件夹为 <code>scala-2.10.6</code>。</p>
+<h2 id="Windows-环境"><a href="#Windows-环境" class="headerlink" title="Windows 环境"></a>Windows 环境</h2><p>假如 <code>scala-2.10.6</code> 文件夹放在了 <code>C:\</code>目录下，那么新增 <code>SCALA_HOME</code> 的值为 <code>C:\scala-2.10.6</code> ，然后找到 <code>PATH</code> 这个环境变量， 在已有的值后面添加 <code>;%SCALA_HOME%\bin</code> （注意前面的分号），重新打开一个新的命令行窗口即可操作。关于windows环境变量的其他说明情自行补脑，这里就不多啰嗦了。</p>
+<h2 id="Linux-和-Mac-环境"><a href="#Linux-和-Mac-环境" class="headerlink" title="Linux 和 Mac 环境"></a>Linux 和 Mac 环境</h2><p>这里假定我们 <code>scala-2.10.6</code> 的 scala 目录存放在 <code>/usr/local/</code> 下，绝对路径就是 <code>/usr/local/scala-2.10.6</code> 。</p>
+<h3 id="Bash-环境"><a href="#Bash-环境" class="headerlink" title="Bash 环境"></a>Bash 环境</h3><p>bash 环境下可以修改 <code>~/.bashrc</code> 或者 <code>/etc/profile</code> 文件，添加一下内容：             </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SCALA_HOME=/usr/<span class="built_in">local</span>/scala-2.10.6</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$SCALA_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> SCALA_HOME PATH</span><br></pre></td></tr></table></figure>
+<p>然后执行 <code>source ~/.bashrc</code> 或者 <code>source /etc/profile</code> 即可。</p>
+<h3 id="Zsh-环境"><a href="#Zsh-环境" class="headerlink" title="Zsh 环境"></a>Zsh 环境</h3><p>如果你的终端bash用的是 zsh ，那么需要在 <code>~/.zshrc</code> 文件中增加上述内容，然后执行 <code>source ~/.zshrc</code> 即可。</p>
+<h1 id="Sbt-配置"><a href="#Sbt-配置" class="headerlink" title="Sbt 配置"></a>Sbt 配置</h1><p><a href="http://www.scala-sbt.org/" target="_blank" rel="external">官方地址</a>，<a href="http://www.scala-sbt.org/download.html" target="_blank" rel="external">从这里下载</a>，如果是MacOS的话，可以依照这里提示的方法进行快捷安装，如果是其他平台或者想手动配置，<a href="https://dl.bintray.com/sbt/native-packages/sbt/0.13.11/sbt-0.13.11.zip" target="_blank" rel="external">点击这里直接下载</a>即可。</p>
+<p>下载完成并解压，得到文件夹 <code>sbt</code>。</p>
+<h2 id="Windows-环境-1"><a href="#Windows-环境-1" class="headerlink" title="Windows 环境"></a>Windows 环境</h2><p>假如我们将 <code>sbt</code> 文件夹放到了 <code>C:\</code>目录下。新增环境变量 <code>SBT_HOME</code> 值为 <code>C:\sbt</code>， 在 <code>PATH</code> 变量值后面添加 <code>;%SBT_HOME%\bin</code>，重新打开一个新的命令行窗口即可。</p>
+<h2 id="Linux-或者-Mac-环境"><a href="#Linux-或者-Mac-环境" class="headerlink" title="Linux 或者 Mac 环境"></a>Linux 或者 Mac 环境</h2><p>这里假定我们将 <code>sbt</code> 目录放在了 <code>/usr/local/</code> 目录下。同上面配置 scala 环境变量一样。</p>
+<h3 id="Bash-环境-1"><a href="#Bash-环境-1" class="headerlink" title="Bash 环境"></a>Bash 环境</h3><p>编辑 <code>~/.bashrc</code> 或者 <code>/etc/profile</code> ，新增以下内容:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SBT_HOME=/usr/<span class="built_in">local</span>/sbt</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$SBT_HOEM</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> SBT_HOME PATH</span><br></pre></td></tr></table></figure>
+<p>然后执行 <code>source ~/.bashrc</code> 或者 <code>source /etc/profile</code> 即可生效。</p>
+<h3 id="Zsh-环境-1"><a href="#Zsh-环境-1" class="headerlink" title="Zsh 环境"></a>Zsh 环境</h3><p>编辑 <code>~/.zshrc</code>， 添加上面的内容并保存后，执行 <code>source ~/.zshrc</code> 即可生效。</p>
+<h2 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h2><h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p>在随意一个地方创建一个文件夹，名字为 <code>spark-sbt-demo</code> ，下面是目录结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">spark-sbt-demo                                                                                                                                                                         </span><br><span class="line">├── build.sbt</span><br><span class="line">├── project</span><br><span class="line">│   ├── build.properties</span><br><span class="line">│   └── plugins.sbt</span><br><span class="line">└── src</span><br><span class="line">    ├── main</span><br><span class="line">        ├── scala</span><br><span class="line">           └── WordCount.scala</span><br></pre></td></tr></table></figure>
+<p>build.sbt 文件中添加如下内容（注意每行要用空行隔开）：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">name := <span class="string">"spark-sbt-demo"</span></span><br><span class="line"></span><br><span class="line">version := <span class="string">"1.0"</span></span><br><span class="line"></span><br><span class="line">scalaVersion := <span class="string">"2.10.6"</span></span><br><span class="line"></span><br><span class="line">organization := <span class="string">"spark.demo"</span></span><br><span class="line"></span><br><span class="line">version := <span class="string">"1.0.0-SNAPSHOT"</span></span><br><span class="line"></span><br><span class="line">libraryDependencies += <span class="string">"org.apache.spark"</span> % <span class="string">"spark-core_2.10"</span> % <span class="string">"1.6.1"</span> % <span class="string">"provided"</span></span><br></pre></td></tr></table></figure>
+<p>WordCount.scala 文件内容：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">  * Created by sdvdxl on 16/5/11.</span><br><span class="line">  */</span></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">WordCount</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"spark-sbt-demo"</span>).setMaster(<span class="string">"local[*]"</span>)</span><br><span class="line">    <span class="keyword">val</span> sc  = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</span><br><span class="line">    sc.textFile(<span class="string">"src/main/scala/WordCount.scala"</span>).flatMap(_.split(<span class="string">" "</span>)).map(word=&gt;(word,<span class="number">1</span>)).reduceByKey(_+_).foreach(println)</span><br><span class="line">    sc.stop()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>build.properties 文件内容 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbt.version = 0.13.11</span><br></pre></td></tr></table></figure>
+<p>plugins.sbt 文件先保持为空。</p>
+<p>至此，我们已经创建了一个 sbt 机构的项目。</p>
+<p>接下来会说明使用sbt下载依赖，使用 idea 创建 sbt 项目，在idea中如何运行sbt管理的 spark app。</p>
+<h2 id="Sbt-的基本使用"><a href="#Sbt-的基本使用" class="headerlink" title="Sbt 的基本使用"></a>Sbt 的基本使用</h2><p>上面我们创建了一个用 sbt 管理的 spark app 项目，如果想要提交到spark中运行，那么需要打包成jar包，好在 sbt 本身或者插件提供了这样的功能。</p>
+<h3 id="应用打包"><a href="#应用打包" class="headerlink" title="应用打包"></a>应用打包</h3><p>打开命令行，切换到该项目目录下，然后输入 <code>sbt</code> 之后，进入 sbt 的交互中，然后输入 <code>package</code> ，开始打包，最后如果看到类似</p>
+<blockquote>
+<p>[info] Done packaging.<br>  [success] Total time: 11 s, completed 2016-5-11 12:32:09</p>
+</blockquote>
+<p>字样，那么说明打包成功，打成的 jar 包在上面的日志中可以找到。</p>
+<h3 id="第三方-jar-统一打包"><a href="#第三方-jar-统一打包" class="headerlink" title="第三方 jar 统一打包"></a>第三方 jar 统一打包</h3><p>在写应用的时候，我们不只是用到 <code>spark</code> 自身的 jar 包，还会用到好多其他第三方类库，那么，在提交应用到 spark 运行的时候，这些第三方依赖也需要一并提交上去，否则会出现找不到类的问题。如果依赖少的话，直接将这些 jar 包直接一个一个提交上去也没问题，但是一旦依赖了大量的类库，这种方法显然是低效费力的，那么怎么才能将这些所有的第三方依赖打成一个 jar 包呢？</p>
+<p>sbt 本身没有提供这样的功能，但是我们可以依靠相应的插件完成此操作。记得上面有个文件内容留空的 <code>plugins.sbt</code> 文件吗？这个文件中可以配置我们想要完成特定功能的插件，现在我们在其中添加如下内容：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addSbtPlugin(<span class="string">"com.eed3si9n"</span> % <span class="string">"sbt-assembly"</span> % <span class="string">"0.14.2"</span>)</span><br></pre></td></tr></table></figure>
+<p>然后重新 进入 sbt 交互式环境，输入 <code>assemblyPackageDependency</code> 回车，稍后将看到类似如下输出：    </p>
+<blockquote>
+<p>[info] Done packaging.<br>  [success] Total time: 41 s, completed 2016-5-11 13:36:37</p>
+</blockquote>
+<p>这样就成功的将所有依赖的第三方类库打包到一个 jar 包中了，具体打包的文件可以在上面的日志中看到。</p>
+<h2 id="使用-idea-创建-sbt-项目"><a href="#使用-idea-创建-sbt-项目" class="headerlink" title="使用 idea 创建 sbt 项目"></a>使用 idea 创建 sbt 项目</h2><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>使用 idea 创建 sbt 项目需要安装 <code>scala</code> 和 <code>sbt</code> 插件。<br>打开idea的首选项，然后找到 <code>Plugins</code> ，点击 <code>Browser repositores...</code> 按钮，输入 <code>scala</code> 搜索，然后找到 <code>scala</code> 和 <code>sbt</code> 的插件进行安装，如下图所示：<br><img src="/images/scala/scala-sbt-plugin.png" alt="scala-sbt-plugins"><br>安装完成后重启idea。</p>
+<h3 id="创建-sbt-项目"><a href="#创建-sbt-项目" class="headerlink" title="创建 sbt 项目"></a>创建 sbt 项目</h3><p>File -&gt; New -&gt; Project… 打开项目创建向导：<br><img src="/images/scala/sbt-project-1.png" alt="创建sbt项目"><br>创建完成后，等待idea刷新项目，目录结构大体如下（project/project 和 target相关没有列出）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">spark-sbt-demo                                                                                                                                                                </span><br><span class="line">├── build.sbt</span><br><span class="line">├── project</span><br><span class="line">│   ├── build.properties</span><br><span class="line">│   └── plugins.sbt</span><br><span class="line">└── src</span><br><span class="line">    ├── main</span><br><span class="line">    │   ├── java</span><br><span class="line">    │   ├── resources</span><br><span class="line">    │   ├── scala</span><br><span class="line">    │   └── scala-2.11</span><br><span class="line">    └── test</span><br><span class="line">        ├── java</span><br><span class="line">        ├── resources</span><br><span class="line">        ├── scala</span><br><span class="line">        └── scala-2.11</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>plugins.sbt</code> 文件放置插件配置</li>
+<li><code>build.sbt</code> 是整体的项目配置信息</li>
+<li><code>build.properties</code> 可以设置 sbt 版本</li>
+<li><code>java</code> 目录存放 java 文件</li>
+<li><code>scala</code> 目录存放 scala 文件</li>
+<li><code>resources</code> 目录用来存放配置文件</li>
+<li><code>test</code> 相关目录用来存放测试相关文件<h2 id="在-idea-中-运行-spark-app"><a href="#在-idea-中-运行-spark-app" class="headerlink" title="在 idea 中 运行 spark app"></a>在 idea 中 运行 spark app</h2>上面我们介绍了如何使用 idea 项目向导创建一个 sbt 项目，现在我们来说一下如何在 idea 中直接运行 sbt 构建的 spark app。</li>
+</ul>
+<p>这里我们使用一开始我们创建的那个项目，使用 idea 导入功能，File -&gt; Open 找到项目目录打开即可。<br>在 <code>WordCount.scala</code> 文件中右键，选择 <code>Run WordCount</code> ，开始运行，但是结果可能不是我们所期望的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">"main"</span> java.lang.NoClassDefFoundError: org/apache/spark/SparkConf</span><br><span class="line">	at WorldCount$.main(WorldCount.scala:<span class="number">8</span>)</span><br><span class="line">	at WorldCount.main(WorldCount.scala)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:<span class="number">62</span>)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:<span class="number">43</span>)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:<span class="number">497</span>)</span><br><span class="line">	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:<span class="number">144</span>)</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: org.apache.spark.SparkConf</span><br><span class="line">	at java.net.URLClassLoader.findClass(URLClassLoader.java:<span class="number">381</span>)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:<span class="number">424</span>)</span><br><span class="line">	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:<span class="number">331</span>)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:<span class="number">357</span>)</span><br><span class="line">	... <span class="number">7</span> more</span><br><span class="line"></span><br><span class="line">Process finished with exit code <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>这是为什么呢？原因是我们在 <code>build.sbt</code> 中配置的 spark 依赖是这样的：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">libraryDependencies += <span class="string">"org.apache.spark"</span> % <span class="string">"spark-core_2.10"</span> % <span class="string">"1.6.1"</span> % <span class="string">"provided"</span></span><br></pre></td></tr></table></figure>
+<p>注意到后面的 <code>provided</code> 了吗？这个代表打包或者运行的时候不会将这个 jar 包的文件包含进去（注意：spark app 要求这样，注意不要把spark相关的jar包包含进去）。这样导致我们无法再 idea 中调试或者运行 spark app。</p>
+<p>解决方案还是有的，sbt 和 maven（也是一个项目管理的软件）一样，提供了模块开发功能，我们定义两个模块，一个模块就是我们上面我们做好的，另一个是用来运行的，这个里面包含了运行时类库，配置如下：</p>
+<ol>
+<li>创建一个名为 <code>main</code> 的文件夹，把项目中的 <code>src</code> 文件夹移动到这个目录下</li>
+<li>在项目根目录下创建名为 <code>run</code> 的文件夹</li>
+<li><p>修改项目根目录下的 <code>build.sbt</code> 文件，内容为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">name := &quot;spark-sbt-demo&quot;</span><br><span class="line"></span><br><span class="line">version := &quot;1.0&quot;</span><br><span class="line"></span><br><span class="line">scalaVersion := &quot;2.10.4&quot;</span><br><span class="line"></span><br><span class="line">organization := &quot;spark.demo&quot;</span><br><span class="line"></span><br><span class="line">version := &quot;1.0.0-SNAPSHOT&quot;</span><br><span class="line"></span><br><span class="line">libraryDependencies += &quot;org.apache.spark&quot; % &quot;spark-core_2.10&quot; % &quot;1.6.1&quot; % &quot;provided&quot;</span><br><span class="line"></span><br><span class="line">lazy val root = (project in file(&quot;.&quot;)).aggregate(main, run)</span><br><span class="line"></span><br><span class="line">lazy val main = (project in file(&quot;main&quot;))</span><br><span class="line"></span><br><span class="line">lazy val run = (project in file(&quot;run&quot;)).dependsOn(main)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在子项目 <code>main</code> 创建 <code>build.sbt</code> 内容为：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">libraryDependencies += <span class="string">"org.apache.spark"</span> % <span class="string">"spark-core_2.10"</span> % <span class="string">"1.6.1"</span> % <span class="string">"provided"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在子项目 <code>run</code> 创建 <code>build.sbt</code> 内容为 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">libraryDependencies += &quot;org.apache.spark&quot; % &quot;spark-core_2.10&quot; % &quot;1.6.1&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置运行参数，如下图：<br><img src="/images/scala/idea-spark-run-config.png" alt="idea-spark-run-config"><br>然后选择上面的运行配置，运行即可。这里可能会碰到一个异常：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">"main"</span> org.apache.hadoop.mapred.InvalidInputException: Input path does not exist: file:/Users/du/workspace/hekr/spark-sbt-demo/src/main/scala/WorldCount.scala</span><br><span class="line">	at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:<span class="number">251</span>)</span><br><span class="line">	at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:<span class="number">270</span>)</span><br><span class="line">	......</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这是由于上面我们修改了改程序main文件的位置，导致找不到该文件所致，请自行设置为一个存在的文件路径或者修改为 <code>main/src/main/scala/WorldCount.scala</code> 重新运行即可成功。</p>
+<h2 id="Sbt-本地依赖库存储位置配置"><a href="#Sbt-本地依赖库存储位置配置" class="headerlink" title="Sbt 本地依赖库存储位置配置"></a>Sbt 本地依赖库存储位置配置</h2><p>抽空再补上，其实就是建立一个连接，先自行思考方案。</p>
+<h1 id="项目下载"><a href="#项目下载" class="headerlink" title="项目下载"></a>项目下载</h1><p>没有源码下载的都是耍流氓，<a href="/files/spark-sbt-demo.tar.gz">点这里下载</a></p>
+
+	
+	</div>
+  <a type="button" href="/spark/sbt-idea-入门及配置/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-04-20 </div>
+			<div class="article-title"><a href="/java/JDK多版本管理/" >JDK多版本管理</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>在实际工作环境中经常碰到不同项目要用不同jdk版本问题，比如我的项目组现在用的是jdk8，而用spark打包的应用是用的jdk7，所以有必要记录一下版本配置和切换问题。</p>
+
+	
+	</div>
+  <a type="button" href="/java/JDK多版本管理/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-16 </div>
+			<div class="article-title"><a href="/spring/通过SpringXD将信息分片-文件夹存储到HDFS/" >通过SpringXD将信息分片|文件夹存储到HDFS</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<pre><code>kafka --topic=kafka_test --zkconnect=10.10.1.20:2181 --queueSize=64 |hdfs --inputType=application/json --idleTimeout=10000 --partitionPath=dateFormat(&apos;yyyy/MM/dd/HH/mm&apos;)
+</code></pre>
+	
+	</div>
+  <a type="button" href="/spring/通过SpringXD将信息分片-文件夹存储到HDFS/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-16 </div>
+			<div class="article-title"><a href="/spark/sparkApp提交到SpringXD出现错误可能情况及解决方法/" >sparkApp提交到SpringXD出现错误可能情况及解决方法</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>编写spark代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.SparkConf;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.JavaPairRDD;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.JavaRDD;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.function.FlatMapFunction;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.function.Function2;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.function.PairFunction;</span><br><span class="line"><span class="keyword">import</span> scala.Tuple2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by sdvdxl on 2016/3/14.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SparkCalcDemo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String HADOOP_URL = <span class="string">"hdfs://10.10.1.110:8020/"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SparkConf conf = <span class="keyword">new</span> SparkConf().setAppName(<span class="string">"test"</span>).setMaster(<span class="string">"local[1]"</span>);</span><br><span class="line">        JavaSparkContext sc = <span class="keyword">new</span> JavaSparkContext(conf);</span><br><span class="line">        JavaRDD&lt;String&gt; textFile = sc.textFile(HADOOP_URL + <span class="string">"/xd/dataset1/2016/03/14/15/01"</span>, <span class="number">1</span>);</span><br><span class="line">        JavaRDD&lt;String&gt; words = textFile.flatMap(<span class="keyword">new</span> FlatMapFunction&lt;String, String&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> Iterable&lt;String&gt; <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">                List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">                JSONObject jobj = JSON.parseObject(<span class="keyword">new</span> String(org.apache.commons.codec.binary.Base64.decodeBase64(s.substring(<span class="number">1</span>, s.length() - <span class="number">1</span>))));</span><br><span class="line">                list.add(jobj.getString(<span class="string">"name"</span>));</span><br><span class="line">                list.add(jobj.getString(<span class="string">"random"</span>));</span><br><span class="line">                <span class="keyword">return</span> list;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        JavaPairRDD&lt;String, Integer&gt; pairs = words.mapToPair(<span class="keyword">new</span> PairFunction&lt;String, String, Integer&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> Tuple2&lt;String, Integer&gt; <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;String, Integer&gt;(s, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        JavaPairRDD&lt;String, Integer&gt; counts = pairs.reduceByKey(<span class="keyword">new</span> Function2&lt;Integer, Integer, Integer&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(Integer a, Integer b)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> a + b;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        counts.foreach(tuple2 -&gt;</span><br><span class="line">                System.out.println(tuple2._1 + <span class="string">" : "</span> + tuple2._2));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>pom依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>kafka-demo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>kafka-demo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.spark<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spark-core_2.11<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.6.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!--&lt;exclusions&gt;</span><br><span class="line">				&lt;exclusion&gt;</span><br><span class="line">					&lt;groupId&gt;com.fasterxml.jackson.module&lt;/groupId&gt;</span><br><span class="line">					&lt;artifactId&gt;jackson-module-scala_2.10&lt;/artifactId&gt;</span><br><span class="line">				&lt;/exclusion&gt;</span><br><span class="line"></span><br><span class="line">			&lt;/exclusions&gt;--&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--dependency&gt;</span><br><span class="line">			&lt;groupId&gt;com.fasterxml.jackson.module&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;jackson-module-scala_2.10&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;2.7.2&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-codec<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-codec<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.camel<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>camel-base64<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.16.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-dependency-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;/lib<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">excludeTransitive</span>&gt;</span>false<span class="tag">&lt;/<span class="name">excludeTransitive</span>&gt;</span> <span class="comment">&lt;!-- 表示是否不包含间接依赖的包 --&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">stripVersion</span>&gt;</span>false<span class="tag">&lt;/<span class="name">stripVersion</span>&gt;</span> <span class="comment">&lt;!-- 去除版本信息 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-dependencies<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-dependencies<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- 拷贝项目依赖包到lib/目录下 --&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;/lib<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">excludeTransitive</span>&gt;</span>false<span class="tag">&lt;/<span class="name">excludeTransitive</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">stripVersion</span>&gt;</span>false<span class="tag">&lt;/<span class="name">stripVersion</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!-- 项目资源插件 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-resources-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- 拷贝项目src/main/resources/下，除.bat以外的所有文件到conf/目录下 --&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;/conf<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources/<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>*.bat<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-command<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- 只拷贝项目src/main/resources/目录下的.bat文件到输出目录下 --&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources/<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">include</span>&gt;</span>*.bat<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!-- 打包插件 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-jar-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">archive</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!-- 生成MANIFEST.MF的设置 --&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- 为依赖包添加路径, 这些路径会写在MANIFEST文件的Class-Path下 --&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">addClasspath</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addClasspath</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">classpathPrefix</span>&gt;</span>lib/<span class="tag">&lt;/<span class="name">classpathPrefix</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- jar启动入口类--&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>com.some.package.some.class.Main<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- 在Class-Path下添加配置文件的路径 --&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">Class-Path</span>&gt;</span>conf/<span class="tag">&lt;/<span class="name">Class-Path</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">archive</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!-- 打jar包时，只打包class文件 --&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.class<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>oschina<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>mavenspring<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.springframework.org/release<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>jcenter<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://jcenter.bintray.com<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>spring-milestones<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>Spring Milestones<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://repo.spring.io/milestone<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>spring-release<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>Spring Releases<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://repo.spring.io/libs-release<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>spring-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>Spring Snapshots<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://repo.spring.io/snapshot<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">releases</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">releases</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>定义xd job:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">job create --name sparkAppDemo --definition &quot;sparkapp --mainClass=com.demo.SparkCalcDemo --appJar=/home/spark/spark-app.jar --master=local[1]&quot; --deploy</span><br></pre></td></tr></table></figure>
+<p>加载job</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">job launch sparkAppDemo</span><br></pre></td></tr></table></figure>
+<p>然后出现以下类似的错误，主要是：<code>...redis:queue-inbound-channel-adapter...</code>错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">2016-03-16T10:16:10+0800 1.3.1.RELEASE INFO DeploymentSupervisor-0 zk.ZKJobDeploymentHandler - Deployment status for job &apos;sparkAppDemo&apos;: DeploymentStatus&#123;state=deployed&#125;</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark application &apos;com.demo.SparkCalcDemo&apos; finished with exit code: 1</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: Exception in thread &quot;main&quot; java.lang.SecurityException: Invalid signature file digest for Manifest main attributes</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.security.util.SignatureFileVerifier.processImpl(SignatureFileVerifier.java:284)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.security.util.SignatureFileVerifier.process(SignatureFileVerifier.java:238)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.util.jar.JarVerifier.processEntry(JarVerifier.java:316)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.util.jar.JarVerifier.update(JarVerifier.java:228)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.util.jar.JarFile.initializeVerifier(JarFile.java:383)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.util.jar.JarFile.getInputStream(JarFile.java:450)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.JarIndex.getJarIndex(JarIndex.java:137)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath$JarLoader$1.run(URLClassPath.java:839)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath$JarLoader$1.run(URLClassPath.java:831)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.security.AccessController.doPrivileged(Native Method)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath$JarLoader.ensureOpen(URLClassPath.java:830)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath$JarLoader.&lt;init&gt;(URLClassPath.java:803)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath$3.run(URLClassPath.java:530)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath$3.run(URLClassPath.java:520)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.security.AccessController.doPrivileged(Native Method)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath.getLoader(URLClassPath.java:519)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath.getLoader(URLClassPath.java:492)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath.getNextLoader(URLClassPath.java:457)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath.getResource(URLClassPath.java:211)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.net.URLClassLoader$1.run(URLClassLoader.java:365)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.net.URLClassLoader$1.run(URLClassLoader.java:362)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.security.AccessController.doPrivileged(Native Method)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.net.URLClassLoader.findClass(URLClassLoader.java:361)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.lang.Class.forName0(Native Method)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.lang.Class.forName(Class.java:348)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at org.apache.spark.deploy.SparkSubmit$.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:538)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at org.apache.spark.deploy.SparkSubmit$.doRunMain$1(SparkSubmit.scala:166)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at org.apache.spark.deploy.SparkSubmit$.submit(SparkSubmit.scala:189)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:110)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)</span><br><span class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: Using Spark&apos;s default log4j profile: org/apache/spark/log4j-defaults.properties</span><br></pre></td></tr></table></figure>
+<p>仔细看的话，在上面有一句<code>Exception in thread &quot;main&quot; java.lang.SecurityException: Invalid signature file digest for Manifest main attributes</code>错误，这个错误是由于导出的jar包结构信息不正确导致的。用eclipse的导出runnable jar 功能导出的jar包就没问题了。</p>
+<p>另外如果有依赖的jar包没哟被加载进去，则会在最上方出现<code>java.lang.NoClassDefFoundError:</code>类似信息。</p>
+<p>相关资料：<a href="http://www.todu.top/2016/03/09/以分布式方式运行Spring-XD" target="_blank" rel="external">以分布式方式运行Spring-XD</a></p>
+
+	
+	</div>
+  <a type="button" href="/spark/sparkApp提交到SpringXD出现错误可能情况及解决方法/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-15 </div>
+			<div class="article-title"><a href="/linux/linux下根据端口号查询对应进程/" >linux下根据端口号查询对应进程</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>适用于ip4</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -Pnl +M -i4 | grep port</span><br></pre></td></tr></table></figure>
+<p>适用于ip6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -Pnl +M -i6 | grep port</span><br></pre></td></tr></table></figure>
+
+	
+	</div>
+  <a type="button" href="/linux/linux下根据端口号查询对应进程/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-15 </div>
+			<div class="article-title"><a href="/golang/golang打印错误栈信息/" >golang打印错误栈信息</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> mainimport (</span><br><span class="line">    <span class="string">"runtime"</span></span><br><span class="line">    <span class="string">"fmt"</span>)<span class="keyword">func</span> main() &#123;</span><br><span class="line">    outer()&#125;<span class="keyword">func</span> outer() &#123;</span><br><span class="line">    inner()&#125;<span class="keyword">func</span> inner() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">defer</span> <span class="keyword">func</span>() &#123;</span><br><span class="line">        <span class="keyword">if</span> err := <span class="built_in">recover</span>(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">            trace := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">1024</span>)</span><br><span class="line">            count := runtime.Stack(trace, <span class="literal">true</span>)</span><br><span class="line">            fmt.Printf(<span class="string">"Recover from panic: %s\n"</span>, err)</span><br><span class="line">            fmt.Printf(<span class="string">"Stack of %d bytes: %s\n"</span>, count, trace)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="built_in">panic</span>(<span class="string">"Fake error!"</span>)&#125;</span><br></pre></td></tr></table></figure>
+
+	
+	</div>
+  <a type="button" href="/golang/golang打印错误栈信息/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-15 </div>
+			<div class="article-title"><a href="/golang/golang容易忽略导致入坑的方面/" >golang容易忽略导致入坑的方面</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="main-函数"><a href="#main-函数" class="headerlink" title="main 函数"></a>main 函数</h1><p>main函数必须定义在main包里，不可导出。当main函数调用完毕，程序就会立即退出，不会等待运行中的goroutine运行完毕。</p>
+<h1 id="初始化函数"><a href="#初始化函数" class="headerlink" title="初始化函数"></a>初始化函数</h1><p><code>func init() { … }</code></p>
+<p>此函数无参，不需显示调用。</p>
+<p>此函数根据依赖顺序执行初始化顺序，并且是顺序执行，如：</p>
+<p>A 依赖 B， B 依赖 C，并且A，B，C 都有init函数，那么初始化顺序是C ，B ， A</p>
+<h1 id="iota"><a href="#iota" class="headerlink" title="iota"></a>iota</h1><ul>
+<li><p>iota 只能用在const定义的常量上</p>
+</li>
+<li><p>iota在一个const范围，不管中间的变量有没有用到iota，iota都是持续递增加1的，如</p>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line"></span><br><span class="line">       aa = <span class="literal">iota</span></span><br><span class="line"></span><br><span class="line">       bb</span><br><span class="line"></span><br><span class="line">       cc = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">       dd = <span class="literal">iota</span></span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>dd 是3</p>
+<ul>
+<li>如果重新定义const，那么值会是重新从0开始，如</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line"></span><br><span class="line">       ee = <span class="literal">iota</span></span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h1 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h1><p>x.(T) x为变量， T为要判断的类型，其中有两种用法</p>
+<ul>
+<li><p><code>a := x.(T)</code> ，如果x是类型T的实现类型变量，那么可以得到转换后的值a，否则panic: interface conversion: (x的类型) is not package.T: missing method （T的方法）</p>
+</li>
+<li><p><code>a, ok := x.(T)</code>，如果x是类型T的实现的类型变量，那么ok为true， 转换成功，否则，ok为false，说明转换失败。</p>
+</li>
+</ul>
+<h1 id="从Panic中恢复"><a href="#从Panic中恢复" class="headerlink" title="从Panic中恢复"></a>从Panic中恢复</h1><p>需要用到build-in recover()方法，函数原型：</p>
+<p><code>func recover() interface{}</code></p>
+<p>要捕获panic，必须在有可能发生panic的地方的上面进行处理，</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">defer</span> <span class="keyword">func</span>()&#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">if</span> err := <span class="built_in">recover</span>(); err !=<span class="literal">nil</span> &#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//处理错误</span></span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p>一般来说，会将上面的代码放在函数（或者方法）的开始的地方。</p>
+<p><strong> 注意 ， recover函数只能用在defer中，否则不会进行错误捕获。</strong></p>
+
+	
+	</div>
+  <a type="button" href="/golang/golang容易忽略导致入坑的方面/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-14 </div>
+			<div class="article-title"><a href="/spring/sink-hdfs/" >sink-hdfs</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>hdfs根据时间自动划分文件夹<br><code>stream create --name dataset1 --definition &quot;kafka --topic=kafka_test --zkconnect=10.10.1.20:2181 --queueSize=64  |hdfs --inputType=application/json --idleTimeout=10000 --partitionPath=dateFormat(&#39;yyyy/MM/dd/HH/mm&#39;)&quot; --deploy</code><br>其中，–partitionPath=dateFormat(‘yyyy/MM/dd/HH/mm’)用来指定划分 策略，这个是说用年(四位)/月(两位)/天(2位)/时(2位)/分(2位)这种格式来划分</p>
+
+	
+	</div>
+  <a type="button" href="/spring/sink-hdfs/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-03-13 </div>
+			<div class="article-title"><a href="/golang/golang命令/" >golang命令</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Go 提供了很多好用的命令，比如可以用go get 直接从网络上导入包，下面介绍一些常用的Go命令</p>
+<h1 id="go-get"><a href="#go-get" class="headerlink" title="go get"></a>go get</h1><h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>go get 命令用来直接下载并安装网络上的包到GOPATH中。事实上它依赖于版本控制工具，比如常用的Git和Mercurial。比如我们要使用<code>github.com/golang/text</code>这个包，那么可以执行命令 <code>go get github.com/golang/text</code>，稍后片刻（依照网络情况时间长短不一），那么这个包源码就会放到 <code>GOPATH/src</code>对应的目录下，编译好的文件会放到<code>GOPATH/pkg</code>对应的目录下，如果有可执行性代码，那么会将编译好的可执行性文件放到<code>GOPATH/bin</code>目录下。</p>
+<h2 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h2><p>像刚才例子中提到的<code>github.com/golang/text</code>这个包下又有子包，也想get下来，该如何做呢？也许你想没办法，一个一个get吧，的确这是一个不错的方法，但是有一个更为高效和优雅的方式，那就是 <code>...</code>，这个符号代表旗下子目录，那我们可以这样操作<code>go get github.com/golang/text ...</code>，就可以将text和其子包同时get下来了。</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><ul>
+<li><code>-v</code> 可以显示正在get的包</li>
+<li><code>-x</code> 可以显示正在执行的命令<h1 id="go-build"><a href="#go-build" class="headerlink" title="go build"></a>go build</h1>编译go文件。<br>可以切换到要build的包中执行<code>go build</code>，也可以直接 “go build” + “包名”，如要build包 <code>github.com/golang/text</code>，可以切换到text包目录下执行 <code>go build</code>，也可以直接执行 <code>go build github.com/golang/text</code>，这样就可以build text包了，如果要build子包，那么输入<code>go build ./...</code>。<code>build</code>命令会将main函数编译成可执行性文件，如果没有main，那么没有额外的文件产生。</li>
+</ul>
+<h1 id="go-clean"><a href="#go-clean" class="headerlink" title="go clean"></a>go clean</h1><p><code>clean</code>和<code>build</code>作用相反，是将build出来的可执行性文件清除掉。</p>
+<h1 id="go-install"><a href="#go-install" class="headerlink" title="go install"></a>go install</h1><p><code>install</code> 命令是将包编译成二进制文件并放到<code>GOPATH/pkg/目标平台/</code>对应的目录下。比如我们自己从github上克隆了<code>github.com/golang/text</code>，要使用它的话，需要进入到text包中，然后执行 <code>go install</code>；加入有子包也要安装的话，输入<code>go install ./...</code>，就会在<code>GOPATH/pkg/目标平台/</code>产生后缀为<code>.a</code>的文件。当然也可以和build一样输入完整的包路径。</p>
+<h1 id="go-list"><a href="#go-list" class="headerlink" title="go list"></a>go list</h1><p>这个命令用来查看所引用的包。</p>
+<h2 id="基本用法-1"><a href="#基本用法-1" class="headerlink" title="基本用法"></a>基本用法</h2><ol>
+<li>直接跟包名，如：<code>github.com/golang/text</code>，会打印这个包本身；也可以切换到该包目录下执行<code>go list</code>，效果相同。</li>
+<li>可以直接跟”包名”+”/…”，比如要查看<code>github.com/golang/text</code>这个包的导入情况，执行<code>go list github.com/golang/text/...</code>会打印本包的go文件。<h2 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h2><code>-f</code>可以指定打印格式，默认是<code>go list -f &#39; {{.ImportPath}} &#39;</code>， <code>-f</code>后面的参数可以用下面结构体的属性：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">type</span> Package <span class="keyword">struct</span> &#123;</span><br><span class="line">    Dir           <span class="keyword">string</span> <span class="comment">// directory containing package sources</span></span><br><span class="line">    ImportPath    <span class="keyword">string</span> <span class="comment">// import path of package in dir</span></span><br><span class="line">    ImportComment <span class="keyword">string</span> <span class="comment">// path in import comment on package statement</span></span><br><span class="line">    Name          <span class="keyword">string</span> <span class="comment">// package name</span></span><br><span class="line">    Doc           <span class="keyword">string</span> <span class="comment">// package documentation string</span></span><br><span class="line">    Target        <span class="keyword">string</span> <span class="comment">// install path</span></span><br><span class="line">    Goroot        <span class="keyword">bool</span>   <span class="comment">// is this package in the Go root?</span></span><br><span class="line">    Standard      <span class="keyword">bool</span>   <span class="comment">// is this package part of the standard Go library?</span></span><br><span class="line">    Stale         <span class="keyword">bool</span>   <span class="comment">// would 'go install' do anything for this package?</span></span><br><span class="line">    Root          <span class="keyword">string</span> <span class="comment">// Go root or Go path dir containing this package</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Source files</span></span><br><span class="line">    GoFiles        []<span class="keyword">string</span> <span class="comment">// .go source files (excluding CgoFiles, TestGoFiles, XTestGoFiles)</span></span><br><span class="line">    CgoFiles       []<span class="keyword">string</span> <span class="comment">// .go sources files that import "C"</span></span><br><span class="line">    IgnoredGoFiles []<span class="keyword">string</span> <span class="comment">// .go sources ignored due to build constraints</span></span><br><span class="line">    CFiles         []<span class="keyword">string</span> <span class="comment">// .c source files</span></span><br><span class="line">    CXXFiles       []<span class="keyword">string</span> <span class="comment">// .cc, .cxx and .cpp source files</span></span><br><span class="line">    MFiles         []<span class="keyword">string</span> <span class="comment">// .m source files</span></span><br><span class="line">    HFiles         []<span class="keyword">string</span> <span class="comment">// .h, .hh, .hpp and .hxx source files</span></span><br><span class="line">    SFiles         []<span class="keyword">string</span> <span class="comment">// .s source files</span></span><br><span class="line">    SwigFiles      []<span class="keyword">string</span> <span class="comment">// .swig files</span></span><br><span class="line">    SwigCXXFiles   []<span class="keyword">string</span> <span class="comment">// .swigcxx files</span></span><br><span class="line">    SysoFiles      []<span class="keyword">string</span> <span class="comment">// .syso object files to add to archive</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Cgo directives</span></span><br><span class="line">    CgoCFLAGS    []<span class="keyword">string</span> <span class="comment">// cgo: flags for C compiler</span></span><br><span class="line">    CgoCPPFLAGS  []<span class="keyword">string</span> <span class="comment">// cgo: flags for C preprocessor</span></span><br><span class="line">    CgoCXXFLAGS  []<span class="keyword">string</span> <span class="comment">// cgo: flags for C++ compiler</span></span><br><span class="line">    CgoLDFLAGS   []<span class="keyword">string</span> <span class="comment">// cgo: flags for linker</span></span><br><span class="line">    CgoPkgConfig []<span class="keyword">string</span> <span class="comment">// cgo: pkg-config names</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Dependency information</span></span><br><span class="line">    Imports []<span class="keyword">string</span> <span class="comment">// import paths used by this package</span></span><br><span class="line">    Deps    []<span class="keyword">string</span> <span class="comment">// all (recursively) imported dependencies</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Error information</span></span><br><span class="line">    Incomplete <span class="keyword">bool</span>            <span class="comment">// this package or a dependency has an error</span></span><br><span class="line">    Error      *PackageError   <span class="comment">// error loading package</span></span><br><span class="line">    DepsErrors []*PackageError <span class="comment">// errors loading dependencies</span></span><br><span class="line"></span><br><span class="line">    TestGoFiles  []<span class="keyword">string</span> <span class="comment">// _test.go files in package</span></span><br><span class="line">    TestImports  []<span class="keyword">string</span> <span class="comment">// imports from TestGoFiles</span></span><br><span class="line">    XTestGoFiles []<span class="keyword">string</span> <span class="comment">// _test.go files outside package</span></span><br><span class="line">    XTestImports []<span class="keyword">string</span> <span class="comment">// imports from XTestGoFiles</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果想打印比较全的信息，也有一个参数可以使用：<code>-json</code>，这会将上面部分信息以json格式打印出来，读者可以自行实验。</p>
+<h1 id="go-run"><a href="#go-run" class="headerlink" title="go run"></a>go run</h1><p>这个命令可以直接运行go文件（带main函数），不需要编译成二进制可执行性文件。</p>
+
+	
+	</div>
+  <a type="button" href="/golang/golang命令/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+<ul class="pagination">
+	 
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+        
+
+        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+
+		
+		   <li class="next"> <a href="/page/2/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
+        
+	
+</ul>
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>分类</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/android/">android<span>1</span></a></li>
+		
+			<li><a href="/categories/git/">git<span>1</span></a></li>
+		
+			<li><a href="/categories/golang/">golang<span>10</span></a></li>
+		
+			<li><a href="/categories/hadoop/">hadoop<span>2</span></a></li>
+		
+			<li><a href="/categories/java/">java<span>2</span></a></li>
+		
+			<li><a href="/categories/linux/">linux<span>5</span></a></li>
+		
+			<li><a href="/categories/mysql/">mysql<span>1</span></a></li>
+		
+			<li><a href="/categories/other/">other<span>1</span></a></li>
+		
+			<li><a href="/categories/spark/">spark<span>4</span></a></li>
+		
+			<li><a href="/categories/spring/">spring<span>6</span></a></li>
+		
+			<li><a href="/categories/sql/">sql<span>1</span></a></li>
+		
+			<li><a href="/categories/sqoop/">sqoop<span>2</span></a></li>
+		
+			<li><a href="/categories/windows/">windows<span>1</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>标签云</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/sqoop/">sqoop<span>2</span></a></li>
+		
+			<li><a href="/tags/端口/">端口<span>1</span></a></li>
+		
+			<li><a href="/tags/sql/">sql<span>1</span></a></li>
+		
+			<li><a href="/tags/spring-xd/">spring-xd<span>3</span></a></li>
+		
+			<li><a href="/tags/linux/">linux<span>4</span></a></li>
+		
+			<li><a href="/tags/博客/">博客<span>1</span></a></li>
+		
+			<li><a href="/tags/kafka/">kafka<span>1</span></a></li>
+		
+			<li><a href="/tags/android/">android<span>1</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+		
+			<li><a href="/tags/ntfs/">ntfs<span>1</span></a></li>
+		
+			<li><a href="/tags/git/">git<span>1</span></a></li>
+		
+			<li><a href="/tags/zookeeper/">zookeeper<span>2</span></a></li>
+		
+			<li><a href="/tags/安卓/">安卓<span>1</span></a></li>
+		
+			<li><a href="/tags/hive/">hive<span>1</span></a></li>
+		
+			<li><a href="/tags/archlinux/">archlinux<span>2</span></a></li>
+		
+			<li><a href="/tags/golang/">golang<span>10</span></a></li>
+		
+			<li><a href="/tags/软件/">软件<span>1</span></a></li>
+		
+			<li><a href="/tags/进程/">进程<span>1</span></a></li>
+		
+			<li><a href="/tags/java/">java<span>1</span></a></li>
+		
+			<li><a href="/tags/录音/">录音<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>35</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>最新文章</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/linux/Linux-Shell-命令/" ><i class="fa fa-file-o"></i>Linux shell 命令</a>
+      </li>
+    
+      <li>
+        <a href="/spark/sbt-idea-入门及配置/" ><i class="fa fa-file-o"></i>sbt-idea-入门及配置</a>
+      </li>
+    
+      <li>
+        <a href="/java/JDK多版本管理/" ><i class="fa fa-file-o"></i>JDK多版本管理</a>
+      </li>
+    
+      <li>
+        <a href="/spring/通过SpringXD将信息分片-文件夹存储到HDFS/" ><i class="fa fa-file-o"></i>通过SpringXD将信息分片|文件夹存储到HDFS</a>
+      </li>
+    
+      <li>
+        <a href="/spark/sparkApp提交到SpringXD出现错误可能情况及解决方法/" ><i class="fa fa-file-o"></i>sparkApp提交到SpringXD出现错误可能情况...</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>链接</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="fa fa-github"></i><a href="http://www.github.com/sdvdxl" title="My Github account." target="_blank"]);">My Github</a></li>
+	
+		<li><i class="fa fa-linkedin"></i><a href="http://www.linkedin.com/in/sdvdxl" title="My Linkin account." target="_blank"]);">My LinkedIn</a></li>
+	
+	</ul>
+</div>
+
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2016 杜龙少
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
