@@ -75,7 +75,7 @@ define([], function(){
                 if(!isEnterTips){
                     Tips.hide();
                 }
-            }, 100);
+            }, 500);
         });
 
         $(".tips-box").bind("mouseenter", function(){
