@@ -45,6 +45,7 @@ category: spark
 单纯修改上面的源还不足以让sbt加载我们的源。打开 sbt 软件安装位置下的 `conf/sbtopts` 文件，在其中添加：    
 ```
 sbt/conf/sbtopts
+-Dsbt.override.build.repos=true
 ```
 然后就可以生效了。
 
