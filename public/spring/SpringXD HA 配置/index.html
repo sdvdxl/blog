@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>go交叉编译 | 杜龙少的博客</title>
+  <title>SpringXD HA 配置 | 杜龙少的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.5之前需要进入go安装目录下的src目录，然后执行GOOS=windows GOARCH=i386  CGO_ENABLED=0 ./make.bash --no-clean
-1.5及其之后可以直接执行CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -o 输出文件名 go文件其中GOOS有：windows,linux,darwin也就是mac系统G">
+  <meta name="description" content="SpringXD官方文档 上说的不是很清楚，而且有些配置（如 配置 hadoop namenode ha ）并没有在上面说明，只是简单的说明了怎么配置 namenode ，如果没有ha配置，那么在生产环境中会令人头痛。
+XD Admin HA说明在 官方文档 中，有说如何配置，就是通过启动多个admin ，然后通过 zookeeper 管理。Spring XD 要求只有一个主节点来和 Contai">
 <meta property="og:type" content="article">
-<meta property="og:title" content="go交叉编译">
-<meta property="og:url" content="http://todu.top/golang/go交叉编译/index.html">
+<meta property="og:title" content="SpringXD HA 配置">
+<meta property="og:url" content="http://todu.top/spring/SpringXD HA 配置/index.html">
 <meta property="og:site_name" content="杜龙少的博客">
-<meta property="og:description" content="1.5之前需要进入go安装目录下的src目录，然后执行GOOS=windows GOARCH=i386  CGO_ENABLED=0 ./make.bash --no-clean
-1.5及其之后可以直接执行CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -o 输出文件名 go文件其中GOOS有：windows,linux,darwin也就是mac系统G">
-<meta property="og:updated_time" content="2016-04-16T15:23:58.000Z">
+<meta property="og:description" content="SpringXD官方文档 上说的不是很清楚，而且有些配置（如 配置 hadoop namenode ha ）并没有在上面说明，只是简单的说明了怎么配置 namenode ，如果没有ha配置，那么在生产环境中会令人头痛。
+XD Admin HA说明在 官方文档 中，有说如何配置，就是通过启动多个admin ，然后通过 zookeeper 管理。Spring XD 要求只有一个主节点来和 Contai">
+<meta property="og:updated_time" content="2016-06-30T02:27:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="go交叉编译">
-<meta name="twitter:description" content="1.5之前需要进入go安装目录下的src目录，然后执行GOOS=windows GOARCH=i386  CGO_ENABLED=0 ./make.bash --no-clean
-1.5及其之后可以直接执行CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -o 输出文件名 go文件其中GOOS有：windows,linux,darwin也就是mac系统G">
+<meta name="twitter:title" content="SpringXD HA 配置">
+<meta name="twitter:description" content="SpringXD官方文档 上说的不是很清楚，而且有些配置（如 配置 hadoop namenode ha ）并没有在上面说明，只是简单的说明了怎么配置 namenode ，如果没有ha配置，那么在生产环境中会令人头痛。
+XD Admin HA说明在 官方文档 中，有说如何配置，就是通过启动多个admin ，然后通过 zookeeper 管理。Spring XD 要求只有一个主节点来和 Contai">
   
     <link rel="alternative" href="/atom.xml" title="杜龙少的博客" type="application/atom+xml">
   
@@ -226,11 +226,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-golang/go交叉编译" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-spring/SpringXD HA 配置" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/golang/go交叉编译/" class="article-date">
-      <time datetime="2016-03-13T03:41:45.000Z" itemprop="datePublished">2016-03-13</time>
+      <a href="/spring/SpringXD HA 配置/" class="article-date">
+      <time datetime="2016-06-29T08:34:48.000Z" itemprop="datePublished">2016-06-29</time>
 </a>
     </div>
   
@@ -243,7 +243,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      go交叉编译
+      SpringXD HA 配置
     </h1>
   
 
@@ -252,13 +252,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/golang/">golang</a>
+    <a class="article-category-link" href="/categories/spring/">spring</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xd/">xd</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -268,8 +268,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>1.5之前需要进入go安装目录下的src目录，然后执行<br><code>GOOS=windows GOARCH=i386  CGO_ENABLED=0 ./make.bash --no-clean</code></p>
-<p>1.5及其之后可以直接执行<code>CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -o 输出文件名 go文件</code><br>其中<code>GOOS</code>有：<code>windows</code>,<code>linux</code>,<code>darwin</code>也就是mac系统<br><code>GOARCH</code>有：<code>adm64</code>和<code>386</code>分别对应64位平台和32位平台</p>
+        <p><a href="http://docs.spring.io/spring-xd/docs/1.3.1.RELEASE/reference/html" target="_blank" rel="external">SpringXD官方文档</a> 上说的不是很清楚，而且有些配置（如 配置 <code>hadoop</code> namenode ha ）并没有在上面说明，只是简单的说明了怎么配置 <code>namenode</code> ，如果没有ha配置，那么在生产环境中会令人头痛。</p>
+<h1 id="XD-Admin-HA"><a href="#XD-Admin-HA" class="headerlink" title="XD Admin HA"></a>XD Admin HA</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>在 <a href="http://docs.spring.io/spring-xd/docs/1.3.1.RELEASE/reference/html/#_configuring_spring_xd_for_high_availabilty_ha" target="_blank" rel="external">官方文档</a> 中，有说如何配置，就是通过启动多个<code>admin</code> ，然后通过 <code>zookeeper</code> 管理。<br><code>Spring XD</code> 要求只有一个主节点来和 <code>Container</code> 交互，例如 <code>Stream</code> 发布等。同时，这些操作都是按顺序处理的。假如只有一个 <code>admin</code> ，那么就存在单点失败的风险，因此，在生产环境中推荐做法是启动 2 个或者多 <code>admin</code> 。注意：在有多个 <code>admin</code> 节点的时候，每个 <code>admin</code> 都可以处理 <a href="http://docs.spring.io/spring-xd/docs/1.3.1.RELEASE/reference/html/#REST-API" target="_blank" rel="external">REST</a> 请求，但是只有一个实例会作为 <code>Leader</code> 处理请求并更新运行时的状态。如果 <code>Leader</code> 宕掉，另一个可用的admin就会成为新的 <code>Leader</code> 来接管任务。当然，Spring XD 的HA不只是他自身要求ha，还需要依赖外部服务，如：<code>zookeeper</code>，<code>MessageBus</code> 等 HA 配置。</p>
+<h2 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h2><p>如果要配置 <code>admin</code> 的 ha，那么启动多个 <code>admin</code> 即可，但是请注意，如果是在同一台机器上部署多个<code>admin</code>，需要在启动时候添加如下参数以防止和默认的端口（<code>9393</code>）冲突：<br><code>--httpPort</code> 用来指定rest api端口<br><code>--mgmtPort</code> 用来指定管理端口<br>如果在不同机器上启动，只需配置相同的配置文件，然后启动即可。</p>
+<h1 id="XD-Container-HA"><a href="#XD-Container-HA" class="headerlink" title="XD Container HA"></a>XD Container HA</h1><p>当添加 <code>Container</code> 的时候，Spring XD 可以动态水平扩展，也就是说不需要额外什么操作，只需像第一次启动 <code>Container</code> 一样输入命令 <code>bin/xd-container</code> 启动即可。</p>
+<h1 id="XD-Hadoop-namenode-HA"><a href="#XD-Hadoop-namenode-HA" class="headerlink" title="XD Hadoop namenode HA"></a>XD Hadoop namenode HA</h1><p>如果 xd 中创建 <code>stream</code> 或者其他任务是用到了 <code>hdfs</code> 的功能，那么要配置 <code>hadoop</code> 的<code>namenode</code> ，要在 <code>xd/config/servers.xml</code>中的 <code>spring.hadoop.fsUri</code> 的配置项中配置。注意，这个地方只允许配置一个 <code>host</code>，如果有备用 <code>namenode</code> ，是不允许配置在这个地方的。但是这样配置是有问题的，就是存在 <code>hadoop</code> 的 <code>namenode</code> 主从切换后 xd 的 <code>stream</code> 无法写入 <code>hdfs</code> 或者读取 <code>hdfs</code> 的故障。要解决这个问题，我们要再 <code>xd/config/hadoop.properties</code> 中配置如下配置项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dfs.nameservices=MyCluster</span><br><span class="line">dfs.ha.namenodes.MyCluster=nn1,nn2</span><br><span class="line">dfs.namenode.rpc-address.MyCluster.nn2=hadoop-master1-host:8020</span><br><span class="line">dfs.namenode.rpc-address.MyCluster.nn1=hadoop-master2-host:8020</span><br><span class="line">dfs.client.failover.proxy.provider.MyCluster=org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</span><br></pre></td></tr></table></figure></p>
+<p>其中，配置项中所有的 <code>MyCluster</code> 要换成自己项目中 hadoop 集群的名字，然后在 <code>xd/config/servers.xml</code> 中 <code>spring.hadoop.fsUri</code> 值配置成 <code>hdfs://MyCluster:8020</code>（注意<code>8020</code>端口换成自己配置的），<code>hadoop-master1-host</code> 和 <code>hadoop-master1-host</code> 换成自己集群的 hadoop的 master 的主机名字或者ip。这样配置后，重新启动 <code>admin</code> 和 <code>container</code> 就会自动检测 hadoop 的 <code>namenode</code> 主从，并自行切换。<br>如果要在 <code>xd-shell</code>中使用，需要登录shell之后（如果有安全设置，还需要先用密码登录成功），输入一下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hadoop config props set --property dfs.nameservices=MyCluster</span><br><span class="line">hadoop config props set --property dfs.ha.namenodes.MyCluster=nn1,nn2</span><br><span class="line">hadoop config props set --property dfs.namenode.rpc-address.MyCluster.nn1=hadoop-master1-host:8020</span><br><span class="line">hadoop config props set --property dfs.namenode.rpc-address.MyCluster.nn2=hadoop-master2-host:8020</span><br><span class="line">hadoop config props set --property dfs.client.failover.proxy.provider.MyCluster=org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</span><br><span class="line">hadoop config fs --namenode hdfs://MyCluster</span><br></pre></td></tr></table></figure></p>
+<p><code>MyCluster</code>，<code>hadoop-master1-host</code> 和 <code>hadoop-master2-host</code> 同上配置。对于 shell 来说，单纯配置 hadoop 的主 <code>namenode</code>也是可以的，因为这个配置只是对 shell 起作用。如果觉得每次打开shell都要输入上面几行配置太繁琐的话，可以将 <code>xd/config/hadoop.properties</code> 中配置的项目添加一份到<code>shell/config/hadoop.properties</code> 即可，这样在shell中操作hdfs，只需配置 <code>hadoop config fs --namenode hdfs://MyCluster:8020</code> 即可。</p>
+<h2 id="附言"><a href="#附言" class="headerlink" title="附言"></a>附言</h2><p>对于如何在xd中使用hadoop的namenode ha配置，xd 官方文档中并未见说明，而是百般Goole之后得到的结果，而且由于xd资料尚少，搜索结果不佳，最后通过搜索关键词 <code>xd namenode fail</code> 才找到解决方案，<a href="https://jira.spring.io/browse/XD-1745" target="_blank" rel="external">请参见这里</a>。</p>
 
       
     </div>
@@ -278,13 +284,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/golang/go交叉编译/">go交叉编译</a></p>
+        <p><span>本文标题:</span><a href="/spring/SpringXD HA 配置/">SpringXD HA 配置</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 杜龙少 的个人博客">杜龙少</a></p>
-        <p><span>发布时间:</span>2016年03月13日 - 11时41分</p>
-        <p><span>最后更新:</span>2016年04月16日 - 23时23分</p>
+        <p><span>发布时间:</span>2016年06月29日 - 16时34分</p>
+        <p><span>最后更新:</span>2016年06月30日 - 10时27分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/golang/go交叉编译/" title="go交叉编译">http://todu.top/golang/go交叉编译/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://todu.top/golang/go交叉编译/　　作者: 杜龙少" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/spring/SpringXD HA 配置/" title="SpringXD HA 配置">http://todu.top/spring/SpringXD HA 配置/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://todu.top/spring/SpringXD HA 配置/　　作者: 杜龙少" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -297,18 +303,9 @@
 
 <nav id="article-nav">
   
-    <a href="/golang/go读取文件/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          go读取文件
-        
-      </div>
-    </a>
   
-  
-    <a href="/golang/go中main/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">go中main</div>
+    <a href="/spark/sbt源配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">sbt源配置</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -319,7 +316,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#XD-Admin-HA"><span class="toc-number">1.</span> <span class="toc-text">XD Admin HA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-number">1.1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置信息"><span class="toc-number">1.2.</span> <span class="toc-text">配置信息</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XD-Container-HA"><span class="toc-number">2.</span> <span class="toc-text">XD Container HA</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XD-Hadoop-namenode-HA"><span class="toc-number">3.</span> <span class="toc-text">XD Hadoop namenode HA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#附言"><span class="toc-number">3.1.</span> <span class="toc-text">附言</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -367,7 +364,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="golang/go交叉编译/" data-title="go交叉编译" data-url="http://todu.top/golang/go交叉编译/"></div>
+    <div class="ds-thread" data-thread-key="spring/SpringXD HA 配置/" data-title="SpringXD HA 配置" data-url="http://todu.top/spring/SpringXD HA 配置/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -390,13 +387,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/golang/go读取文件/" title="上一篇: go读取文件">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/golang/go中main/" title="下一篇: go中main">
+            <a href="/spark/sbt源配置/" title="下一篇: sbt源配置">
                 <i class="fa fa-angle-right"></i>
             </a>
         
