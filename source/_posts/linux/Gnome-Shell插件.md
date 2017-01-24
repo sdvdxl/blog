@@ -22,7 +22,6 @@ category: linux
 
 ## [Tab 切换](https://extensions.gnome.org/extension/15/alternatetab/)
 ![](http://public-links.qiniudn.com/gnome-shell-alternatetab.png)
-![](https://extensions.gnome.org/static/extension-data/screenshots/screenshot_15.png)
 
 ## [任务栏](https://extensions.gnome.org/extension/584/taskbar/)
 ![](http://public-links.qiniudn.com/gnome-shell-taskbar.png)
