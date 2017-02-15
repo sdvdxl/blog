@@ -1,5 +1,5 @@
 ---
-title: 安装启动Hadoop集群
+title: 安装Hbase分布式集群
 date: 2017-02-15 17:44:43
 tags:
   - hadoop

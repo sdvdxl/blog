@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title><![CDATA[安装启动Hadoop集群]]></title>
+      <title><![CDATA[安装Hbase分布式集群]]></title>
       <url>http://todu.top/hadoop/%E5%AE%89%E8%A3%85hbase%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/</url>
       <content type="html"><![CDATA[<p><strong>以下操作都是在hadoop这个用户下</strong></p>
 <ol>
