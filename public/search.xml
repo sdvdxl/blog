@@ -7,7 +7,7 @@
       <title><![CDATA[RESTFul API 错误的设计]]></title>
       <url>http://todu.top/other/RESTFul-API-%E9%94%99%E8%AF%AF%E7%9A%84%E8%AE%BE%E8%AE%A1/</url>
       <content type="html"><![CDATA[<p>不管是WEB还是移动端，如果需要调用Http接口，那么不可避免要处理各种错误，包括客户端参数完整性校验，类型校验，系统错误等。如果一个设计规范的接口错误返回值，不但可以规范调用方统一处理方式，给出更合理的提示，而且后端也有着接口返回规范的作用。这里讨论的其实并不单纯是返回的错误设计，也包括业务上的错误设计。</p>
-<h1 id="接口返回设计"><a href="#接口返回设计" class="headerlink" title="接口返回设计"></a>接口返回设计</h1><p>接口返回需要有http status，错误说明，并且要提供一个完整的错误列表，可以通过简单的错误说明或者错误代码查阅到详细的错误原因。简要错误说明可以只包含简短的文字描述，可以包含错误代码。如果说哪种方式更为合理，我更倾向于错误代码+简要错误说明。如果只有简要错误说明，这个错误描述可能有些描述不合理，如果后端改了说明，那么对应的错误映射也要更改，调用方也要跟着修改。如果只有错误代码，调用方难以一眼看出错误原因，需要查阅错误码，这个比较啰嗦。如果同时提供错误码和简要错误说明，调用方可以通过简要说明快速定位问题，如果要处理错误逻辑，根据错误码表映射即可，这样即使描述改变了，但是错误码是永久不变的，不会影响调用方的处理逻辑。返回的结构如下：<br><figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Content-Type</span>: application/json;charset=UTF-8</div><div class="line"></div><div class="line"><span class="bash">&#123;</span></div><div class="line">	<span class="string">"msg"</span>: <span class="string">"错误说明"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="接口返回设计"><a href="#接口返回设计" class="headerlink" title="接口返回设计"></a>接口返回设计</h1><p>接口返回需要有http status，错误说明，并且要提供一个完整的错误列表，可以通过简单的错误说明或者错误代码查阅到详细的错误原因。简要错误说明可以只包含简短的文字描述，可以包含错误代码。如果说哪种方式更为合理，我更倾向于错误代码+简要错误说明。如果只有简要错误说明，这个错误描述可能有些描述不合理，如果后端改了说明，那么对应的错误映射也要更改，调用方也要跟着修改。如果只有错误代码，调用方难以一眼看出错误原因，需要查阅错误码，这个比较啰嗦。如果同时提供错误码和简要错误说明，调用方可以通过简要说明快速定位问题，如果要处理错误逻辑，根据错误码表映射即可，这样即使描述改变了，但是错误码是永久不变的，不会影响调用方的处理逻辑。返回的结构如下：<br><figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Content-Type</span>: application/json;charset=UTF-8</div><div class="line"></div><div class="line"><span class="go">&#123;</span></div><div class="line">	<span class="string">"msg"</span>: <span class="string">"错误说明"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h1 id="服务端错误设计和处理"><a href="#服务端错误设计和处理" class="headerlink" title="服务端错误设计和处理"></a>服务端错误设计和处理</h1><p>根据RESTful接口的http status，对于错误，可以分为以下几大类（常用）：</p>
 <ol>
 <li>权限错误 401</li>
@@ -172,9 +172,9 @@
         
         <tags>
             
-            <tag> scala </tag>
-            
             <tag> sbt </tag>
+            
+            <tag> scala </tag>
             
         </tags>
         
@@ -383,9 +383,9 @@
         
         <tags>
             
-            <tag> spark </tag>
-            
             <tag> spring xd </tag>
+            
+            <tag> spark </tag>
             
         </tags>
         
@@ -1585,9 +1585,9 @@ b                            |  1
         
         <tags>
             
-            <tag> archlinux </tag>
-            
             <tag> arch </tag>
+            
+            <tag> archlinux </tag>
             
             <tag> ntfs </tag>
             
@@ -1693,9 +1693,9 @@ b                            |  1
             
             <tag> linux </tag>
             
-            <tag> archlinux </tag>
-            
             <tag> arch </tag>
+            
+            <tag> archlinux </tag>
             
         </tags>
         
@@ -1839,30 +1839,6 @@ b                            |  1
     </entry>
     
     <entry>
-      <title><![CDATA[Apache-Sqoop 安装]]></title>
-      <url>http://todu.top/sqoop/Apache-Sqoop-%E5%AE%89%E8%A3%85/</url>
-      <content type="html"><![CDATA[<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>首先当然是<a href="http://archive.apache.org/dist/sqoop/1.4.4/sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz" target="_blank" rel="external">下载sqoop</a><br>sqoop 依赖以下软件,点击链接可以直接下载<br>&gt;<br><a href="http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/hadoop/common/hadoop-2.6.0/hadoop-2.6.0.tar.gz" target="_blank" rel="external">hadoop</a><br><a href="http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/accumulo/1.6.2/accumulo-1.6.2-bin.tar.gz" target="_blank" rel="external">accumulo</a><br><a href="http://ftp.tsukuba.wide.ad.jp/software/apache/hive/hive-1.0.0/apache-hive-1.0.0-bin.tar.gz" target="_blank" rel="external">apache-hive</a><br><a href="http://ftp.kddilabs.jp/infosystems/apache/hbase/hbase-1.0.0/hbase-1.0.0-bin.tar.gz" target="_blank" rel="external">hbase</a><br><a href="http://mirror.bit.edu.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz" target="_blank" rel="external">zookeeper</a></p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="配置JAVA环境变量"><a href="#配置JAVA环境变量" class="headerlink" title="配置JAVA环境变量"></a>配置JAVA环境变量</h2><p>JAVA_HOME=/home/du/software/dev/jdk1.7.0_45<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> JAVA_HOME=/usr/install/java  <span class="comment">#此处换成自己的jdk目录</span></div><div class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/jre/lib</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</div></pre></td></tr></table></figure></p>
-<h2 id="配置sqoop运行依赖"><a href="#配置sqoop运行依赖" class="headerlink" title="配置sqoop运行依赖"></a>配置sqoop运行依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> HADOOP_COMMON_HOME=/home/du/software/dev/hadoop-2.6.0</div><div class="line"><span class="built_in">export</span> HADOOP_MAPRED_HOME=<span class="variable">$HADOOP_COMMON_HOME</span>/share/hadoop/mapreduce</div><div class="line"><span class="built_in">export</span> ZOOKEEPER_HOME=/home/du/software/dev/zookeeper-3.4.6</div><div class="line"><span class="built_in">export</span> ACCUMULO_HOME=/usr/install/accumulo-1.6.2</div><div class="line"><span class="built_in">export</span> HIVE_HOME=/usr/install/apache-hive-1.0.0-bin</div><div class="line"><span class="built_in">export</span> HCAT_HOME=/usr/install/apache-hive-1.0.0-bin/hcatalog</div><div class="line"><span class="built_in">export</span> HBASE_HOME=/usr/install/hbase-1.0.0</div><div class="line"><span class="built_in">export</span> SQOOP_HOME=/usr/install/sqoop-1.4.4.bin__hadoop-2.0.4-alpha</div></pre></td></tr></table></figure>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>切换到sqoop目录，运行 <code>bin/sqoop help</code>， 如果打印帮助文档则说明成功。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> sqoop </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> sqoop </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[SparkStreaming+Zookeeper+Kafka入门程序]]></title>
       <url>http://todu.top/spark/SparkStreaming+Zookeeper+Kafka%E5%85%A5%E9%97%A8%E7%A8%8B%E5%BA%8F/</url>
       <content type="html"><![CDATA[<h2 id="准备工作："><a href="#准备工作：" class="headerlink" title="准备工作："></a>准备工作：</h2><ul>
@@ -1901,6 +1877,111 @@ b                            |  1
             <tag> spark-streaming </tag>
             
             <tag> spark </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[运行第一个SparkStreaming程序（及过程中问题解决）]]></title>
+      <url>http://todu.top/spark/SparkStreaming%E7%A8%8B%E5%BA%8F%EF%BC%88%E5%8F%8A%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%EF%BC%89/</url>
+      <content type="html"><![CDATA[<h1 id="官方示例说明"><a href="#官方示例说明" class="headerlink" title="官方示例说明"></a>官方示例说明</h1><p>按照官方文档的 <a href="http://spark.apache.org/docs/1.0.0/streaming-programming-guide.html#a-quick-example" target="_blank" rel="external">这个示例说明</a>，可以轻松的在本地的spark-shell环境中测试这个示例。示例，即为了更好的入门，那么就再说明一下。<br>运行这个统计单词的方式有三种，前面两种是官方文档上的指引，第三种则是用scala程序运行。</p>
+<hr>
+<ul>
+<li><h2 id="第一种方式-run-demo"><a href="#第一种方式-run-demo" class="headerlink" title="第一种方式, run-demo"></a>第一种方式, run-demo</h2></li>
+</ul>
+<ol>
+<li>打开一个终端，打开一个终端，输入 命令 <code>nc -lk 9999</code>，暂时叫做 “nc终端” 吧</li>
+<li><p>再打开终端，切换到Spark HOME目录， 执行命令 <code>bin/run-example org.apache.spark.examples.streaming.NetworkWordCount localhost 9999</code>， 然后每秒会有类似一下日志循环输出<br>&gt;<br>-——————————————<br>Time: 1415701382000 ms<br>-——————————————<br>-——————————————<br>Time: 1415701383000 ms<br>-——————————————</p>
+</li>
+<li><p>在nc终端随便输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在上面的Spark终端中看到有新内容输出<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</p>
+</li>
+</ol>
+<p>OK，成功！</p>
+<hr>
+<ul>
+<li><h2 id="第二种-spark-shell-模式"><a href="#第二种-spark-shell-模式" class="headerlink" title="第二种 spark-shell 模式"></a>第二种 spark-shell 模式</h2>下面介绍在spark-shell中输入scala代码运行的方式。</li>
+</ul>
+<ol>
+<li>同上面第一步，打开一个终端，打开一个终端，输入 命令 <code>nc -lk 9999</code>，暂时叫做 “nc终端” 吧</li>
+<li><p>再打开一个终端， 切换到Spark HOME目录下，输入 <code>bin/spark-shell</code> （如果你已经安装好了Spark的话，直接输入 <code>spark-shell</code> 即可），等待Spark启动成功，会打印信息<br>&gt;<br>Spark context available as sc.<br>scala&gt;</p>
+<p>然后输入以下语句：</p>
+</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.apache.spark.streaming._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</div><div class="line"><span class="keyword">import</span> org.apache.spark.api.java.function._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.api._</div><div class="line"></div><div class="line"><span class="comment">// Create a StreamingContext with a local master</span></div><div class="line"><span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(sc, <span class="type">Seconds</span>(<span class="number">1</span>))</div><div class="line"></div><div class="line"><span class="comment">// Create a DStream that will connect to serverIP:serverPort, like localhost:9999</span></div><div class="line"><span class="keyword">val</span> lines = ssc.socketTextStream(<span class="string">"localhost"</span>, <span class="number">9999</span>)</div><div class="line"></div><div class="line"><span class="comment">// Split each line into words</span></div><div class="line"><span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</div><div class="line"></div><div class="line"><span class="comment">// Count each word in each batch</span></div><div class="line"><span class="keyword">val</span> pairs = words.map(word =&gt; (word, <span class="number">1</span>))</div><div class="line"><span class="keyword">val</span> wordCounts = pairs.reduceByKey(_ + _)</div><div class="line"></div><div class="line"><span class="comment">// Print a few of the counts to the console</span></div><div class="line">wordCounts.print()</div><div class="line">ssc.start()             <span class="comment">// Start the computation</span></div><div class="line">ssc.awaitTermination()  <span class="comment">// Wait for the computation to terminate</span></div></pre></td></tr></table></figure>
+<p> 会打印以下信息：<br>&gt;<br>14/11/11 18:07:23 INFO MemoryStore: ensureFreeSpace(2216) called with curMem=100936, maxMem=278019440<br>.…..<br>14/11/11 18:07:23 INFO DAGScheduler: Stage 91 (take at DStream.scala:608) finished in 0.004 s<br>14/11/11 18:07:23 INFO SparkContext: Job finished: take at DStream.scala:608, took 0.007531701 s<br> -——————————————<br>Time: 1415700443000 ms<br>-——————————————</p>
+<ol>
+<li><p>同第一种方式的第3步，随便输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在上面的Spark终端中看到有新内容输出<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</p>
+<p>OK，成功！</p>
+</li>
+</ol>
+<hr>
+<ul>
+<li><h2 id="第三种-scala-ide编程方式"><a href="#第三种-scala-ide编程方式" class="headerlink" title="第三种 scala-ide编程方式"></a>第三种 scala-ide编程方式</h2>在用这种方式运行这个demo代码的时候，遇到了不少问题，记录下来，供大家参考。这个例子，请大家先根据这里记录的方式进行操作，得到一个可以运行的程序，后面我会记录遇到的问题。</li>
+</ul>
+<ol>
+<li>下载scala-ide, <a href="http://scala-ide.org/download/sdk.html" target="_blank" rel="external">下载链接</a>，下载 For Scala 2.10.4 下的对应平台的ide，解压，运行。</li>
+<li>安装sbt，<a href="http://www.scala-sbt.org/download.html" target="_blank" rel="external">下载链接</a>,</li>
+<li>安装sbteclipse, <a href="https://github.com/typesafehub/sbteclipse" target="_blank" rel="external">github地址</a>, 编辑 <code>~/.sbt/0.13/plugins/plugins.sbt</code> 文件， 添加以下内容 <code>addSbtPlugin(&quot;com.typesafe.sbteclipse&quot; % &quot;sbteclipse-plugin&quot; % &quot;2.5.0&quot;)</code>，如果没有plugins目录和plugins.sbt，自行创建。</li>
+<li><p>用向导创建一个scala项目，并在项目根目录下创建一个build.sbt文件，添加以下内容(注意，每行正式语句之后要换行)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">name := &quot;spark-test&quot;</div><div class="line"></div><div class="line"></div><div class="line">version := &quot;1.0&quot;</div><div class="line"></div><div class="line"></div><div class="line">scalaVersion := &quot;2.10.4&quot;</div><div class="line"></div><div class="line"></div><div class="line">// set the main class for the main &apos;run&apos; task</div><div class="line">// change Compile to Test to set it for &apos;test:run&apos;</div><div class="line">mainClass in (Compile, run) := Some(&quot;test.SparkTest&quot;)</div><div class="line"></div><div class="line">libraryDependencies += &quot;org.apache.spark&quot; % &quot;spark-streaming_2.10&quot; % &quot;1.1.0&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建test.SparkTest.scala文件，添加以下代码</p>
+</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> test</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</div><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.api.java.function._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.api._</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">SparkTest</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</div><div class="line">    <span class="comment">// Create a StreamingContext with a local master</span></div><div class="line">    <span class="comment">// Spark Streaming needs at least two working thread</span></div><div class="line">    <span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(<span class="string">"local[2]"</span>, <span class="string">"NetworkWordCount"</span>, <span class="type">Seconds</span>(<span class="number">10</span>))</div><div class="line">    <span class="comment">// Create a DStream that will connect to serverIP:serverPort, like localhost:9999</span></div><div class="line">    <span class="keyword">val</span> lines = ssc.socketTextStream(<span class="string">"localhost"</span>, <span class="number">9999</span>)</div><div class="line">    <span class="comment">// Split each line into words</span></div><div class="line">    <span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</div><div class="line">    <span class="comment">// Count each word in each batch</span></div><div class="line">    <span class="keyword">val</span> pairs = words.map(word =&gt; (word, <span class="number">1</span>))</div><div class="line">    <span class="keyword">val</span> wordCounts = pairs.reduceByKey(_ + _)</div><div class="line">    wordCounts.print</div><div class="line">    ssc.start</div><div class="line">    ssc.awaitTermination</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>终端中切换目录到这个项目根目录，输入命令 <code>sbt</code> ， 命令运行成功后，敲入 <code>eclipse</code> 生成eclipse项目和项目所需依赖</li>
+<li>同第一种方式的第1,3步，<br>再打开一个终端，输入 命令 <code>nc -lk 9999</code>。<br>然后运行刚才写的main程序，在nc终端中输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在ide控制台中观察到<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</li>
+</ol>
+<p>OK，成功！</p>
+<hr>
+<h1 id="下面是遇到的问题及解决方法："><a href="#下面是遇到的问题及解决方法：" class="headerlink" title="下面是遇到的问题及解决方法："></a>下面是遇到的问题及解决方法：</h1><h3 id="1-运行程序说找不到主类"><a href="#1-运行程序说找不到主类" class="headerlink" title="1. 运行程序说找不到主类"></a>1. 运行程序说找不到主类</h3><p>解：没有在sbt文件配置主类是哪个，在<code>build.sbt</code>  文件中添加以下代码</p>
+<blockquote>
+<p>mainClass in (Compile, run) := Some(“test.SparkTest”)</p>
+</blockquote>
+<p> Some中就是主类的路径</p>
+<h3 id="2-java-lang-NoClassDefFoundError-scala-collection-GenTraversableOnce-class"><a href="#2-java-lang-NoClassDefFoundError-scala-collection-GenTraversableOnce-class" class="headerlink" title="2. java.lang.NoClassDefFoundError: scala/collection/GenTraversableOnce$class"></a>2. java.lang.NoClassDefFoundError: scala/collection/GenTraversableOnce$class</h3><p>这个问题困扰了我很长时间，一直没找到怎么解决。后来看到说是scala每次版本升级不兼容以前的版本编译的库，于是换了对应的版本的ide才正常运行。<br>解：scala-ide版本和现在用的spark包依赖编译的scala版本不一致， 请下载上面说过的 <code>scala-ide For Scala 2.10.4</code> 版本。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> spark </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> zookeeper </tag>
+            
+            <tag> spark-streaming </tag>
+            
+            <tag> spark </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Apache-Sqoop 安装]]></title>
+      <url>http://todu.top/sqoop/Apache-Sqoop-%E5%AE%89%E8%A3%85/</url>
+      <content type="html"><![CDATA[<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>首先当然是<a href="http://archive.apache.org/dist/sqoop/1.4.4/sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz" target="_blank" rel="external">下载sqoop</a><br>sqoop 依赖以下软件,点击链接可以直接下载<br>&gt;<br><a href="http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/hadoop/common/hadoop-2.6.0/hadoop-2.6.0.tar.gz" target="_blank" rel="external">hadoop</a><br><a href="http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/accumulo/1.6.2/accumulo-1.6.2-bin.tar.gz" target="_blank" rel="external">accumulo</a><br><a href="http://ftp.tsukuba.wide.ad.jp/software/apache/hive/hive-1.0.0/apache-hive-1.0.0-bin.tar.gz" target="_blank" rel="external">apache-hive</a><br><a href="http://ftp.kddilabs.jp/infosystems/apache/hbase/hbase-1.0.0/hbase-1.0.0-bin.tar.gz" target="_blank" rel="external">hbase</a><br><a href="http://mirror.bit.edu.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz" target="_blank" rel="external">zookeeper</a></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="配置JAVA环境变量"><a href="#配置JAVA环境变量" class="headerlink" title="配置JAVA环境变量"></a>配置JAVA环境变量</h2><p>JAVA_HOME=/home/du/software/dev/jdk1.7.0_45<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> JAVA_HOME=/usr/install/java  <span class="comment">#此处换成自己的jdk目录</span></div><div class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/jre/lib</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</div></pre></td></tr></table></figure></p>
+<h2 id="配置sqoop运行依赖"><a href="#配置sqoop运行依赖" class="headerlink" title="配置sqoop运行依赖"></a>配置sqoop运行依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> HADOOP_COMMON_HOME=/home/du/software/dev/hadoop-2.6.0</div><div class="line"><span class="built_in">export</span> HADOOP_MAPRED_HOME=<span class="variable">$HADOOP_COMMON_HOME</span>/share/hadoop/mapreduce</div><div class="line"><span class="built_in">export</span> ZOOKEEPER_HOME=/home/du/software/dev/zookeeper-3.4.6</div><div class="line"><span class="built_in">export</span> ACCUMULO_HOME=/usr/install/accumulo-1.6.2</div><div class="line"><span class="built_in">export</span> HIVE_HOME=/usr/install/apache-hive-1.0.0-bin</div><div class="line"><span class="built_in">export</span> HCAT_HOME=/usr/install/apache-hive-1.0.0-bin/hcatalog</div><div class="line"><span class="built_in">export</span> HBASE_HOME=/usr/install/hbase-1.0.0</div><div class="line"><span class="built_in">export</span> SQOOP_HOME=/usr/install/sqoop-1.4.4.bin__hadoop-2.0.4-alpha</div></pre></td></tr></table></figure>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>切换到sqoop目录，运行 <code>bin/sqoop help</code>， 如果打印帮助文档则说明成功。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> sqoop </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> sqoop </tag>
             
         </tags>
         
@@ -2137,87 +2218,6 @@ b                            |  1
             <tag> mysql </tag>
             
             <tag> sqoop </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[运行第一个SparkStreaming程序（及过程中问题解决）]]></title>
-      <url>http://todu.top/spark/SparkStreaming%E7%A8%8B%E5%BA%8F%EF%BC%88%E5%8F%8A%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%EF%BC%89/</url>
-      <content type="html"><![CDATA[<h1 id="官方示例说明"><a href="#官方示例说明" class="headerlink" title="官方示例说明"></a>官方示例说明</h1><p>按照官方文档的 <a href="http://spark.apache.org/docs/1.0.0/streaming-programming-guide.html#a-quick-example" target="_blank" rel="external">这个示例说明</a>，可以轻松的在本地的spark-shell环境中测试这个示例。示例，即为了更好的入门，那么就再说明一下。<br>运行这个统计单词的方式有三种，前面两种是官方文档上的指引，第三种则是用scala程序运行。</p>
-<hr>
-<ul>
-<li><h2 id="第一种方式-run-demo"><a href="#第一种方式-run-demo" class="headerlink" title="第一种方式, run-demo"></a>第一种方式, run-demo</h2></li>
-</ul>
-<ol>
-<li>打开一个终端，打开一个终端，输入 命令 <code>nc -lk 9999</code>，暂时叫做 “nc终端” 吧</li>
-<li><p>再打开终端，切换到Spark HOME目录， 执行命令 <code>bin/run-example org.apache.spark.examples.streaming.NetworkWordCount localhost 9999</code>， 然后每秒会有类似一下日志循环输出<br>&gt;<br>-——————————————<br>Time: 1415701382000 ms<br>-——————————————<br>-——————————————<br>Time: 1415701383000 ms<br>-——————————————</p>
-</li>
-<li><p>在nc终端随便输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在上面的Spark终端中看到有新内容输出<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</p>
-</li>
-</ol>
-<p>OK，成功！</p>
-<hr>
-<ul>
-<li><h2 id="第二种-spark-shell-模式"><a href="#第二种-spark-shell-模式" class="headerlink" title="第二种 spark-shell 模式"></a>第二种 spark-shell 模式</h2>下面介绍在spark-shell中输入scala代码运行的方式。</li>
-</ul>
-<ol>
-<li>同上面第一步，打开一个终端，打开一个终端，输入 命令 <code>nc -lk 9999</code>，暂时叫做 “nc终端” 吧</li>
-<li><p>再打开一个终端， 切换到Spark HOME目录下，输入 <code>bin/spark-shell</code> （如果你已经安装好了Spark的话，直接输入 <code>spark-shell</code> 即可），等待Spark启动成功，会打印信息<br>&gt;<br>Spark context available as sc.<br>scala&gt;</p>
-<p>然后输入以下语句：</p>
-</li>
-</ol>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.apache.spark.streaming._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</div><div class="line"><span class="keyword">import</span> org.apache.spark.api.java.function._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.api._</div><div class="line"></div><div class="line"><span class="comment">// Create a StreamingContext with a local master</span></div><div class="line"><span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(sc, <span class="type">Seconds</span>(<span class="number">1</span>))</div><div class="line"></div><div class="line"><span class="comment">// Create a DStream that will connect to serverIP:serverPort, like localhost:9999</span></div><div class="line"><span class="keyword">val</span> lines = ssc.socketTextStream(<span class="string">"localhost"</span>, <span class="number">9999</span>)</div><div class="line"></div><div class="line"><span class="comment">// Split each line into words</span></div><div class="line"><span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</div><div class="line"></div><div class="line"><span class="comment">// Count each word in each batch</span></div><div class="line"><span class="keyword">val</span> pairs = words.map(word =&gt; (word, <span class="number">1</span>))</div><div class="line"><span class="keyword">val</span> wordCounts = pairs.reduceByKey(_ + _)</div><div class="line"></div><div class="line"><span class="comment">// Print a few of the counts to the console</span></div><div class="line">wordCounts.print()</div><div class="line">ssc.start()             <span class="comment">// Start the computation</span></div><div class="line">ssc.awaitTermination()  <span class="comment">// Wait for the computation to terminate</span></div></pre></td></tr></table></figure>
-<p> 会打印以下信息：<br>&gt;<br>14/11/11 18:07:23 INFO MemoryStore: ensureFreeSpace(2216) called with curMem=100936, maxMem=278019440<br>.…..<br>14/11/11 18:07:23 INFO DAGScheduler: Stage 91 (take at DStream.scala:608) finished in 0.004 s<br>14/11/11 18:07:23 INFO SparkContext: Job finished: take at DStream.scala:608, took 0.007531701 s<br> -——————————————<br>Time: 1415700443000 ms<br>-——————————————</p>
-<ol>
-<li><p>同第一种方式的第3步，随便输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在上面的Spark终端中看到有新内容输出<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</p>
-<p>OK，成功！</p>
-</li>
-</ol>
-<hr>
-<ul>
-<li><h2 id="第三种-scala-ide编程方式"><a href="#第三种-scala-ide编程方式" class="headerlink" title="第三种 scala-ide编程方式"></a>第三种 scala-ide编程方式</h2>在用这种方式运行这个demo代码的时候，遇到了不少问题，记录下来，供大家参考。这个例子，请大家先根据这里记录的方式进行操作，得到一个可以运行的程序，后面我会记录遇到的问题。</li>
-</ul>
-<ol>
-<li>下载scala-ide, <a href="http://scala-ide.org/download/sdk.html" target="_blank" rel="external">下载链接</a>，下载 For Scala 2.10.4 下的对应平台的ide，解压，运行。</li>
-<li>安装sbt，<a href="http://www.scala-sbt.org/download.html" target="_blank" rel="external">下载链接</a>,</li>
-<li>安装sbteclipse, <a href="https://github.com/typesafehub/sbteclipse" target="_blank" rel="external">github地址</a>, 编辑 <code>~/.sbt/0.13/plugins/plugins.sbt</code> 文件， 添加以下内容 <code>addSbtPlugin(&quot;com.typesafe.sbteclipse&quot; % &quot;sbteclipse-plugin&quot; % &quot;2.5.0&quot;)</code>，如果没有plugins目录和plugins.sbt，自行创建。</li>
-<li><p>用向导创建一个scala项目，并在项目根目录下创建一个build.sbt文件，添加以下内容(注意，每行正式语句之后要换行)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">name := &quot;spark-test&quot;</div><div class="line"></div><div class="line"></div><div class="line">version := &quot;1.0&quot;</div><div class="line"></div><div class="line"></div><div class="line">scalaVersion := &quot;2.10.4&quot;</div><div class="line"></div><div class="line"></div><div class="line">// set the main class for the main &apos;run&apos; task</div><div class="line">// change Compile to Test to set it for &apos;test:run&apos;</div><div class="line">mainClass in (Compile, run) := Some(&quot;test.SparkTest&quot;)</div><div class="line"></div><div class="line">libraryDependencies += &quot;org.apache.spark&quot; % &quot;spark-streaming_2.10&quot; % &quot;1.1.0&quot;</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建test.SparkTest.scala文件，添加以下代码</p>
-</li>
-</ol>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> test</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</div><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.api.java.function._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.api._</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">SparkTest</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</div><div class="line">    <span class="comment">// Create a StreamingContext with a local master</span></div><div class="line">    <span class="comment">// Spark Streaming needs at least two working thread</span></div><div class="line">    <span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(<span class="string">"local[2]"</span>, <span class="string">"NetworkWordCount"</span>, <span class="type">Seconds</span>(<span class="number">10</span>))</div><div class="line">    <span class="comment">// Create a DStream that will connect to serverIP:serverPort, like localhost:9999</span></div><div class="line">    <span class="keyword">val</span> lines = ssc.socketTextStream(<span class="string">"localhost"</span>, <span class="number">9999</span>)</div><div class="line">    <span class="comment">// Split each line into words</span></div><div class="line">    <span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</div><div class="line">    <span class="comment">// Count each word in each batch</span></div><div class="line">    <span class="keyword">val</span> pairs = words.map(word =&gt; (word, <span class="number">1</span>))</div><div class="line">    <span class="keyword">val</span> wordCounts = pairs.reduceByKey(_ + _)</div><div class="line">    wordCounts.print</div><div class="line">    ssc.start</div><div class="line">    ssc.awaitTermination</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>终端中切换目录到这个项目根目录，输入命令 <code>sbt</code> ， 命令运行成功后，敲入 <code>eclipse</code> 生成eclipse项目和项目所需依赖</li>
-<li>同第一种方式的第1,3步，<br>再打开一个终端，输入 命令 <code>nc -lk 9999</code>。<br>然后运行刚才写的main程序，在nc终端中输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在ide控制台中观察到<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</li>
-</ol>
-<p>OK，成功！</p>
-<hr>
-<h1 id="下面是遇到的问题及解决方法："><a href="#下面是遇到的问题及解决方法：" class="headerlink" title="下面是遇到的问题及解决方法："></a>下面是遇到的问题及解决方法：</h1><h3 id="1-运行程序说找不到主类"><a href="#1-运行程序说找不到主类" class="headerlink" title="1. 运行程序说找不到主类"></a>1. 运行程序说找不到主类</h3><p>解：没有在sbt文件配置主类是哪个，在<code>build.sbt</code>  文件中添加以下代码</p>
-<blockquote>
-<p>mainClass in (Compile, run) := Some(“test.SparkTest”)</p>
-</blockquote>
-<p> Some中就是主类的路径</p>
-<h3 id="2-java-lang-NoClassDefFoundError-scala-collection-GenTraversableOnce-class"><a href="#2-java-lang-NoClassDefFoundError-scala-collection-GenTraversableOnce-class" class="headerlink" title="2. java.lang.NoClassDefFoundError: scala/collection/GenTraversableOnce$class"></a>2. java.lang.NoClassDefFoundError: scala/collection/GenTraversableOnce$class</h3><p>这个问题困扰了我很长时间，一直没找到怎么解决。后来看到说是scala每次版本升级不兼容以前的版本编译的库，于是换了对应的版本的ide才正常运行。<br>解：scala-ide版本和现在用的spark包依赖编译的scala版本不一致， 请下载上面说过的 <code>scala-ide For Scala 2.10.4</code> 版本。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> spark </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> zookeeper </tag>
-            
-            <tag> spark-streaming </tag>
-            
-            <tag> spark </tag>
             
         </tags>
         

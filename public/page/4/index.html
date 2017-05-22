@@ -119,6 +119,8 @@
                         
                             <li><a href="/tags">分类|标签</a></li>
                         
+                            <li><a href="javascript:;">备案：鲁ICP备17022134号</a></li>
+                        
                         </ul>
                     </nav>
                     <nav class="header-nav">
@@ -203,6 +205,8 @@
                     <li><a href="/">博客首页</a></li>
                 
                     <li><a href="/tags">分类|标签</a></li>
+                
+                    <li><a href="javascript:;">备案：鲁ICP备17022134号</a></li>
                 
                 <div class="clearfix"></div>
                 </ul>
@@ -1194,10 +1198,10 @@ b                            |  1
 
 
   
-    <article id="post-sqoop/Apache-Sqoop-安装" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-spark/SparkStreaming+Zookeeper+Kafka入门程序" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/sqoop/Apache-Sqoop-安装/" class="article-date">
+      <a href="/spark/SparkStreaming+Zookeeper+Kafka入门程序/" class="article-date">
       <time datetime="2016-03-09T04:51:43.000Z" itemprop="datePublished">2016-03-09</time>
 </a>
     </div>
@@ -1211,7 +1215,7 @@ b                            |  1
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/sqoop/Apache-Sqoop-安装/">Apache-Sqoop 安装</a>
+      <a class="article-title" href="/spark/SparkStreaming+Zookeeper+Kafka入门程序/">SparkStreaming+Zookeeper+Kafka入门程序</a>
     </h1>
   
 
@@ -1221,10 +1225,26 @@ b                            |  1
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>首先当然是<a href="http://archive.apache.org/dist/sqoop/1.4.4/sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz" target="_blank" rel="external">下载sqoop</a><br>sqoop 依赖以下软件,点击链接可以直接下载<br>&gt;<br><a href="http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/hadoop/common/hadoop-2.6.0/hadoop-2.6.0.tar.gz" target="_blank" rel="external">hadoop</a><br><a href="http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/accumulo/1.6.2/accumulo-1.6.2-bin.tar.gz" target="_blank" rel="external">accumulo</a><br><a href="http://ftp.tsukuba.wide.ad.jp/software/apache/hive/hive-1.0.0/apache-hive-1.0.0-bin.tar.gz" target="_blank" rel="external">apache-hive</a><br><a href="http://ftp.kddilabs.jp/infosystems/apache/hbase/hbase-1.0.0/hbase-1.0.0-bin.tar.gz" target="_blank" rel="external">hbase</a><br><a href="http://mirror.bit.edu.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz" target="_blank" rel="external">zookeeper</a></p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="配置JAVA环境变量"><a href="#配置JAVA环境变量" class="headerlink" title="配置JAVA环境变量"></a>配置JAVA环境变量</h2><p>JAVA_HOME=/home/du/software/dev/jdk1.7.0_45<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> JAVA_HOME=/usr/install/java  <span class="comment">#此处换成自己的jdk目录</span></div><div class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/jre/lib</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</div></pre></td></tr></table></figure></p>
-<h2 id="配置sqoop运行依赖"><a href="#配置sqoop运行依赖" class="headerlink" title="配置sqoop运行依赖"></a>配置sqoop运行依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> HADOOP_COMMON_HOME=/home/du/software/dev/hadoop-2.6.0</div><div class="line"><span class="built_in">export</span> HADOOP_MAPRED_HOME=<span class="variable">$HADOOP_COMMON_HOME</span>/share/hadoop/mapreduce</div><div class="line"><span class="built_in">export</span> ZOOKEEPER_HOME=/home/du/software/dev/zookeeper-3.4.6</div><div class="line"><span class="built_in">export</span> ACCUMULO_HOME=/usr/install/accumulo-1.6.2</div><div class="line"><span class="built_in">export</span> HIVE_HOME=/usr/install/apache-hive-1.0.0-bin</div><div class="line"><span class="built_in">export</span> HCAT_HOME=/usr/install/apache-hive-1.0.0-bin/hcatalog</div><div class="line"><span class="built_in">export</span> HBASE_HOME=/usr/install/hbase-1.0.0</div><div class="line"><span class="built_in">export</span> SQOOP_HOME=/usr/install/sqoop-1.4.4.bin__hadoop-2.0.4-alpha</div></pre></td></tr></table></figure>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>切换到sqoop目录，运行 <code>bin/sqoop help</code>， 如果打印帮助文档则说明成功。</p>
+        <h2 id="准备工作："><a href="#准备工作：" class="headerlink" title="准备工作："></a>准备工作：</h2><ul>
+<li>安装 <a href="http://spark.apache.org/" target="_blank" rel="external">spark</a></li>
+<li>安装 <a href="http://zookeeper.apache.org/" target="_blank" rel="external">zookeeper</a></li>
+<li>安装 <a href="http://kafka.apache.org/" target="_blank" rel="external">kafka</a></li>
+</ul>
+<h2 id="开始工作"><a href="#开始工作" class="headerlink" title="开始工作"></a>开始工作</h2><h4 id="1-启动zookeeper"><a href="#1-启动zookeeper" class="headerlink" title="1. 启动zookeeper"></a>1. 启动zookeeper</h4><p> 打开终端，切换到 <code>zookeeper HOME</code> 目录， 进入conf文件夹，拷贝一份 <code>zoo_sample.cfg</code> 副本并重命名为 <code>zoo.cfg</code><br> 切换到上级的bin目录中，执行 <code>./zkServer.sh start</code> 启动zookeeper，会有日志打印</p>
+<blockquote>
+<p>Starting zookeeper … STARTED</p>
+</blockquote>
+<p> 然后用 <code>./zkServer.sh status</code> 查看状态，如果有下列信息输出，则说明启动成功</p>
+<blockquote>
+<p>Mode: standalone</p>
+</blockquote>
+<p> 如果要停止zookeeper，则运行 <code>./zkServer stop</code> 即可</p>
+<h4 id="2-启动kafka"><a href="#2-启动kafka" class="headerlink" title="2. 启动kafka"></a>2. 启动kafka</h4><p>打开终端，切换到 <code>kafka HOME</code> 目录,运行 <code>bin/kafka-server-start.sh config/server.properties</code> 会有以下类似日志输出<br>  &gt;<br>[2014-11-12 17:38:13,395] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions [test,0] (kafka.server.ReplicaFetcherManager)<br>[2014-11-12 17:38:13,420] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions [test,0] (kafka.server.ReplicaFetcherManager)</p>
+<h4 id="3-启动kafka生产者"><a href="#3-启动kafka生产者" class="headerlink" title="3. 启动kafka生产者"></a>3. 启动kafka生产者</h4><p>重新打开一个终端，暂叫做 生产者终端，方便后面引用说明。切换到 <code>kafka HOME</code> 目录,运行 <code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</code> 创建一个叫 <code>test</code> 的主题。</p>
+<h4 id="4-编写scala应用程序"><a href="#4-编写scala应用程序" class="headerlink" title="4. 编写scala应用程序"></a>4. 编写scala应用程序</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">    <span class="keyword">package</span> test</div><div class="line">    <span class="keyword">import</span> java.util.<span class="type">Properties</span></div><div class="line">    <span class="keyword">import</span> kafka.producer._</div><div class="line">    <span class="keyword">import</span> org.apache.spark.streaming._</div><div class="line">    <span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</div><div class="line">    <span class="keyword">import</span> org.apache.spark.streaming.kafka._</div><div class="line">    <span class="keyword">import</span> org.apache.spark.<span class="type">SparkConf</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">object</span> <span class="title">KafkaWordCount</span> </span>&#123;</div><div class="line">      <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</div><div class="line">    <span class="comment">//    if (args.length &lt; 4) &#123;</span></div><div class="line">    <span class="comment">//      System.err.println("Usage: KafkaWordCount &lt;zkQuorum&gt;     &lt;group&gt; &lt;topics&gt; &lt;numThreads&gt;")</span></div><div class="line">    <span class="comment">//      System.exit(1)</span></div><div class="line">     <span class="comment">//    &#125;</span></div><div class="line"></div><div class="line">    <span class="comment">//    StreamingExamples.setStreamingLogLevels()</span></div><div class="line"></div><div class="line">    <span class="comment">//val Array(zkQuorum, group, topics, numThreads) = args</span></div><div class="line">    <span class="keyword">val</span> zkQuorum = <span class="string">"localhost:2181"</span></div><div class="line">    <span class="keyword">val</span> group = <span class="string">"1"</span></div><div class="line">    <span class="keyword">val</span> topics = <span class="string">"test"</span></div><div class="line">    <span class="keyword">val</span> numThreads = <span class="number">2</span></div><div class="line"></div><div class="line">    <span class="keyword">val</span> sparkConf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"KafkaWordCount"</span>).setMaster(<span class="string">"local[2]"</span>)</div><div class="line">    <span class="keyword">val</span> ssc =  <span class="keyword">new</span> <span class="type">StreamingContext</span>(sparkConf, <span class="type">Seconds</span>(<span class="number">2</span>))</div><div class="line">    ssc.checkpoint(<span class="string">"checkpoint"</span>)</div><div class="line"></div><div class="line">    <span class="keyword">val</span> topicpMap = topics.split(<span class="string">","</span>).map((_,numThreads)).toMap</div><div class="line">    <span class="keyword">val</span> lines = <span class="type">KafkaUtils</span>.createStream(ssc, zkQuorum, group, topicpMap).map(_._2)</div><div class="line">    <span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</div><div class="line"></div><div class="line">    <span class="keyword">val</span> pairs = words.map(word =&gt; (word, <span class="number">1</span>))</div><div class="line"></div><div class="line">    <span class="keyword">val</span> wordCounts = pairs.reduceByKey(_ + _)</div><div class="line"></div><div class="line">    <span class="comment">//val wordCounts = words.map(x =&gt; (x, 1L))</span></div><div class="line">    <span class="comment">//  .reduceByKeyAndWindow(_ + _, _ - _, Minutes(10), Seconds(2), 2)</span></div><div class="line">    wordCounts.print()</div><div class="line"></div><div class="line">    ssc.start()</div><div class="line">    ssc.awaitTermination()</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>build.sbt</code> 文件中添加依赖<br> &gt;<br> libraryDependencies += “org.apache.spark” % “spark-streaming_2.10” % “1.1.0”<br>&gt;<br>libraryDependencies += “org.apache.spark” % “spark-streaming-kafka_2.10” % “1.1.0”</p>
+<p>启动scala程序，然后在 上面第2步的 生产者终端中输入一些字符串，如  <code>sdfsadf a aa a a a a a a a a</code> ，在ide的控制台上可以看到有信息输出<br> &gt;<br>4/11/12 16:38:22 INFO scheduler.DAGScheduler: Stage 195 (take at DStream.scala:608) finished in 0.004 s<br>-——————————————<br>Time: 1415781502000 ms<br>-——————————————<br>(aa,1)<br>(a,9)<br>(sdfsadf,1)</p>
+<p>说明程序成功运行。</p>
 
       
     </div>
@@ -1233,13 +1253,13 @@ b                            |  1
       
       
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/sqoop/">sqoop</a>
+    <a class="article-category-link" href="/categories/spark/">spark</a>
     </div>
 
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqoop/">sqoop</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spark/">spark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spark-streaming/">spark-streaming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zookeeper/">zookeeper</a></li></ul>
     </div>
 
       

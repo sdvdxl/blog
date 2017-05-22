@@ -119,6 +119,8 @@
                         
                             <li><a href="/tags">分类|标签</a></li>
                         
+                            <li><a href="javascript:;">备案：鲁ICP备17022134号</a></li>
+                        
                         </ul>
                     </nav>
                     <nav class="header-nav">
@@ -204,6 +206,8 @@
                 
                     <li><a href="/tags">分类|标签</a></li>
                 
+                    <li><a href="javascript:;">备案：鲁ICP备17022134号</a></li>
+                
                 <div class="clearfix"></div>
                 </ul>
             </nav>
@@ -255,7 +259,7 @@
       
           
         <p>不管是WEB还是移动端，如果需要调用Http接口，那么不可避免要处理各种错误，包括客户端参数完整性校验，类型校验，系统错误等。如果一个设计规范的接口错误返回值，不但可以规范调用方统一处理方式，给出更合理的提示，而且后端也有着接口返回规范的作用。这里讨论的其实并不单纯是返回的错误设计，也包括业务上的错误设计。</p>
-<h1 id="接口返回设计"><a href="#接口返回设计" class="headerlink" title="接口返回设计"></a>接口返回设计</h1><p>接口返回需要有http status，错误说明，并且要提供一个完整的错误列表，可以通过简单的错误说明或者错误代码查阅到详细的错误原因。简要错误说明可以只包含简短的文字描述，可以包含错误代码。如果说哪种方式更为合理，我更倾向于错误代码+简要错误说明。如果只有简要错误说明，这个错误描述可能有些描述不合理，如果后端改了说明，那么对应的错误映射也要更改，调用方也要跟着修改。如果只有错误代码，调用方难以一眼看出错误原因，需要查阅错误码，这个比较啰嗦。如果同时提供错误码和简要错误说明，调用方可以通过简要说明快速定位问题，如果要处理错误逻辑，根据错误码表映射即可，这样即使描述改变了，但是错误码是永久不变的，不会影响调用方的处理逻辑。返回的结构如下：<br><figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Content-Type</span>: application/json;charset=UTF-8</div><div class="line"></div><div class="line"><span class="bash">&#123;</span></div><div class="line">	<span class="string">"msg"</span>: <span class="string">"错误说明"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="接口返回设计"><a href="#接口返回设计" class="headerlink" title="接口返回设计"></a>接口返回设计</h1><p>接口返回需要有http status，错误说明，并且要提供一个完整的错误列表，可以通过简单的错误说明或者错误代码查阅到详细的错误原因。简要错误说明可以只包含简短的文字描述，可以包含错误代码。如果说哪种方式更为合理，我更倾向于错误代码+简要错误说明。如果只有简要错误说明，这个错误描述可能有些描述不合理，如果后端改了说明，那么对应的错误映射也要更改，调用方也要跟着修改。如果只有错误代码，调用方难以一眼看出错误原因，需要查阅错误码，这个比较啰嗦。如果同时提供错误码和简要错误说明，调用方可以通过简要说明快速定位问题，如果要处理错误逻辑，根据错误码表映射即可，这样即使描述改变了，但是错误码是永久不变的，不会影响调用方的处理逻辑。返回的结构如下：<br><figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Content-Type</span>: application/json;charset=UTF-8</div><div class="line"></div><div class="line"><span class="go">&#123;</span></div><div class="line">	<span class="string">"msg"</span>: <span class="string">"错误说明"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h1 id="服务端错误设计和处理"><a href="#服务端错误设计和处理" class="headerlink" title="服务端错误设计和处理"></a>服务端错误设计和处理</h1><p>根据RESTful接口的http status，对于错误，可以分为以下几大类（常用）：</p>
 <ol>
 <li>权限错误 401</li>

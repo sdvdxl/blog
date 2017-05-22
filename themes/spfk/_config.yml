@@ -6,7 +6,7 @@
 menu:
   博客首页: /
   "分类|标签": /tags
-
+  "备案：鲁ICP备17022134号": javascript:;
 # Link to your avatar | 填写头像地址
 avatar: /me.jpg
 
