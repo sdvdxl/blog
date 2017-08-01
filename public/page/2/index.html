@@ -231,6 +231,68 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-spring/通过SpringXD将信息分片-文件夹存储到HDFS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/spring/通过SpringXD将信息分片-文件夹存储到HDFS/" class="article-date">
+      <time datetime="2016-03-16T09:29:03.000Z" itemprop="datePublished">2016-03-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/spring/通过SpringXD将信息分片-文件夹存储到HDFS/">通过SpringXD将信息分片|文件夹存储到HDFS</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <pre><code>kafka --topic=kafka_test --zkconnect=10.10.1.20:2181 --queueSize=64 |hdfs --inputType=application/json --idleTimeout=10000 --partitionPath=dateFormat(&apos;yyyy/MM/dd/HH/mm&apos;)
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/spring/">spring</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hdfs/">hdfs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kafka/">kafka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-xd/">spring xd</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-spark/sparkApp提交到SpringXD出现错误可能情况及解决方法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -624,9 +686,9 @@
 <h1 id="go-list"><a href="#go-list" class="headerlink" title="go list"></a>go list</h1><p>这个命令用来查看所引用的包。</p>
 <h2 id="基本用法-1"><a href="#基本用法-1" class="headerlink" title="基本用法"></a>基本用法</h2><ol>
 <li>直接跟包名，如：<code>github.com/golang/text</code>，会打印这个包本身；也可以切换到该包目录下执行<code>go list</code>，效果相同。</li>
-<li>可以直接跟”包名”+”/…”，比如要查看<code>github.com/golang/text</code>这个包的导入情况，执行<code>go list github.com/golang/text/...</code>会打印本包的go文件。<h2 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h2><code>-f</code>可以指定打印格式，默认是<code>go list -f &#39;{% raw %} {{.ImportPath}} {% endraw %}&#39;</code>， <code>-f</code>后面的参数可以用下面结构体的属性：<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">type</span> Package <span class="keyword">struct</span> &#123;</div><div class="line">    Dir           <span class="keyword">string</span> <span class="comment">// directory containing package sources</span></div><div class="line">    ImportPath    <span class="keyword">string</span> <span class="comment">// import path of package in dir</span></div><div class="line">    ImportComment <span class="keyword">string</span> <span class="comment">// path in import comment on package statement</span></div><div class="line">    Name          <span class="keyword">string</span> <span class="comment">// package name</span></div><div class="line">    Doc           <span class="keyword">string</span> <span class="comment">// package documentation string</span></div><div class="line">    Target        <span class="keyword">string</span> <span class="comment">// install path</span></div><div class="line">    Goroot        <span class="keyword">bool</span>   <span class="comment">// is this package in the Go root?</span></div><div class="line">    Standard      <span class="keyword">bool</span>   <span class="comment">// is this package part of the standard Go library?</span></div><div class="line">    Stale         <span class="keyword">bool</span>   <span class="comment">// would 'go install' do anything for this package?</span></div><div class="line">    Root          <span class="keyword">string</span> <span class="comment">// Go root or Go path dir containing this package</span></div><div class="line"></div><div class="line">    <span class="comment">// Source files</span></div><div class="line">    GoFiles        []<span class="keyword">string</span> <span class="comment">// .go source files (excluding CgoFiles, TestGoFiles, XTestGoFiles)</span></div><div class="line">    CgoFiles       []<span class="keyword">string</span> <span class="comment">// .go sources files that import "C"</span></div><div class="line">    IgnoredGoFiles []<span class="keyword">string</span> <span class="comment">// .go sources ignored due to build constraints</span></div><div class="line">    CFiles         []<span class="keyword">string</span> <span class="comment">// .c source files</span></div><div class="line">    CXXFiles       []<span class="keyword">string</span> <span class="comment">// .cc, .cxx and .cpp source files</span></div><div class="line">    MFiles         []<span class="keyword">string</span> <span class="comment">// .m source files</span></div><div class="line">    HFiles         []<span class="keyword">string</span> <span class="comment">// .h, .hh, .hpp and .hxx source files</span></div><div class="line">    SFiles         []<span class="keyword">string</span> <span class="comment">// .s source files</span></div><div class="line">    SwigFiles      []<span class="keyword">string</span> <span class="comment">// .swig files</span></div><div class="line">    SwigCXXFiles   []<span class="keyword">string</span> <span class="comment">// .swigcxx files</span></div><div class="line">    SysoFiles      []<span class="keyword">string</span> <span class="comment">// .syso object files to add to archive</span></div><div class="line"></div><div class="line">    <span class="comment">// Cgo directives</span></div><div class="line">    CgoCFLAGS    []<span class="keyword">string</span> <span class="comment">// cgo: flags for C compiler</span></div><div class="line">    CgoCPPFLAGS  []<span class="keyword">string</span> <span class="comment">// cgo: flags for C preprocessor</span></div><div class="line">    CgoCXXFLAGS  []<span class="keyword">string</span> <span class="comment">// cgo: flags for C++ compiler</span></div><div class="line">    CgoLDFLAGS   []<span class="keyword">string</span> <span class="comment">// cgo: flags for linker</span></div><div class="line">    CgoPkgConfig []<span class="keyword">string</span> <span class="comment">// cgo: pkg-config names</span></div><div class="line"></div><div class="line">    <span class="comment">// Dependency information</span></div><div class="line">    Imports []<span class="keyword">string</span> <span class="comment">// import paths used by this package</span></div><div class="line">    Deps    []<span class="keyword">string</span> <span class="comment">// all (recursively) imported dependencies</span></div><div class="line"></div><div class="line">    <span class="comment">// Error information</span></div><div class="line">    Incomplete <span class="keyword">bool</span>            <span class="comment">// this package or a dependency has an error</span></div><div class="line">    Error      *PackageError   <span class="comment">// error loading package</span></div><div class="line">    DepsErrors []*PackageError <span class="comment">// errors loading dependencies</span></div><div class="line"></div><div class="line">    TestGoFiles  []<span class="keyword">string</span> <span class="comment">// _test.go files in package</span></div><div class="line">    TestImports  []<span class="keyword">string</span> <span class="comment">// imports from TestGoFiles</span></div><div class="line">    XTestGoFiles []<span class="keyword">string</span> <span class="comment">// _test.go files outside package</span></div><div class="line">    XTestImports []<span class="keyword">string</span> <span class="comment">// imports from XTestGoFiles</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
+<li>可以直接跟”包名”+”/…”，比如要查看<code>github.com/golang/text</code>这个包的导入情况，执行<code>go list github.com/golang/text/...</code>会打印本包的go文件。<h2 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h2><code>-f</code>可以指定打印格式，默认是<code>go list -f &#39;{% raw %} {{.ImportPath}} {% endraw %}&#39;</code>， <code>-f</code>后面的参数可以用下面结构体的属性：</li>
 </ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">type</span> Package <span class="keyword">struct</span> &#123;</div><div class="line">    Dir           <span class="keyword">string</span> <span class="comment">// directory containing package sources</span></div><div class="line">    ImportPath    <span class="keyword">string</span> <span class="comment">// import path of package in dir</span></div><div class="line">    ImportComment <span class="keyword">string</span> <span class="comment">// path in import comment on package statement</span></div><div class="line">    Name          <span class="keyword">string</span> <span class="comment">// package name</span></div><div class="line">    Doc           <span class="keyword">string</span> <span class="comment">// package documentation string</span></div><div class="line">    Target        <span class="keyword">string</span> <span class="comment">// install path</span></div><div class="line">    Goroot        <span class="keyword">bool</span>   <span class="comment">// is this package in the Go root?</span></div><div class="line">    Standard      <span class="keyword">bool</span>   <span class="comment">// is this package part of the standard Go library?</span></div><div class="line">    Stale         <span class="keyword">bool</span>   <span class="comment">// would 'go install' do anything for this package?</span></div><div class="line">    Root          <span class="keyword">string</span> <span class="comment">// Go root or Go path dir containing this package</span></div><div class="line"></div><div class="line">    <span class="comment">// Source files</span></div><div class="line">    GoFiles        []<span class="keyword">string</span> <span class="comment">// .go source files (excluding CgoFiles, TestGoFiles, XTestGoFiles)</span></div><div class="line">    CgoFiles       []<span class="keyword">string</span> <span class="comment">// .go sources files that import "C"</span></div><div class="line">    IgnoredGoFiles []<span class="keyword">string</span> <span class="comment">// .go sources ignored due to build constraints</span></div><div class="line">    CFiles         []<span class="keyword">string</span> <span class="comment">// .c source files</span></div><div class="line">    CXXFiles       []<span class="keyword">string</span> <span class="comment">// .cc, .cxx and .cpp source files</span></div><div class="line">    MFiles         []<span class="keyword">string</span> <span class="comment">// .m source files</span></div><div class="line">    HFiles         []<span class="keyword">string</span> <span class="comment">// .h, .hh, .hpp and .hxx source files</span></div><div class="line">    SFiles         []<span class="keyword">string</span> <span class="comment">// .s source files</span></div><div class="line">    SwigFiles      []<span class="keyword">string</span> <span class="comment">// .swig files</span></div><div class="line">    SwigCXXFiles   []<span class="keyword">string</span> <span class="comment">// .swigcxx files</span></div><div class="line">    SysoFiles      []<span class="keyword">string</span> <span class="comment">// .syso object files to add to archive</span></div><div class="line"></div><div class="line">    <span class="comment">// Cgo directives</span></div><div class="line">    CgoCFLAGS    []<span class="keyword">string</span> <span class="comment">// cgo: flags for C compiler</span></div><div class="line">    CgoCPPFLAGS  []<span class="keyword">string</span> <span class="comment">// cgo: flags for C preprocessor</span></div><div class="line">    CgoCXXFLAGS  []<span class="keyword">string</span> <span class="comment">// cgo: flags for C++ compiler</span></div><div class="line">    CgoLDFLAGS   []<span class="keyword">string</span> <span class="comment">// cgo: flags for linker</span></div><div class="line">    CgoPkgConfig []<span class="keyword">string</span> <span class="comment">// cgo: pkg-config names</span></div><div class="line"></div><div class="line">    <span class="comment">// Dependency information</span></div><div class="line">    Imports []<span class="keyword">string</span> <span class="comment">// import paths used by this package</span></div><div class="line">    Deps    []<span class="keyword">string</span> <span class="comment">// all (recursively) imported dependencies</span></div><div class="line"></div><div class="line">    <span class="comment">// Error information</span></div><div class="line">    Incomplete <span class="keyword">bool</span>            <span class="comment">// this package or a dependency has an error</span></div><div class="line">    Error      *PackageError   <span class="comment">// error loading package</span></div><div class="line">    DepsErrors []*PackageError <span class="comment">// errors loading dependencies</span></div><div class="line"></div><div class="line">    TestGoFiles  []<span class="keyword">string</span> <span class="comment">// _test.go files in package</span></div><div class="line">    TestImports  []<span class="keyword">string</span> <span class="comment">// imports from TestGoFiles</span></div><div class="line">    XTestGoFiles []<span class="keyword">string</span> <span class="comment">// _test.go files outside package</span></div><div class="line">    XTestImports []<span class="keyword">string</span> <span class="comment">// imports from XTestGoFiles</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果想打印比较全的信息，也有一个参数可以使用：<code>-json</code>，这会将上面部分信息以json格式打印出来，读者可以自行实验。</p>
 <h1 id="go-run"><a href="#go-run" class="headerlink" title="go run"></a>go run</h1><p>这个命令可以直接运行go文件（带main函数），不需要编译成二进制可执行性文件。</p>
 
@@ -878,71 +940,6 @@
 <h1 id="配置GDB-debug"><a href="#配置GDB-debug" class="headerlink" title="配置GDB debug"></a>配置GDB debug</h1><p>Run -&gt; Edit Configrations -&gt; Defaults -&gt; Go GDB -&gt;<br>Name：可以随便填写<br>GDB executeable：dbg.exe的完整路径<br>Application executable：填写生成的可执行文件的完整路径，路径要是windows写法，如G:\gopath\src\example\main.exe则需要两个反斜杠，就变成了G:\gopath\src\example\main.exe，或者是Unix写法 G:/gopath/src/example/main.exe,否则会提示找不到文件。这里的可执行文件必须使用<code>go build -gcflags &quot;-N -l&quot;</code>编译出来的，这样的文件带有debug信息并且没有被go内联优化。</p>
 <h1 id="配置保存时自动格式化代码和自动导入"><a href="#配置保存时自动格式化代码和自动导入" class="headerlink" title="配置保存时自动格式化代码和自动导入"></a>配置保存时自动格式化代码和自动导入</h1><p>这个配置需要用到IDEA的宏（所谓的宏，就是一系列操作），下面就说怎么录制这个宏。</p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/golang/">golang</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-golang/go读取文件" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/golang/go读取文件/" class="article-date">
-      <time datetime="2016-03-13T03:42:18.000Z" itemprop="datePublished">2016-03-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/golang/go读取文件/">go读取文件</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="使用File"><a href="#使用File" class="headerlink" title="使用File"></a>使用File</h1><pre><code>不多说，直接上代码
-</code></pre><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">readUseFile</span><span class="params">()</span></span> &#123;</div><div class="line">	file, err := os.Open(<span class="string">"f:/file.txt"</span>)</div><div class="line">	handleError(err)</div><div class="line"></div><div class="line">	<span class="keyword">defer</span> file.Close()</div><div class="line"></div><div class="line">	buf := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">512</span>)</div><div class="line">	<span class="keyword">for</span> &#123;</div><div class="line">		n, err := file.Read(buf)</div><div class="line"></div><div class="line">		<span class="comment">//1</span></div><div class="line">		<span class="comment">//		if err != nil &amp;&amp; err == io.EOF &#123;</span></div><div class="line">		<span class="comment">//			break</span></div><div class="line">		<span class="comment">//		&#125;</span></div><div class="line"></div><div class="line">		<span class="comment">//2</span></div><div class="line">		<span class="comment">//		if n == 0 &#123;</span></div><div class="line">		<span class="comment">//			break</span></div><div class="line">		<span class="comment">//		&#125;</span></div><div class="line"></div><div class="line">		<span class="comment">//3</span></div><div class="line">		<span class="keyword">if</span> n == <span class="number">0</span> &amp;&amp; err != <span class="literal">nil</span> &amp;&amp; err == io.EOF &#123;</div><div class="line">			<span class="keyword">break</span></div><div class="line">		&#125;</div><div class="line"></div><div class="line">		fmt.Print(n)</div><div class="line">		fmt.Print(<span class="keyword">string</span>(buf))</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	handleError(err)</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<pre><code>可以看到，file本身具有读取文件内容的函数，入参事一个切片，是数据的缓冲区，出参第一个是实际读取的大小，第二个是读取过程中发生的错误。如果有数据且读取成功，则n&gt;0,如果恰好读到文件末尾，则n=0。如果读取过程中有错误发生，则err不为nil，如果读取正常且读到了文件末尾，则err为io.EOF。
-读取过程中有三种方法可以跳出死循环。第一种方法是判断err状态，如果不为nil且是io.EOF，则已经读取完毕；第二种方法是判断实际读取的数量，如果读取的量为0，则认为已经读取结束。第三种方式是上面两种的结合，这种判断要比上面两种中仁和一种都要保险，缺点就是罗嗦点。
-</code></pre>
       
     </div>
     

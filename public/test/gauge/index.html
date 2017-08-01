@@ -3,19 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>SpringXD HA 配置 | 杜龙少的博客</title>
+  <title>杜龙少的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="SpringXD官方文档 上说的不是很清楚，而且有些配置（如 配置 hadoop namenode ha ）并没有在上面说明，只是简单的说明了怎么配置 namenode ，如果没有ha配置，那么在生产环境中会令人头痛。 XD Admin HA说明在 官方文档 中，有说如何配置，就是通过启动多个admin ，然后通过 zookeeper 管理。Spring XD 要求只有一个主节点来和 Contai">
-<meta name="keywords" content="spring,xd">
+  <meta name="description" content="title: 自动测试工具Gaugedate: 2017-07-31 14:49:23tags:  gauge 测试category: test   Gauge 是一款轻量级、跨平台自动化测试工具集。规则文件语法可以使用markdown语法编写。另外还可以使用你喜欢的语言来编写业务规则代码比如 go、 java、ruby等语言。Gauge还提供了输出插件，可以将执行结果导出为html或者xml，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringXD HA 配置">
-<meta property="og:url" content="http://todu.top/spring/SpringXD HA 配置/index.html">
+<meta property="og:title" content="杜龙少的博客">
+<meta property="og:url" content="http://todu.top/test/gauge/index.html">
 <meta property="og:site_name" content="杜龙少的博客">
-<meta property="og:description" content="SpringXD官方文档 上说的不是很清楚，而且有些配置（如 配置 hadoop namenode ha ）并没有在上面说明，只是简单的说明了怎么配置 namenode ，如果没有ha配置，那么在生产环境中会令人头痛。 XD Admin HA说明在 官方文档 中，有说如何配置，就是通过启动多个admin ，然后通过 zookeeper 管理。Spring XD 要求只有一个主节点来和 Contai">
-<meta property="og:updated_time" content="2017-05-14T08:10:16.000Z">
+<meta property="og:description" content="title: 自动测试工具Gaugedate: 2017-07-31 14:49:23tags:  gauge 测试category: test   Gauge 是一款轻量级、跨平台自动化测试工具集。规则文件语法可以使用markdown语法编写。另外还可以使用你喜欢的语言来编写业务规则代码比如 go、 java、ruby等语言。Gauge还提供了输出插件，可以将执行结果导出为html或者xml，">
+<meta property="og:updated_time" content="2017-08-01T15:20:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringXD HA 配置">
-<meta name="twitter:description" content="SpringXD官方文档 上说的不是很清楚，而且有些配置（如 配置 hadoop namenode ha ）并没有在上面说明，只是简单的说明了怎么配置 namenode ，如果没有ha配置，那么在生产环境中会令人头痛。 XD Admin HA说明在 官方文档 中，有说如何配置，就是通过启动多个admin ，然后通过 zookeeper 管理。Spring XD 要求只有一个主节点来和 Contai">
+<meta name="twitter:title" content="杜龙少的博客">
+<meta name="twitter:description" content="title: 自动测试工具Gaugedate: 2017-07-31 14:49:23tags:  gauge 测试category: test   Gauge 是一款轻量级、跨平台自动化测试工具集。规则文件语法可以使用markdown语法编写。另外还可以使用你喜欢的语言来编写业务规则代码比如 go、 java、ruby等语言。Gauge还提供了输出插件，可以将执行结果导出为html或者xml，">
   
     <link rel="alternative" href="/atom.xml" title="杜龙少的博客" type="application/atom+xml">
   
@@ -228,11 +227,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-spring/SpringXD HA 配置" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-test/gauge" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/spring/SpringXD HA 配置/" class="article-date">
-      <time datetime="2016-06-29T08:34:48.000Z" itemprop="datePublished">2016-06-29</time>
+      <a href="/test/gauge/" class="article-date">
+      <time datetime="2017-07-31T06:48:22.000Z" itemprop="datePublished">2017-07-31</time>
 </a>
     </div>
   
@@ -241,44 +240,55 @@
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      SpringXD HA 配置
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/spring/">spring</a>
-    </div>
-
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xd/">xd</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><a href="http://docs.spring.io/spring-xd/docs/1.3.1.RELEASE/reference/html" target="_blank" rel="external">SpringXD官方文档</a> 上说的不是很清楚，而且有些配置（如 配置 <code>hadoop</code> namenode ha ）并没有在上面说明，只是简单的说明了怎么配置 <code>namenode</code> ，如果没有ha配置，那么在生产环境中会令人头痛。</p>
-<h1 id="XD-Admin-HA"><a href="#XD-Admin-HA" class="headerlink" title="XD Admin HA"></a>XD Admin HA</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>在 <a href="http://docs.spring.io/spring-xd/docs/1.3.1.RELEASE/reference/html/#_configuring_spring_xd_for_high_availabilty_ha" target="_blank" rel="external">官方文档</a> 中，有说如何配置，就是通过启动多个<code>admin</code> ，然后通过 <code>zookeeper</code> 管理。<br><code>Spring XD</code> 要求只有一个主节点来和 <code>Container</code> 交互，例如 <code>Stream</code> 发布等。同时，这些操作都是按顺序处理的。假如只有一个 <code>admin</code> ，那么就存在单点失败的风险，因此，在生产环境中推荐做法是启动 2 个或者多 <code>admin</code> 。注意：在有多个 <code>admin</code> 节点的时候，每个 <code>admin</code> 都可以处理 <a href="http://docs.spring.io/spring-xd/docs/1.3.1.RELEASE/reference/html/#REST-API" target="_blank" rel="external">REST</a> 请求，但是只有一个实例会作为 <code>Leader</code> 处理请求并更新运行时的状态。如果 <code>Leader</code> 宕掉，另一个可用的admin就会成为新的 <code>Leader</code> 来接管任务。当然，Spring XD 的HA不只是他自身要求ha，还需要依赖外部服务，如：<code>zookeeper</code>，<code>MessageBus</code> 等 HA 配置。</p>
-<h2 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h2><p>如果要配置 <code>admin</code> 的 ha，那么启动多个 <code>admin</code> 即可，但是请注意，如果是在同一台机器上部署多个<code>admin</code>，需要在启动时候添加如下参数以防止和默认的端口（<code>9393</code>）冲突：<br><code>--httpPort</code> 用来指定rest api端口<br><code>--mgmtPort</code> 用来指定管理端口<br>如果在不同机器上启动，只需配置相同的配置文件，然后启动即可。</p>
-<h1 id="XD-Container-HA"><a href="#XD-Container-HA" class="headerlink" title="XD Container HA"></a>XD Container HA</h1><p>当添加 <code>Container</code> 的时候，Spring XD 可以动态水平扩展，也就是说不需要额外什么操作，只需像第一次启动 <code>Container</code> 一样输入命令 <code>bin/xd-container</code> 启动即可。</p>
-<h1 id="XD-Hadoop-namenode-HA"><a href="#XD-Hadoop-namenode-HA" class="headerlink" title="XD Hadoop namenode HA"></a>XD Hadoop namenode HA</h1><p>如果 xd 中创建 <code>stream</code> 或者其他任务是用到了 <code>hdfs</code> 的功能，那么要配置 <code>hadoop</code> 的<code>namenode</code> ，要在 <code>xd/config/servers.xml</code>中的 <code>spring.hadoop.fsUri</code> 的配置项中配置。注意，这个地方只允许配置一个 <code>host</code>，如果有备用 <code>namenode</code> ，是不允许配置在这个地方的。但是这样配置是有问题的，就是存在 <code>hadoop</code> 的 <code>namenode</code> 主从切换后 xd 的 <code>stream</code> 无法写入 <code>hdfs</code> 或者读取 <code>hdfs</code> 的故障。要解决这个问题，我们要再 <code>xd/config/hadoop.properties</code> 中配置如下配置项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dfs.nameservices=MyCluster</div><div class="line">dfs.ha.namenodes.MyCluster=nn1,nn2</div><div class="line">dfs.namenode.rpc-address.MyCluster.nn2=hadoop-master1-host:8020</div><div class="line">dfs.namenode.rpc-address.MyCluster.nn1=hadoop-master2-host:8020</div><div class="line">dfs.client.failover.proxy.provider.MyCluster=org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</div></pre></td></tr></table></figure></p>
-<p>其中，配置项中所有的 <code>MyCluster</code> 要换成自己项目中 hadoop 集群的名字，然后在 <code>xd/config/servers.xml</code> 中 <code>spring.hadoop.fsUri</code> 值配置成 <code>hdfs://MyCluster:8020</code>（注意<code>8020</code>端口换成自己配置的），<code>hadoop-master1-host</code> 和 <code>hadoop-master1-host</code> 换成自己集群的 hadoop的 master 的主机名字或者ip。这样配置后，重新启动 <code>admin</code> 和 <code>container</code> 就会自动检测 hadoop 的 <code>namenode</code> 主从，并自行切换。<br>如果要在 <code>xd-shell</code>中使用，需要登录shell之后（如果有安全设置，还需要先用密码登录成功），输入一下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">hadoop config props set --property dfs.nameservices=MyCluster</div><div class="line">hadoop config props set --property dfs.ha.namenodes.MyCluster=nn1,nn2</div><div class="line">hadoop config props set --property dfs.namenode.rpc-address.MyCluster.nn1=hadoop-master1-host:8020</div><div class="line">hadoop config props set --property dfs.namenode.rpc-address.MyCluster.nn2=hadoop-master2-host:8020</div><div class="line">hadoop config props set --property dfs.client.failover.proxy.provider.MyCluster=org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</div><div class="line">hadoop config fs --namenode hdfs://MyCluster</div></pre></td></tr></table></figure></p>
-<p><code>MyCluster</code>，<code>hadoop-master1-host</code> 和 <code>hadoop-master2-host</code> 同上配置。对于 shell 来说，单纯配置 hadoop 的主 <code>namenode</code>也是可以的，因为这个配置只是对 shell 起作用。如果觉得每次打开shell都要输入上面几行配置太繁琐的话，可以将 <code>xd/config/hadoop.properties</code> 中配置的项目添加一份到<code>shell/config/hadoop.properties</code> 即可，这样在shell中操作hdfs，只需配置 <code>hadoop config fs --namenode hdfs://MyCluster:8020</code> 即可。</p>
-<h2 id="附言"><a href="#附言" class="headerlink" title="附言"></a>附言</h2><p>对于如何在xd中使用hadoop的namenode ha配置，xd 官方文档中并未见说明，而是百般Goole之后得到的结果，而且由于xd资料尚少，搜索结果不佳，最后通过搜索关键词 <code>xd namenode fail</code> 才找到解决方案，<a href="https://jira.spring.io/browse/XD-1745" target="_blank" rel="external">请参见这里</a>。</p>
-
+        <hr>
+<p>title: 自动测试工具Gauge<br>date: 2017-07-31 14:49:23<br>tags:</p>
+<ul>
+<li>gauge</li>
+<li>测试<br>category: test</li>
+</ul>
+<hr>
+<p>Gauge 是一款轻量级、跨平台自动化测试工具集。规则文件语法可以使用markdown语法编写。另外还可以使用你喜欢的语言来编写业务规则代码比如 <code>go</code>、 <code>java</code>、<code>ruby</code>等语言。Gauge还提供了输出插件，可以将执行结果导出为html或者xml，甚至flash，方便查看。</p>
+<h1 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h1><ul>
+<li>A rich markup based on markdown</li>
+<li>Simple, Flexible and Rich Syntax</li>
+<li>Business Language Tests : Supports the concept of executable documentation.</li>
+<li>Consistent Cross Platform/Language Support for writing test code. Currently supported languages.</li>
+<li>Open Source, so it could be shared freely and improved by others as well.</li>
+<li>A modular architecture with Plugins support.</li>
+<li>Extensible through Plugins and Hackable.</li>
+<li>Supports External Data Sources.</li>
+<li>Helps you create Maintainable and Understandable test suites.<br>IDE Support.</li>
+</ul>
+<h1 id="概念-术语"><a href="#概念-术语" class="headerlink" title="概念(术语)"></a>概念(术语)</h1><h2 id="Specifications-spec"><a href="#Specifications-spec" class="headerlink" title="Specifications (spec)"></a>Specifications (spec)</h2><p>一个spec就是一个spec文件，用来定义规则。<br>使用markdown的一级标题来定义该文件的说明 ，比如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Specification name</div><div class="line">==================</div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># Specification name</div></pre></td></tr></table></figure></p>
+<h2 id="Scenarios"><a href="#Scenarios" class="headerlink" title="Scenarios"></a>Scenarios</h2><p>一个 scenarios 可以认为是一个组，定义在spec文件中。使用markdown的二级标题定义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Scenarios</div><div class="line">----------------</div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">## Scenarios</div></pre></td></tr></table></figure></p>
+<h2 id="Tags"><a href="#Tags" class="headerlink" title="Tags"></a>Tags</h2><p>可以给 Spec 文件和 Scenarios 打标签。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Specification name</div><div class="line">================</div><div class="line"></div><div class="line">tags: s1,test1</div><div class="line"></div><div class="line"></div><div class="line">Scenarios</div><div class="line">----------------</div><div class="line"></div><div class="line">tags: s1, s2</div></pre></td></tr></table></figure>
+<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a><a href="https://docs.getgauge.io/syntax.html#steps" target="_blank" rel="external">Steps</a></h2><p>这个就是具体的测试用例。使用markdown的 <code>*</code> 声明一个用例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* Step Name</div></pre></td></tr></table></figure>
+<p>step 还支持参数，包括静态参数，动态参数，表格参数  ，特殊参数</p>
+<h2 id="静态参数"><a href="#静态参数" class="headerlink" title="静态参数"></a>静态参数</h2><p>静态参数用双引号包裹:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* Check &quot;product&quot; exists</div></pre></td></tr></table></figure></p>
+<h2 id="动态参数"><a href="#动态参数" class="headerlink" title="动态参数"></a>动态参数</h2><p>动态参数使用尖括号包裹，跟下面的特殊参数结合使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* Check &lt;product&gt; exists</div></pre></td></tr></table></figure>
+<h2 id="表格参数"><a href="#表格参数" class="headerlink" title="表格参数"></a>表格参数</h2><p>表格参数，就是一个二维表格所构成的数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">* Step that takes a table</div><div class="line">   | id  | name    |</div><div class="line">   |-----|---------|</div><div class="line">   | 123 | John    |</div><div class="line">   | 456 | Mcclain |</div></pre></td></tr></table></figure>
+<p><strong> 注意，定义和表格之间没有空行，表格是直接跟在定义的语句下面 </strong></p>
+<h2 id="特殊参数"><a href="#特殊参数" class="headerlink" title="特殊参数"></a>特殊参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;prefix:value&gt;</div></pre></td></tr></table></figure>
+<p>prefix 支持 <code>file</code> 和 <code>table</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// file </div><div class="line">* Check if &lt;file:/work/content.txt&gt; is visible</div><div class="line"></div><div class="line">// table</div><div class="line">* Check if the users exist &lt;table:/Users/john/work/users.csv&gt;</div></pre></td></tr></table></figure>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>没有特殊的语法，任何一般的文本都可以作为注释</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>支持图片，连接</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>首先要安装Gauge程序，可以从这里<a href="https://getgauge.io/get-started.html" target="_blank" rel="external">https://getgauge.io/get-started.html</a>下载对应平台的安装程序。Windows平台没有测试。</p>
+<h2 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h2><p>mac用户可以使用brew安装，<code>brew update &amp;&amp; brew install gauge</code>，也可以从上面的地址下载安装包，然后执行安装即可。</p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>linux用户需要下载linux程序，下载下来是个安装包，假设我们放到 <code>/opt/gauge/gauge-0.9.0-linux.x86_64.zip</code> (最好创建一个目录，因为解压后不会生成单独的目录)。切换到 <code>/opt/gauge</code> 执行 <code>unzip gauge-0.9.0-linux.x86_64.zip</code>，得到以下文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">├── bin</div><div class="line">│   ├── gauge</div><div class="line">│   └── gauge_screenshot</div><div class="line">└── install.sh</div></pre></td></tr></table></figure></p>
+<p>执行 <code>./install.sh</code> ，一直按回车，使用默认配置即可安装完成。</p>
+<h2 id="其他环境"><a href="#其他环境" class="headerlink" title="其他环境"></a>其他环境</h2><p>如果要使用java，则需要安装jdk，如果要使用C#，则需要安装.net环境，总之，需要什么语言，就需要安装什么环境。</p>
+<p>安装完成后，命令行输入<code>gauge</code>，如果出现 gauge 的帮助信息，则说明安装成功，否则请按照<a href="https://getgauge.io/get-started.html" target="_blank" rel="external">官方文档</a>进行安装。</p>
+<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1>
       
     </div>
     
@@ -286,13 +296,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/spring/SpringXD HA 配置/">SpringXD HA 配置</a></p>
+        <p><span>本文标题:</span><a href="/test/gauge/"></a></p>
         <p><span>文章作者:</span><a href="/" title="访问 杜龙少 的个人博客">杜龙少</a></p>
-        <p><span>发布时间:</span>2016年06月29日 - 16时34分</p>
-        <p><span>最后更新:</span>2017年05月14日 - 16时10分</p>
+        <p><span>发布时间:</span>2017年07月31日 - 14时48分</p>
+        <p><span>最后更新:</span>2017年08月01日 - 23时20分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/spring/SpringXD HA 配置/" title="SpringXD HA 配置">http://todu.top/spring/SpringXD HA 配置/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://todu.top/spring/SpringXD HA 配置/　　作者: 杜龙少" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/test/gauge/" title="">http://todu.top/test/gauge/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://todu.top/test/gauge/　　作者: 杜龙少" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -305,18 +315,9 @@
 
 <nav id="article-nav">
   
-    <a href="/linux/Gnome-Shell插件/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Gnome-Shell插件
-        
-      </div>
-    </a>
   
-  
-    <a href="/spark/sbt源配置/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">sbt源配置</div>
+    <a href="/other/RESTFul-API-错误的设计/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RESTFul API 错误的设计</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -327,7 +328,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#XD-Admin-HA"><span class="toc-number">1.</span> <span class="toc-text">XD Admin HA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-number">1.1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置信息"><span class="toc-number">1.2.</span> <span class="toc-text">配置信息</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XD-Container-HA"><span class="toc-number">2.</span> <span class="toc-text">XD Container HA</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XD-Hadoop-namenode-HA"><span class="toc-number">3.</span> <span class="toc-text">XD Hadoop namenode HA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#附言"><span class="toc-number">3.1.</span> <span class="toc-text">附言</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#主要特点"><span class="toc-number">1.</span> <span class="toc-text">主要特点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#概念-术语"><span class="toc-number">2.</span> <span class="toc-text">概念(术语)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Specifications-spec"><span class="toc-number">2.1.</span> <span class="toc-text">Specifications (spec)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scenarios"><span class="toc-number">2.2.</span> <span class="toc-text">Scenarios</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tags"><span class="toc-number">2.3.</span> <span class="toc-text">Tags</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Steps"><span class="toc-number">2.4.</span> <span class="toc-text">Steps</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态参数"><span class="toc-number">2.5.</span> <span class="toc-text">静态参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态参数"><span class="toc-number">2.6.</span> <span class="toc-text">动态参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表格参数"><span class="toc-number">2.7.</span> <span class="toc-text">表格参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特殊参数"><span class="toc-number">2.8.</span> <span class="toc-text">特殊参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-number">2.9.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">2.10.</span> <span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mac"><span class="toc-number">3.1.</span> <span class="toc-text">Mac</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-number">3.2.</span> <span class="toc-text">Linux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他环境"><span class="toc-number">3.3.</span> <span class="toc-text">其他环境</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#进阶"><span class="toc-number">4.</span> <span class="toc-text">进阶</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -376,7 +377,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="spring/SpringXD HA 配置/" data-title="SpringXD HA 配置" data-url="http://todu.top/spring/SpringXD HA 配置/"></div>
+    <div class="ds-thread" data-thread-key="test/gauge/" data-title="" data-url="http://todu.top/test/gauge/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -399,13 +400,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/linux/Gnome-Shell插件/" title="上一篇: Gnome-Shell插件">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/spark/sbt源配置/" title="下一篇: sbt源配置">
+            <a href="/other/RESTFul-API-错误的设计/" title="下一篇: RESTFul API 错误的设计">
                 <i class="fa fa-angle-right"></i>
             </a>
         

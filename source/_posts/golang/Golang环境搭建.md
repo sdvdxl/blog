@@ -28,11 +28,11 @@ category: golang
 # 编写第一个Go程序
 用你喜欢的编辑器编辑一个文件，加入文件名叫 hello.go 。
 敲入以下代码
-``` :go
+``` go
 package main
-import （
-“fmt”
-）
+import (
+"fmt"
+)
 func main(){
     fmt.println("Hello World!")
 }
