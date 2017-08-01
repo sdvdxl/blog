@@ -5,7 +5,7 @@ tags:
   - gauge
   - 测试
 category: test
-----------------
+---
 
 Gauge 是一款轻量级、跨平台自动化测试工具集。规则文件语法可以使用markdown语法编写。另外还可以使用你喜欢的语言来编写业务规则代码比如 `go`、 `java`、`ruby`等语言。Gauge还提供了输出插件，可以将执行结果导出为html或者xml，甚至flash，方便查看。
 

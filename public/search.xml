@@ -4,16 +4,9 @@
   
     
     <entry>
-      <title></title>
+      <title><![CDATA[自动测试工具Gauge]]></title>
       <url>http://todu.top/test/gauge/</url>
-      <content type="html"><![CDATA[<hr>
-<p>title: 自动测试工具Gauge<br>date: 2017-07-31 14:49:23<br>tags:</p>
-<ul>
-<li>gauge</li>
-<li>测试<br>category: test</li>
-</ul>
-<hr>
-<p>Gauge 是一款轻量级、跨平台自动化测试工具集。规则文件语法可以使用markdown语法编写。另外还可以使用你喜欢的语言来编写业务规则代码比如 <code>go</code>、 <code>java</code>、<code>ruby</code>等语言。Gauge还提供了输出插件，可以将执行结果导出为html或者xml，甚至flash，方便查看。</p>
+      <content type="html"><![CDATA[<p>Gauge 是一款轻量级、跨平台自动化测试工具集。规则文件语法可以使用markdown语法编写。另外还可以使用你喜欢的语言来编写业务规则代码比如 <code>go</code>、 <code>java</code>、<code>ruby</code>等语言。Gauge还提供了输出插件，可以将执行结果导出为html或者xml，甚至flash，方便查看。</p>
 <h1 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h1><ul>
 <li>A rich markup based on markdown</li>
 <li>Simple, Flexible and Rich Syntax</li>
@@ -53,6 +46,20 @@
 <p>安装完成后，命令行输入<code>gauge</code>，如果出现 gauge 的帮助信息，则说明安装成功，否则请按照<a href="https://getgauge.io/get-started.html" target="_blank" rel="external">官方文档</a>进行安装。</p>
 <h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1>]]></content>
       
+        <categories>
+            
+            <category> test </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> gauge </tag>
+            
+            <tag> 测试 </tag>
+            
+        </tags>
         
     </entry>
     
