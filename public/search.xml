@@ -44,6 +44,54 @@
 <p>执行 <code>./install.sh</code> ，一直按回车，使用默认配置即可安装完成。</p>
 <h2 id="其他环境"><a href="#其他环境" class="headerlink" title="其他环境"></a>其他环境</h2><p>如果要使用java，则需要安装jdk，如果要使用C#，则需要安装.net环境，总之，需要什么语言，就需要安装什么环境。</p>
 <p>安装完成后，命令行输入<code>gauge</code>，如果出现 gauge 的帮助信息，则说明安装成功，否则请按照<a href="https://getgauge.io/get-started.html" target="_blank" rel="external">官方文档</a>进行安装。</p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>Gauge 支持一些插件，比如生成java和执行代码的插件，生成html报告的插件等等，插件支持:</p>
+<ul>
+<li>java</li>
+<li>ruby</li>
+<li>flash</li>
+<li>go</li>
+<li>js</li>
+<li>html-report</li>
+<li>xml-report</li>
+<li>python</li>
+<li>spectacle<br>(可能还有其他的，暂时没有去搜索。)</li>
+</ul>
+<p>插件安装方式: <code>gauge install &lt;plugin-name&gt;</code>，如果下载太慢，可以手动下载，然后使用本地安装方式安装 <code>gauge install --file &lt;path-plugin&gt;</code></p>
+<h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><p>这里我们使用的是JAVA方式。所以这里需要安装JAVA插件 <code>gauge install java</code>，并且我们要以html方式展示报告，需要安装 html report 插件 <code>gauge install html-report</code></p>
+<p>执行 <code>gauge init java</code> 会生成一个java的gauge项目:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">├── env</div><div class="line">│   └── default</div><div class="line">│       ├── default.properties</div><div class="line">│       └── java.properties</div><div class="line">├── libs</div><div class="line">├── manifest.json</div><div class="line">├── specs</div><div class="line">│   └── example.spec</div><div class="line">└── src</div><div class="line">    └── test</div><div class="line">        └── java</div><div class="line">            └── StepImplementation.java</div></pre></td></tr></table></figure></p>
+<p>想要执行测试，执行命令 <code>gauge run specs</code> 即可，   最后会输出执行结果，同时会在项目下生成<code>reports/html-report</code> html报告，用浏览器打开即可查看结果。</p>
+<h2 id="结构说明"><a href="#结构说明" class="headerlink" title="结构说明"></a>结构说明</h2><table>
+<thead>
+<tr>
+<th>目录</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>env</td>
+<td>环境变量，可以配置不通参数，适用于不通环境，比如测试环境还是线上环境</td>
+</tr>
+<tr>
+<td>libs</td>
+<td>其他要依赖的java类库要放到这里</td>
+</tr>
+<tr>
+<td>manifest.json</td>
+<td>项目配置文件</td>
+</tr>
+<tr>
+<td>spces</td>
+<td>测试用例描述文件存放的地方</td>
+</tr>
+<tr>
+<td>src</td>
+<td>java 代码放置地方</td>
+</tr>
+</tbody>
+</table>
+<h2 id="命令说明"><a href="#命令说明" class="headerlink" title="命令说明"></a>命令说明</h2><p>上面我们使用了命令 <code>gauge run spces</code> 来运行测试用例，<code>run</code> 后面跟的 <code>spces</code>就是项目中的 <code>specs</code> 目录，代表执行这个目录下的所有文件，也可以单独执行一个文件执行，比如 <code>gauge run specs/example.spec</code>。</p>
+<h2 id="文件编写"><a href="#文件编写" class="headerlink" title="文件编写"></a>文件编写</h2><p>用例定义在spec文件中，具体实现的代码则是在java代码中实现的。</p>
 <h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1>]]></content>
       
         <categories>
