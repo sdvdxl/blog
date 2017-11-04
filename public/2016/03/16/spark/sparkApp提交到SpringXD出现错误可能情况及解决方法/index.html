@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        sparkApp提交到SpringXD出现错误可能情况及解决方法 · sdvdxl 杜龙少
+        
+    </title>
+    <link rel="icon" href= /images/favicon.ico>
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href = /css/style.css?v=20171020 />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >sdvdxl</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">sparkApp提交到SpringXD出现错误可能情况及解决方法</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>sdvdxl</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/images/header.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            sparkApp提交到SpringXD出现错误可能情况及解决方法
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = spark>spark</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = spring xd>spring xd</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2016/03/16</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>编写spark代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.demo;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</div><div class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</div><div class="line"><span class="keyword">import</span> org.apache.spark.SparkConf;</div><div class="line"><span class="keyword">import</span> org.apache.spark.api.java.JavaPairRDD;</div><div class="line"><span class="keyword">import</span> org.apache.spark.api.java.JavaRDD;</div><div class="line"><span class="keyword">import</span> org.apache.spark.api.java.JavaSparkContext;</div><div class="line"><span class="keyword">import</span> org.apache.spark.api.java.function.FlatMapFunction;</div><div class="line"><span class="keyword">import</span> org.apache.spark.api.java.function.Function2;</div><div class="line"><span class="keyword">import</span> org.apache.spark.api.java.function.PairFunction;</div><div class="line"><span class="keyword">import</span> scala.Tuple2;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Created by sdvdxl on 2016/3/14.</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SparkCalcDemo</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String HADOOP_URL = <span class="string">"hdfs://10.10.1.110:8020/"</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        SparkConf conf = <span class="keyword">new</span> SparkConf().setAppName(<span class="string">"test"</span>).setMaster(<span class="string">"local[1]"</span>);</div><div class="line">        JavaSparkContext sc = <span class="keyword">new</span> JavaSparkContext(conf);</div><div class="line">        JavaRDD&lt;String&gt; textFile = sc.textFile(HADOOP_URL + <span class="string">"/xd/dataset1/2016/03/14/15/01"</span>, <span class="number">1</span>);</div><div class="line">        JavaRDD&lt;String&gt; words = textFile.flatMap(<span class="keyword">new</span> FlatMapFunction&lt;String, String&gt;() &#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> Iterable&lt;String&gt; <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">                List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line"></div><div class="line">                JSONObject jobj = JSON.parseObject(<span class="keyword">new</span> String(org.apache.commons.codec.binary.Base64.decodeBase64(s.substring(<span class="number">1</span>, s.length() - <span class="number">1</span>))));</div><div class="line">                list.add(jobj.getString(<span class="string">"name"</span>));</div><div class="line">                list.add(jobj.getString(<span class="string">"random"</span>));</div><div class="line">                <span class="keyword">return</span> list;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        JavaPairRDD&lt;String, Integer&gt; pairs = words.mapToPair(<span class="keyword">new</span> PairFunction&lt;String, String, Integer&gt;() &#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> Tuple2&lt;String, Integer&gt; <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;String, Integer&gt;(s, <span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        JavaPairRDD&lt;String, Integer&gt; counts = pairs.reduceByKey(<span class="keyword">new</span> Function2&lt;Integer, Integer, Integer&gt;() &#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(Integer a, Integer b)</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> a + b;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        counts.foreach(tuple2 -&gt;</div><div class="line">                System.out.println(tuple2._1 + <span class="string">" : "</span> + tuple2._2));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>pom依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></div><div class="line"><span class="tag">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>kafka-demo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>kafka-demo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.spark<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spark-core_2.11<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.6.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!--&lt;exclusions&gt;</span></div><div class="line"><span class="comment">				&lt;exclusion&gt;</span></div><div class="line"><span class="comment">					&lt;groupId&gt;com.fasterxml.jackson.module&lt;/groupId&gt;</span></div><div class="line"><span class="comment">					&lt;artifactId&gt;jackson-module-scala_2.10&lt;/artifactId&gt;</span></div><div class="line"><span class="comment">				&lt;/exclusion&gt;</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">			&lt;/exclusions&gt;--&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!--dependency&gt;</span></div><div class="line"><span class="comment">			&lt;groupId&gt;com.fasterxml.jackson.module&lt;/groupId&gt;</span></div><div class="line"><span class="comment">			&lt;artifactId&gt;jackson-module-scala_2.10&lt;/artifactId&gt;</span></div><div class="line"><span class="comment">			&lt;version&gt;2.7.2&lt;/version&gt;</span></div><div class="line"><span class="comment">		&lt;/dependency&gt;--&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-codec<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-codec<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.camel<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>camel-base64<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.16.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></div><div class="line">				<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-dependency-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;/lib<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">excludeTransitive</span>&gt;</span>false<span class="tag">&lt;/<span class="name">excludeTransitive</span>&gt;</span> <span class="comment">&lt;!-- 表示是否不包含间接依赖的包 --&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">stripVersion</span>&gt;</span>false<span class="tag">&lt;/<span class="name">stripVersion</span>&gt;</span> <span class="comment">&lt;!-- 去除版本信息 --&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line"></div><div class="line">                <span class="tag">&lt;<span class="name">executions</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-dependencies<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-dependencies<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">                            <span class="comment">&lt;!-- 拷贝项目依赖包到lib/目录下 --&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;/lib<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">excludeTransitive</span>&gt;</span>false<span class="tag">&lt;/<span class="name">excludeTransitive</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">stripVersion</span>&gt;</span>false<span class="tag">&lt;/<span class="name">stripVersion</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line"></div><div class="line">            <span class="comment">&lt;!-- 项目资源插件 --&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-resources-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">executions</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></div><div class="line">                            <span class="comment">&lt;!-- 拷贝项目src/main/resources/下，除.bat以外的所有文件到conf/目录下 --&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;/conf<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">                                <span class="tag">&lt;<span class="name">resource</span>&gt;</span></div><div class="line">                                    <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources/<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></div><div class="line">                                    <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></div><div class="line">                                    <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></div><div class="line">                                        <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>*.bat<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></div><div class="line">                                    <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></div><div class="line">                                <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-command<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></div><div class="line">                            <span class="comment">&lt;!-- 只拷贝项目src/main/resources/目录下的.bat文件到输出目录下 --&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">                                <span class="tag">&lt;<span class="name">resource</span>&gt;</span></div><div class="line">                                    <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources/<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></div><div class="line">                                    <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></div><div class="line">                                    <span class="tag">&lt;<span class="name">includes</span>&gt;</span></div><div class="line">                                        <span class="tag">&lt;<span class="name">include</span>&gt;</span>*.bat<span class="tag">&lt;/<span class="name">include</span>&gt;</span></div><div class="line">                                    <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></div><div class="line">                                <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line"></div><div class="line">            <span class="comment">&lt;!-- 打包插件 --&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-jar-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">archive</span>&gt;</span></div><div class="line">                        <span class="comment">&lt;!-- 生成MANIFEST.MF的设置 --&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">manifest</span>&gt;</span></div><div class="line">                            <span class="comment">&lt;!-- 为依赖包添加路径, 这些路径会写在MANIFEST文件的Class-Path下 --&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">addClasspath</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addClasspath</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">classpathPrefix</span>&gt;</span>lib/<span class="tag">&lt;/<span class="name">classpathPrefix</span>&gt;</span></div><div class="line">                            <span class="comment">&lt;!-- jar启动入口类--&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>com.some.package.some.class.Main<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">manifestEntries</span>&gt;</span></div><div class="line">                            <span class="comment">&lt;!-- 在Class-Path下添加配置文件的路径 --&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">Class-Path</span>&gt;</span>conf/<span class="tag">&lt;/<span class="name">Class-Path</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;/<span class="name">manifestEntries</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">archive</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">includes</span>&gt;</span></div><div class="line">                        <span class="comment">&lt;!-- 打jar包时，只打包class文件 --&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.class<span class="tag">&lt;/<span class="name">include</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">build</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">repositories</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>oschina<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>mavenspring<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.springframework.org/release<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>jcenter<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://jcenter.bintray.com<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>spring-milestones<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>Spring Milestones<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://repo.spring.io/milestone<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>spring-release<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>Spring Releases<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://repo.spring.io/libs-release<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>spring-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>Spring Snapshots<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://repo.spring.io/snapshot<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">releases</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">releases</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>定义xd job:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">job create --name sparkAppDemo --definition &quot;sparkapp --mainClass=com.demo.SparkCalcDemo --appJar=/home/spark/spark-app.jar --master=local[1]&quot; --deploy</div></pre></td></tr></table></figure>
+<p>加载job</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">job launch sparkAppDemo</div></pre></td></tr></table></figure>
+<p>然后出现以下类似的错误，主要是：<code>...redis:queue-inbound-channel-adapter...</code>错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">2016-03-16T10:16:10+0800 1.3.1.RELEASE INFO DeploymentSupervisor-0 zk.ZKJobDeploymentHandler - Deployment status for job &apos;sparkAppDemo&apos;: DeploymentStatus&#123;state=deployed&#125;</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark application &apos;com.demo.SparkCalcDemo&apos; finished with exit code: 1</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: Exception in thread &quot;main&quot; java.lang.SecurityException: Invalid signature file digest for Manifest main attributes</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.security.util.SignatureFileVerifier.processImpl(SignatureFileVerifier.java:284)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.security.util.SignatureFileVerifier.process(SignatureFileVerifier.java:238)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.util.jar.JarVerifier.processEntry(JarVerifier.java:316)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.util.jar.JarVerifier.update(JarVerifier.java:228)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.util.jar.JarFile.initializeVerifier(JarFile.java:383)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.util.jar.JarFile.getInputStream(JarFile.java:450)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.JarIndex.getJarIndex(JarIndex.java:137)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath$JarLoader$1.run(URLClassPath.java:839)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath$JarLoader$1.run(URLClassPath.java:831)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.security.AccessController.doPrivileged(Native Method)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath$JarLoader.ensureOpen(URLClassPath.java:830)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath$JarLoader.&lt;init&gt;(URLClassPath.java:803)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath$3.run(URLClassPath.java:530)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath$3.run(URLClassPath.java:520)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.security.AccessController.doPrivileged(Native Method)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath.getLoader(URLClassPath.java:519)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath.getLoader(URLClassPath.java:492)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath.getNextLoader(URLClassPath.java:457)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at sun.misc.URLClassPath.getResource(URLClassPath.java:211)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.net.URLClassLoader$1.run(URLClassLoader.java:365)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.net.URLClassLoader$1.run(URLClassLoader.java:362)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.security.AccessController.doPrivileged(Native Method)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.net.URLClassLoader.findClass(URLClassLoader.java:361)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.lang.Class.forName0(Native Method)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at java.lang.Class.forName(Class.java:348)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at org.apache.spark.deploy.SparkSubmit$.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:538)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at org.apache.spark.deploy.SparkSubmit$.doRunMain$1(SparkSubmit.scala:166)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at org.apache.spark.deploy.SparkSubmit$.submit(SparkSubmit.scala:189)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:110)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: 	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)</div><div class="line">2016-03-16T10:16:14+0800 1.3.1.RELEASE ERROR inbound.job:sparkAppDemo-redis:queue-inbound-channel-adapter1 tasklet.SparkTasklet - Spark Logger: Using Spark&apos;s default log4j profile: org/apache/spark/log4j-defaults.properties</div></pre></td></tr></table></figure>
+<p>仔细看的话，在上面有一句<code>Exception in thread &quot;main&quot; java.lang.SecurityException: Invalid signature file digest for Manifest main attributes</code>错误，这个错误是由于导出的jar包结构信息不正确导致的。用eclipse的导出runnable jar 功能导出的jar包就没问题了。</p>
+<p>另外如果有依赖的jar包没哟被加载进去，则会在最上方出现<code>java.lang.NoClassDefFoundError:</code>类似信息。</p>
+<p>相关资料：<a href="http://www.todu.top/2016/03/09/以分布式方式运行Spring-XD" target="_blank" rel="external">以分布式方式运行Spring-XD</a></p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2016/03/16/spring/通过SpringXD将信息分片-文件夹存储到HDFS/" title= 通过SpringXD将信息分片|文件夹存储到HDFS >
+                    <span>Next Post</span>
+                    <span>通过SpringXD将信息分片|文件夹存储到HDFS</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2016/03/15/linux/linux下根据端口号查询对应进程/" title= linux下根据端口号查询对应进程 >
+                    <span>Previous Post</span>
+                    <span>linux下根据端口号查询对应进程</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="https://github.com/sdvdxl" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="https://weibo.com/sdvdxl" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 44 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2017/11/04/hello-world/" >Hello World</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2017/05/13/other/RESTFul-API-错误的设计/" >RESTFul API 错误的设计</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/15</span><a class="archive-post-title" href= "/2017/02/15/hadoop/安装hbase分布式集群/" >安装Hbase分布式集群</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/15</span><a class="archive-post-title" href= "/2017/02/15/域名说明/" >域名说明</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2016 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/02</span><a class="archive-post-title" href= "/2016/08/02/linux/Gnome-Shell插件/" >Gnome-Shell插件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/29</span><a class="archive-post-title" href= "/2016/06/29/spring/SpringXD HA 配置/" >SpringXD HA 配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/20</span><a class="archive-post-title" href= "/2016/06/20/spark/sbt源配置/" >sbt源配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2016/05/25/linux/Linux-Shell-命令/" >Linux shell 命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/10</span><a class="archive-post-title" href= "/2016/05/10/spark/sbt-idea-入门及配置/" >sbt-idea-入门及配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2016/04/20/java/JDK多版本管理/" >JDK多版本管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2016/03/16/spring/通过SpringXD将信息分片-文件夹存储到HDFS/" >通过SpringXD将信息分片|文件夹存储到HDFS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2016/03/16/spark/sparkApp提交到SpringXD出现错误可能情况及解决方法/" >sparkApp提交到SpringXD出现错误可能情况及解决方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2016/03/15/golang/golang容易忽略导致入坑的方面/" >golang容易忽略导致入坑的方面</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2016/03/15/golang/golang打印错误栈信息/" >golang打印错误栈信息</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2016/03/15/linux/linux下根据端口号查询对应进程/" >linux下根据端口号查询对应进程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span><a class="archive-post-title" href= "/2016/03/14/spring/sink-hdfs/" >sink-hdfs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang命令/" >golang命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang入门/" >golang入门</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/linux/linux工具集锦/" >linux工具集锦</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/go交叉编译/" >go交叉编译</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/android/Android通话自动录音/" >Android通话自动录音</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/go中main/" >go中main</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/git/删除git已经跟踪的文件或者目录/" >删除git已经跟踪的文件或者目录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/配置Idea的Go开发环境/" >配置Idea的Go开发环境</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/go读取文件/" >go读取文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/Golang环境搭建/" >Golang环境搭建</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang-http-client-post[golang]/" >golang-http-client-post</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2016/03/11/hadoop/hadoop集成hive/" >hadoop集成hive</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2016/03/11/spring/SpingXD结合Hadoop/" >SpingXD结合Hadoop</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/other/Hexo-Git-Oschina-Golang-Tenxcloud打造博客/" >Hexo+Git+Oschina+Golang+Tenxcloud打造博客</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/hadoop/安装启动Hadoop集群/" >安装启动Hadoop集群</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spring/Spring-XD简介/" >Spring-XD简介</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/linux/archlinux安装/" >archlinux安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/hack/特定国家版windows8/" >特定国家版windows8</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sql/MySql避免重复插入记录/" >MySql避免重复插入记录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/java/Jrebel插件配置参数/" >Jrebel插件配置参数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/linux/archlinux安装ntfs驱动/" >archlinux安装ntfs驱动</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sql/sql查找排除某些表后不存在某个字段的表/" >sql查找排除某些表后不存在某个字段的表</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spring/以分布式方式运行Spring-XD/" >以分布式方式运行Spring-XD</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spark/Spark基础知识/" >Spark基础知识</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sqoop/Sqoop使用/" >Sqoop使用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sqoop/Apache-Sqoop-安装/" >Apache-Sqoop 安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spark/SparkStreaming+Zookeeper+Kafka入门程序/" >SparkStreaming+Zookeeper+Kafka入门程序</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spark/SparkStreaming程序（及过程中问题解决）/" >运行第一个SparkStreaming程序（及过程中问题解决）</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">android</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">安卓</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">录音</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">git</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">go</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">golang</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">http</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">windows8</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hive</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hadoop</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hdfs</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hbase</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">jdk</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">jrebel</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">java</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">linux</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">gnome</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">shell</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">arch</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">archlinux</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">ntfs</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">端口</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">进程</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">软件</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">博客</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">API</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">RESTFul</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">错误</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">异常</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">zookeeper</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spark-streaming</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spark</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">scala</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">sbt</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spring xd</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spring</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spring-xd</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">xd</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">kafka</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">mysql</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">sql</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">sqoop</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

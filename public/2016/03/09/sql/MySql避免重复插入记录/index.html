@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        MySql避免重复插入记录 · sdvdxl 杜龙少
+        
+    </title>
+    <link rel="icon" href= /images/favicon.ico>
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href = /css/style.css?v=20171020 />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >sdvdxl</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">MySql避免重复插入记录</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>sdvdxl</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/images/header.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            MySql避免重复插入记录
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = mysql>mysql</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2016/03/09</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="方案一：使用ignore关键字"><a href="#方案一：使用ignore关键字" class="headerlink" title="方案一：使用ignore关键字"></a>方案一：使用ignore关键字</h1><p>如果是用主键primary或者唯一索引unique区分了记录的唯一性,避免重复插入记录可以使用：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> <span class="keyword">ignore</span> <span class="keyword">into</span> table_name(email,phone,user_id) <span class="keyword">values</span>(<span class="string">'test9@163.com'</span>,<span class="string">'99999'</span>,<span class="string">'9999'</span>)</div></pre></td></tr></table></figure></p>
+<p>这样当有重复记录就会忽略,执行后返回数字0,还有个应用就是复制表,避免重复记录：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> <span class="keyword">ignore</span> <span class="keyword">into</span> <span class="keyword">table</span>(<span class="keyword">name</span>)  <span class="keyword">select</span>  <span class="keyword">name</span> <span class="keyword">from</span> table2</div></pre></td></tr></table></figure></p>
+<h1 id="方案二：使用Replace"><a href="#方案二：使用Replace" class="headerlink" title="方案二：使用Replace"></a>方案二：使用Replace</h1><p>replace的语法格式为：</p>
+<ol>
+<li><code>replace into table_name(col_name, ...) values(...)</code></li>
+<li><code>replace into table_name(col_name, ...) select ...</code></li>
+<li><code>replace into table_name set col_name=value, ...</code></li>
+</ol>
+<h2 id="算法说明："><a href="#算法说明：" class="headerlink" title="算法说明："></a>算法说明：</h2><p>REPLACE的运行与INSERT很相像,但是如果旧记录与新记录有相同的值，则在新记录被插入之前，旧记录被删除，即：</p>
+<ol>
+<li>尝试把新行插入到表中</li>
+<li>当因为对于主键或唯一关键字出现重复关键字错误而造成插入失败时：<ul>
+<li>从表中删除含有重复关键字值的冲突行</li>
+<li>再次尝试把新行插入到表中<br>旧记录与新记录有相同的值的判断标准就是：表有一个PRIMARY KEY或UNIQUE索引，否则，使用一个REPLACE语句没有意义。该语句会与INSERT相同，因为没有索引被用于确定是否新行复制了其它的行。<h2 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h2>REPLACE语句会返回一个数，来指示受影响的行的数目。该数是被删除和被插入的行数的和。受影响的行数可以容易地确定是否REPLACE只添加了一行，或者是否REPLACE也替换了其它行：检查该数是否为1（添加）或更大（替换）。<h2 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h2>eg:(phone字段为唯一索引)<br><code>replace  into table_name(email,phone,user_id) values(&#39;test569&#39;,&#39;99999&#39;,&#39;123&#39;)</code><br>另外：在 SQL Server 中可以这样处理：<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if not exists (<span class="keyword">select</span> phone <span class="keyword">from</span> t <span class="keyword">where</span> phone= <span class="string">'1'</span>)  </div><div class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> t(phone, update_time) <span class="keyword">values</span>(<span class="string">'1'</span>, <span class="keyword">getdate</span>())</div><div class="line"><span class="keyword">else</span></div><div class="line">    <span class="keyword">update</span> t <span class="keyword">set</span> update_time = <span class="keyword">getdate</span>() <span class="keyword">where</span> phone= <span class="string">'1'</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<p>更多信息<a href="http://dev.mysql.com/doc/refman/5.1/zh/sql-syntax.html#replace" target="_blank" rel="external">请看</a></p>
+<h1 id="方案三：ON-DUPLICATE-KEY-UPDATE"><a href="#方案三：ON-DUPLICATE-KEY-UPDATE" class="headerlink" title="方案三：ON DUPLICATE KEY UPDATE"></a>方案三：ON DUPLICATE KEY UPDATE</h1><p>如‍上所写，你也可以在<code>INSERT INTO.....</code>后面加上 <code>ON DUPLICATE KEY UPDATE</code>方法来实现。如果您指定了<code>ON DUPLICATE KEY UPDATE</code>，并且插入行后会导致在一个UNIQUE索引或PRIMARY KEY中出现重复值，则执行旧行UPDATE。例如，如果列a被定义为UNIQUE，并且包含值1，则以下两个语句具有相同的效果：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> (a,b,c) <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> c=c+<span class="number">1</span>; `</div><div class="line"><span class="keyword">UPDATE</span> <span class="keyword">table</span> <span class="keyword">SET</span> c=c+<span class="number">1</span> <span class="keyword">WHERE</span> a=<span class="number">1</span>;</div></pre></td></tr></table></figure></p>
+<p>如果行作为新记录被插入，则受影响行的值为1；如果原有的记录被更新，则受影响行的值为2。注释：如果列b也是唯一列，则INSERT与此UPDATE语句相当：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">UPDATE</span> <span class="keyword">table</span> <span class="keyword">SET</span> c=c+<span class="number">1</span></div><div class="line"><span class="keyword">WHERE</span> a=<span class="number">1</span> <span class="keyword">OR</span> b=<span class="number">2</span> <span class="keyword">LIMIT</span> <span class="number">1</span>;</div></pre></td></tr></table></figure></p>
+<p>如果a=1 OR b=2与多个行向匹配，则只有一个行被更新。通常，您应该尽量避免对带有多个唯一关键字的表使用ON DUPLICATE KEY子句。<br>您可以在UPDATE子句中使用VALUES(col_name)函数从INSERT…UPDATE语句的INSERT部分引用列值。换句话说，如果没有发生重复关键字冲突，则UPDATE子句中的VALUES(col_name)可以引用被插入的col_name的值。本函数特别适用于多行插入。VALUES()函数只在INSERT…UPDATE语句中有意义，其它时候会返回NULL。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> (a,b,c) <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),(<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)    </div><div class="line"><span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> c=<span class="keyword">VALUES</span>(a)+<span class="keyword">VALUES</span>(b);</div></pre></td></tr></table></figure></p>
+<p>本语句与以下两个语句作用相同：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> (a,b,c) <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)  <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> c=<span class="number">3</span>;</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> (a,b,c) <span class="keyword">VALUES</span> (<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)  <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> c=<span class="number">9</span>;</div></pre></td></tr></table></figure></p>
+<p>当您使用<code>ON DUPLICATE KEY UPDATE</code>时，<code>DELAYED</code>选项被忽略。<br>注：<a href="http://www.cnblogs.com/zeroone/archive/2012/04/18/2454728.html" target="_blank" rel="external">来源</a></p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2016/03/09/sql/sql查找排除某些表后不存在某个字段的表/" title= sql查找排除某些表后不存在某个字段的表 >
+                    <span>Next Post</span>
+                    <span>sql查找排除某些表后不存在某个字段的表</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2016/03/09/hack/特定国家版windows8/" title= 特定国家版windows8 >
+                    <span>Previous Post</span>
+                    <span>特定国家版windows8</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="https://github.com/sdvdxl" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="https://weibo.com/sdvdxl" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#方案一：使用ignore关键字"><span class="toc-number">1.</span> <span class="toc-text">方案一：使用ignore关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方案二：使用Replace"><span class="toc-number">2.</span> <span class="toc-text">方案二：使用Replace</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法说明："><span class="toc-number">2.1.</span> <span class="toc-text">算法说明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#返回值："><span class="toc-number">2.2.</span> <span class="toc-text">返回值：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#示例"><span class="toc-number">2.3.</span> <span class="toc-text">示例:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方案三：ON-DUPLICATE-KEY-UPDATE"><span class="toc-number">3.</span> <span class="toc-text">方案三：ON DUPLICATE KEY UPDATE</span></a></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 44 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2017/11/04/hello-world/" >Hello World</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2017/05/13/other/RESTFul-API-错误的设计/" >RESTFul API 错误的设计</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/15</span><a class="archive-post-title" href= "/2017/02/15/hadoop/安装hbase分布式集群/" >安装Hbase分布式集群</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/15</span><a class="archive-post-title" href= "/2017/02/15/域名说明/" >域名说明</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2016 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/02</span><a class="archive-post-title" href= "/2016/08/02/linux/Gnome-Shell插件/" >Gnome-Shell插件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/29</span><a class="archive-post-title" href= "/2016/06/29/spring/SpringXD HA 配置/" >SpringXD HA 配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/20</span><a class="archive-post-title" href= "/2016/06/20/spark/sbt源配置/" >sbt源配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2016/05/25/linux/Linux-Shell-命令/" >Linux shell 命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/10</span><a class="archive-post-title" href= "/2016/05/10/spark/sbt-idea-入门及配置/" >sbt-idea-入门及配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2016/04/20/java/JDK多版本管理/" >JDK多版本管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2016/03/16/spring/通过SpringXD将信息分片-文件夹存储到HDFS/" >通过SpringXD将信息分片|文件夹存储到HDFS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2016/03/16/spark/sparkApp提交到SpringXD出现错误可能情况及解决方法/" >sparkApp提交到SpringXD出现错误可能情况及解决方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2016/03/15/golang/golang容易忽略导致入坑的方面/" >golang容易忽略导致入坑的方面</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2016/03/15/golang/golang打印错误栈信息/" >golang打印错误栈信息</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2016/03/15/linux/linux下根据端口号查询对应进程/" >linux下根据端口号查询对应进程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span><a class="archive-post-title" href= "/2016/03/14/spring/sink-hdfs/" >sink-hdfs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang命令/" >golang命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang入门/" >golang入门</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/linux/linux工具集锦/" >linux工具集锦</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/go交叉编译/" >go交叉编译</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/android/Android通话自动录音/" >Android通话自动录音</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/go中main/" >go中main</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/git/删除git已经跟踪的文件或者目录/" >删除git已经跟踪的文件或者目录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/配置Idea的Go开发环境/" >配置Idea的Go开发环境</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/go读取文件/" >go读取文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/Golang环境搭建/" >Golang环境搭建</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang-http-client-post[golang]/" >golang-http-client-post</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2016/03/11/hadoop/hadoop集成hive/" >hadoop集成hive</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2016/03/11/spring/SpingXD结合Hadoop/" >SpingXD结合Hadoop</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/other/Hexo-Git-Oschina-Golang-Tenxcloud打造博客/" >Hexo+Git+Oschina+Golang+Tenxcloud打造博客</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/hadoop/安装启动Hadoop集群/" >安装启动Hadoop集群</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spring/Spring-XD简介/" >Spring-XD简介</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/linux/archlinux安装/" >archlinux安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/hack/特定国家版windows8/" >特定国家版windows8</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sql/MySql避免重复插入记录/" >MySql避免重复插入记录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/java/Jrebel插件配置参数/" >Jrebel插件配置参数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/linux/archlinux安装ntfs驱动/" >archlinux安装ntfs驱动</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sql/sql查找排除某些表后不存在某个字段的表/" >sql查找排除某些表后不存在某个字段的表</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spring/以分布式方式运行Spring-XD/" >以分布式方式运行Spring-XD</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spark/Spark基础知识/" >Spark基础知识</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sqoop/Sqoop使用/" >Sqoop使用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sqoop/Apache-Sqoop-安装/" >Apache-Sqoop 安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spark/SparkStreaming+Zookeeper+Kafka入门程序/" >SparkStreaming+Zookeeper+Kafka入门程序</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spark/SparkStreaming程序（及过程中问题解决）/" >运行第一个SparkStreaming程序（及过程中问题解决）</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">android</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">安卓</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">录音</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">git</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">go</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">golang</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">http</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">windows8</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hive</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hadoop</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hdfs</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hbase</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">jdk</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">jrebel</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">java</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">linux</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">gnome</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">shell</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">arch</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">archlinux</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">ntfs</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">端口</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">进程</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">软件</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">博客</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">API</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">RESTFul</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">错误</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">异常</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">zookeeper</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spark-streaming</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spark</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">scala</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">sbt</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spring xd</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spring</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spring-xd</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">xd</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">kafka</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">mysql</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">sql</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">sqoop</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

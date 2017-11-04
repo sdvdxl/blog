@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        运行第一个SparkStreaming程序（及过程中问题解决） · sdvdxl 杜龙少
+        
+    </title>
+    <link rel="icon" href= /images/favicon.ico>
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href = /css/style.css?v=20171020 />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >sdvdxl</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">运行第一个SparkStreaming程序（及过程中问题解决）</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>sdvdxl</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/images/header.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            运行第一个SparkStreaming程序（及过程中问题解决）
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = zookeeper>zookeeper</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = spark-streaming>spark-streaming</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = spark>spark</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2016/03/09</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="官方示例说明"><a href="#官方示例说明" class="headerlink" title="官方示例说明"></a>官方示例说明</h1><p>按照官方文档的 <a href="http://spark.apache.org/docs/1.0.0/streaming-programming-guide.html#a-quick-example" target="_blank" rel="external">这个示例说明</a>，可以轻松的在本地的spark-shell环境中测试这个示例。示例，即为了更好的入门，那么就再说明一下。<br>运行这个统计单词的方式有三种，前面两种是官方文档上的指引，第三种则是用scala程序运行。</p>
+<hr>
+<ul>
+<li><h2 id="第一种方式-run-demo"><a href="#第一种方式-run-demo" class="headerlink" title="第一种方式, run-demo"></a>第一种方式, run-demo</h2></li>
+</ul>
+<ol>
+<li>打开一个终端，打开一个终端，输入 命令 <code>nc -lk 9999</code>，暂时叫做 “nc终端” 吧</li>
+<li><p>再打开终端，切换到Spark HOME目录， 执行命令 <code>bin/run-example org.apache.spark.examples.streaming.NetworkWordCount localhost 9999</code>， 然后每秒会有类似一下日志循环输出<br>&gt;<br>-——————————————<br>Time: 1415701382000 ms<br>-——————————————<br>-——————————————<br>Time: 1415701383000 ms<br>-——————————————</p>
+</li>
+<li><p>在nc终端随便输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在上面的Spark终端中看到有新内容输出<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</p>
+</li>
+</ol>
+<p>OK，成功！</p>
+<hr>
+<ul>
+<li><h2 id="第二种-spark-shell-模式"><a href="#第二种-spark-shell-模式" class="headerlink" title="第二种 spark-shell 模式"></a>第二种 spark-shell 模式</h2>下面介绍在spark-shell中输入scala代码运行的方式。</li>
+</ul>
+<ol>
+<li>同上面第一步，打开一个终端，打开一个终端，输入 命令 <code>nc -lk 9999</code>，暂时叫做 “nc终端” 吧</li>
+<li><p>再打开一个终端， 切换到Spark HOME目录下，输入 <code>bin/spark-shell</code> （如果你已经安装好了Spark的话，直接输入 <code>spark-shell</code> 即可），等待Spark启动成功，会打印信息<br>&gt;<br>Spark context available as sc.<br>scala&gt;</p>
+<p>然后输入以下语句：</p>
+</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.apache.spark.streaming._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</div><div class="line"><span class="keyword">import</span> org.apache.spark.api.java.function._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.api._</div><div class="line"></div><div class="line"><span class="comment">// Create a StreamingContext with a local master</span></div><div class="line"><span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(sc, <span class="type">Seconds</span>(<span class="number">1</span>))</div><div class="line"></div><div class="line"><span class="comment">// Create a DStream that will connect to serverIP:serverPort, like localhost:9999</span></div><div class="line"><span class="keyword">val</span> lines = ssc.socketTextStream(<span class="string">"localhost"</span>, <span class="number">9999</span>)</div><div class="line"></div><div class="line"><span class="comment">// Split each line into words</span></div><div class="line"><span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</div><div class="line"></div><div class="line"><span class="comment">// Count each word in each batch</span></div><div class="line"><span class="keyword">val</span> pairs = words.map(word =&gt; (word, <span class="number">1</span>))</div><div class="line"><span class="keyword">val</span> wordCounts = pairs.reduceByKey(_ + _)</div><div class="line"></div><div class="line"><span class="comment">// Print a few of the counts to the console</span></div><div class="line">wordCounts.print()</div><div class="line">ssc.start()             <span class="comment">// Start the computation</span></div><div class="line">ssc.awaitTermination()  <span class="comment">// Wait for the computation to terminate</span></div></pre></td></tr></table></figure>
+<p> 会打印以下信息：<br>&gt;<br>14/11/11 18:07:23 INFO MemoryStore: ensureFreeSpace(2216) called with curMem=100936, maxMem=278019440<br>.…..<br>14/11/11 18:07:23 INFO DAGScheduler: Stage 91 (take at DStream.scala:608) finished in 0.004 s<br>14/11/11 18:07:23 INFO SparkContext: Job finished: take at DStream.scala:608, took 0.007531701 s<br> -——————————————<br>Time: 1415700443000 ms<br>-——————————————</p>
+<ol>
+<li><p>同第一种方式的第3步，随便输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在上面的Spark终端中看到有新内容输出<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</p>
+<p>OK，成功！</p>
+</li>
+</ol>
+<hr>
+<ul>
+<li><h2 id="第三种-scala-ide编程方式"><a href="#第三种-scala-ide编程方式" class="headerlink" title="第三种 scala-ide编程方式"></a>第三种 scala-ide编程方式</h2>在用这种方式运行这个demo代码的时候，遇到了不少问题，记录下来，供大家参考。这个例子，请大家先根据这里记录的方式进行操作，得到一个可以运行的程序，后面我会记录遇到的问题。</li>
+</ul>
+<ol>
+<li>下载scala-ide, <a href="http://scala-ide.org/download/sdk.html" target="_blank" rel="external">下载链接</a>，下载 For Scala 2.10.4 下的对应平台的ide，解压，运行。</li>
+<li>安装sbt，<a href="http://www.scala-sbt.org/download.html" target="_blank" rel="external">下载链接</a>,</li>
+<li>安装sbteclipse, <a href="https://github.com/typesafehub/sbteclipse" target="_blank" rel="external">github地址</a>, 编辑 <code>~/.sbt/0.13/plugins/plugins.sbt</code> 文件， 添加以下内容 <code>addSbtPlugin(&quot;com.typesafe.sbteclipse&quot; % &quot;sbteclipse-plugin&quot; % &quot;2.5.0&quot;)</code>，如果没有plugins目录和plugins.sbt，自行创建。</li>
+<li><p>用向导创建一个scala项目，并在项目根目录下创建一个build.sbt文件，添加以下内容(注意，每行正式语句之后要换行)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">name := &quot;spark-test&quot;</div><div class="line"></div><div class="line"></div><div class="line">version := &quot;1.0&quot;</div><div class="line"></div><div class="line"></div><div class="line">scalaVersion := &quot;2.10.4&quot;</div><div class="line"></div><div class="line"></div><div class="line">// set the main class for the main &apos;run&apos; task</div><div class="line">// change Compile to Test to set it for &apos;test:run&apos;</div><div class="line">mainClass in (Compile, run) := Some(&quot;test.SparkTest&quot;)</div><div class="line"></div><div class="line">libraryDependencies += &quot;org.apache.spark&quot; % &quot;spark-streaming_2.10&quot; % &quot;1.1.0&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建test.SparkTest.scala文件，添加以下代码</p>
+</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> test</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</div><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.api.java.function._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming._</div><div class="line"><span class="keyword">import</span> org.apache.spark.streaming.api._</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">SparkTest</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</div><div class="line">    <span class="comment">// Create a StreamingContext with a local master</span></div><div class="line">    <span class="comment">// Spark Streaming needs at least two working thread</span></div><div class="line">    <span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(<span class="string">"local[2]"</span>, <span class="string">"NetworkWordCount"</span>, <span class="type">Seconds</span>(<span class="number">10</span>))</div><div class="line">    <span class="comment">// Create a DStream that will connect to serverIP:serverPort, like localhost:9999</span></div><div class="line">    <span class="keyword">val</span> lines = ssc.socketTextStream(<span class="string">"localhost"</span>, <span class="number">9999</span>)</div><div class="line">    <span class="comment">// Split each line into words</span></div><div class="line">    <span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</div><div class="line">    <span class="comment">// Count each word in each batch</span></div><div class="line">    <span class="keyword">val</span> pairs = words.map(word =&gt; (word, <span class="number">1</span>))</div><div class="line">    <span class="keyword">val</span> wordCounts = pairs.reduceByKey(_ + _)</div><div class="line">    wordCounts.print</div><div class="line">    ssc.start</div><div class="line">    ssc.awaitTermination</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>终端中切换目录到这个项目根目录，输入命令 <code>sbt</code> ， 命令运行成功后，敲入 <code>eclipse</code> 生成eclipse项目和项目所需依赖</li>
+<li>同第一种方式的第1,3步，<br>再打开一个终端，输入 命令 <code>nc -lk 9999</code>。<br>然后运行刚才写的main程序，在nc终端中输入一些字符串，用空格隔开，回车，如aa aa bb c。可以在ide控制台中观察到<br>&gt;<br>-——————————————<br>Time: 1415701670000 ms<br>-——————————————<br>(aa,2)<br>(bb,1)<br>(c,1)</li>
+</ol>
+<p>OK，成功！</p>
+<hr>
+<h1 id="下面是遇到的问题及解决方法："><a href="#下面是遇到的问题及解决方法：" class="headerlink" title="下面是遇到的问题及解决方法："></a>下面是遇到的问题及解决方法：</h1><h3 id="1-运行程序说找不到主类"><a href="#1-运行程序说找不到主类" class="headerlink" title="1. 运行程序说找不到主类"></a>1. 运行程序说找不到主类</h3><p>解：没有在sbt文件配置主类是哪个，在<code>build.sbt</code>  文件中添加以下代码</p>
+<blockquote>
+<p>mainClass in (Compile, run) := Some(“test.SparkTest”)</p>
+</blockquote>
+<p> Some中就是主类的路径</p>
+<h3 id="2-java-lang-NoClassDefFoundError-scala-collection-GenTraversableOnce-class"><a href="#2-java-lang-NoClassDefFoundError-scala-collection-GenTraversableOnce-class" class="headerlink" title="2. java.lang.NoClassDefFoundError: scala/collection/GenTraversableOnce$class"></a>2. java.lang.NoClassDefFoundError: scala/collection/GenTraversableOnce$class</h3><p>这个问题困扰了我很长时间，一直没找到怎么解决。后来看到说是scala每次版本升级不兼容以前的版本编译的库，于是换了对应的版本的ide才正常运行。<br>解：scala-ide版本和现在用的spark包依赖编译的scala版本不一致， 请下载上面说过的 <code>scala-ide For Scala 2.10.4</code> 版本。</p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2016/03/09/spark/Spark基础知识/" title= Spark基础知识 >
+                    <span>Next Post</span>
+                    <span>Spark基础知识</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2016/03/09/spark/SparkStreaming+Zookeeper+Kafka入门程序/" title= SparkStreaming+Zookeeper+Kafka入门程序 >
+                    <span>Previous Post</span>
+                    <span>SparkStreaming+Zookeeper+Kafka入门程序</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="https://github.com/sdvdxl" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="https://weibo.com/sdvdxl" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#官方示例说明"><span class="toc-number">1.</span> <span class="toc-text">官方示例说明</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一种方式-run-demo"><span class="toc-number">1.1.</span> <span class="toc-text">第一种方式, run-demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二种-spark-shell-模式"><span class="toc-number">1.2.</span> <span class="toc-text">第二种 spark-shell 模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三种-scala-ide编程方式"><span class="toc-number">1.3.</span> <span class="toc-text">第三种 scala-ide编程方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#下面是遇到的问题及解决方法："><span class="toc-number">2.</span> <span class="toc-text">下面是遇到的问题及解决方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-运行程序说找不到主类"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 运行程序说找不到主类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-java-lang-NoClassDefFoundError-scala-collection-GenTraversableOnce-class"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. java.lang.NoClassDefFoundError: scala/collection/GenTraversableOnce$class</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 44 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2017/11/04/hello-world/" >Hello World</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2017/05/13/other/RESTFul-API-错误的设计/" >RESTFul API 错误的设计</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/15</span><a class="archive-post-title" href= "/2017/02/15/hadoop/安装hbase分布式集群/" >安装Hbase分布式集群</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/15</span><a class="archive-post-title" href= "/2017/02/15/域名说明/" >域名说明</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2016 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/02</span><a class="archive-post-title" href= "/2016/08/02/linux/Gnome-Shell插件/" >Gnome-Shell插件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/29</span><a class="archive-post-title" href= "/2016/06/29/spring/SpringXD HA 配置/" >SpringXD HA 配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/20</span><a class="archive-post-title" href= "/2016/06/20/spark/sbt源配置/" >sbt源配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2016/05/25/linux/Linux-Shell-命令/" >Linux shell 命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/10</span><a class="archive-post-title" href= "/2016/05/10/spark/sbt-idea-入门及配置/" >sbt-idea-入门及配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2016/04/20/java/JDK多版本管理/" >JDK多版本管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2016/03/16/spring/通过SpringXD将信息分片-文件夹存储到HDFS/" >通过SpringXD将信息分片|文件夹存储到HDFS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2016/03/16/spark/sparkApp提交到SpringXD出现错误可能情况及解决方法/" >sparkApp提交到SpringXD出现错误可能情况及解决方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2016/03/15/golang/golang容易忽略导致入坑的方面/" >golang容易忽略导致入坑的方面</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2016/03/15/golang/golang打印错误栈信息/" >golang打印错误栈信息</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2016/03/15/linux/linux下根据端口号查询对应进程/" >linux下根据端口号查询对应进程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span><a class="archive-post-title" href= "/2016/03/14/spring/sink-hdfs/" >sink-hdfs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang命令/" >golang命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang入门/" >golang入门</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/linux/linux工具集锦/" >linux工具集锦</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/go交叉编译/" >go交叉编译</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/android/Android通话自动录音/" >Android通话自动录音</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/go中main/" >go中main</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/git/删除git已经跟踪的文件或者目录/" >删除git已经跟踪的文件或者目录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/配置Idea的Go开发环境/" >配置Idea的Go开发环境</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/go读取文件/" >go读取文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/Golang环境搭建/" >Golang环境搭建</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang-http-client-post[golang]/" >golang-http-client-post</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2016/03/11/hadoop/hadoop集成hive/" >hadoop集成hive</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2016/03/11/spring/SpingXD结合Hadoop/" >SpingXD结合Hadoop</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/other/Hexo-Git-Oschina-Golang-Tenxcloud打造博客/" >Hexo+Git+Oschina+Golang+Tenxcloud打造博客</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/hadoop/安装启动Hadoop集群/" >安装启动Hadoop集群</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spring/Spring-XD简介/" >Spring-XD简介</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/linux/archlinux安装/" >archlinux安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/hack/特定国家版windows8/" >特定国家版windows8</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sql/MySql避免重复插入记录/" >MySql避免重复插入记录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/java/Jrebel插件配置参数/" >Jrebel插件配置参数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/linux/archlinux安装ntfs驱动/" >archlinux安装ntfs驱动</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sql/sql查找排除某些表后不存在某个字段的表/" >sql查找排除某些表后不存在某个字段的表</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spring/以分布式方式运行Spring-XD/" >以分布式方式运行Spring-XD</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spark/Spark基础知识/" >Spark基础知识</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sqoop/Sqoop使用/" >Sqoop使用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sqoop/Apache-Sqoop-安装/" >Apache-Sqoop 安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spark/SparkStreaming+Zookeeper+Kafka入门程序/" >SparkStreaming+Zookeeper+Kafka入门程序</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spark/SparkStreaming程序（及过程中问题解决）/" >运行第一个SparkStreaming程序（及过程中问题解决）</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">android</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">安卓</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">录音</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">git</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">go</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">golang</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">http</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">windows8</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hive</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hadoop</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hdfs</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hbase</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">jdk</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">jrebel</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">java</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">linux</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">gnome</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">shell</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">arch</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">archlinux</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">ntfs</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">端口</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">进程</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">软件</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">博客</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">API</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">RESTFul</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">错误</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">异常</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">zookeeper</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spark-streaming</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spark</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">scala</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">sbt</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spring xd</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spring</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spring-xd</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">xd</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">kafka</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">mysql</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">sql</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">sqoop</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

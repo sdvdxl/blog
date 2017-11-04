@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        sdvdxl 杜龙少
+        
+    </title>
+    <link rel="icon" href= /images/favicon.ico>
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href = /css/style.css?v=20171020 />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <a class="home-link" href=/>sdvdxl</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main index-page">
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2016/03/15/golang/golang打印错误栈信息/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>golang打印错误栈信息</span>
+                    </h2>
+                <div class="abstract-content">
+                    12345678910111213141516package mainimport (    "runtime"    "fmt")func main() &#123;    outer()&#125;func outer() &#123;    inner()&#125;func inner() &#123;    defer func() &#123;        if err := recover(); err != nil &#123;            trace := make([]byte, 1024)            count := runtime.Stac...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = golang>golang</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/15</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2016/03/15/golang/golang容易忽略导致入坑的方面/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>golang容易忽略导致入坑的方面</span>
+                    </h2>
+                <div class="abstract-content">
+                    main 函数main函数必须定义在main包里，不可导出。当main函数调用完毕，程序就会立即退出，不会等待运行中的goroutine运行完毕。
+初始化函数func init() { … }
+此函数无参，不需显示调用。
+此函数根据依赖顺序执行初始化顺序，并且是顺序执行，如：
+A 依赖 B， B 依赖 C，并且A，B，C 都有init函数，那么初始化顺序是C ，B ， A
+iota
+iota 只能用在const定义的常量上
+
+iota在一个const范围，不管中间的变量有没有用到iota，iota都是持续递增加1的，如
+
+
+123456789101112const (       aa ...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = golang>golang</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/15</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2016/03/13/golang/golang命令/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>golang命令</span>
+                    </h2>
+                <div class="abstract-content">
+                    Go 提供了很多好用的命令，比如可以用go get 直接从网络上导入包，下面介绍一些常用的Go命令
+go get基本用法go get 命令用来直接下载并安装网络上的包到GOPATH中。事实上它依赖于版本控制工具，比如常用的Git和Mercurial。比如我们要使用github.com/golang/text这个包，那么可以执行命令 go get github.com/golang/text，稍后片刻（依照网络情况时间长短不一），那么这个包源码就会放到 GOPATH/src对应的目录下，编译好的文件会放到GOPATH/pkg对应的目录下，如果有可执行性代码，那么会将编译好的可执行性文件放到...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = go>go</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = golang>golang</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/13</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2016/03/13/golang/配置Idea的Go开发环境/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>配置Idea的Go开发环境</span>
+                    </h2>
+                <div class="abstract-content">
+                    获取IDEA
+最新版戳这里下载，下载对应平台的版本，一般来说，社区版(Community Edition)就已经足够了。
+安装IDEA。Windows和Mac是安装版，一步一步安装完成即可；Linux是免安装版，解压，给IDEA的执行文件添加可执行权限即可。假设安装目录是H:\software\dev\JetBrains\IntelliJ IDEA Community Edition 14.1.1，其他平台自行设置目录。
+
+获取Go
+Go的官方网站是http://golang.org/，下载地址，但是鉴于中国网络问题，不科学上网则没法下载，各位同学可以从这里下载，最好下载最新的，当然这个...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = go>go</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = golang>golang</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/13</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2016/03/13/golang/go读取文件/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>go读取文件</span>
+                    </h2>
+                <div class="abstract-content">
+                    使用File不多说，直接上代码
+1234567891011121314151617181920212223242526272829303132func readUseFile() &#123;	file, err := os.Open("f:/file.txt")	handleError(err)	defer file.Close()	buf := make([]byte, 512)	for &#123;		n, err := file.Read(buf)		//1		//		if err != nil &amp;&amp; err == io.EOF &#123;		//			brea...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = go>go</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = golang>golang</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/13</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2016/03/13/golang/go交叉编译/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>go交叉编译</span>
+                    </h2>
+                <div class="abstract-content">
+                    1.5之前需要进入go安装目录下的src目录，然后执行GOOS=windows GOARCH=i386  CGO_ENABLED=0 ./make.bash --no-clean
+1.5及其之后可以直接执行CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -o 输出文件名 go文件其中GOOS有：windows,linux,darwin也就是mac系统GOARCH有：adm64和386分别对应64位平台和32位平台
+
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = go>go</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = golang>golang</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/13</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2016/03/13/golang/go中main/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>go中main</span>
+                    </h2>
+                <div class="abstract-content">
+                    想必很多朋友在入门的时候都是拿main开始，而不是test，我也喜欢这样，我想可能是main比较为人熟知的用法吧，test在go中也是非常友好的，不需要依赖其他库就可方便使用。既然都偏向于main方法的开始和入门，那么这个博文就说一下go语言main相关的事情。原本只打算写一下main包的拆分和运行方式，突然想到还有其他一些注意地方，那么就一并记录一下，其他的如果使用过程中遇到了，再进行记录。以下示例都是在GOPATH下进行
+main函数定义想要作为程序的运行入口，那么这个函数必须明明为main，同时要放到main包。main函数声明极其简单，如下：123func main()&#123...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = go>go</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = golang>golang</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/13</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2016/03/13/golang/golang入门/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>golang入门</span>
+                    </h2>
+                <div class="abstract-content">
+                    本文同步发表于我的简书,点此穿越
+Go 基本介绍Go发展早在2007年9月，Go语言还是这帮大牛的20%自由时间的实验项目。 幸运的是， 到了2008年5月 ， Google发现了Go语言的巨大潜力， 从而开始全力支持这个项目 ， 让这批人可以全身心投入Go语言的设计和开发工作中。 Go语言的第一个版本在2009年11月正式对外发布，并在此后的两年内快速迭代，发展迅猛。 第一个正式版本的Go语言于2012年3月28 日正式发布， 让Go语言迎来了第一个引人瞩目的里程碑。截至现在，Go已经更新到1.5版本，1.5正式版就在8月份中旬发布。Go编程语言是一个使得程序员更加有效率的开源项目。G...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = go>go</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = golang>golang</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/13</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2016/03/13/golang/golang-http-client-post[golang]/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>golang-http-client-post</span>
+                    </h2>
+                <div class="abstract-content">
+                    
+title: Golang环境搭建date: 2016-03-13 11:10:48tags:
+
+go
+golangcategory: golang
+
+
+下载Gogo官方网站在大陆已经被和谐，要访问，如果没有梯子，这里有个传送门,可以在线代理访问。首先就是要下载go开发程序了，建议在此处下载对应版本。
+配置Go环境## Window 环境
+下载对应的windows版本（注意64位和32位系统），然后解压得到go目录，假如名字就叫go，绝对路径是E:\go。右键计算机(xp 是我的电脑，windows8是这台电脑)，选择属性，选择左侧的高级系统设置，接下来选择环境变量，出现环境变量的对话...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = go>go</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = golang>golang</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = http>http</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/13</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2016/03/13/golang/Golang环境搭建/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>Golang环境搭建</span>
+                    </h2>
+                <div class="abstract-content">
+                    下载Gogo官方网站在大陆已经被和谐，要访问，如果没有梯子，这里有个传送门,可以在线代理访问。首先就是要下载go开发程序了，建议在此处下载对应版本。
+配置Go环境## Window 环境
+下载对应的windows版本（注意64位和32位系统），然后解压得到go目录，假如名字就叫go，绝对路径是E:\go。右键计算机(xp 是我的电脑，windows8是这台电脑)，选择属性，选择左侧的高级系统设置，接下来选择环境变量，出现环境变量的对话框。上面是当前用户的环境变量，也就是说配置的变量只是针对当前用户生效；下面是系统变量，对于整个系统的所有用户生效。我习惯于配置成系统变量，在此也是用系统变量...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = go>go</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = golang>golang</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/13</span>
+                </div>
+            </div>
+        </article>
+    
+    <!-- paginator  -->
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="https://github.com/sdvdxl" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="https://weibo.com/sdvdxl" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 44 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2017/11/04/hello-world/" >Hello World</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2017/05/13/other/RESTFul-API-错误的设计/" >RESTFul API 错误的设计</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/15</span><a class="archive-post-title" href= "/2017/02/15/hadoop/安装hbase分布式集群/" >安装Hbase分布式集群</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/15</span><a class="archive-post-title" href= "/2017/02/15/域名说明/" >域名说明</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2016 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/02</span><a class="archive-post-title" href= "/2016/08/02/linux/Gnome-Shell插件/" >Gnome-Shell插件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/29</span><a class="archive-post-title" href= "/2016/06/29/spring/SpringXD HA 配置/" >SpringXD HA 配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/20</span><a class="archive-post-title" href= "/2016/06/20/spark/sbt源配置/" >sbt源配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2016/05/25/linux/Linux-Shell-命令/" >Linux shell 命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/10</span><a class="archive-post-title" href= "/2016/05/10/spark/sbt-idea-入门及配置/" >sbt-idea-入门及配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/20</span><a class="archive-post-title" href= "/2016/04/20/java/JDK多版本管理/" >JDK多版本管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2016/03/16/spring/通过SpringXD将信息分片-文件夹存储到HDFS/" >通过SpringXD将信息分片|文件夹存储到HDFS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2016/03/16/spark/sparkApp提交到SpringXD出现错误可能情况及解决方法/" >sparkApp提交到SpringXD出现错误可能情况及解决方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2016/03/15/golang/golang容易忽略导致入坑的方面/" >golang容易忽略导致入坑的方面</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2016/03/15/golang/golang打印错误栈信息/" >golang打印错误栈信息</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2016/03/15/linux/linux下根据端口号查询对应进程/" >linux下根据端口号查询对应进程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span><a class="archive-post-title" href= "/2016/03/14/spring/sink-hdfs/" >sink-hdfs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang命令/" >golang命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang入门/" >golang入门</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/linux/linux工具集锦/" >linux工具集锦</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/go交叉编译/" >go交叉编译</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/android/Android通话自动录音/" >Android通话自动录音</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/go中main/" >go中main</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/git/删除git已经跟踪的文件或者目录/" >删除git已经跟踪的文件或者目录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/配置Idea的Go开发环境/" >配置Idea的Go开发环境</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/go读取文件/" >go读取文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/Golang环境搭建/" >Golang环境搭建</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang-http-client-post[golang]/" >golang-http-client-post</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2016/03/11/hadoop/hadoop集成hive/" >hadoop集成hive</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2016/03/11/spring/SpingXD结合Hadoop/" >SpingXD结合Hadoop</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/other/Hexo-Git-Oschina-Golang-Tenxcloud打造博客/" >Hexo+Git+Oschina+Golang+Tenxcloud打造博客</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/hadoop/安装启动Hadoop集群/" >安装启动Hadoop集群</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spring/Spring-XD简介/" >Spring-XD简介</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/linux/archlinux安装/" >archlinux安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/hack/特定国家版windows8/" >特定国家版windows8</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sql/MySql避免重复插入记录/" >MySql避免重复插入记录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/java/Jrebel插件配置参数/" >Jrebel插件配置参数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/linux/archlinux安装ntfs驱动/" >archlinux安装ntfs驱动</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sql/sql查找排除某些表后不存在某个字段的表/" >sql查找排除某些表后不存在某个字段的表</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spring/以分布式方式运行Spring-XD/" >以分布式方式运行Spring-XD</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spark/Spark基础知识/" >Spark基础知识</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sqoop/Sqoop使用/" >Sqoop使用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/sqoop/Apache-Sqoop-安装/" >Apache-Sqoop 安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spark/SparkStreaming+Zookeeper+Kafka入门程序/" >SparkStreaming+Zookeeper+Kafka入门程序</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2016/03/09/spark/SparkStreaming程序（及过程中问题解决）/" >运行第一个SparkStreaming程序（及过程中问题解决）</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">android</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">安卓</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">录音</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">git</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">go</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">golang</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">http</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">windows8</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hive</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hadoop</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hdfs</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">hbase</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">jdk</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">jrebel</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">java</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">linux</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">gnome</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">shell</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">arch</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">archlinux</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">ntfs</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">端口</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">进程</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">软件</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">博客</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">API</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">RESTFul</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">错误</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">异常</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">zookeeper</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spark-streaming</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spark</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">scala</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">sbt</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spring xd</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spring</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">spring-xd</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">xd</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">kafka</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">mysql</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">sql</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">sqoop</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+
