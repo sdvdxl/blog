@@ -13,6 +13,8 @@ blog.exe
 db.json
 node_modules
 blog
+public
+.deploy_git
 
 # End of https://www.gitignore.io/api/visualstudiocode
 ### macOS ###
