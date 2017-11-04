@@ -149,37 +149,6 @@
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2016/03/13/golang/go读取文件/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>go读取文件</span>
-                    </h2>
-                <div class="abstract-content">
-                    使用File不多说，直接上代码
-1234567891011121314151617181920212223242526272829303132func readUseFile() &#123;	file, err := os.Open("f:/file.txt")	handleError(err)	defer file.Close()	buf := make([]byte, 512)	for &#123;		n, err := file.Read(buf)		//1		//		if err != nil &amp;&amp; err == io.EOF &#123;		//			brea...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = go>go</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = golang>golang</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/13</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
             <a class="content-show-full" href = "/2016/03/13/golang/go交叉编译/" >
                     <h2 class="abstract-title">
                         
@@ -486,6 +455,38 @@ TenxCloud 也就是时速云，是国内最早的容器云平台之一(Container
                 <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-href = 博客>博客</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/09</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2016/03/09/hadoop/安装启动Hadoop集群/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>安装启动Hadoop集群</span>
+                    </h2>
+                <div class="abstract-content">
+                    环境UCloud云主机，2.6.32-431.11.15.el6.ucloud.x86_64假设三台主机内网IP分别为master, 10.10.1.11和10.10.1.12，hostname分别为：10-10-1-10,10-10-1-11和10-10-1-12
+配置JDK本次搭建测试用的是jdk8，可以从Oracle官网下载对应的版本。
+配置jdk假设jdk解压后目录存放在/usr/local/jdk8，命令行输入sudo vi /etc/profile，添加一下内容：123JAVA_HOME=/usr/local/jdk8CLASSPATH=.:$JAVA_HOME/jre/li...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = hadoop>hadoop</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = hdfs>hdfs</a>
     
 </div>
                 
@@ -1209,20 +1210,7 @@ TenxCloud 也就是时速云，是国内最早的容器云平台之一(Container
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-archive"> Total : 44 </div>
+    <div class="total-archive"> Total : 43 </div>
     
     <div class="post-archive">
     
@@ -1231,11 +1219,6 @@ TenxCloud 也就是时速云，是国内最早的容器云平台之一(Container
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2017/11/04/hello-world/" >Hello World</a>
-        </li>
     
     
         <li class="archive-post-item">
@@ -1343,7 +1326,7 @@ TenxCloud 也就是时速云，是国内最早的容器云平台之一(Container
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/android/Android通话自动录音/" >Android通话自动录音</a>
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/git/删除git已经跟踪的文件或者目录/" >删除git已经跟踪的文件或者目录</a>
         </li>
     
     
@@ -1353,7 +1336,7 @@ TenxCloud 也就是时速云，是国内最早的容器云平台之一(Container
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/git/删除git已经跟踪的文件或者目录/" >删除git已经跟踪的文件或者目录</a>
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/Golang环境搭建/" >Golang环境搭建</a>
         </li>
     
     
@@ -1368,12 +1351,12 @@ TenxCloud 也就是时速云，是国内最早的容器云平台之一(Container
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/Golang环境搭建/" >Golang环境搭建</a>
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang-http-client-post[golang]/" >golang-http-client-post</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang-http-client-post[golang]/" >golang-http-client-post</a>
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/android/Android通话自动录音/" >Android通话自动录音</a>
         </li>
     
     

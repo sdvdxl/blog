@@ -162,39 +162,6 @@
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2016/03/16/spring/通过SpringXD将信息分片-文件夹存储到HDFS/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>通过SpringXD将信息分片|文件夹存储到HDFS</span>
-                    </h2>
-                <div class="abstract-content">
-                    kafka --topic=kafka_test --zkconnect=10.10.1.20:2181 --queueSize=64 |hdfs --inputType=application/json --idleTimeout=10000 --partitionPath=dateFormat(&apos;yyyy/MM/dd/HH/mm&apos;)
-
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = hdfs>hdfs</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = spring xd>spring xd</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = kafka>kafka</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/16</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
             <a class="content-show-full" href = "/2016/03/16/spark/sparkApp提交到SpringXD出现错误可能情况及解决方法/" >
                     <h2 class="abstract-title">
                         
@@ -478,6 +445,37 @@ mutate类似 mac上的alfred的软件，地址ppa安装方式123sudo add...
 
 获取Go
 Go的官方网站是http://golang.org/，下载地址，但是鉴于中国网络问题，不科学上网则没法下载，各位同学可以从这里下载，最好下载最新的，当然这个...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = go>go</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = golang>golang</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2016/03/13</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2016/03/13/golang/go读取文件/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>go读取文件</span>
+                    </h2>
+                <div class="abstract-content">
+                    使用File不多说，直接上代码
+1234567891011121314151617181920212223242526272829303132func readUseFile() &#123;	file, err := os.Open("f:/file.txt")	handleError(err)	defer file.Close()	buf := make([]byte, 512)	for &#123;		n, err := file.Read(buf)		//1		//		if err != nil &amp;&amp; err == io.EOF &#123;		//			brea...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -1248,20 +1246,7 @@ Go的官方网站是http://golang.org/，下载地址，但是鉴于中国网络
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-archive"> Total : 44 </div>
+    <div class="total-archive"> Total : 43 </div>
     
     <div class="post-archive">
     
@@ -1270,11 +1255,6 @@ Go的官方网站是http://golang.org/，下载地址，但是鉴于中国网络
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2017/11/04/hello-world/" >Hello World</a>
-        </li>
     
     
         <li class="archive-post-item">
@@ -1382,7 +1362,7 @@ Go的官方网站是http://golang.org/，下载地址，但是鉴于中国网络
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/android/Android通话自动录音/" >Android通话自动录音</a>
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/git/删除git已经跟踪的文件或者目录/" >删除git已经跟踪的文件或者目录</a>
         </li>
     
     
@@ -1392,7 +1372,7 @@ Go的官方网站是http://golang.org/，下载地址，但是鉴于中国网络
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/git/删除git已经跟踪的文件或者目录/" >删除git已经跟踪的文件或者目录</a>
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/Golang环境搭建/" >Golang环境搭建</a>
         </li>
     
     
@@ -1407,12 +1387,12 @@ Go的官方网站是http://golang.org/，下载地址，但是鉴于中国网络
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/Golang环境搭建/" >Golang环境搭建</a>
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang-http-client-post[golang]/" >golang-http-client-post</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/golang/golang-http-client-post[golang]/" >golang-http-client-post</a>
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/android/Android通话自动录音/" >Android通话自动录音</a>
         </li>
     
     
