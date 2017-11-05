@@ -1,10 +1,11 @@
 ---
 title: Gnome-Shell插件
-date: 2016-08-02 16:24:18
-tags: 
-	- linux
-	- gnome
+tags:
+  - linux
+  - gnome
 category: linux
+abbrlink: 51680
+date: 2016-08-02 16:24:18
 ---
 
 ## [状态栏菜单按钮](https://extensions.gnome.org/extension/327/axe-menu/)

@@ -1,10 +1,11 @@
 ---
 title: go中main
-date: 2016-03-13 11:16:46
 tags:
   - go
   - golang
 category: golang
+abbrlink: 14904
+date: 2016-03-13 11:16:46
 ---
 
 想必很多朋友在入门的时候都是拿main开始，而不是test，我也喜欢这样，我想可能是main比较为人熟知的用法吧，test在go中也是非常友好的，不需要依赖其他库就可方便使用。既然都偏向于main方法的开始和入门，那么这个博文就说一下go语言main相关的事情。  

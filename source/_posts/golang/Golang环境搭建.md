@@ -1,10 +1,11 @@
 ---
 title: Golang环境搭建
-date: 2016-03-13 11:10:48
 tags:
   - go
   - golang
 category: golang
+abbrlink: 21463
+date: 2016-03-13 11:10:48
 ---
 # 下载Go
 [go官方网站](http://golang.org)在大陆已经被和谐，要访问，如果没有梯子，这里有个[传送门](http://www.tvdaili.com/),可以在线代理访问。首先就是要下载go开发程序了，建议[在此处下载](http://golangtc.com/download)对应版本。

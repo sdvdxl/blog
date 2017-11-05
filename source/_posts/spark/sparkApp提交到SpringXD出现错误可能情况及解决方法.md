@@ -1,10 +1,11 @@
 ---
 title: sparkApp提交到SpringXD出现错误可能情况及解决方法
-date: 2016-03-16 11:52:19
 tags:
   - spark
   - spring xd
 category: spring
+abbrlink: 35324
+date: 2016-03-16 11:52:19
 ---
 编写spark代码：
 

@@ -1,10 +1,11 @@
 ---
 title: go交叉编译
-date: 2016-03-13 11:41:45
 tags:
   - go
   - golang
 category: golang
+abbrlink: 58433
+date: 2016-03-13 11:41:45
 ---
 1.5之前需要进入go安装目录下的src目录，然后执行
 `GOOS=windows GOARCH=i386  CGO_ENABLED=0 ./make.bash --no-clean`

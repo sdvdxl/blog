@@ -1,10 +1,11 @@
 ---
 title: go读取文件
-date: 2016-03-13 11:42:18
 tags:
   - go
   - golang
 category: golang
+abbrlink: 44633
+date: 2016-03-13 11:42:18
 ---
 # 使用File
     不多说，直接上代码

@@ -1,11 +1,12 @@
 ---
 title: 运行第一个SparkStreaming程序（及过程中问题解决）
-date: 2016-03-09 12:51:43
 tags:
   - zookeeper
   - spark-streaming
   - spark
 category: spark
+abbrlink: 5818
+date: 2016-03-09 12:51:43
 ---
 
 # 官方示例说明

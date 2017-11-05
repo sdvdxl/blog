@@ -1,9 +1,10 @@
 ---
 title: golang打印错误栈信息
-date: 2016-03-15 18:21:05
 tags:
   - golang
 category: golang
+abbrlink: 12856
+date: 2016-03-15 18:21:05
 ---
 
 ``` go

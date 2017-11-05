@@ -1,10 +1,11 @@
 ---
 title: Jrebel插件配置参数
-date: 2016-03-09 14:10:18
 tags:
   - jrebel
   - java
 category: java
+abbrlink: 15199
+date: 2016-03-09 14:10:18
 ---
 # JVM 参数
 `-javaagent:/path/jrebel.jar `

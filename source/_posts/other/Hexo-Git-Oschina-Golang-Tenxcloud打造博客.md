@@ -1,9 +1,10 @@
 ---
 title: Hexo+Git+Oschina+Golang+Tenxcloud打造博客
-date: 2016-03-09 23:17:00
 tags:
-    - 博客
+  - 博客
 category: other
+abbrlink: 38204
+date: 2016-03-09 23:17:00
 ---
 
 # 简介

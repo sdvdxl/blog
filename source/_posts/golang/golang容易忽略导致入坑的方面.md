@@ -1,9 +1,10 @@
 ---
 title: golang容易忽略导致入坑的方面
-date: 2016-03-15 18:19:19
 tags:
   - golang
 category: golang
+abbrlink: 7883
+date: 2016-03-15 18:19:19
 ---
 # main 函数
 

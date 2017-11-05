@@ -1,10 +1,11 @@
 ---
 title: 安装Hbase分布式集群
-date: 2017-02-15 17:44:43
 tags:
   - hadoop
   - hbase
 category: hadoop
+abbrlink: 10952
+date: 2017-02-15 17:44:43
 ---
 
 **以下操作都是在hadoop这个用户下**

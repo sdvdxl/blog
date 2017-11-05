@@ -1,10 +1,11 @@
 ---
 title: golang命令
-date: 2016-03-13 12:00:37
 tags:
   - go
   - golang
 category: golang
+abbrlink: 55216
+date: 2016-03-13 12:00:37
 ---
 Go 提供了很多好用的命令，比如可以用go get 直接从网络上导入包，下面介绍一些常用的Go命令
 # go get

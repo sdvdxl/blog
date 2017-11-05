@@ -1,11 +1,12 @@
 ---
 title: Sqoop使用
-date: 2016-03-09 12:51:43
 tags:
   - sqoop
   - hdfs
   - mysql
 category: sqoop
+abbrlink: 37890
+date: 2016-03-09 12:51:43
 ---
 
 `sqoop help` 查看帮助信息

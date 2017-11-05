@@ -1,12 +1,13 @@
 ---
 title: sink-hdfs
-date: 2016-03-14 16:10:23
 tags:
   - hdfs
   - hadoop
   - spring
   - spring xd
 category: spring
+abbrlink: 37291
+date: 2016-03-14 16:10:23
 ---
 
 hdfs根据时间自动划分文件夹

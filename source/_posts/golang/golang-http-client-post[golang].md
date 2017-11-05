@@ -1,11 +1,12 @@
 ---
 title: golang-http-client-post
-date: 2016-03-13 11:11:55
 tags:
   - go
   - golang
   - http
 category: golang
+abbrlink: 19514
+date: 2016-03-13 11:11:55
 ---
 ---
 title: Golang环境搭建

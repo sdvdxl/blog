@@ -1,9 +1,10 @@
 ---
 title: Apache-Sqoop 安装
-date: 2016-03-09 12:51:43
 tags:
   - sqoop
 category: sqoop
+abbrlink: 27704
+date: 2016-03-09 12:51:43
 ---
 # 准备
 首先当然是[下载sqoop](http://archive.apache.org/dist/sqoop/1.4.4/sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz)

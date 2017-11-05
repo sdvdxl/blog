@@ -1,6 +1,5 @@
 ---
 title: SpingXD结合Hadoop
-date: 2016-03-11 12:34:40
 tags:
   - spring
   - spring xd
@@ -9,6 +8,8 @@ tags:
   - hdfs
   - xd
 category: spring
+abbrlink: 19943
+date: 2016-03-11 12:34:40
 ---
 # 前言
 之前的文章介绍了[Spring XD](/Spring-XD简介)，[以分布式方式运行Spring-XD](/以分布式方式运行Spring-XD)和[安装启动Hadoop集群](/安装启动Hadoop集群)的文章。本文将简单介绍（刚学，很LOW(⊙﹏⊙)b）SpringXD和Hadoop，HDFS结合配置和使用方法。

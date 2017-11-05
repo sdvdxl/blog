@@ -1,10 +1,11 @@
 ---
 title: sql查找排除某些表后不存在某个字段的表
-date: 2016-03-09 14:03:56
 tags:
   - mysql
   - sql
 category: sql
+abbrlink: 6879
+date: 2016-03-09 14:03:56
 ---
 
 ``` sql

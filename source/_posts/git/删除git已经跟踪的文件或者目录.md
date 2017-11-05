@@ -1,9 +1,10 @@
 ---
 title: 删除git已经跟踪的文件或者目录
-date: 2016-03-13 11:09:29
 tags:
   - git
 category: git
+abbrlink: 18216
+date: 2016-03-13 11:09:29
 ---
 
 如果第一次提交的时候，没有在gitignore文件中添加忽略文件，那么这些文件（目录也是文件）就会被git跟踪，push的时候也会被推送到远程。所以最好就是一开始在commit之前先添加到gitignore中。

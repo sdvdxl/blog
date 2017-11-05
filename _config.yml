@@ -14,7 +14,7 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://todu.top
 root: /
-permalink: :year/:month/:day/:title/
+permalink: posts/:abbrlink/
 permalink_defaults:
 
 jsonContent:
@@ -49,6 +49,11 @@ code_dir: downloads/code
 i18n_dir: :lang
 skip_render: .well-known
 
+# https://github.com/YuyingWu/hexo-generator-index-plus
+index_generator_plus:
+  path: ''
+  per_page: 10
+
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
@@ -64,7 +69,12 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-  
+
+# https://github.com/lujjjh/hexo-hanzi 
+#安装这个包之前，你需要先安装 Cario。详情请参见 canvas。
+#安装完依赖之后，执行
+#$ npm install --save hexo-hanzi
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)

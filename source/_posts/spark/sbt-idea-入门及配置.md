@@ -1,10 +1,11 @@
 ---
 title: sbt-idea-入门及配置
-date: 2016-05-10 09:35:48
 tags:
   - spark
   - scala
 category: spark
+abbrlink: 34842
+date: 2016-05-10 09:35:48
 ---
 # Java 环境配置
 这个就不多说了，这是前提条件，请自行安装后配置正确，如果不清楚请自行搜索 **java 环境变量配置** 相关问题。

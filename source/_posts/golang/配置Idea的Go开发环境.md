@@ -1,10 +1,11 @@
 ---
 title: 配置Idea的Go开发环境
-date: 2016-03-13 11:43:19
 tags:
   - go
   - golang
 category: golang
+abbrlink: 47403
+date: 2016-03-13 11:43:19
 ---
 # 获取IDEA
 1. [最新版戳这里下载](https://www.jetbrains.com/idea/download/)，下载对应平台的版本，一般来说，社区版(Community Edition)就已经足够了。

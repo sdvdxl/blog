@@ -1,10 +1,11 @@
 ---
 title: SpringXD HA 配置
-date: 2016-06-29 16:34:48
 category: spring
-tags: 
-	- xd
-	- spring
+tags:
+  - xd
+  - spring
+abbrlink: 17742
+date: 2016-06-29 16:34:48
 ---
 [SpringXD官方文档](http://docs.spring.io/spring-xd/docs/1.3.1.RELEASE/reference/html) 上说的不是很清楚，而且有些配置（如 配置 `hadoop` namenode ha ）并没有在上面说明，只是简单的说明了怎么配置 `namenode` ，如果没有ha配置，那么在生产环境中会令人头痛。
 

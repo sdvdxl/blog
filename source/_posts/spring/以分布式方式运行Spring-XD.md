@@ -1,12 +1,13 @@
 ---
 title: 以分布式方式运行Spring-XD
-date: 2016-03-09 14:18:33
 tags:
   - spring
   - xd
   - spring-xd
   - spring xd
 category: spring
+abbrlink: 54199
+date: 2016-03-09 14:18:33
 ---
 *主要以官方文档说明进行配置*
 # 简介

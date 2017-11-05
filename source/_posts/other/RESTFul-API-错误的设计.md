@@ -1,11 +1,12 @@
 ---
 title: RESTFul API 错误的设计
+tags:
+  - API
+  - RESTFul
+  - 错误
+  - 异常
+abbrlink: 48925
 date: 2017-05-13 23:15:53
-tags: 
-    - API
-    - RESTFul
-    - 错误
-    - 异常
 ---
 
 

@@ -1,11 +1,12 @@
 ---
 title: SparkStreaming+Zookeeper+Kafka入门程序
-date: 2016-03-09 12:51:43
 tags:
   - zookeeper
-	- spark-streaming
-	- spark
+  - spark-streaming
+  - spark
 category: spark
+abbrlink: 48330
+date: 2016-03-09 12:51:43
 ---
 
 ## 准备工作：

@@ -1,11 +1,12 @@
 ---
 title: hadoop集成hive
-date: 2016-03-11 16:25:27
 tags:
-    - hive
-    - hadoop
-    - hdfs
+  - hive
+  - hadoop
+  - hdfs
 category: hadoop
+abbrlink: 61872
+date: 2016-03-11 16:25:27
 ---
 # 前置条件
 hadoop和yarn已经配置好并且成功运行。

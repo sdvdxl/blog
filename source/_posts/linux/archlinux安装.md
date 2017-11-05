@@ -1,11 +1,12 @@
 ---
 title: archlinux安装
-date: 2016-03-09 14:05:03
 tags:
   - arch
   - archlinux
   - linux
 category: linux
+abbrlink: 3603
+date: 2016-03-09 14:05:03
 ---
 
 # 前言

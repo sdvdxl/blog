@@ -1,11 +1,12 @@
 ---
 title: sbt源配置
 p: spark/sbt源配置
-date: 2016-06-20 11:21:13
 tags:
   - sbt
   - scala
 category: spark
+abbrlink: 51898
+date: 2016-06-20 11:21:13
 ---
 
 # sbt 默认源下载有点慢，我们可以调教它，让它从我们自己配置的源下载。

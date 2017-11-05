@@ -1,11 +1,12 @@
 ---
 title: archlinux安装ntfs驱动
-date: 2016-03-09 14:08:56
 tags:
   - archlinux
   - arch
   - ntfs
 category: linux
+abbrlink: 33366
+date: 2016-03-09 14:08:56
 ---
 默认情况下，archlinux本身支持挂在ntfs文件系统，只不过是只读，不能写入。如果要支持ntfs系统文件，那么需要安装ntfs的驱动程序。
 用命令 ` yaourt -Ss ntfs` 可以查找关于ntfs的软件包

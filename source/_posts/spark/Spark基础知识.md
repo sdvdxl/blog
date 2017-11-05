@@ -1,9 +1,10 @@
 ---
 title: Spark基础知识
-date: 2016-03-09 13:59:50
 tags:
   - spark
 category: spark
+abbrlink: 20157
+date: 2016-03-09 13:59:50
 ---
 
 

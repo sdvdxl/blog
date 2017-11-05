@@ -1,9 +1,10 @@
 ---
 title: MySql避免重复插入记录
-date: 2016-03-09 14:02:47
 tags:
   - mysql
 category: mysql
+abbrlink: 23635
+date: 2016-03-09 14:02:47
 ---
 
 # 方案一：使用ignore关键字
