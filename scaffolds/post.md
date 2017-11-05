@@ -1,5 +1,5 @@
 ---
-title: [🔝] {{ title }}
+title: {{ title }}
 date: {{ date }}
 updateDate: {{ date }}
 category:
