@@ -1,11 +1,11 @@
-layout: linux
+---
 title: Linux shell 命令
-date: 2016-05-25 09:34:07
 tags:
-	- linux
-	- shell
+  - linux
+  - shell
 category: linux
-
+abbrlink: '4992'
+date: 2016-05-25 09:34:07
 ---
 
 ## lsof
