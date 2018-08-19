@@ -9,6 +9,7 @@
         "git": "^0.1.5",
         "hexo": "^3.7.1",
         "hexo-abbrlink": "^2.0.5",
+        "hexo-algolia": "^1.2.5",
         "hexo-deployer-git": "^0.3.1",
         "hexo-deployer-git-fx": "^0.4.9",
         "hexo-generator-archive": "^0.1.5",

@@ -10,6 +10,13 @@ author: sdvdxl
 language: zh_CN
 timezone: 
 
+algolia:
+  enable: true
+  applicationID: 'RRE6HIGVQV'
+  apiKey: '7e9df76fd7a563078bcf631e5bea39cd'
+  indexName: 'todu_top'
+  chunkSize: 5000
+
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://todu.top
