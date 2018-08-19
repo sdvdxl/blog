@@ -101,4 +101,54 @@ consul 提供了3中部署方式
 
 这样就是已经成功启动了一个dev模式的agent。
 
+### KV 存储
+
 执行 `./consul kv put a 'test value'` 可以在consul的存储kv系统中设置一个key为`a`值为`test value`的配置。
+执行 `./consul kv get a` 可以读取我们刚才设置的这个值。
+
+### 服务注册
+
+通过agent的api可以直接像该agent注册服务，比如：
+
+```shell
+curl --request PUT \
+  --url http://localhost:8500/v1/agent/service/register \
+  --header 'accept: application/json' \
+  --header 'content-type: application/json' \
+  --data '{
+  "ID": "myweb1",
+  "Name": "myweb",
+  "Tags": [
+    "primary",
+    "v1"
+  ],
+  "Address": "127.0.0.1",
+  "Port": 8080,
+  "Meta": {
+    "redis_version": "4.0"
+  },
+  "EnableTagOverride": false
+}'
+```
+
+这样，就像这个节点注册了一个名为 `myweb`，id为`myweb1`的服务。
+
+通过 `./consul catalog services`可以看到列表中出现了我们的服务名字：
+
+```shell
+consul
+myweb
+```
+
+### web页面
+
+上面是通过命令，简单介绍了consul的两个基本特性 `kv存储` 和 `服务管理`。有个比较简单的方式就是可以通过web页面操作kv值和查看services。浏览器打开 `http://localhost:8500`即可，默认会跳转到services的页面，如图所示：
+![consul-ui-start](http://public-links.qiniudn.com/image/consul/consul-ui-start.png)
+点击Nodes链接，即可查看node节点简易信息：
+![consul-ui-nodes](http://public-links.qiniudn.com/image/consul/consul-ui-nodes.png)
+点击Key/Value即可查看kv存储：
+![consul-ui-kv](http://public-links.qiniudn.com/image/consul/consul-ui-kv.png)
+点击key还可以进行编辑：
+![consul-ui-kv-edit](http://public-links.qiniudn.com/image/consul/consul-ui-kv-edit.png)
+
+通过以上简单介绍，相比我们已经对consul有了初步认识。进阶操作和高级特性会通过后面的文章进行介绍。
