@@ -115,7 +115,7 @@ deploy:
   type: git
   repo: git@git.coding.net:sdvdxl/blog-html.git
   branch: master
-  message: 
+  message: 'update pages'
 
 
 
