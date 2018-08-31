@@ -38,15 +38,15 @@ Total time taken: 93ms
 ```
 
 测试已经完成，并且会在项目目录下 `reports/html-report` 生成测试报告，直接用浏览器打开 index 即可查看测试报告:
-![](http://note.youdao.com/yws/public/resource/9b09c5bfd845d727a234b59d5c599fa8/xmlnote/FE1AD5BE7CC14F31BCB44BFAC0E59B9D/1352) 
+![](https://public-links.todu.top/images/gauge/gauge-1.png) 
 
 这是报告的首页，上面标注了总共多少个 spec 文件，失败个数，成功个数，跳过多少个。并且可以通过左下角的搜索或者直接点标题来查看对应的测试文件或者用例。
-![](http://note.youdao.com/yws/public/resource/9b09c5bfd845d727a234b59d5c599fa8/xmlnote/FB2E7F3C889840A6B6A47A82A68DAFDC/1355)
+![](https://public-links.todu.top/images/gauge/gauge-2.png)
 
 每个spce 的测试报告都会将测试的用例结果打印出来并且用不同颜色表示出来，绿色则是成功，红色则是失败。其中一个大的圆点表示的是一个测试场景，圆点下每个绿色线条代表一个具体的测试用例。
 
 下面我们来尝试修改一下  `The word "gauge" has "3" vowels` 这个用例。打开 `specs/example.spec` 这个文件，在第18行我们就会找到上面提到的这个测试用例，然后打开 `src/test/java/StepImplementation.java` 这个文件，第21行就是这个测试用例的实现代码。 可以看到，这个测试用例有两个参数，`word` 和 `expectedCount`，现在我们将 `specs/example.spec` 中的这个测试用例的参数  "expectedCount" 改为 1，然后重新运行 `gauge run specs` ，执行过程中控制台抛出了异常信息，接收后，打开 生成的 html 文件查看，有没有通过的测试用例: 
-![](http://note.youdao.com/yws/public/resource/9b09c5bfd845d727a234b59d5c599fa8/xmlnote/2E49A843026C460993E0456FDF7EAD43/1357)
+![](https://public-links.todu.top/images/gauge/gauge-3.png)
 
 尝试增加一个场景和一个用例:
 在 `specs/example.spec` 中最后追加以下代码:
