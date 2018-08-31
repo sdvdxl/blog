@@ -143,12 +143,12 @@ myweb
 ### web页面
 
 上面是通过命令，简单介绍了consul的两个基本特性 `kv存储` 和 `服务管理`。有个比较简单的方式就是可以通过web页面操作kv值和查看services。浏览器打开 `http://localhost:8500`即可，默认会跳转到services的页面，如图所示：
-![consul-ui-start](http://public-links.qiniudn.com/image/consul/consul-ui-start.png)
+![consul-ui-start](https://public-links.todu.top/image/consul/consul-ui-start.png)
 点击Nodes链接，即可查看node节点简易信息：
-![consul-ui-nodes](http://public-links.qiniudn.com/image/consul/consul-ui-nodes.png)
+![consul-ui-nodes](https://public-links.todu.top/image/consul/consul-ui-nodes.png)
 点击Key/Value即可查看kv存储：
-![consul-ui-kv](http://public-links.qiniudn.com/image/consul/consul-ui-kv.png)
+![consul-ui-kv](https://public-links.todu.top/image/consul/consul-ui-kv.png)
 点击key还可以进行编辑：
-![consul-ui-kv-edit](http://public-links.qiniudn.com/image/consul/consul-ui-kv-edit.png)
+![consul-ui-kv-edit](https://public-links.todu.top/image/consul/consul-ui-kv-edit.png)
 
 通过以上简单介绍，相比我们已经对consul有了初步认识。进阶操作和高级特性会通过后面的文章进行介绍。

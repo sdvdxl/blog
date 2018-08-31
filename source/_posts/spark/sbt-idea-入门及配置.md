@@ -7,6 +7,7 @@ category: spark
 abbrlink: 34842
 date: 2016-05-10 09:35:48
 ---
+
 # Java 环境配置
 这个就不多说了，这是前提条件，请自行安装后配置正确，如果不清楚请自行搜索 **java 环境变量配置** 相关问题。
 # Scala 配置
@@ -147,11 +148,11 @@ addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.2")
 ### 安装插件
 使用 idea 创建 sbt 项目需要安装 `scala` 和 `sbt` 插件。
 打开idea的首选项，然后找到 `Plugins` ，点击 `Browser repositores...` 按钮，输入 `scala` 搜索，然后找到 `scala` 和 `sbt` 的插件进行安装，如下图所示：
-![scala-sbt-plugins](/images/scala/scala-sbt-plugin.png)
+![scala-sbt-plugins](https://public-links.todu.top/images/scala/scala-sbt-plugin.png)
 安装完成后重启idea。
 ### 创建 sbt 项目
 File -> New -> Project... 打开项目创建向导：
-![创建sbt项目](/images/scala/sbt-project-1.png)
+![创建sbt项目](https://public-links.todu.top/images/scala/sbt-project-1.png)
 创建完成后，等待idea刷新项目，目录结构大体如下（project/project 和 target相关没有列出）：
 
 ```
@@ -245,20 +246,23 @@ libraryDependencies += "org.apache.spark" % "spark-core_2.10" % "1.6.1" % "provi
 libraryDependencies += "org.apache.spark" % "spark-core_2.10" % "1.6.1"
 ```
 6. 配置运行参数，如下图：
-![idea-spark-run-config](/images/scala/idea-spark-run-config.png)
+![idea-spark-run-config](https://public-links.todu.top/images/scala/idea-spark-run-config.png)
 然后选择上面的运行配置，运行即可。这里可能会碰到一个异常：
+
 ```java
 Exception in thread "main" org.apache.hadoop.mapred.InvalidInputException: Input path does not exist: file:/Users/du/workspace/hekr/spark-sbt-demo/src/main/scala/WorldCount.scala
 	at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:251)
 	at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:270)
 	......
 ```
+
 这是由于上面我们修改了改程序main文件的位置，导致找不到该文件所致，请自行设置为一个存在的文件路径或者修改为 `main/src/main/scala/WorldCount.scala` 重新运行即可成功。
+
 ## Sbt 本地依赖库存储位置配置
+
 抽空再补上，其实就是建立一个连接，先自行思考方案。
 
-
-
 # 项目下载
-没有源码下载的都是耍流氓，[点这里下载](/files/spark-sbt-demo.tar.gz)
+
+没有源码下载的都是耍流氓，[点这里下载](https://public-links.todu.top/files/sparkspark-sbt-demo.tar.gz)
 

@@ -12,10 +12,10 @@ date: 2016-03-09 15:30:24
 
 # 简介
 Spring XD is a unified, distributed, and extensible service for data ingestion, real time analytics, batch processing, and data export.
-![distributed-overview.](/images/xd/xd-overview.png)
+![distributed-overview.](https://public-links.todu.top/images/xd/xd-overview.png)
 # Streams
 翻译过来就是流，通过定义stream可以控制数据的流向，比如从MongoDB读取数据然后存储到HDFS中。
-![stream](/images/xd/stream.png)
+![stream](https://public-links.todu.top/images/xd/stream.png)
 ## 创建方式
 一个简单的示例：该示例创建一个名字叫`ticktock`的stream，每秒钟产生一条时间信息然后通过管道传送到log中。
 ```

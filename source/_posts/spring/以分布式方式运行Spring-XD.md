@@ -21,7 +21,7 @@ XD的分布式运行架构主要由以下组件构成：
 - A Message Broker --用于数据传输。XD的数据传输模块设计成了插拔式。当前XD版本支持`Rabbit MQ`和`Redis `，这两个都支持stream和job过程产生的数据的传输，`Kafka`仅支持steam产生的数据传输。请注意：job使用Kafka作为数据传输是不稳定的。这个项目必须要配置一个作为数据传输的插件（推荐Redis）。
 - Analytics Repository -- XD目前用Redis作为counters和gauges分析的存储方式。
 XD的分布式运行环境概览如下：
-![distributed-runtime-overview](/images/xd/distributed-runtime-overview.png)
+![distributed-runtime-overview](https://public-links.todu.top/images/xd/distributed-runtime-overview.png)
 
 # Server Configuration
 默认查找`$XD_HOME/config/servers.yml`文件，作为配置文件。

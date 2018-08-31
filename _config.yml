@@ -48,8 +48,9 @@ jsonContent:
 
 # Directory
 include:
+  - .well-known/pki-validation/*
   - .well-known/acme-challenge/*
-  - .a/*
+
 source_dir: source
 public_dir: public
 tag_dir: tags
