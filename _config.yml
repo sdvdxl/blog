@@ -8,7 +8,7 @@ subtitle:
 description:
 author: sdvdxl
 language: zh_CN
-timezone: 
+timezone:
 
 algolia:
   enable: true
@@ -19,7 +19,7 @@ algolia:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://todu.top
+url: https://todu.top
 root: /
 permalink: posts/:abbrlink/
 permalink_defaults:
@@ -58,7 +58,9 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render: .well-known
+skip_render:
+  - .well-known
+  - google6e08df8d075a3c96.html
 
 # https://github.com/YuyingWu/hexo-generator-index-plus
 index_generator_plus:
@@ -81,7 +83,7 @@ highlight:
   auto_detect: false
   tab_replace:
 
-# https://github.com/lujjjh/hexo-hanzi 
+# https://github.com/lujjjh/hexo-hanzi
 #安装这个包之前，你需要先安装 Cario。详情请参见 canvas。
 #安装完依赖之后，执行
 #$ npm install --save hexo-hanzi
@@ -94,7 +96,7 @@ index_generator:
   path: ''
   per_page: 10
   order_by: -date
-  
+
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -115,7 +117,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: archer 
+theme: archer
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
