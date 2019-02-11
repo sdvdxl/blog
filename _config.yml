@@ -128,7 +128,7 @@ deploy:
   branch: master
   message: 'update pages'
 
-
+all_minifier: true
 
 sitemap:
     path: sitemap.xml
