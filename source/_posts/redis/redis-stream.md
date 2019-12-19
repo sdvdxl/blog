@@ -132,4 +132,47 @@ XREAD [COUNT count] [BLOCK milliseconds] STREAMS key [key ...] ID [ID ...]
             4) "19.8"
     (1.75s)
     ```
-1.
+
+## [XDEL](https://redis.io/commands/xdel) 命令
+
+XDEL 用于从 stream 中删除删除指定 ID 的记录，基本用法如下：
+
+```bash
+XDEL key ID [...]
+```
+
+ID 可以同时指定 1 到多个。返回值是删除的数量。
+
+需要注意的是，删除并不是真正立刻就删除数据，只是给这条数据打了一个删除标签，当1个 `macro-node` 中所有数据都被删除时，才会将这个 `macro-node` 删除掉，数据也就随之真正删除。大量删除操作会引发内存碎片化情况的出现（性能不会受到影响），（在将来的Redis版本中，如果给定的宏节点达到给定数量的已删除条目，我们可能会触发节点垃圾回收。）
+
+举例： 删除 id 为 0-0 的数据 `XDEL mystream 0-0`
+
+## [XTRIM](https://redis.io/commands/xtrim) 命令
+
+`XTRIM` 命令用于裁剪 stream 的长度，基本用法如下：
+
+```bash
+XTRIM key MAXLEN [~] count
+```
+
+返回结果是裁剪掉的数量。
+
+使用的时候，需要指定期望裁剪后的最大长度，使用 `MAXLEN` 关键词来指定，比如期望裁剪后的最大长度为1000：
+
+```bash
+XTRIM key MAXLEN 1000
+```
+
+注意：这里说的是裁剪后的**最大长度**，如果 stream 本身没有达到 `MAXLEN` 的值，那么裁剪后的 stream 的长度还是其真实大小，即 `XLEN key` 所看到的结果。
+
+另外用法中包含了 `~`，这个代表裁剪的时候近似的进行裁剪，可以多出 `MAXLEN` 几十个，但是不能少于 `MAXLEN`。
+
+如： 执行 `XTRIM mystream MAXLEN ~ 1000` 后，查看长度 `XLEN mystream` 结果可能是大于1000的。
+
+时间复杂度：O(N) N是要删除的数据的数量。
+
+因为条目是在包含多个条目的宏节点中组织的，这些条目可以通过一次释放释放，所以可以在极短的时间内完成。
+
+## macro nodes
+
+为了提高内存效率，stream 由 `macro-node`（宏节点） 组成 [`radix tree`](https://en.wikipedia.org/wiki/Radix_tree)（[基数树](https://zh.wikipedia.org/wiki/%E5%9F%BA%E6%95%B0%E6%A0%91)）。
