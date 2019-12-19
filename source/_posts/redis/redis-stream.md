@@ -34,9 +34,9 @@ updateDate: 2019-12-16 18:47:32
 
 执行 `src/redis-server` 启动redis，在另一个终端中输入 `src/redic-cli` 进入交互界面。
 
-## Stream 的使用
+# Stream 的使用
 
-### [XADD](https://redis.io/commands/xadd) 命令
+## [XADD](https://redis.io/commands/xadd) 命令
 
 `XADD` 命令可以在指定的一个stream中追加新的数据，主要用法如下：
 
@@ -210,7 +210,250 @@ XTRIM key MAXLEN 1000
 
 因为条目是在包含多个条目的宏节点中组织的，这些条目可以通过一次释放释放，所以可以在极短的时间内完成。
 
-## []() 命令
+## 消费组
+
+redis 不仅提供了上面的基本输入输出功能，还提供了消费组的功能。如果你用过 [`kafka`](https://kafka.apache.org/) 或者其他类似的 MQ 组件的话，可能会比较熟悉。如果不熟悉也没关系，简单介绍一下 `组` 的概念。
+
+假如有2台服务器 A 和 B，部署了相同的服务，都可以读取 redis stream。
+
+首先我们考虑直接使用 `XREAD` 会有什么问题？毫无疑问，2台都会收到一模一样的数据。如果这些数据确实需要扩散到每一台（术语的话叫 `广播模式`），那么这样操作是没有问题的，比如发送一条更新缓存的消息，每台服务都需要更新，那么这个场景就很适合广播模式。
+
+但是假如这 2 台服务器是订单服务，还是使用 `XREAD` 的话，就会产生2条一样的订单，2台服务器原本是为了负载用的，现在却干了同样的事情，有点浪费资源；另外因为都接收到了一样的消息，业务上还得处理更复杂的去重工作。
+
+这种情况下呢，消费组就可以派上用场了。
+
+一个消费组(group)内允许有多个消费者(consumer)（上面的直接执行 `XREAD` 指令的都是消费者），但是1条消息只会投递到其中一个 consumer上，也就是每个 consumer 都会收到不同的消息。（这种模式术语叫做 `集群模式`）
+
+下面就针对 redis stream 的消费组做一下简单介绍。
+
+## [XGROUP](https://redis.io/commands/xgroup) 命令
+
+XGROUP 支持创建和销毁组，也支持管理consumer。这个子命令还是略微有点多的，我们分开解释：
+
+### 创建分组
+
+基本格式：
+
+```bash
+XGROUP CREATE key consumer-group-name ID [MKSTREAM]
+```
+
+- key stream 的名字
+- consumer-group-name 要创建分组的名字
+- ID 开始消费的偏移量，过滤条件，只有该 ID 之后的数据才会进入到该组并且可以被consumer消费
+- MKSTREAM 可选选项，默认不加的话，如果指定的 stream 不存在会返回错误，加上之后不存在则会自动创建 stream
+
+下面进行实战讲解：
+
+创建一个接收最新消息的组，注意 最后的 ID 是 `$`，consumer 只能接收新的消息。
+
+```bash
+XGROUP CREATE mystream group-a $
+```
+
+创建一个接收所有消息的组，包含已经存在的消息，注意 最后的 ID 是 `0`，，consumer 可以消费已经存在的消息。
+
+```bash
+XGROUP CREATE mystream group-b 0
+```
+
+**注意** 分组不允许重复创建，如果分组已经存在，则会报错：
+
+> (error) BUSYGROUP Consumer Group name already exists
+
+### 删除分组
+
+基本格式：
+
+```bash
+XGROUP DESTROY key consumer-group-name
+```
+
+比如要删除上面创建的 `group-a` 分组，可以执行 `XGROUP DESTROY mystream group-a`
+
+**注意** 执行该指令会删除所有分组相关信息，包括 group 和 consumer 信息。
+
+输入 `XGROUP HELP` 可以打印帮助信息。
+
+## [XREADGROUP](https://redis.io/commands/xreadgroup) 命令
+
+`XREADGROUP` 是专门用于读取分组消息的命令。
+
+基本格式：
+
+```bash
+XREADGROUP GROUP group-name [COUNT count] [BLOCK milliseconds] [NOACK] STREAMS key [key ...] ID [ID...]
+```
+
+这个格式跟 `XREAD` 基本一样，只不过增加了 `GROUP`。
+
+比如要读取 mystream 最新（没有投递给其他consumer）的消息，可以使用下面的命令，这也是最常用的形式：
+
+```bash
+XREADGROUP GROUP group-a consumer-1 STREAMS mystream >
+```
+
+注意这里面有个特殊的符号 `>`，在这里也是一个 ID 的表现形式，意思是说读取没有被其他消费者消费的消息（也就是最新的消息）。
+
+如果要增加读取数量和阻塞读取，可以使用下面的命令：
+
+```bash
+XREADGROUP GROUP group-a consumer-1 COUNT 10 BLOCK 10000 STREAMS mystream >
+```
+
+**注意** `STREAMS mystream >` 必须放在 BLOCK 和 COUNT 的后面。
+
+如果指定 `NOACK` 参数，则说明该条消息不需要进行ack ，至于 ack ，下面会提到。
+
+## [XACK](https://redis.io/commands/xack)
+
+基本格式：
+
+```bash
+XACK key group-name ID [ID ...]
+```
+
+上面介绍了 `XREADGROUP` 的使用。当使用 `XREADGROUP` 命令（不指定 `NOACK` 参数）读取消息后，消息就会进入到该 stream 的未确认队列(pending entries list (PEL))。进入到 PEL 的消息是可以被重复消费的，只需要将 ID 由 `>` 替换为任意合法的ID即可，比如 `0`，则可以将该 stream 的消息再消费一次。
+
+举例：
+
+```bash
+XREADGROUP GROUP group-a consumer-1 count 10 block 100000 STREAMS mystream >
+```
+
+另一个终端的 redis-cli 中输入
+
+```bash
+XADD mystream * a 1
+```
+
+则上一个终端会打印出刚才添加的消息。
+
+如果再次执行 `XREADGROUP GROUP group-a consumer-1 count 10 block 100000 STREAMS mystream >` 则会一直卡在那里，因为没有新的消息流入，需要等待100s才会超时。
+
+如果我们输入
+
+```bash
+XREADGROUP GROUP group-a consumer-1 count 10 block 100000 STREAMS mystream 0
+```
+
+终端立即打印出了内容，这就是因为这条消息再 PEL 中，在被 ACK 之前都是可以被重复消费的。
+
+为了能够让这条消息从 PEL 中删除，则需要执行 ACK 命令：
+
+```bash
+XACK mystream group-a 1576768897319-0
+```
+
+会打印ack的数量。
+
+现在我们再次执行 `XREADGROUP GROUP group-a consumer-1 count 10 block 100000 STREAMS mystream 0` 会发现输出：
+
+```raw
+1) 1) "mystream"
+   2) (empty list or set)
+```
+
+没有可以消费的消息了。
+
+细心朋友可能会发现，既然没有消息，为什么没有进入阻塞，立马就返回结果了？这个地方，官方也明确说了，如果 ID 不是 `>`，那么 `BLOCK` 和 `NOACK` 是不起作用的，原文如下：
+
+> Any other ID, that is, 0 or any other valid ID or incomplete ID (just the millisecond time part), will have the effect of returning entries that are pending for the consumer sending the command with IDs greater than the one provided. So basically if the ID is not >, then the command will just let the client access its pending entries: messages delivered to it, but not yet acknowledged. Note that in this case, both BLOCK and NOACK are ignored.
+
+## [XINFO](https://redis.io/commands/xinfo) 命令
+
+上面介绍了写入，读取，分组等功能，那有什么办法能看到 stream 或者 group 的信息么？`XINFO` 就排上用场了。
+
+基本格式：
+
+```bash
+XINFO [CONSUMERS key groupname] [GROUPS key] [STREAM key] [HELP]
+```
+
+输入 `XINFO HELP` 可以查看帮助。
+
+### 查看 stream 信息
+
+比如查看 mystream 的信息
+
+```bash
+XINFO stream mystream
+```
+
+会打印出如下信息（可能和你的输出略微有出入），`#` 后面是我加的注释
+
+```bash
+1) "length"
+ 2) (integer) 14            # stream 长度
+ 3) "radix-tree-keys"
+ 4) (integer) 1             # radix-tree key 的个数
+ 5) "radix-tree-nodes"
+ 6) (integer) 2             # radix-tree node 的个数
+ 7) "groups"
+ 8) (integer) 3             # stream 下有3个group
+ 9) "last-generated-id"
+10) "1576768897319-0"       # 最后一条信息系统自动生成的 ID
+11) "first-entry"
+12) 1) "1526919030474-55"   # 第一条消息
+    2) 1) "a"
+       2) "a"
+13) "last-entry"
+14) 1) "1576768897319-0"    # 最后一条消息
+    2) 1) "a"
+       2) "1"
+```
+
+### stream 的 group 信息
+
+基本格式：
+
+```bash
+XINFO GROUPS key
+```
+
+比如要查看 mystream 的group信息：
+
+```bash
+XINFO GROUPS mystream
+```
+
+输出：
+
+```bash
+1) 1) "name"
+   2) "group-a"             # group 名字
+   3) "consumers"
+   4) (integer) 1           # consumer 数量
+   5) "pending"
+   6) (integer) 0           # 等待确认的消息数量
+   7) "last-delivered-id"
+   8) "1576768897319-0"     # 最后投递的消息的 ID
+```
+
+### 查看 group 的 consumer 信息
+
+基本格式：
+
+```bash
+XINFO CONSUMERS key group-name
+```
+
+比如要查看 mystream 的 group-a 的 consumer的信息：
+
+```bash
+XINFO CONSUMERS mystream group-a
+```
+
+输出：
+
+```bash
+1) 1) "name"
+   2) "consumer-1"      #consumer 名字
+   3) "pending"
+   4) (integer) 0       # 等待确认的消息数量
+   5) "idle"
+   6) (integer) 1285495 # 空闲时间毫秒数（多久已经没有收到新消息了）
+```
 
 ## macro nodes
 
