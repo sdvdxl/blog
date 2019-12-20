@@ -142,13 +142,13 @@ XREAD [COUNT count] [BLOCK milliseconds] STREAMS key [key ...] ID [ID ...]
 
 ## [XRANGE](https://redis.io/commands/xrange) 命令
 
-XRANGE 也是用于读取数据，但是可以指定区间，基本用法：
+XRANGE 也是用于读取数据，但是可以指定 ID 区间，基本用法：
 
 ```bash
 XRANGE key start end [COUNT count]
 ```
 
-- start 可以指定开始的 ID，闭区间
+- start 开始的 ID，闭区间
 - end 结束的 ID，闭区间
 - COUNT 限制返回的数量
 
@@ -202,11 +202,9 @@ XTRIM key MAXLEN 1000
 
 注意：这里说的是裁剪后的**最大长度**，如果 stream 本身没有达到 `MAXLEN` 的值，那么裁剪后的 stream 的长度还是其真实大小，即 `XLEN key` 所看到的结果。
 
-另外用法中包含了 `~`，这个代表裁剪的时候近似的进行裁剪，可以多出 `MAXLEN` 几十个，但是不能少于 `MAXLEN`。
+本示例中包含了 `~`，这个代表裁剪的时候近似的进行裁剪，可以多出 `MAXLEN` 几十个，但是不能少于 `MAXLEN`。
 
 如： 执行 `XTRIM mystream MAXLEN ~ 1000` 后，查看长度 `XLEN mystream` 结果可能是大于1000的。
-
-时间复杂度：O(N) N是要删除的数据的数量。
 
 因为条目是在包含多个条目的宏节点中组织的，这些条目可以通过一次释放释放，所以可以在极短的时间内完成。
 
@@ -427,7 +425,7 @@ XINFO [CONSUMERS key groupname] [GROUPS key] [STREAM key] [HELP]
 比如查看 mystream 的信息
 
 ```bash
-XINFO stream mystream
+XINFO STREAM mystream
 ```
 
 会打印出如下信息（可能和你的输出略微有出入），`#` 后面是我加的注释
