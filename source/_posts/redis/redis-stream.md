@@ -673,3 +673,36 @@ XCLAIM s:test g:test consumer:2 10000 1576805524932-0 IDLE 100000 JUSTID
 ## macro nodes
 
 为了提高内存效率，stream 由 `macro-node`（宏节点） 组成 [维基英文 `radix tree`](https://en.wikipedia.org/wiki/Radix_tree)（[维基中文 `基数树`](https://zh.wikipedia.org/wiki/%E5%9F%BA%E6%95%B0%E6%A0%91)）。
+
+使用 `XINFO STREAM key` 可以查看 `radix-tree` 相关信息，比如查看我们的 mystream ：
+
+```bash
+XINFO STREAM mystream
+```
+
+输出：
+
+```raw
+ 1) "length"
+ 2) (integer) 20
+ 3) "radix-tree-keys"
+ 4) (integer) 1
+ 5) "radix-tree-nodes"
+ 6) (integer) 2
+ 7) "groups"
+ 8) (integer) 3
+ 9) "last-generated-id"
+10) "1576812267602-0"
+11) "first-entry"
+12) 1) "1526919030474-55"
+    2) 1) "a"
+       2) "a"
+13) "last-entry"
+14) 1) "1576812267602-0"
+    2) 1) "a"
+       2) "4"
+```
+
+其中的 `radix-tree-keys` 和 `radix-tree-nodes` 就是 nodes 的信息。
+
+这块内容我也没了解过，所以这里就不做过多解释了。
