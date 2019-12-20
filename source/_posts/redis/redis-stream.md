@@ -522,68 +522,68 @@ XADD s:test * a 2
 
 1. 创建一个消费组，注意这里的 ID 是从 0开始，也就是这个组要消费所有的消息
 
-```bash
-XGROUP CREATE s:test g:test 0
-```
+    ```bash
+    XGROUP CREATE s:test g:test 0
+    ```
 
 1. 使用 consumer:1 消费最新的消息
 
-```bash
-XREADGROUP GROUP g:test consumer:1 STREAMS s:test >
-```
+    ```bash
+    XREADGROUP GROUP g:test consumer:1 STREAMS s:test >
+    ```
 
-输出：
+    输出：
 
-```raw
-1) 1) "s:test"
-   2) 1) 1) "1576805524932-0"
-         2) 1) "a"
-            2) "1"
-      2) 1) "1576805529738-0"
-         2) 1) "a"
-            2) "2"
-```
+    ```raw
+    1) 1) "s:test"
+    2) 1) 1) "1576805524932-0"
+            2) 1) "a"
+                2) "1"
+        2) 1) "1576805529738-0"
+            2) 1) "a"
+                2) "2"
+    ```
 
 1. 使用 consumer:2 消费
 
-```bash
-XREADGROUP GROUP g:test consumer:2 STREAMS s:test >
-```
+    ```bash
+    XREADGROUP GROUP g:test consumer:2 STREAMS s:test >
+    ```
 
-因为已经被 consumer:1 消费掉了，所以只输出一个 `(nil)` 表示没有数据。
+    因为已经被 consumer:1 消费掉了，所以只输出一个 `(nil)` 表示没有数据。
 
 1. 使用 consumer:1 重复消费
 
-```bash
-XREADGROUP GROUP g:test consumer:1 STREAMS s:test 0
-```
+    ```bash
+    XREADGROUP GROUP g:test consumer:1 STREAMS s:test 0
+    ```
 
-还是可以读取到之前的消息：
+    还是可以读取到之前的消息：
 
-```raw
-1) 1) "s:test"
-   2) 1) 1) "1576805524932-0"
-         2) 1) "a"
-            2) "1"
-      2) 1) "1576805529738-0"
-         2) 1) "a"
-            2) "2"
-```
+    ```raw
+    1) 1) "s:test"
+    2) 1) 1) "1576805524932-0"
+            2) 1) "a"
+                2) "1"
+        2) 1) "1576805529738-0"
+            2) 1) "a"
+                2) "2"
+    ```
 
 1. 再来使用 consuer:2 来重复消费：
 
-```bash
-XREADGROUP GROUP g:test consumer:2 STREAMS s:test 0
-```
+    ```bash
+    XREADGROUP GROUP g:test consumer:2 STREAMS s:test 0
+    ```
 
-会打印：
+    会打印：
 
-```raw
-1) 1) "s:test"
-   2) (empty list or set)
-```
+    ```raw
+    1) 1) "s:test"
+    2) (empty list or set)
+    ```
 
-表示 consumer:2 中 没有可以重复消费的消息，也即是 PEL 中没有消息。
+    表示 consumer:2 中 没有可以重复消费的消息，也即是 PEL 中没有消息。
 
 为了确认上面的事实，我们使用 `XINFO` 查看 consumer 的信息：
 
