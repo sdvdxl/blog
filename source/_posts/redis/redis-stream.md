@@ -360,6 +360,56 @@ XACK mystream group-a 1576768897319-0
 
 > Any other ID, that is, 0 or any other valid ID or incomplete ID (just the millisecond time part), will have the effect of returning entries that are pending for the consumer sending the command with IDs greater than the one provided. So basically if the ID is not >, then the command will just let the client access its pending entries: messages delivered to it, but not yet acknowledged. Note that in this case, both BLOCK and NOACK are ignored.
 
+## [XPENDING](https://redis.io/commands/xpending)
+
+基本格式：
+
+XPENDING key group [start end count] [consumer]
+
+XPENDING 可以查看为 ack 的消息情况。
+
+先创造一点数据，并读取：
+
+```bash
+XADD mystream * a 1
+XADD mystream * a 2
+XADD mystream * a 3
+XADD mystream * a 4
+XADD mystream * a 5
+XREADGROUP GROUP group-a consumer:1 STREAMS mystream >
+```
+
+查看 pending 概要信息
+
+```bash
+XPENDING mystream group-a
+```
+
+输出：
+
+```raw
+1) (integer) 6              # pending 消息总数量
+2) "1576770674583-0"        # 第一条 ID
+3) "1576812267602-0"        # 最后一条 ID
+4) 1) 1) "consumer:1"       # consumer 名字
+      2) "6"                # consumer 对应的 pending 消息数量
+```
+
+查看详细信息，需要指定 开始和结束的 ID，可以使用 `-` 最小 和 `+` 最大，数量； 也可以指定 consumer 名字，只查看这一个consumer的信息，这个是可选的。
+
+```bash
+XPENDING mystream group-a - + 1 consumer:1
+```
+
+输出：
+
+```raw
+1) 1) "1576770674583-0"         # 消息ID
+   2) "consumer:1"              # 所属 consumer
+   3) (integer) 171110          # IDLE 时间，多久没有被访问了
+   4) (integer) 1               # 投递次数，每投递（比如重复消费）一次就会+1
+```
+
 ## [XINFO](https://redis.io/commands/xinfo) 命令
 
 上面介绍了写入，读取，分组等功能，那有什么办法能看到 stream 或者 group 的信息么？`XINFO` 就排上用场了。
@@ -455,6 +505,173 @@ XINFO CONSUMERS mystream group-a
    6) (integer) 1285495 # 空闲时间毫秒数（多久已经没有收到新消息了）
 ```
 
+## [XCLAIM](https://redis.io/commands/xclaim) 命令
+
+基本格式：
+
+XCLAIM key group consumer min-idle-time ID [ID ...] [IDLE ms] [TIME ms-unix-time] [RETRYCOUNT count] [FORCE] [JUSTID]
+
+**注意** 一般不太常用，作为了解就可以了。
+
+这条指令是用来转义 consumer pending 消息的。当一个 consumer 意外终止的时候，其产生的 pending（未进行ack）的消息就会始终得不到确认，并且也不能被其他消费者再次消费，那么就可以使用这个命令这些处于 pending 状态的消息转移到另一个 consumer 的 PEL 中，严格来说是将符合条件的 ID 的消息转移到指定 consumer 的 PEL中。下面使用一个例子来说明它是怎么工作的：
+
+1. 创建一个新的 stream `s:test`，并添加2条消息
+
+```bash
+XADD s:test * a 1
+XADD s:test * a 2
+```
+
+1. 创建一个消费组，注意这里的 ID 是从 0开始，也就是这个组要消费所有的消息
+
+```bash
+XGROUP CREATE s:test g:test 0
+```
+
+1. 使用 consumer:1 消费最新的消息
+
+```bash
+XREADGROUP GROUP g:test consumer:1 STREAMS s:test >
+```
+
+输出：
+
+```raw
+1) 1) "s:test"
+   2) 1) 1) "1576805524932-0"
+         2) 1) "a"
+            2) "1"
+      2) 1) "1576805529738-0"
+         2) 1) "a"
+            2) "2"
+```
+
+1. 使用 consumer:2 消费
+
+```bash
+XREADGROUP GROUP g:test consumer:2 STREAMS s:test >
+```
+
+因为已经被 consumer:1 消费掉了，所以只输出一个 `(nil)` 表示没有数据。
+
+1. 使用 consumer:1 重复消费
+
+```bash
+XREADGROUP GROUP g:test consumer:1 STREAMS s:test 0
+```
+
+还是可以读取到之前的消息：
+
+```raw
+1) 1) "s:test"
+   2) 1) 1) "1576805524932-0"
+         2) 1) "a"
+            2) "1"
+      2) 1) "1576805529738-0"
+         2) 1) "a"
+            2) "2"
+```
+
+1. 再来使用 consuer:2 来重复消费：
+
+```bash
+XREADGROUP GROUP g:test consumer:2 STREAMS s:test 0
+```
+
+会打印：
+
+```raw
+1) 1) "s:test"
+   2) (empty list or set)
+```
+
+表示 consumer:2 中 没有可以重复消费的消息，也即是 PEL 中没有消息。
+
+为了确认上面的事实，我们使用 `XINFO` 查看 consumer 的信息：
+
+```bash
+XINFO CONSUMERS s:test g:test
+```
+
+输出：
+
+```raw
+1) 1) "name"
+   2) "consumer:1"
+   3) "pending"
+   4) (integer) 2               # consumer:1 PEL 中有2个消息
+   5) "idle"
+   6) (integer) 219700
+2) 1) "name"
+   2) "consumer:2"
+   3) "pending"
+   4) (integer) 0·              # consumer:2 PEL 中确实没有消息
+   5) "idle"
+   6) (integer) 120599
+```
+
+假如现在 consumer:1 不再使用了，或者就是想将 consumer:1 的 pending 数据转移到 consumer:2 中，就得使用 `XCLAM`：
+
+```bash
+XCLAIM s:test g:test consumer:2 10000 1576805524932-0 JUSTID
+```
+
+这条语句意思是，如果 1576805524932-0 空闲超过10s，则把 1576805524932-0 这条消息转移到 consumer:2 的 pending 中，前提是转移的时候这条消息没有被删除也没有被ACK。`JUSTID` 是声明只返回转移成功的 ID 号，不打印其具体内容。
+
+输出：`1) "1576805524932-0"`
+
+查看 consumer 信息 `XINFO CONSUMERS s:test g:test` ：
+
+输出：
+
+```raw
+1) 1) "name"
+   2) "consumer:1"
+   3) "pending"
+   4) (integer) 1               # consumer:1 PEL 中只剩1条
+   5) "idle"
+   6) (integer) 1638459
+2) 1) "name"
+   2) "consumer:2"
+   3) "pending"
+   4) (integer) 1               # consumer:2 PEL 中多出1条
+   5) "idle"
+   6) (integer) 20603
+```
+
+**注意** `XCLAIM` 会重置 consumer 的 IDLE 时间，如果想自定义可以使用参数 `IDLE`：
+
+```bash
+XCLAIM s:test g:test consumer:2 10000 1576805524932-0 IDLE 100000 JUSTID
+```
+
+当然还有几个其他参数，不太常用，暂时不详细介绍了
+
+- TIME 跟 IDLE 差不多
+- RETRYCOUNT 跟消息投递次数有关
+- FORCE 强制转移（不属于本组但是属于这个stream）的消息
+
+## 应用场景
+
+总的来说，redis stream 还是提供了比较强大的功能和灵活性。但是由于其是基于内存的，在实际使用的场景中还是要仔细考虑的。
+以下场景可以尝试使用：
+
+- 对数据丢失有一定容忍性，因为是基于内存的，可能存在宕机，内存的消息就丢失了，虽然有持久化保证，但是并不是实时写入到磁盘的，所以还是会存在丢数据的风险
+- 实时处理消息，不能够堆积数据。 还是因为是内存的问题，如果消息堆积非常多，就会导致 redis 内存膨胀，所以要实时（或者及时）处理消息，并将不需要的消息删除。
+
+### 优点
+
+1. 轻量
+1. 高效（尚未进行压测）
+
+### 缺点
+
+1. 实际使用略微复杂，需要手动删除不需要的（消费过的）数据
+1. 存在数据丢失的风险
+1. 大量消息堆积可能导致 redis 内存使用率过高宕机
+
+所以大家如果有更高要求的，可以选择 [RocketMQ](https://rocketmq.apache.org/) [RabbitMQ](https://www.rabbitmq.com/) 或者 [Kafka](https://kafka.apache.org/) 等消息队列中间件。
+
 ## macro nodes
 
-为了提高内存效率，stream 由 `macro-node`（宏节点） 组成 [`radix tree`](https://en.wikipedia.org/wiki/Radix_tree)（[基数树](https://zh.wikipedia.org/wiki/%E5%9F%BA%E6%95%B0%E6%A0%91)）。
+为了提高内存效率，stream 由 `macro-node`（宏节点） 组成 [维基英文 `radix tree`](https://en.wikipedia.org/wiki/Radix_tree)（[维基中文 `基数树`](https://zh.wikipedia.org/wiki/%E5%9F%BA%E6%95%B0%E6%A0%91)）。
