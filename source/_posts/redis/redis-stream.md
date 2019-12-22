@@ -32,6 +32,12 @@ updateDate: 2019-12-16 18:47:32
 
 的时候，说明编译通过了，并且在 `src` 目录中会生成 `redis-server` 文件。
 
+如果报错：
+
+> jemalloc/jemalloc.h: No such file or directory
+
+进入 redis目录下的 dist目录执行 `make hiredis lua jemalloc linenoise`，然后 `cd .. && make` 再次编译。
+
 执行 `src/redis-server` 启动redis，在另一个终端中输入 `src/redic-cli` 进入交互界面。
 
 # Stream 的使用
