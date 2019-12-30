@@ -8,12 +8,19 @@ date: 2016-03-15 18:21:05
 ---
 
 ``` go
-package mainimport (
+package main
+import (
     "runtime"
-    "fmt")func main() {
-    outer()}func outer() {
-    inner()}func inner() {
+    "fmt")
+func main() {
+    outer()
+}
 
+func outer() {
+    inner()
+}
+
+func inner() {
     defer func() {
         if err := recover(); err != nil {
             trace := make([]byte, 1024)
@@ -23,5 +30,6 @@ package mainimport (
         }
     }()
 
-    panic("Fake error!")}
+    panic("Fake error!")
+}
 ```
