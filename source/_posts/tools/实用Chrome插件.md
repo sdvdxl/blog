@@ -36,3 +36,11 @@ JSON自动格式化、手动格式化，支持排序、解码、下载等，更�
 启动器/便捷管理扩展/应用/标签/历史记录等
 
 [官网](http://oksteward.com/)
+
+## [沙拉查词-聚合词典划词翻译](https://chrome.google.com/webstore/detail/%E6%B2%99%E6%8B%89%E6%9F%A5%E8%AF%8D-%E8%81%9A%E5%90%88%E8%AF%8D%E5%85%B8%E5%88%92%E8%AF%8D%E7%BF%BB%E8%AF%91/cdonnmffkdaoajfknoeeecmchibpmkmg)
+
+Saladict 沙拉查词是一款专业划词翻译扩展，为交叉阅读而生。大量权威词典涵盖中英日韩法德西语，支持复杂的划词操作、网页翻译、生词本与 PDF 浏览。
+
+[官网](https://saladict.crimx.com)
+
+[项目主页](https://github.com/crimx/crx-saladict)
