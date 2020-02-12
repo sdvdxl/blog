@@ -31,3 +31,8 @@ JSON自动格式化、手动格式化，支持排序、解码、下载等，更�
 
 [官网](https://www.baidufe.com/fehelper)
 
+## [steward-plus](https://chrome.google.com/webstore/detail/steward-plus/dnkhdiodfglfckibnfcjbgddcgjgkacd)
+
+启动器/便捷管理扩展/应用/标签/历史记录等
+
+[官网](http://oksteward.com/)
