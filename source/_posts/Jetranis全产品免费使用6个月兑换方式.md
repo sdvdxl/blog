@@ -75,6 +75,17 @@ updateDate: 2020-03-15 17:07:22
 
 除此之外，还有8折优惠码 `46023125` ，使用方式同上。
 
+## 使用
+
+可以直接在产品中使用账号登录方式激活，也可以下载激活码激活。
+![下载激活码](https://public-links.todu.top/1584265914.png?imageMogr2/thumbnail/!100p)
+
+解压后又2个文件，根据版本选择对应的激活码输入并激活。
+![激活码](https://public-links.todu.top/1584265980.png?imageMogr2/thumbnail/!100p)
+
+如果已经打开编辑器，一般是在help 菜单选择激活。
+![激活](https://public-links.todu.top/1584266057.png?imageMogr2/thumbnail/!100p)
+
 ## 扣费风险
 
 如果不想被扣费，千万别绑定任何支付方式，否则到期后可能自动扣费。我这里只是介绍获取免费使用时长，任何扣费后果均需要自己承担。
