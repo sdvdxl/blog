@@ -1,12 +1,13 @@
 ---
 title: Jetranis全产品免费使用6个月兑换方式
-date: 2020-03-15 17:07:22
-updateDate: 2020-03-15 17:07:22
 category: other
 tags:
   - jetbrains
   - 免费
   - 激活码
+abbrlink: cddd
+date: 2020-03-15 17:07:22
+updateDate: 2020-03-15 17:07:22
 ---
 
 ## 优惠活动
