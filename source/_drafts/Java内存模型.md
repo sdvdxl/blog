@@ -157,8 +157,7 @@ public class SimpleHappenBefore {
 }
 ```
 
-
-##### 参考
+## 参考
 
 - [Java内存模型原理，你真的理解吗？推荐阅读](https://zhuanlan.zhihu.com/p/51613784)
 - [https://ifeve.com/jmm-cookbook/](https://ifeve.com/jmm-cookbook/)
