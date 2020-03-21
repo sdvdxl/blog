@@ -8,7 +8,7 @@ subtitle:
 description:
 author: sdvdxl
 language: zh_CN
-timezone:
+timezone: 'Asia/Shanghai'
 
 algolia:
   enable: true
@@ -62,6 +62,7 @@ skip_render:
   - .well-known
   - google6e08df8d075a3c96.html
   - baidu_verify_yBtqa2oDdc.html
+  - 'about/*'
 
 # https://github.com/YuyingWu/hexo-generator-index-plus
 index_generator_plus:
