@@ -5,11 +5,7 @@ tags:
   - java
   - 内存
   - jvm
-abbrlink: c685
-date: 2020-03-21 17:35:38
-updateDate: 2020-03-21 17:35:38
 ---
-
 
 ## 概述
 
@@ -162,7 +158,7 @@ public class SimpleHappenBefore {
 ##### 参考
 
 - [Java内存模型原理，你真的理解吗？推荐阅读](https://zhuanlan.zhihu.com/p/51613784)
-- https://ifeve.com/jmm-cookbook/](https://ifeve.com/jmm-cookbook/)
-- https://www.cs.umd.edu/~pugh/java/memoryModel/](https://www.cs.umd.edu/~pugh/java/memoryModel/)
-- 维基百科](https://en.wikipedia.org/wiki/Java_memory_model)
+- [https://ifeve.com/jmm-cookbook/](https://ifeve.com/jmm-cookbook/)
+- [https://www.cs.umd.edu/~pugh/java/memoryModel/](https://www.cs.umd.edu/~pugh/java/memoryModel/)
+- [维基百科](https://en.wikipedia.org/wiki/Java_memory_model)
 
