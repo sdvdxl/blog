@@ -3,7 +3,7 @@ title: Jrebel插件配置参数
 tags:
   - jrebel
   - java
-category: java
+category: Java
 abbrlink: 15199
 date: 2016-03-09 14:10:18
 ---

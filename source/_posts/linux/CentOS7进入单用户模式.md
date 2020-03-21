@@ -7,7 +7,7 @@ tags:
 abbrlink: 99f7
 date: 2019-06-02 12:39:46
 updateDate: 2019-06-02 12:39:46
-category: linux
+category: Linux
 ---
 
 ## CentOS7 进入单用户模式

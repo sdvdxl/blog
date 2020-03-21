@@ -1,6 +1,6 @@
 ---
 title: redis-stream
-category: redis
+category: 缓存
 tags:
   - redis
   - mq

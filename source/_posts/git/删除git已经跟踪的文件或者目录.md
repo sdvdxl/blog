@@ -2,7 +2,7 @@
 title: 删除git已经跟踪的文件或者目录
 tags:
   - git
-category: git
+category: Git
 abbrlink: 18216
 date: 2016-03-13 11:09:29
 ---

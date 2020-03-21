@@ -4,7 +4,7 @@ tags:
   - sqoop
   - hdfs
   - mysql
-category: sqoop
+category: Sqoop
 abbrlink: 37890
 date: 2016-03-09 12:51:43
 ---

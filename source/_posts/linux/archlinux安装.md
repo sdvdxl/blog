@@ -4,7 +4,7 @@ tags:
   - arch
   - archlinux
   - linux
-category: linux
+category: Linux
 abbrlink: 3603
 date: 2016-03-09 14:05:03
 ---
@@ -121,7 +121,7 @@ pacman -S gamin
 输入法就安装fcitx小企鹅输入法了
     1. 安装输入法
 
-        `pacman -S fcitx`  
+        `pacman -S fcitx`
     2. 配置输入法
         安装输入法其他模块
         `fcitx-ui-light` Fcitx 的轻量 UI.

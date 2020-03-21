@@ -4,7 +4,7 @@ tags:
   - hive
   - hadoop
   - hdfs
-category: hadoop
+category: 大数据
 abbrlink: 61872
 date: 2016-03-11 16:25:27
 ---
@@ -67,7 +67,7 @@ export HIVE_HOME PATH
 5. 拷贝`hive-env.sh.template`并重命名`hive-env.sh`，添加如下内容，注意环境变量值更换为自己的路径。
 
 ```bash
-HADOOP_HOME=/home/hadoop/hadoop-2.7.1 
+HADOOP_HOME=/home/hadoop/hadoop-2.7.1
 
 export JAVA_HOME=/usr/local/share/jdk1.8.0_73
 ```

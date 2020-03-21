@@ -4,7 +4,7 @@ tags:
   - linux
   - 端口
   - 进程
-category: linux
+category: Linux
 abbrlink: 10727
 date: 2016-03-15 18:22:37
 ---

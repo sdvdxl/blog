@@ -1,6 +1,6 @@
 ---
 title: 使用autobahn-testsuite测试websocket兼容性
-category: java
+category: Java
 tags:
   - java
   - websocket

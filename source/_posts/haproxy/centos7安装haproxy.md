@@ -1,7 +1,7 @@
 ---
 title: 【草稿】centos7安装haproxy
 p: haproxy/centos7安装haproxy.md
-category: haproxy
+category: Haproxy
 tags:
   - haproxy
   - 负载均衡

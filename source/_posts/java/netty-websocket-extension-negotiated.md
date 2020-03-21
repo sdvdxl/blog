@@ -1,5 +1,5 @@
 ---
-category: java
+category: Java
 title: netty websocket extension negotiated
 tags:
   - java

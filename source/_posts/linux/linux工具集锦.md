@@ -3,7 +3,7 @@ title: linux工具集锦
 tags:
   - linux
   - 软件
-category: linux
+category: Linux
 abbrlink: 46961
 date: 2016-03-13 11:44:10
 ---

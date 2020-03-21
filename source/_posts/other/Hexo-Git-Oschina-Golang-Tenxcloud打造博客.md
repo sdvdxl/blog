@@ -2,7 +2,7 @@
 title: Hexo+Git+Oschina+Golang+Tenxcloud打造博客
 tags:
   - 博客
-category: other
+category: 其他
 abbrlink: 38204
 date: 2016-03-09 23:17:00
 ---
@@ -18,7 +18,7 @@ date: 2016-03-09 23:17:00
 
 *TenxCloud* 也就是[时速云](https://www.tenxcloud.com/)，是国内最早的容器云平台之一(Container as a service)，提供丰富的容器化应用，镜像构建与发布，弹性可伸缩的容器服务，以及灵活、高性能的容器主机管理。容器化应用包括但不限于云主机，云数据库，大数据，Web应用等。
 
-# 准备         
+# 准备
 1. 安装hexo
 2. 安装Golang，并配置Golang环境
 3. 安装Git，并配置相关环境变量

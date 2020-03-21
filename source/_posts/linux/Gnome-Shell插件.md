@@ -3,7 +3,7 @@ title: Gnome-Shell插件
 tags:
   - linux
   - gnome
-category: linux
+category: Linux
 abbrlink: 51680
 date: 2016-08-02 16:24:18
 ---
@@ -30,7 +30,7 @@ date: 2016-08-02 16:24:18
 ## [状态栏数字键+大写键状态](https://extensions.gnome.org/extension/36/lock-keys/)
 ![](http://public-links.qiniudn.com/gnome-shell-lock-keys.png)
 
-## [番茄工作法插件](https://extensions.gnome.org/extension/53/pomodoro/) 
+## [番茄工作法插件](https://extensions.gnome.org/extension/53/pomodoro/)
 ![](http://public-links.qiniudn.com/gnome-shell-pomodoro.png)
 
 ## [系统托盘](https://extensions.gnome.org/extension/495/topicons/)

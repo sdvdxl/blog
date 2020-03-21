@@ -3,7 +3,7 @@ title: 安装Hbase分布式集群
 tags:
   - hadoop
   - hbase
-category: hadoop
+category: 大数据
 abbrlink: 10952
 date: 2017-02-15 17:44:43
 ---
@@ -33,8 +33,8 @@ date: 2017-02-15 17:44:43
   </property>
 </configuration>
 ```
-其中 `hbase.zookeeper.quorum` 配置是hbase集群机器的名字，上面的值代表在master，slave1，和slave2上启动hbase和zookeeper    
-`hbase.zookeeper.property.dataDir` 是用于配置zookeeper安装目录的，这里我把zookeeper安装到了 `/home/hadoop/zookeeper-3.4.9`    
+其中 `hbase.zookeeper.quorum` 配置是hbase集群机器的名字，上面的值代表在master，slave1，和slave2上启动hbase和zookeeper
+`hbase.zookeeper.property.dataDir` 是用于配置zookeeper安装目录的，这里我把zookeeper安装到了 `/home/hadoop/zookeeper-3.4.9`
 4. 修改 conf下 hbase-env.sh
 修改JAVA_HOME，将其指向具体的java安装目录，（最小版本要求是1.7）
 5. 启动hbase

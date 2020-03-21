@@ -3,7 +3,7 @@ title: JDK多版本管理
 p: java/JDK多版本管理
 tags:
   - jdk
-category: java
+category: Java
 abbrlink: 61467
 date: 2016-04-20 09:43:43
 ---

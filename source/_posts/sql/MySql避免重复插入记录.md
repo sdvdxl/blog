@@ -2,7 +2,7 @@
 title: MySql避免重复插入记录
 tags:
   - mysql
-category: mysql
+category: 数据库
 abbrlink: 23635
 date: 2016-03-09 14:02:47
 ---
@@ -38,7 +38,7 @@ eg:(phone字段为唯一索引)
 `replace  into table_name(email,phone,user_id) values('test569','99999','123')`
 另外：在 SQL Server 中可以这样处理：
 ``` sql
-if not exists (select phone from t where phone= '1')  
+if not exists (select phone from t where phone= '1')
     insert into t(phone, update_time) values('1', getdate())
 else
     update t set update_time = getdate() where phone= '1'
@@ -59,7 +59,7 @@ WHERE a=1 OR b=2 LIMIT 1;
 如果a=1 OR b=2与多个行向匹配，则只有一个行被更新。通常，您应该尽量避免对带有多个唯一关键字的表使用ON DUPLICATE KEY子句。
 您可以在UPDATE子句中使用VALUES(col_name)函数从INSERT...UPDATE语句的INSERT部分引用列值。换句话说，如果没有发生重复关键字冲突，则UPDATE子句中的VALUES(col_name)可以引用被插入的col_name的值。本函数特别适用于多行插入。VALUES()函数只在INSERT...UPDATE语句中有意义，其它时候会返回NULL。
 ``` sql
-INSERT INTO table (a,b,c) VALUES (1,2,3),(4,5,6)    
+INSERT INTO table (a,b,c) VALUES (1,2,3),(4,5,6)
 ON DUPLICATE KEY UPDATE c=VALUES(a)+VALUES(b);
 ```
 本语句与以下两个语句作用相同：
@@ -67,5 +67,5 @@ ON DUPLICATE KEY UPDATE c=VALUES(a)+VALUES(b);
 INSERT INTO table (a,b,c) VALUES (1,2,3)  ON DUPLICATE KEY UPDATE c=3;
 INSERT INTO table (a,b,c) VALUES (4,5,6)  ON DUPLICATE KEY UPDATE c=9;
 ```
-当您使用`ON DUPLICATE KEY UPDATE`时，`DELAYED`选项被忽略。                   
+当您使用`ON DUPLICATE KEY UPDATE`时，`DELAYED`选项被忽略。
 注：[来源](http://www.cnblogs.com/zeroone/archive/2012/04/18/2454728.html)

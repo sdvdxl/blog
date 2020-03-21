@@ -4,7 +4,7 @@ tags:
   - archlinux
   - arch
   - ntfs
-category: linux
+category: Linux
 abbrlink: 33366
 date: 2016-03-09 14:08:56
 ---

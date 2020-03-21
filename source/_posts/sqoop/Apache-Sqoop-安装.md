@@ -2,7 +2,7 @@
 title: Apache-Sqoop 安装
 tags:
   - sqoop
-category: sqoop
+category: Sqoop
 abbrlink: 27704
 date: 2016-03-09 12:51:43
 ---

@@ -3,7 +3,7 @@ title: Linux shell 命令
 tags:
   - linux
   - shell
-category: linux
+category: Linux
 abbrlink: '4992'
 date: 2016-05-25 09:34:07
 ---
