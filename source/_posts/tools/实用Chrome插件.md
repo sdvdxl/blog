@@ -44,3 +44,15 @@ Saladict 沙拉查词是一款专业划词翻译扩展，为交叉阅读而生�
 [官网](https://saladict.crimx.com)
 
 [项目主页](https://github.com/crimx/crx-saladict)
+
+## [简悦](https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll)
+
+### 阅读模式
+
+独有功能，通过提取 标题 · 描述 ·正文 · 媒体 图片 / 视频 等资源生成符合中文阅读习惯的页面，具有零干扰 · 沉浸式特点，适合深入阅读
+
+### 聚焦模式
+
+不改变当前页面的结构，仅仅高亮需要阅读的部分适合临时阅读或者未适配阅读模式的网站
+
+[官网](http://ksria.com/simpread/)
