@@ -10,8 +10,20 @@ abbrlink: b8e1
 01 Zookeeper 部分
 
 CAP定理
+
+一致性（Consistency） （等同于所有节点访问同一份最新的数据副本）
+可用性（Availability）（每次请求都能获取到非错的响应——但是不保证获取的数据为最新数据）
+分区容错性（Partition tolerance）（以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择[3]。）
+
 ZAB协议
+Zookeeper基于ZAB（Zookeeper Atomic Broadcast），实现了主备模式下的系统架构，保持集群中各个副本之间的数据一致性。
+ZAB协议定义了选举（election）、发现（discovery）、同步（sync）、广播(Broadcast)四个阶段。
+
+
 leader选举算法和流程
+
+
+
 02 Redis 部分
 
 Redis的应用场景
@@ -81,3 +93,31 @@ BeanFactory和ApplicationContext的联系和区别
 
 岗位要求
 计算机相关专业本科及以上学历，三年以上软件开发经验，英语流利者优先； Java基础扎实，熟悉JVM原理、Java高级特性、Java网络编程、Java多线程编程； 精通Java主流开源框架，如Spring、Dubbo、Netty等，掌握底层原理和机制； 精通MySql、MyBatis、MyCat等数据库相关技术，对SQL性能优化有经验； 了解分布式系统原理：CAP、最终一致性、幂等操作、分布式事务等； 了解大型网络应用架构：MQ、缓存、负载均衡、集群技术、数据同步、高可用、可容灾等； 良好的团队合作精神和沟通能力，能主动寻求挑战、采取行动、达成目标； 持续学习，追求卓越，能为团队引入创新的技术和方案，用创新的思路解决问题
+
+1. Serializable
+
+Serializable 是一个标记性接口，就是该这种类型的接口没有任何需要实现的方法。
+
+1. 数
+
+
+
+二叉树
+平衡二叉树：AVL
+红黑树
+
+
+
+
+启动类加载器（Bootstrap ClassLoader）
+$JAVA_HOME/jre/lib目录下的jar文件，比如 rt.jar、tools.jar，或者-Xbootclasspath系统环境变量指定目录下的路径。
+
+扩展类加载器（Extension ClassLoader）
+这个类加载器由sun.misc.Launcher$ExtClassLoader来实现，负责加载$JAVA_HOME/jre/lib/ext目录中，或者java.ext.dirs系统变量指定路径中所有的类库，允许用户将具备通用性的类库可以放到ext目录下，扩展Java SE功能。在JDK 9之后，这种扩展机制被模块化带来的天然的扩展能力所取代。
+
+应用类加载器（App/System ClassLoader），也称作为系统类加载器，这个类加载器由sun.misc.Launcher$AppClassLoader来实现。它负责加载用户应用类路径（ClassPath）上所有的类库，开发者同样可以直接在代码中使用这个类加载器。如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。
+
+
+## Tree
+
+二叉树，平衡二叉树，平衡树，2-3树，红黑树，BTree，B+Tree, B*Tree

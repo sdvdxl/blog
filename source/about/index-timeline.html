@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="apple-mobile-web-app-title" content="杜龙少的个人简介">
+  <title>杜龙少的个人简介</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+  <style>
+    @import "https://fonts.googleapis.com/css?family=Libre+Franklin";
+
+    body {
+      font-family: 'Libre Franklin', sans-serif;
+    }
+
+    #timeline-header {
+      font-size: 26px;
+    }
+
+    .timeline {
+      list-style: none;
+      padding: 20px 0 20px;
+      position: relative;
+    }
+
+    .timeline:before {
+      background-color: #eee;
+      bottom: 0;
+      content: " ";
+      left: 50px;
+      margin-left: -1.5px;
+      position: absolute;
+      top: 0;
+      width: 3px;
+    }
+
+    .timeline>li {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .timeline>li:before,
+    .timeline>li:after {
+      content: " ";
+      display: table;
+    }
+
+    .timeline>li:after {
+      clear: both;
+    }
+
+    .timeline>li>.timeline-panel {
+      border-radius: 2px;
+      border: 1px solid #d4d4d4;
+      box-shadow: 0 1px 2px rgba(100, 100, 100, 0.2);
+      margin-left: 100px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .timeline>li>.timeline-panel .timeline-heading .timeline-panel-controls {
+      position: absolute;
+      right: 8px;
+      top: 5px;
+    }
+
+    .timeline>li>.timeline-panel .timeline-heading .timeline-panel-controls .timestamp {
+      display: inline-block;
+    }
+
+    .timeline>li>.timeline-panel .timeline-heading .timeline-panel-controls .controls {
+      display: inline-block;
+      padding-right: 5px;
+      border-right: 1px solid #aaa;
+    }
+
+    .timeline>li>.timeline-panel .timeline-heading .timeline-panel-controls .controls a {
+      color: #999;
+      font-size: 11px;
+      padding: 0 5px;
+    }
+
+    .timeline>li>.timeline-panel .timeline-heading .timeline-panel-controls .controls a:hover {
+      color: #333;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .timeline>li>.timeline-panel .timeline-heading .timeline-panel-controls .controls+.timestamp {
+      padding-left: 5px;
+    }
+
+    .timeline>li .timeline-badge {
+      background-color: #999;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.4em;
+      height: 50px;
+      left: 50px;
+      line-height: 52px;
+      margin-left: -25px;
+      position: absolute;
+      text-align: center;
+      top: 16px;
+      width: 50px;
+      z-index: 100;
+    }
+
+    .timeline>li .timeline-badge+.timeline-panel:before {
+      border-bottom: 15px solid transparent;
+      border-left: 0 solid #ccc;
+      border-right: 15px solid #ccc;
+      border-top: 15px solid transparent;
+      content: " ";
+      display: inline-block;
+      position: absolute;
+      left: -15px;
+      right: auto;
+      top: 26px;
+    }
+
+    .timeline>li .timeline-badge+.timeline-panel:after {
+      border-bottom: 14px solid transparent;
+      border-left: 0 solid #fff;
+      border-right: 14px solid #fff;
+      border-top: 14px solid transparent;
+      content: " ";
+      display: inline-block;
+      position: absolute;
+      left: -14px;
+      right: auto;
+      top: 27px;
+    }
+
+    .timeline-badge.primary {
+      background-color: #2e6da4 !important;
+    }
+
+    .timeline-badge.success {
+      background-color: #3f903f !important;
+    }
+
+    .timeline-badge.warning {
+      background-color: #f0ad4e !important;
+    }
+
+    .timeline-badge.danger {
+      background-color: #d9534f !important;
+    }
+
+    .timeline-badge.info {
+      background-color: #5bc0de !important;
+    }
+
+    .timeline-title {
+      margin-top: 0;
+      color: inherit;
+    }
+
+    .timeline-body>p,
+    .timeline-body>ul {
+      margin-bottom: 0;
+    }
+
+    .timeline-body>p+p {
+      margin-top: 5px;
+    }
+
+    .copy {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: #aaa;
+      font-size: 11px;
+    }
+
+    .copy>* {
+      color: #444;
+    }
+  </style>
+  <script>
+    window.console = window.console || function (t) {};
+  </script>
+  <script>
+    if (document.location.search.match(/type=embed/gi)) {
+      window.parent.postMessage("resize", "*");
+    }
+  </script>
+</head>
+
+<body translate="no">
+  <div id="app">
+    <div class="container">
+      <div class="page-header">
+        <span id="timeline-header"><a href="/">杜龙少的个人简介</a></span>
+      </div>
+      <timeline :items="timeline"></timeline>
+    </div>
+    <span class="copy">
+      <a href="/">返回博客首页</a>
+    </span>
+    <template id="timeline-template">
+      <ul class="timeline">
+        <li v-for="item in items" is="timeline-item" :item="item">
+        </li>
+      </ul>
+    </template>
+    <template id="timeline-item-template">
+      <li class="timeline-item">
+        <div class="timeline-badge {{ item.icon_status }}"><i class="{{ item.icon_class }}"></i></div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <h2 class="timeline-title">{{ item.title }}</h2>
+            <div class="timeline-panel-controls">
+              <div class="controls">
+                <a v-for="control in item.controls" is="timeline-control" :control="control">
+                </a>
+              </div>
+              <div class="timestamp">
+                <small class="text-muted">{{ item.created }}</small>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-body">{{{ item.body }}}</div>
+        </div>
+  </div>
+  </li>
+  </template>
+  <template id="timeline-control-template">
+    <a href="#" @click="handleClick">
+      <i class="{{ control.icon_class }}"></i>
+    </a>
+  </template>
+  </div>
+  <script
+    src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js">
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.js'></script>
+  <script id="rendered-js">
+    Vue.component('timeline-control', {
+      template: '#timeline-control-template',
+
+      props: ['control'],
+
+      methods: {
+        handleClick: function () {
+          if (this.control.method == 'delete') {
+            this.$dispatch('timeline-delete');
+          } else if (this.control.method == 'edit') {
+            this.$dispatch('timeline-edit');
+          } else {
+            console.log("Unknown method " + this.control.method);
+          }
+        }
+      }
+    });
+
+
+
+    Vue.component('timeline', {
+      template: '#timeline-template',
+
+      props: ['items'],
+
+      events: {
+        'delete-item': function () {
+          return true; // forward to parent
+        }
+      }
+    });
+
+
+
+    Vue.component('timeline-item', {
+      template: '#timeline-item-template',
+
+      props: ['item'],
+
+      methods: {
+        delete: function () {
+          this.$dispatch('timeline-delete-item', this.item.id);
+        },
+
+        edit: function () {
+
+        }
+      },
+
+
+      events: {
+        'timeline-delete': function () {
+          this.delete();
+        },
+
+        'timeline-edit': function () {
+          this.edit();
+        }
+      }
+    });
+
+
+
+    new Vue({
+      el: '#app',
+
+      data: {
+        timeline: [{
+            id: 5,
+            icon_class: 'glyphicon glyphicon-play-circle',
+            icon_status: 'danger',
+            title: '杭州第九区科技有限公司',
+            // // controls: [{
+            // //     method: 'edit',
+            // //     icon_class: 'glyphicon glyphicon-pencil'
+            // //   },
+
+            // //   {
+            // //     method: 'delete',
+            // //     icon_class: 'glyphicon glyphicon-trash'
+            // //   }
+            // ],
+
+
+            created: '2016/03 - 至今',
+            body: `<div><p></p>现任职技术专家和后端负责人。
+<br>
+<ol>
+ <li>氦氪IOT云平台开发维护，优化系统性能（JVM，Linux参数，中间件等），负责系统需求和设计。</li>
+ <li>云平台全球化方案参与设计并实现。</li>
+ <li>SpringXD 数据流转方案设计和实现</li>
+ <li>基于Kafak和Spark的大数据分析平台搭建和开发，大数据存储方案设计和实现。</li>
+ <li>MongoDB多数据中心多主同步系统设计开发实现，现在在国内1个和欧洲1个美国2个节点上运行良好。</li>
+ <li>带领团队，任务分配，故障排查<br></li>
+ <li>系统运维，云平台扩容</li>
+ <li>搭建ELK日志收集系统，并配合自定义Go编写的告警脚本实现了钉钉和Mail告警通知。</li>
+ <li>BOT热水数据存储方案和大数据分析，设备异常实时告警</li>
+ <li>基于Gauge的接口-系统自动化测试系统</li>
+ <li>基于MQTT的设备App通信</li>
+ <li>熟练使用Cassandra，Redis，RabbitMQ，kafka，RocketMQ等中间件和NoSQL</li>
+</ol>
+<p></p></div>`
+          },
+
+          {
+            id: 4,
+            icon_class: 'glyphicon glyphicon-check',
+            icon_status: 'success',
+            title: '杭州大搜车汽车服务有限公司',
+            controls: [],
+            created: '2015/05 - 2016/02',
+            body: `<div><p></p>
+<ol>
+ <li>卖车财务系统维护开发。</li>
+ <li>通过rpc（hession）跟其他系统通信。</li>
+ <li>优化了多方系统调用接口查询慢问题。</li>
+</ol>
+<p></p></div>`
+          },
+
+          {
+            id: 3,
+            icon_class: 'glyphicon glyphicon-check',
+            icon_status: 'success',
+            title: '杭州同盾科技有限公司',
+            controls: [],
+            created: '2013/12 - 2015/05',
+            body: `<div><h4>反欺诈</h4><p>Forseti项目是公司主打的产品，产品功能可以在同盾官方网站(www.tongdun.cn)看到介绍。是一款风险评估产品，可以根据规则模型判定该事件是否存在风险。功能强大的大数据风险平台，主要功能：</p>
+<ul>
+ <li>生物探针</li>
+ <li>代理检测</li>
+ <li>设备指纹</li>
+ <li>风险引擎</li>
+ <li>高危账户</li>
+ <li>失信名单</li>
+ <li>欺诈信息库</li>
+ <li>地理位置库</li>
+</ul>
+<p></p></div></div>`
+          },
+
+          {
+            id: 1,
+            icon_class: 'glyphicon glyphicon-education',
+            icon_status: 'success',
+            title: '山东科技大学',
+            controls: [],
+            created: '2009/09 - 2013/06',
+            body: '<p>在山东科技大学就读软件工程专业</p>'
+          }
+        ]
+      },
+
+
+
+
+      events: {
+        'timeline-delete-item': function (id) {
+          this.timeline = _.remove(this.timeline, function (item) {
+            return item.id != id;
+          });
+        }
+      }
+    });
+  </script>
+  <!-- <div class="progress">
+    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+      <span class="sr-only">40% Complete (success)</span>
+    </div>
+  </div>
+  <div class="progress">
+    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+      <span class="sr-only">20% Complete</span>
+    </div>
+  </div>
+  <div class="progress">
+    <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+      <span class="sr-only">60% Complete (warning)</span>
+    </div>
+  </div>
+  <div class="progress">
+    <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+      <span class="sr-only">80% Complete (danger)</span>
+    </div>
+  </div> -->
+</body>
+
+</html>
