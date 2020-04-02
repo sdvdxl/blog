@@ -62,7 +62,8 @@ skip_render:
   - .well-known
   - google6e08df8d075a3c96.html
   - baidu_verify_yBtqa2oDdc.html
-  - 'about/*'
+  - 'about/sdvdxl.html'
+  - 'about/index-timeline.html'
 
 # https://github.com/YuyingWu/hexo-generator-index-plus
 index_generator_plus:
