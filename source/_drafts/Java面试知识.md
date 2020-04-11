@@ -121,3 +121,15 @@ $JAVA_HOME/jre/lib目录下的jar文件，比如 rt.jar、tools.jar，或者-Xbo
 ## Tree
 
 二叉树，平衡二叉树，平衡树，2-3树，红黑树，BTree，B+Tree, B*Tree
+
+## 并发 并行
+
+并发： 是否有处理多个任务的能力，关键是切换任务的能力
+并行： 同一时间是否有处理多个任务的能力，关键点是同时
+
+## ThreadLocal
+
+Tread 里面有个 threadLocals map对象，用于存储threadLocal和线程的关系。
+其中threadLocals entry 继承了 WeakRrefrence，key 是弱引用，如果threadLocal没有强引用，那么这个key就会在垃圾回收的时候被清理掉，value也就没有了引用，那么也会被回收掉。
+
+Java 虚拟机，栈过深：StackOverFlowError ，内存不足：OutOfMemoryError􏱏

@@ -246,7 +246,7 @@ MIT许可证（MIT）
         </svg>&nbsp;&nbsp;
         <a href="https://github.com/MadMaxChow/VLOOK" target="_blank"><strong>VLOOK™</strong></a> (V9.13.2) for
         <a href="https://www.typora.io" target="_blank">Typora</a>. Powered by <strong><a
-                href="mailto:67870144@qq.com">MAX丨孟兆</a></strong>
+                href="https://todu.top">sdvdxl | 杜龙少</a></strong>
     </div>
 </div>
 
