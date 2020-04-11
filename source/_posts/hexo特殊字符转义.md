@@ -1,11 +1,12 @@
 ---
 title: hexo特殊字符转义
-date: 2019-12-30 12:22:46
-updateDate: 2019-12-30 12:22:46
 category: hexo
 tags:
-- hexo
-- 转义
+  - hexo
+  - 转义
+abbrlink: 6a97
+date: 2019-12-30 12:22:46
+updateDate: 2019-12-30 12:22:46
 ---
 
 # hexo特殊字符转义
