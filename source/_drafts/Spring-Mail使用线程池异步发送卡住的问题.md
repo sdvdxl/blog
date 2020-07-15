@@ -6,6 +6,7 @@ tags:
   - spring
   - mail
   - 线程
+abbrlink: '2083'
 ---
 
 ## 背景

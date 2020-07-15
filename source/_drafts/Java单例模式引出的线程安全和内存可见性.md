@@ -4,6 +4,7 @@ category: Java
 tags:
   - java
   - 线程安全
+abbrlink: a9ba
 ---
 
 首先看一下饿汉模式的单例实现：
