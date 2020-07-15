@@ -56,3 +56,9 @@ Saladict 沙拉查词是一款专业划词翻译扩展，为交叉阅读而生�
 不改变当前页面的结构，仅仅高亮需要阅读的部分适合临时阅读或者未适配阅读模式的网站
 
 [官网](http://ksria.com/simpread/)
+
+#### [两步验证动态密码保存插件](https://chrome.google.com/webstore/detail/authenticator/bhghoamapcdpbohphigoooaddinpkbai)
+
+[官网](https://authenticator.cc/)
+
+[项目主页](https://github.com/Authenticator-Extension/Authenticator)

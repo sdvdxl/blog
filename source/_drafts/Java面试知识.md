@@ -7,24 +7,22 @@ tags:
 abbrlink: b8e1
 ---
 
-01 Zookeeper 部分
+## Zookeeper 部分
 
-CAP定理
+### CAP定理
 
 一致性（Consistency） （等同于所有节点访问同一份最新的数据副本）
 可用性（Availability）（每次请求都能获取到非错的响应——但是不保证获取的数据为最新数据）
 分区容错性（Partition tolerance）（以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择[3]。）
 
-ZAB协议
+### ZAB协议
 Zookeeper基于ZAB（Zookeeper Atomic Broadcast），实现了主备模式下的系统架构，保持集群中各个副本之间的数据一致性。
 ZAB协议定义了选举（election）、发现（discovery）、同步（sync）、广播(Broadcast)四个阶段。
 
 
 leader选举算法和流程
 
-
-
-02 Redis 部分
+## Redis 部分
 
 Redis的应用场景
 Redis支持的数据类型（必考）
@@ -34,7 +32,8 @@ Redis的LRU过期策略的具体实现
 如何解决Redis缓存雪崩，缓存穿透问题
 Redis的持久化机制（必考）
 Redis的管道pipeline
-03 Mysql 部分
+
+## Mysql 部分
 
 事务的基本要素
 事务隔离级别
@@ -49,9 +48,46 @@ myisam和innodb的区别，什么时候选择myisam？
 sql如何优化?
 explain是如何解析sql的？
 order by原理
-04 JVM 部分
 
-运行时数据区域（内存模型）
+4、数据库：MySQL
+MySQL的binlog有有几种录入格式？分别有什么区别？
+
+## JVM 部分
+
+## 并发 并行
+
+并发： 是否有处理多个任务的能力，关键是切换任务的能力
+并行： 同一时间是否有处理多个任务的能力，关键点是同时
+
+### ThreadLocal
+
+Tread 里面有个 threadLocals map对象，用于存储threadLocal和线程的关系。
+其中threadLocals entry 继承了 WeakRrefrence，key 是弱引用，如果threadLocal没有强引用，那么这个key就会在垃圾回收的时候被清理掉，但是value还被entry持有，那么不会被回收掉。
+
+Java 虚拟机，栈过深：StackOverFlowError（-Xss大小和栈帧（线程本地变量）大小决定） ，内存不足：OutOfMemoryError
+
+
+### 类加载过程
+
+1. 加载
+1. 连接（验证，准备，解析）
+1. 初始化
+
+#### 运行时数据区域（java内存区域）
+
+方法区（Method Area）：各个线程共享的内存区域，用于存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等数据。
+
+JDK7之前使用永久代实现了方法区。JDK7 里面把字符串常量池、静态变量等移出，放到了堆中。在jdk1.8中，永久代已经不存在，存储的类信息、编译后的代码数据等已经移动到了元空间（MetaSpace）中，元空间并没有处于堆内存上，而是直接占用的本地内存（NativeMemory）。
+
+元空间并不在虚拟机中，而是使用本地内存。因此，默认情况下，元空间的大小仅受本地内存限制，但可以通过以下参数来指定元空间的大小：
+　　-XX:MetaspaceSize，初始空间大小，达到该值就会触发垃圾收集进行类型卸载，同时GC会对该值进行调整：如果释放了大量的空间，就适当降低该值；如果释放了很少的空间，那么在不超过MaxMetaspaceSize时，适当提高该值。
+　　-XX:MaxMetaspaceSize，最大空间，默认是没有限制的。
+　　除了上面两个指定大小的选项以外，还有两个与 GC 相关的属性：
+　　-XX:MinMetaspaceFreeRatio，在GC之后，最小的Metaspace剩余空间容量的百分比，减少为分配空间所导致的垃圾收集
+　　-XX:MaxMetaspaceFreeRatio，在GC之后，最大的Metaspace剩余空间容量的百分比，减少为释放空间所导致的垃圾收集
+
+
+
 垃圾回收机制
 垃圾回收算法
 Minor GC和Full GC触发条件
@@ -75,8 +111,10 @@ ThreadPoolExecutor的工作流程
 Boolean占几个字节
 jdk1.8/jdk1.7都分别新增了哪些特性？
 Exception和Error
-06 Spring 部分
 
+## Spring 部分
+
+谈谈Spring中都用到了哪些设计模式？并举例说明。
 Spring的IOC/AOP的实现
 动态代理的实现方式
 Spring如何解决循环依赖（三级缓存）
@@ -84,7 +122,8 @@ Spring的后置处理器
 Spring的@Transactional如何实现的？
 Spring的事务传播级别
 BeanFactory和ApplicationContext的联系和区别
-07 其他部分
+
+## 其他部分
 
 高并发系统的限流如何实现？
 高并发秒杀系统的设计
@@ -122,14 +161,4 @@ $JAVA_HOME/jre/lib目录下的jar文件，比如 rt.jar、tools.jar，或者-Xbo
 
 二叉树，平衡二叉树，平衡树，2-3树，红黑树，BTree，B+Tree, B*Tree
 
-## 并发 并行
 
-并发： 是否有处理多个任务的能力，关键是切换任务的能力
-并行： 同一时间是否有处理多个任务的能力，关键点是同时
-
-## ThreadLocal
-
-Tread 里面有个 threadLocals map对象，用于存储threadLocal和线程的关系。
-其中threadLocals entry 继承了 WeakRrefrence，key 是弱引用，如果threadLocal没有强引用，那么这个key就会在垃圾回收的时候被清理掉，value也就没有了引用，那么也会被回收掉。
-
-Java 虚拟机，栈过深：StackOverFlowError ，内存不足：OutOfMemoryError􏱏
