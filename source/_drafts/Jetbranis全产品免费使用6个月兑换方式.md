@@ -1,5 +1,5 @@
 ---
-title: Jetranis全产品免费使用6个月兑换方式
+title: Jetbranis全产品免费使用6个月兑换方式
 category: other
 tags:
   - jetbrains
