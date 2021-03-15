@@ -12,9 +12,9 @@ timezone: 'Asia/Shanghai'
 
 algolia:
   enable: true
-  applicationID: 'RRE6HIGVQV'
-  apiKey: '7e9df76fd7a563078bcf631e5bea39cd'
-  indexName: 'todu_top'
+  applicationID: '5BRMSXDN2O'
+  apiKey: 'd8486eaf81cd291560883e45d0ed70da'
+  indexName: 'blog'
   chunkSize: 5000
 
 # URL
