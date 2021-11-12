@@ -1390,6 +1390,12 @@ spring 内部有三级缓存：
 *   earlySingletonObjects 二级缓存，用于保存实例化完成的 bean 实例
 *   singletonFactories 三级缓存，用于保存 bean 创建工厂，以便于后面扩展有机会创建代理对象。
 
+> 一级缓存，简单依赖（无循环），也可以解决
+> 二级缓存，可以解决循环依赖
+> 三级缓存，可以解决AOP代理对象问题
+
+[参考](https://www.cnblogs.com/grey-wolf/p/13034371.html)
+
 下面用一张图告诉你，spring 是如何解决循环依赖的：
 
 [![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91TDM3MTI4MW9ERjI0dDNGanJCOFhlYng3V2drQXhkYW1zV2RaUVg2Y0k2SlFQYTNQN2ljb2VwaWJEWG9GRWhDNzFqdWliREFyS2JsRU1jb0JUUkxSUE1DZy82NDA?x-oss-process=image/format,png)](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91TDM3MTI4MW9ERjI0dDNGanJCOFhlYng3V2drQXhkYW1zV2RaUVg2Y0k2SlFQYTNQN2ljb2VwaWJEWG9GRWhDNzFqdWliREFyS2JsRU1jb0JUUkxSUE1DZy82NDA?x-oss-process=image/format,png)
@@ -2357,6 +2363,13 @@ ISO8859-1 是 tomcat 默认编码，需要将 tomcat 编码后的内容按 utf-8
     </mvc:interceptor>
 </mvc:interceptors>
 ```
+
+### 过滤器和拦截器主要区别
+
+1. 二者适用范围不同。Filter是Servlet规范规定的，只能用于Web程序中，而拦截器既可以用于Web程序，也可以用于Application、Swing程序中。
+2. 规范不同。Filter是在Servlet规范定义的，是Servlet容器支持的，而拦截器是在Spring容器内的，是Spring框架支持的。
+3. 使用的资源不同。同其他代码块一样，拦截器也是一个Spring的组件，归Spring管理，配置在Spring文件中，因此能使用Spring里的任何资源、对象(各种bean)，而Filter不行。
+4. 深度不同。Filter只在Servlet前后起作用，而拦截器能够深入到方法前后、异常跑出前后等，拦截器的使用有更大的弹性。
 
 ### 介绍一下 WebApplicationContext
 
