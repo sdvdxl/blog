@@ -649,7 +649,7 @@ aside:
       link: https://github.com/sdvdxl
   card_announcement:
     enable: true
-    content: This is my Blog
+    content: 思想的火花，知识的积累
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
