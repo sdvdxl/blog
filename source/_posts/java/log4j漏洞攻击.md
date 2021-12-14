@@ -18,7 +18,7 @@ updateDate: 2021-12-14 23:16:11
 
 事情起因于前几天（2021-12-10号）被全球广泛应用的组件Apache Log4j被曝出一个高危漏洞，攻击者仅需一段代码就可远程控制受害者服务器的事件。受影响的版本为 `Apache Log4j 2.x <= 2.14.1`。
 
-其实这个本来算是log4j的一个特性，这个玩意在log4j里面叫做 [lookup](https://logging.apache.org/log4j/2.x/manual/lookups.html)，简而言之可以使用一些特定的变量进行数据处理包括远程调用。但也因为这个特性，如果是用户填写的内容被解释了，那么可能会造成远程调用，执行任意代码的危害，接下来我们演示下怎么重现这个问题。
+其实这个本来算是log4j的一个特性，这个玩意在log4j里面叫做 [lookup](https://logging.apache.org/log4j/2.x/manual/lookups.html)，简而言之可以使用一些特定的变量进行数据处理包括远程调用。但也因为这个特性，如果是用户填写的内容被解释了，那么可能会造成远程调用，造成执行任意代码的危害，接下来我们演示下怎么重现这个问题。
 
 代码已经放在了[码云-sdvdxl](https://gitee.com/sdvdxl/log4j-attack-demo)上，该工程是 maven+springboot项目，建议使用 idea 或者 eclipse 打开操作和运行程序（本人使用 mac + idea 作为开发调试环境）
 
