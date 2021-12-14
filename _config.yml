@@ -25,7 +25,7 @@ root: /
 permalink: posts/:abbrlink/
 permalink_defaults:
 abbrlink:
-  alg: crc16  #support crc16(default，最大65536) and crc32,如果不够了，可以改为32，
+  alg: crc32  #support crc16(default，最大65536) and crc32,如果不够了，可以改为32，
   rep: hex    #support dec(default) and hex
 
 jsonContent:
