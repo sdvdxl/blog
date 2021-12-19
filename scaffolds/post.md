@@ -2,7 +2,8 @@
 title: {{ title }}
 date: {{ date }}
 updateDate: {{ date }}
-tag_img:
+top_img:
+cover:
 category:
 tags:
 keywords:

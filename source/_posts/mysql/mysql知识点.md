@@ -3,7 +3,8 @@ title: mysql知识点
 abbrlink: 1c4e
 date: 2021-11-28 23:03:31
 updateDate: 2021-11-28 23:03:31
-tag_img:
+top_img: 'https://img0.baidu.com/it/u=3950852095,898642958&fm=253&fmt=auto&app=138&f=JPEG?w=921&h=500'
+cover: 'https://img0.baidu.com/it/u=3950852095,898642958&fm=253&fmt=auto&app=138&f=JPEG?w=921&h=500'
 category:
 tags:
 keywords:

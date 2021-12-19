@@ -3,7 +3,7 @@ title: redis知识点
 abbrlink: ae04
 date: 2021-11-21 14:19:56
 updateDate: 2021-11-21 14:19:56
-tag_img:
+cover: 'http://vdposter.bdstatic.com/f903cd5899ae3a35b3652d2f79aea2ac.png'
 category:
 tags:
 keywords:

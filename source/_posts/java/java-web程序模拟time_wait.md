@@ -14,7 +14,7 @@ keywords:
 abbrlink: b3f1
 date: 2021-12-01 22:25:01
 updateDate: 2021-12-01 22:25:01
-tag_img:
+cover: 'https://img2.baidu.com/it/u=3068497985,619330922&fm=253&fmt=auto&app=138&f=PNG?w=402&h=416'
 ---
 
 # tcp close_wait 模拟

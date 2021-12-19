@@ -1,20 +1,7 @@
 ---
-title: log4j 漏洞攻击
-category: java
-tags:
-  - java
-  - log4j
-  - 日志
-keywords:
-  - sdvdxl
-  - java
-  - log4j
-  - 日志
-abbrlink: 7af9
-tag_img: 'https://public-links.todu.top/1639498829.png?imageMogr2/thumbnail/!100p'
-date: 2021-12-14 23:16:11
-updateDate: 2021-12-14 23:16:11
+abbrlink: '0'
 ---
+# log4j 漏洞攻击
 
 事情起因于前几天（2021-12-10号）被全球广泛应用的组件Apache Log4j被曝出一个高危漏洞，攻击者仅需一段代码就可远程控制受害者服务器的事件。受影响的版本为 `Apache Log4j 2.x <= 2.14.1`。
 
