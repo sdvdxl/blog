@@ -1,23 +1,24 @@
 ---
 title: java日志框架简介
 draft: true
+tags:
+  - java
+  - slf4j
+  - logback
+  - log4j
+  - 日志
+keywords:
+  - java
+  - slf4j
+  - logback
+  - log4j
+  - 日志
+  - sdvdxl
+abbrlink: 13f2c906
 date: 2021-12-19 13:10:21
 updateDate: 2021-12-19 13:10:21
 top_img:
 cover:
-tags:
-- java
-- slf4j
-- logback
-- log4j
-- 日志
-keywords:
-- java
-- slf4j
-- logback
-- log4j
-- 日志
-- sdvdxl
 ---
 
 # java日志框架简介
